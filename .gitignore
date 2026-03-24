@@ -1,0 +1,18 @@
+# Claude Code
+.claude/
+
+# Scraped data & screenshots
+*.csv
+*.html
+*.png
+
+# Logs
+errors.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
