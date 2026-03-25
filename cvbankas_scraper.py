@@ -1,6 +1,9 @@
 """
-Aruodas.lt apartment rental scraper.
-Uses Playwright (Cloudflare requires JS) + BeautifulSoup for parsing.
+CVBankas.lt job listing scraper for Vilnius.
+Uses Playwright (JS-rendered pages) + BeautifulSoup for parsing.
+
+Phase 1: Scrapes all job listings from search results.
+Phase 2 (later): Filter jobs and scrape individual detail pages.
 """
 
 import csv
@@ -15,23 +18,23 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 
 # ── Config ───────────────────────────────────────────────────────────────────
-BASE_URL = "https://www.aruodas.lt"
-START_URL = f"{BASE_URL}/butu-nuoma/vilniuje/pilaiteje/"
-PAGE_URL_TEMPLATE = f"{BASE_URL}/butu-nuoma/vilniuje/pilaiteje/puslapis/{{page}}/"
+BASE_URL = "https://www.cvbankas.lt"
+START_URL = f"{BASE_URL}/?keyw=Vilnius&min_salary="
+PAGE_URL_TEMPLATE = f"{BASE_URL}/?keyw=Vilnius&min_salary=&page={{page}}"
 DATE_STAMP = datetime.now().strftime("%Y%m%d")
 
 # Output folder
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "aruodas")
+OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cvbankas")
 os.makedirs(OUT_DIR, exist_ok=True)
 
-CSV_PATH = os.path.join(OUT_DIR, f"aruodas_rentals_pilaitė_{DATE_STAMP}.csv")
-HTML_PATH = os.path.join(OUT_DIR, f"aruodas_rentals_pilaitė_{DATE_STAMP}.html")
-SCREENSHOT_PATH = os.path.join(OUT_DIR, f"aruodas_screenshot_{DATE_STAMP}.png")
+CSV_PATH = os.path.join(OUT_DIR, f"cvbankas_jobs_vilnius_{DATE_STAMP}.csv")
+HTML_PATH = os.path.join(OUT_DIR, f"cvbankas_jobs_vilnius_{DATE_STAMP}.html")
+SCREENSHOT_PATH = os.path.join(OUT_DIR, f"cvbankas_screenshot_{DATE_STAMP}.png")
 ERROR_LOG = os.path.join(OUT_DIR, "errors.log")
 
 CSV_FIELDS = [
-    "listing_id", "title", "price_eur", "area_m2", "eur_per_sqm", "rooms",
-    "floor", "district", "city", "street", "url", "scraped_utc",
+    "job_id", "title", "company", "salary_raw", "salary_min", "salary_max",
+    "salary_type", "location", "posted", "url", "scraped_utc",
 ]
 
 # ── Logging ──────────────────────────────────────────────────────────────────
@@ -43,7 +46,6 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# Also log INFO+ to console
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 console.setFormatter(logging.Formatter("%(asctime)s  %(message)s", datefmt="%H:%M:%S"))
@@ -52,62 +54,40 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
-def clean_price(raw: str) -> str:
-    """Return numeric price string or '' if unavailable."""
-    if not raw:
-        return ""
-    text = raw.strip().lower()
-    # Lithuanian for "price on request" or similar
-    if any(kw in text for kw in ["pageidavimu", "sutartin", "request"]):
-        return ""
-    digits = re.sub(r"[^\d]", "", text)
-    return digits if digits else ""
-
-
 def clean_text(raw: str | None) -> str:
     if not raw:
         return ""
     return " ".join(raw.split()).strip()
 
 
-def extract_listing_id(url: str) -> str:
-    """Pull the numeric ID from a listing URL, e.g. '4-1460923' from the slug."""
-    match = re.search(r"(\d+-\d+)", url)
-    return match.group(1) if match else ""
+def extract_job_id(article) -> str:
+    """Pull job ID from article id='job_ad_13676911' or from href."""
+    art_id = article.get("id", "")
+    match = re.search(r"(\d+)$", art_id)
+    if match:
+        return match.group(1)
+    # Fallback: from URL
+    link = article.select_one("a.list_a")
+    if link:
+        href = link.get("href", "")
+        m = re.search(r"/(\d+-\d+)$", href.rstrip("/"))
+        if m:
+            return m.group(1)
+    return ""
 
 
-def parse_address(link_tag) -> tuple[str, str, str, str]:
-    """Parse address from an <a> tag whose text is 'City, District<br/>Street'.
-    Returns (title, city, district, street).
+def parse_salary(raw: str) -> tuple[str, str]:
+    """Extract min and max from salary string like '1900-3400' or '2000'.
+    Returns (min_salary, max_salary).
     """
-    # The <a> contains text like "Vilnius, Fabijoniškės" then <br/> then "Ateities g."
-    # get_text() collapses that; we need to split on the <br/>
-    parts_raw = []
-    for child in link_tag.children:
-        if isinstance(child, str):
-            text = child.strip()
-            if text:
-                parts_raw.append(text)
-        # <br/> tags separate city/district from street
-
-    # parts_raw is typically ["Vilnius, Fabijoniškės", "Ateities g."]
-    city = ""
-    district = ""
-    street = ""
-
-    if parts_raw:
-        # First part: "City, District"
-        city_district = parts_raw[0]
-        cd_parts = [p.strip() for p in city_district.split(",")]
-        city = cd_parts[0] if cd_parts else ""
-        district = cd_parts[1] if len(cd_parts) > 1 else ""
-        # Second part: street (after <br/>)
-        street = parts_raw[1] if len(parts_raw) > 1 else ""
-
-    # Build a clean title with proper separators
-    title_parts = [p for p in [city, district, street] if p]
-    title = ", ".join(title_parts)
-    return title, city, district, street
+    if not raw:
+        return ("", "")
+    numbers = re.findall(r"[\d]+", raw.replace(" ", ""))
+    if len(numbers) >= 2:
+        return (numbers[0], numbers[1])
+    elif len(numbers) == 1:
+        return (numbers[0], numbers[0])
+    return ("", "")
 
 
 def sleep_random():
@@ -116,66 +96,73 @@ def sleep_random():
 
 # ── Parsing ──────────────────────────────────────────────────────────────────
 def parse_listings(html: str) -> list[dict]:
-    """Parse all listing rows from a search-results page."""
+    """Parse all job listing rows from a search-results page."""
     soup = BeautifulSoup(html, "html.parser")
-    rows = soup.select("div.object-row")
-    results = []
     now_utc = datetime.now(timezone.utc).isoformat()
+    results = []
 
-    for row in rows:
+    for article in soup.select("article.list_article"):
         try:
-            # Link & address
-            link_tag = row.select_one(".list-adress-v2 h3 a")
+            # URL
+            link_tag = article.select_one("a.list_a")
             if not link_tag:
                 continue
-
             href = link_tag.get("href", "")
             full_url = href if href.startswith("http") else BASE_URL + href
-            listing_id = extract_listing_id(href)
-            title, city, district, street = parse_address(link_tag)
 
-            # Price
-            price_tag = row.select_one(".list-item-price-v2")
-            price_eur = clean_price(price_tag.get_text() if price_tag else "")
+            # Job ID
+            job_id = extract_job_id(article)
 
-            # Area
-            area_tag = row.select_one(".list-AreaOverall-v2")
-            area_m2 = clean_text(area_tag.get_text()) if area_tag else ""
+            # Title
+            h3 = article.select_one("h3.list_h3")
+            title = clean_text(h3.get_text()) if h3 else ""
 
-            # Rooms
-            rooms_tag = row.select_one(".list-RoomNum-v2")
-            rooms = clean_text(rooms_tag.get_text()) if rooms_tag else ""
+            # Company
+            company_span = article.select_one("span.heading_secondary span")
+            company = clean_text(company_span.get_text()) if company_span else ""
 
-            # Floor
-            floor_tag = row.select_one(".list-Floors-v2")
-            floor = clean_text(floor_tag.get_text()) if floor_tag else ""
+            # Salary
+            salary_amount_el = article.select_one("span.salary_amount")
+            salary_amount = clean_text(salary_amount_el.get_text()) if salary_amount_el else ""
 
-            # Compute €/m²
-            eur_per_sqm = ""
-            if price_eur and area_m2:
-                try:
-                    eur_per_sqm = round(float(price_eur) / float(area_m2), 2)
-                except (ValueError, ZeroDivisionError):
-                    pass
+            salary_period_el = article.select_one("span.salary_period")
+            salary_period = clean_text(salary_period_el.get_text()) if salary_period_el else ""
+
+            salary_calc_el = article.select_one("span.salary_calculation")
+            salary_type = clean_text(salary_calc_el.get_text()) if salary_calc_el else ""
+
+            salary_raw = f"{salary_amount} {salary_period}".strip()
+            if salary_type:
+                salary_raw += f" {salary_type}"
+            salary_raw = salary_raw.strip()
+
+            salary_min, salary_max = parse_salary(salary_amount)
+
+            # Location
+            city_el = article.select_one("span.list_city")
+            location = clean_text(city_el.get_text()) if city_el else ""
+
+            # Posted time
+            posted_el = article.select_one("span.txt_list_2")
+            posted = clean_text(posted_el.get_text()) if posted_el else ""
 
             results.append({
-                "listing_id": listing_id,
+                "job_id": job_id,
                 "title": title,
-                "price_eur": price_eur,
-                "area_m2": area_m2,
-                "eur_per_sqm": eur_per_sqm,
-                "rooms": rooms,
-                "floor": floor,
-                "district": district,
-                "city": city,
-                "street": street,
+                "company": company,
+                "salary_raw": salary_raw,
+                "salary_min": salary_min,
+                "salary_max": salary_max,
+                "salary_type": salary_type,
+                "location": location,
+                "posted": posted,
                 "url": full_url,
                 "scraped_utc": now_utc,
             })
 
         except Exception as exc:
-            snippet = clean_text(row.get_text())[:120]
-            log.warning("Failed to parse listing row: %s | snippet: %s", exc, snippet)
+            snippet = clean_text(article.get_text())[:120]
+            log.warning("Failed to parse job listing: %s | snippet: %s", exc, snippet)
 
     return results
 
@@ -185,35 +172,33 @@ def has_next_page(html: str, current_page: int) -> bool:
     soup = BeautifulSoup(html, "html.parser")
     next_page = current_page + 1
     for a in soup.select("a[href]"):
-        if f"/puslapis/{next_page}/" in a.get("href", ""):
+        href = a.get("href", "")
+        if f"page={next_page}" in href:
             return True
     return False
 
 
 # ── HTML report ──────────────────────────────────────────────────────────────
 def write_html_report(listings: list[dict]):
-    """Generate a styled HTML table from the listings."""
+    """Generate a styled HTML table from the job listings."""
     rows_html = ""
     for i, r in enumerate(listings):
         row_class = "even" if i % 2 == 0 else "odd"
-        price = f"{int(r['price_eur']):,}" if r["price_eur"] else "—"
-        eur_sqm = r["eur_per_sqm"] if r["eur_per_sqm"] else "—"
+        salary = r["salary_raw"] if r["salary_raw"] else "\u2014"
         rows_html += f"""        <tr class="{row_class}">
             <td>{i + 1}</td>
-            <td>{r['street']}</td>
-            <td class="num">{price} &euro;</td>
-            <td class="num">{r['area_m2']} m&sup2;</td>
-            <td class="num highlight">{eur_sqm} &euro;/m&sup2;</td>
-            <td class="num">{r['rooms']}</td>
-            <td class="num">{r['floor']}</td>
-            <td><a href="{r['url']}" target="_blank">Atidaryti</a></td>
+            <td><a href="{r['url']}" target="_blank">{r['title']}</a></td>
+            <td>{r['company']}</td>
+            <td class="num">{salary}</td>
+            <td>{r['location']}</td>
+            <td>{r['posted']}</td>
         </tr>\n"""
 
     html = f"""<!DOCTYPE html>
 <html lang="lt">
 <head>
 <meta charset="utf-8">
-<title>Pilait\u0117 nuoma — {DATE_STAMP}</title>
+<title>CVBankas Vilnius darbai \u2014 {DATE_STAMP}</title>
 <style>
     * {{ margin: 0; padding: 0; box-sizing: border-box; }}
     body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; padding: 30px; color: #333; }}
@@ -225,25 +210,22 @@ def write_html_report(listings: list[dict]):
     tr.odd {{ background: #f9fbfd; }}
     tr:hover {{ background: #eef3fa; }}
     .num {{ text-align: right; font-variant-numeric: tabular-nums; }}
-    .highlight {{ font-weight: 700; color: #27ae60; }}
     a {{ color: #2980b9; text-decoration: none; }}
     a:hover {{ text-decoration: underline; }}
 </style>
 </head>
 <body>
-<h1>Vilnius, Pilait\u0117 — but\u0173 nuoma</h1>
-<p class="subtitle">Surikiuota pagal kain\u0105 u\u017e m&sup2; (pigiausi vir\u0161uje) &bull; {len(listings)} skelbimai &bull; {DATE_STAMP}</p>
+<h1>CVBankas \u2014 darbo skelbimai Vilniuje</h1>
+<p class="subtitle">Surikiuota pagal atlyginim\u0105 (did\u017eiausias vir\u0161uje) &bull; {len(listings)} skelbimai &bull; {DATE_STAMP}</p>
 <table>
     <thead>
         <tr>
             <th>#</th>
-            <th>Gatv\u0117</th>
-            <th>Kaina</th>
-            <th>Plotas</th>
-            <th>&euro;/m&sup2;</th>
-            <th>Kamb.</th>
-            <th>Auk\u0161tas</th>
-            <th>Nuoroda</th>
+            <th>Pareigos</th>
+            <th>\u012emon\u0117</th>
+            <th>Atlyginimas</th>
+            <th>Vieta</th>
+            <th>Paskelbta</th>
         </tr>
     </thead>
     <tbody>
@@ -275,21 +257,24 @@ def run():
 
         # ── First page ────────────────────────────────────────────────────
         logging.info("Loading first page: %s", START_URL)
-        page.goto(START_URL, wait_until="domcontentloaded", timeout=60_000)
+        page.goto(START_URL, wait_until="networkidle", timeout=60_000)
 
         # Dismiss cookie banner if present
         try:
-            page.click("#onetrust-reject-all-handler", timeout=5_000)
+            cookie_btn = page.locator("button:has-text('Sutinku'), button:has-text('Priimti'), #onetrust-accept-btn-handler, .cookie-accept, #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
+            cookie_btn.first.click(timeout=5_000)
             logging.info("Cookie banner dismissed.")
             time.sleep(1)
         except PlaywrightTimeout:
             pass
+        except Exception:
+            pass
 
-        # Wait for listings to appear
+        # Wait for job listings to appear
         try:
-            page.wait_for_selector("div.object-row", timeout=15_000)
+            page.wait_for_selector("article.list_article", timeout=15_000)
         except PlaywrightTimeout:
-            logging.warning("No listing rows found on first page — site may be blocking.")
+            logging.warning("No job listings found on first page — site may be blocking.")
 
         # Screenshot of the first results page
         page.screenshot(path=SCREENSHOT_PATH, full_page=True)
@@ -318,26 +303,29 @@ def run():
             sleep_random()
 
             try:
-                page.goto(next_url, wait_until="domcontentloaded", timeout=60_000)
-                page.wait_for_selector("div.object-row", timeout=15_000)
+                page.goto(next_url, wait_until="networkidle", timeout=60_000)
+                page.wait_for_selector("article.list_article", timeout=15_000)
             except PlaywrightTimeout:
                 logging.warning("Timeout loading page %d — stopping.", current_page)
                 break
 
         browser.close()
 
-    # ── Sort by €/m² (cheapest first) ──────────────────────────────────────
-    all_listings.sort(key=lambda r: float(r["eur_per_sqm"]) if r["eur_per_sqm"] else float("inf"))
+    # ── Sort by salary (highest first) ───────────────────────────────────
+    all_listings.sort(
+        key=lambda r: int(r["salary_max"]) if r["salary_max"] else 0,
+        reverse=True,
+    )
 
-    # ── Write CSV ─────────────────────────────────────────────────────────
-    logging.info("Total listings scraped: %d", len(all_listings))
+    # ── Write CSV ────────────────────────────────────────────────────────
+    logging.info("Total job listings scraped: %d", len(all_listings))
     with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
         writer.writeheader()
         writer.writerows(all_listings)
     logging.info("CSV saved: %s", CSV_PATH)
 
-    # ── Write HTML report ─────────────────────────────────────────────────
+    # ── Write HTML report ────────────────────────────────────────────────
     write_html_report(all_listings)
     logging.info("HTML report saved: %s", HTML_PATH)
 
