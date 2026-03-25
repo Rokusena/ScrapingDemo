@@ -40,8 +40,8 @@ export async function POST() {
       },
     ],
     metadata: { user_id: user.id },
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, '')}/dashboard?success=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, '')}/dashboard`,
   })
 
   return NextResponse.json({ url: session.url })
