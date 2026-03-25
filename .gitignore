@@ -1,6 +1,9 @@
 # Claude Code
 .claude/
 
+
+.env
+
 # Scraper output folders
 aruodas/
 cvbankas/
