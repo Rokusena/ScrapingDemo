@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'DarbAI — Rask darbą greičiau su AI',
+  title: 'GaukDarba — Rask darbą greičiau su AI',
   description:
     'AI pagrindu veikianti darbo paieška Lietuvoje. Kasdien skenuojame CVBankas.lt ir surandame skelbimus, labiausiai atitinkančius jūsų profilį.',
 }

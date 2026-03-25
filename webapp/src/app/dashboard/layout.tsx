@@ -21,7 +21,7 @@ export default async function DashboardLayout({
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Link href="/dashboard" className="font-extrabold text-xl tracking-tight">
-              <span className="text-indigo-400">Darb</span>AI
+              <span className="text-indigo-400">Gauk</span>Darba
             </Link>
             <div className="hidden sm:flex items-center gap-6">
               <Link

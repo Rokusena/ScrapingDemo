@@ -38,7 +38,7 @@ export default function LandingPage() {
       <nav className="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <span className="font-extrabold text-xl tracking-tight">
-            <span className="text-indigo-400">Darb</span>AI
+            <span className="text-indigo-400">Gauk</span>Darba
           </span>
           <Link
             href="/login"
@@ -163,9 +163,9 @@ export default function LandingPage() {
       <footer className="border-t border-gray-800/60 py-8">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="font-extrabold text-lg">
-            <span className="text-indigo-400">Darb</span>AI
+            <span className="text-indigo-400">Gauk</span>Darba
           </span>
-          <p className="text-gray-600 text-sm">© 2024 DarbAI. Visos teisės saugomos.</p>
+          <p className="text-gray-600 text-sm">© 2024 GaukDarba. Visos teisės saugomos.</p>
         </div>
       </footer>
     </div>

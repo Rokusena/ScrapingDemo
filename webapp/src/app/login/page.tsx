@@ -48,7 +48,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block font-extrabold text-2xl">
-            <span className="text-indigo-400">Darb</span>AI
+            <span className="text-indigo-400">Gauk</span>Darba
           </Link>
         </div>
 
