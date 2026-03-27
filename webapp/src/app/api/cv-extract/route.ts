@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { PDFParse } from 'pdf-parse'
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
@@ -53,22 +54,30 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Failas per didelis (max 10MB)' }, { status: 400 })
   }
 
+  // Step 1: Extract text from PDF
+  let cvText: string
   try {
-    // Extract text from PDF using pdf-parse
     const arrayBuffer = await file.arrayBuffer()
-    const { PDFParse } = await import('pdf-parse')
     const parser = new PDFParse({ data: new Uint8Array(arrayBuffer) })
     const textResult = await parser.getText()
-    const cvText = textResult.pages.map((p: { text: string }) => p.text).join('\n').trim()
+    cvText = textResult.pages.map((p) => p.text).join('\n').trim()
+  } catch (err) {
+    console.error('PDF parse error:', err)
+    return NextResponse.json(
+      { error: `Nepavyko nuskaityti PDF: ${err instanceof Error ? err.message : 'nežinoma klaida'}` },
+      { status: 400 }
+    )
+  }
 
-    if (!cvText || cvText.length < 50) {
-      return NextResponse.json(
-        { error: 'Nepavyko išgauti teksto iš PDF. Patikrinkite ar failas nėra tuščias arba nuskanuotas vaizdas.' },
-        { status: 400 }
-      )
-    }
+  if (!cvText || cvText.length < 50) {
+    return NextResponse.json(
+      { error: 'Nepavyko išgauti teksto iš PDF. Patikrinkite ar failas nėra tuščias arba nuskanuotas vaizdas.' },
+      { status: 400 }
+    )
+  }
 
-    // Send to OpenAI for extraction
+  // Step 2: Send to OpenAI for extraction
+  try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -86,6 +95,8 @@ export async function POST(request: NextRequest) {
     })
 
     if (!response.ok) {
+      const errBody = await response.text()
+      console.error('OpenAI API error:', response.status, errBody)
       return NextResponse.json({ error: 'AI analizė nepavyko' }, { status: 500 })
     }
 
@@ -99,7 +110,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ extracted })
   } catch (err) {
-    console.error('CV extract error:', err)
-    return NextResponse.json({ error: 'Nepavyko apdoroti CV failo' }, { status: 500 })
+    console.error('CV AI extraction error:', err)
+    return NextResponse.json(
+      { error: `AI analizė nepavyko: ${err instanceof Error ? err.message : 'nežinoma klaida'}` },
+      { status: 500 }
+    )
   }
 }

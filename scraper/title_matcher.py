@@ -227,7 +227,7 @@ TITLE_BLACKLIST = {
 # ── Layer 3: LLM prompt ──────────────────────────────────────────────────────
 
 SYSTEM_PROMPT = (
-    "Tu esi darbo skelbimų relevancijos vertintojas TIKSLIAI pagal kandidato tikslinę poziciją.\n\n"
+    "Tu esi darbo skelbimų relevancijos vertintojas pagal kandidato tikslinę poziciją.\n\n"
     "KANDIDATO PROFILIS:\n"
     "- Pageidaujama pozicija: {desired_position}\n"
     "- Įgūdžiai: {skills}\n"
@@ -237,35 +237,22 @@ SYSTEM_PROMPT = (
     "- Kalbos: {languages}\n"
     "- Darbo būdas: {keywords}\n\n"
     "VERTINIMO TAISYKLĖS:\n\n"
-    "Balas 8-10: Pavadinimas TIESIOGIAI atitinka kandidato poziciją IR technologijas.\n"
-    "  Pavyzdžiai FrontEnd Developer kandidatui:\n"
-    '  - "Frontend Developer" → 9\n'
-    '  - "React programuotojas" → 9\n'
-    '  - "Full-Stack Developer (React)" → 8\n'
-    '  - "Junior Front-End Developer" → 8\n\n'
-    "Balas 5-7: Susijusi IT pozicija, bet ne tiksli atitiktis.\n"
-    '  - "Full-Stack Developer" (be React paminėjimo) → 6\n'
-    '  - "Web Developer" → 6\n'
-    '  - "UX/UI Designer" → 5\n\n'
-    "Balas 1-4: NEATITINKA kandidato pozicijos.\n"
-    "  - PHP Programuotojas → 2 (kita tech stack)\n"
-    "  - Java Developer → 2 (kita tech stack)\n"
-    "  - Python Developer → 2 (kita tech stack)\n"
-    "  - .NET programuotojas → 2 (kita tech stack)\n"
-    "  - Backend Engineer → 3 (kita pozicijos tipas)\n"
-    "  - DevOps inžinierius → 2\n"
-    "  - QA inžinierius → 2\n"
-    "  - Automation Developer → 2\n"
-    "  - Embedded Developer → 1\n"
-    "  - Network Engineer → 1\n"
-    "  - BET KOKS ne-IT darbas → 0 (neįtraukti)\n\n"
+    "Balas 8-10: Pavadinimas TIESIOGIAI atitinka kandidato poziciją arba labai artimas variantas.\n"
+    "  Pvz. jei kandidatas ieško '{desired_position}' — tikslus pavadinimo atitikmuo arba\n"
+    "  to paties tipo pozicija su kandidato technologijomis pavadinime.\n\n"
+    "Balas 5-7: Susijusi pozicija, kuri GALĖTŲ tikti kandidatui.\n"
+    "  Pvz. full-stack pozicija frontend kandidatui, arba artima sritis.\n\n"
+    "Balas 1-4: Kita sritis arba technologijų stack'as.\n"
+    "  Pvz. kandidatas ieško frontend — o skelbimas yra grynai backend/devops/QA.\n"
+    "  Arba kandidatas ieško backend — o skelbimas yra grynai frontend/dizainas.\n\n"
     "SVARBU:\n"
-    "- Jei pavadinime nėra frontend/react/vue/angular/javascript/web/ui — balas NEGALI būti > 6\n"
-    "- PHP, Java, Python, C#, .NET, C++, Embedded, DevOps, QA, Automation — tai NE frontend, max balas 3\n"
-    '- Jei pavadinime yra "programuotojas" be jokios technologijos — balas 4 (neįtraukti)\n'
+    "- Vertink pagal kandidato KONKREČIĄ poziciją ir įgūdžius, ne pagal bendras IT kategorijas\n"
+    "- Jei skelbimo technologijos nesutampa su kandidato įgūdžiais — žemas balas\n"
+    "- Jei pavadinime yra tik bendras žodis ('programuotojas', 'developer') be technologijos — max 5\n"
+    "- Ne-IT darbai — balas 0 (neįtraukti)\n"
     "- Grąžink TIK skelbimus su balu >= 5\n\n"
     "Atsakymo formatas — TIK JSON masyvas:\n"
-    '[{{"job_id": "123", "score": 9, "reason": "Frontend Developer, React, Vilnius"}}]\n\n'
+    '[{{"job_id": "123", "score": 8, "reason": "Trumpas paaiškinimas"}}]\n\n'
     "Jei nieko neatitinka: []"
 )
 

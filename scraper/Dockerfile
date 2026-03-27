@@ -17,6 +17,7 @@ COPY scrape.py        .
 COPY title_matcher.py .
 COPY detail_scraper.py .
 COPY detail_matcher.py .
+COPY api_server.py    .
 
 # Required at runtime (pass via --env or Railway Variables):
 #   SUPABASE_URL, SUPABASE_SERVICE_KEY
