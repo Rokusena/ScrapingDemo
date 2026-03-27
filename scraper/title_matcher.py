@@ -85,6 +85,10 @@ REMOTE_KEYWORDS = [
     "hibrid", "hybrid", "mišrus",
 ]
 
+ONSITE_KEYWORDS = [
+    "on-site", "onsite", "on site", "office", "biure", "vietoje",
+]
+
 # ── Layer 2: Role-specific keyword map (strong / weak / ambiguous) ────────────
 
 ROLE_KEYWORDS = {
@@ -338,6 +342,11 @@ def _build_location_patterns(preferred_cities: list[str]) -> list[str]:
     # Always include remote/hybrid listings
     for kw in REMOTE_KEYWORDS:
         patterns.append(f"location.ilike.%{kw}%")
+
+    # Include on-site listings when "Vietoje" is selected
+    if any(c.strip().lower() == "vietoje" for c in preferred_cities):
+        for kw in ONSITE_KEYWORDS:
+            patterns.append(f"location.ilike.%{kw}%")
 
     return patterns
 

@@ -14,7 +14,7 @@ const OTHER_CITIES = [
   'Biržai', 'Rokiškis', 'Elektrėnai', 'Jurbarkas', 'Garliava',
   'Lentvaris', 'Grigiškės', 'Naujoji Vilnia',
 ]
-const WORK_MODES = ['Remote', 'Hybrid']
+const WORK_MODES = ['Remote', 'Hybrid', 'Vietoje']
 const LANGUAGES = ['Lietuvių', 'Anglų', 'Rusų']
 const EXPERIENCE_LEVELS: { value: string; label: string }[] = [
   { value: '', label: 'Nepasirinkta' },
