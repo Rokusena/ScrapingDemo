@@ -39,13 +39,17 @@ INTER_CALL_DELAY  = 0.5    # seconds between OpenAI calls (rate-limit courtesy)
 
 SYSTEM_PROMPT = (
     "You are a job matching assistant for the Lithuanian job market. "
+    "Job titles are in Lithuanian but the candidate profile may be in English or Lithuanian — match across languages. "
+    "Examples: 'Programuotojas' = 'Developer/Programmer', 'Kūrėjas' = 'Developer', "
+    "'Inžinierius' = 'Engineer', 'Vadovas' = 'Manager/Lead', 'Buhalteris' = 'Accountant'. "
     "Given a job seeker's profile and a list of job titles with IDs, "
-    "return the top 100 most relevant job IDs as a JSON array. "
-    "Consider: title relevance to desired position, location match, "
+    "return the most relevant job IDs as a JSON array. "
+    "Consider: title relevance to desired position (match across languages!), location match, "
     "salary range if visible, experience level fit. "
+    "If ANY jobs are relevant (score >= 5), include them all — do NOT return an empty array if there are good matches. "
     'Return ONLY valid JSON: [{"job_id": "123", "score": 8, '
     '"reason": "Junior Python pozicija Vilniuje, atitinka patirtį"}]. '
-    "Score 1-10."
+    "Score 1-10. Return [] only if truly no jobs match at all."
 )
 
 # ── Logging ───────────────────────────────────────────────────────────────────
@@ -102,18 +106,29 @@ def load_active_users(supabase) -> list[dict]:
 
 
 def load_todays_listings(supabase) -> list[dict]:
-    """Return all raw_listings where scraped_at falls on today (UTC)."""
+    """Return all raw_listings where scraped_at falls on today (UTC), paginating past the 1000-row limit."""
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    res = (
-        supabase.table("raw_listings")
-        .select("job_id, title, company, salary_raw, location")
-        .gte("scraped_at", f"{today}T00:00:00+00:00")
-        .lt( "scraped_at", f"{today}T23:59:59+00:00")
-        .execute()
-    )
-    listings = res.data or []
-    log.info("Loaded %d listings scraped today (%s)", len(listings), today)
-    return listings
+    all_listings: list[dict] = []
+    page_size = 1000
+    offset = 0
+
+    while True:
+        res = (
+            supabase.table("raw_listings")
+            .select("job_id, title, company, salary_raw, location")
+            .gte("scraped_at", f"{today}T00:00:00+00:00")
+            .lt( "scraped_at", f"{today}T23:59:59+00:00")
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+        batch = res.data or []
+        all_listings.extend(batch)
+        if len(batch) < page_size:
+            break
+        offset += page_size
+
+    log.info("Loaded %d listings scraped today (%s)", len(all_listings), today)
+    return all_listings
 
 
 def load_existing_match_ids(supabase, user_id: str) -> set[str]:
