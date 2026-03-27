@@ -243,16 +243,19 @@ def scrape_details(job_map: dict[str, list[str]]) -> None:
 
         parsed = parse_detail_page(resp.text)
 
-        supabase.table("listing_details").upsert(
-            {
-                "job_id":      job_id,
-                "description": parsed["description"],
-                "full_salary": parsed["full_salary"],
-                "requirements": parsed["requirements"],
-                "scraped_at":  now_utc,
-            },
-            on_conflict="job_id",
-        ).execute()
+        row = {
+            "job_id":       job_id,
+            "description":  parsed["description"],
+            "full_salary":  parsed["full_salary"],
+            "requirements": parsed["requirements"],
+            "scraped_at":   now_utc,
+        }
+        try:
+            supabase.table("listing_details").upsert(row, on_conflict="job_id").execute()
+        except Exception:
+            # Fallback if unique constraint on job_id is missing: delete then insert
+            supabase.table("listing_details").delete().eq("job_id", job_id).execute()
+            supabase.table("listing_details").insert(row).execute()
 
         scraped += 1
         desc_len = len(parsed["description"] or "")

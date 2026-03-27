@@ -348,16 +348,28 @@ def main() -> int:
 
     # ── Run stages based on mode ──────────────────────────────────────────
     if RUN_MODE == "scraper":
-        run_scraper(metrics, supabase)
+        # Skip if already scraped today (prevents re-run on redeploy)
+        if _count_todays_listings(supabase) > 1000:
+            log.info("Scraper already ran today (%d listings in DB) — skipping.",
+                     _count_todays_listings(supabase))
+        else:
+            run_scraper(metrics, supabase)
 
     elif RUN_MODE == "matcher":
-        # Matchers run against whatever is already in the DB (scraped earlier today)
-        metrics.listings_scraped = _count_todays_listings(supabase)
-        job_map = run_title_matcher(metrics)
-        run_detail_scraper(job_map, metrics)
-        run_detail_matcher(metrics, supabase)
+        # Skip if matcher already ran today (prevents re-run on redeploy)
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        existing_matches = supabase.table("matches").select("id", count="exact") \
+            .gte("matched_at", f"{today}T00:00:00+00:00").execute()
+        if (existing_matches.count or 0) > 0:
+            log.info("Matcher already ran today (%d matches in DB) — skipping.",
+                     existing_matches.count)
+        else:
+            metrics.listings_scraped = _count_todays_listings(supabase)
+            job_map = run_title_matcher(metrics)
+            run_detail_scraper(job_map, metrics)
+            run_detail_matcher(metrics, supabase)
 
-    else:  # "full" or unrecognised — run everything
+    else:  # "full" or unrecognised — run everything (no skip guard, manual use)
         run_scraper(metrics, supabase)
         job_map = run_title_matcher(metrics)
         run_detail_scraper(job_map, metrics)
