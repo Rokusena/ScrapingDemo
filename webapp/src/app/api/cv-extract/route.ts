@@ -49,13 +49,15 @@ async function extractTextFromPdf(arrayBuffer: ArrayBuffer): Promise<string> {
     } as unknown as typeof DOMMatrix;
   }
 
+  // Set globalThis.pdfjsWorker so pdfjs uses it instead of dynamic-importing the worker file
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!(globalThis as any).pdfjsWorker) {
+    // @ts-expect-error — no type declarations for worker module
+    const workerModule = await import('pdfjs-dist/legacy/build/pdf.worker.mjs')
+    ;(globalThis as any).pdfjsWorker = workerModule
+  }
+
   const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs')
-  // Pre-load the worker module so pdfjs doesn't attempt a dynamic import that fails in serverless
-  // @ts-expect-error — no type declarations for worker module
-  const worker = await import('pdfjs-dist/legacy/build/pdf.worker.mjs')
-  pdfjs.GlobalWorkerOptions.workerSrc = ''
-  // @ts-expect-error — inject the worker handler to bypass the fake-worker dynamic import
-  pdfjs.PDFWorker._setupFakeWorkerGlobal = Promise.resolve(worker.WorkerMessageHandler)
   const doc = await pdfjs.getDocument({ data: new Uint8Array(arrayBuffer), useWorkerFetch: false, isEvalSupported: false, useSystemFonts: true }).promise
 
   const pageTexts: string[] = []
