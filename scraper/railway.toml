@@ -1,34 +1,40 @@
-# ── GaukDarba scraper — Railway deploy config ─────────────────────────────────
+# ── GaukDarba — Railway deploy config ────────────────────────────────────────
 #
-# This service is a one-shot job: it runs main.py and exits.
-# Railway Cron Job services restart it on schedule.
+# Two separate Railway Cron Job services share this same Docker image.
+# The RUN_MODE env var controls which stages each service executes.
 #
-# Setup in Railway dashboard:
-#   1. "New Service" → "GitHub Repo" → select this repo
-#   2. Root directory: scraper/
-#   3. Service type: "Cron Job"
-#   4. Schedule (see below)
+# ── SERVICE 1: scraper (once a day at 04:00 Lithuania time) ──────────────────
+#   RUN_MODE = scraper
+#   Lithuania is UTC+2 (EET, winter) / UTC+3 (EEST, summer)
+#   04:00 Lithuania → 02:00 UTC in winter  →  cron: "0 2 * * *"
+#                  → 01:00 UTC in summer   →  cron: "0 1 * * *"
+#   Recommended: "0 2 * * *" year-round (1h late in summer is fine)
 #
-# Cron schedule for 07:00 and 17:00 Europe/Vilnius:
+# ── SERVICE 2: matcher (every hour) ──────────────────────────────────────────
+#   RUN_MODE = matcher
+#   cron: "0 * * * *"
+#   Runs title_matcher → detail_scraper → detail_matcher against today's DB data.
+#   Safe to run before the scraper fires — it will simply find 0 new listings.
 #
-#   Lithuania is UTC+2 (EET, winter) / UTC+3 (EEST, summer, last Sun Mar–Oct)
+# ── Railway setup ─────────────────────────────────────────────────────────────
+#   Service 1 (scraper):
+#     New Service → GitHub Repo → Root dir: scraper/
+#     Type: Cron Job,  Schedule: "0 2 * * *"
+#     Env: RUN_MODE=scraper  + all shared vars below
 #
-#   UTC equivalent:
-#     Winter (Nov–Mar):  05:00 and 15:00 UTC  →  "0 5,15 * * *"
-#     Summer (Apr–Oct):  04:00 and 14:00 UTC  →  "0 4,14 * * *"
+#   Service 2 (matcher):
+#     New Service → GitHub Repo → Root dir: scraper/
+#     Type: Cron Job,  Schedule: "0 * * * *"
+#     Env: RUN_MODE=matcher  + all shared vars below
 #
-#   Recommended: use "0 5,15 * * *" year-round — runs at 07:00/17:00 in winter
-#   and 08:00/18:00 in summer (1h late in summer is acceptable for a job alert).
-#   ── OR ── set up two separate cron services with seasonal schedules.
-#
-# Railway environment variables to set:
+# ── Shared environment variables ──────────────────────────────────────────────
 #   SUPABASE_URL
 #   SUPABASE_SERVICE_KEY
 #   OPENAI_API_KEY
 #   RESEND_API_KEY
 #   RESEND_FROM_EMAIL   (e.g. "GaukDarba <noreply@gaukdarba.lt>")
 #   APP_URL             (e.g. "https://gaukdarba.lt")
-# ──────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
 
 [build]
 builder          = "dockerfile"
@@ -38,8 +44,3 @@ dockerfilePath   = "Dockerfile"
 startCommand        = "python main.py"
 restartPolicyType   = "never"    # job exits after each run — don't loop
 numReplicas         = 1
-
-# Cron schedule — set this in the Railway dashboard under the service settings
-# or via Railway CLI:  railway service update --cron "0 5,15 * * *"
-#
-# cronSchedule = "0 5,15 * * *"

@@ -316,9 +316,16 @@ def print_summary(metrics: PipelineMetrics) -> None:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
+# RUN_MODE controls which stages execute:
+#   "scraper"  — Stage 1 only  (run once a day at 04:00 Lithuania time)
+#   "matcher"  — Stages 2-4    (run every hour)
+#   "full"     — All stages    (default, for manual / legacy use)
+RUN_MODE = os.environ.get("RUN_MODE", "full").lower()
+
+
 def main() -> int:
     """
-    Run the full pipeline. Returns exit code:
+    Run the pipeline. Returns exit code:
       0 — all stages succeeded
       1 — one or more stages failed (pipeline still completed)
       2 — fatal error before pipeline could start
@@ -329,7 +336,7 @@ def main() -> int:
     )
 
     log.info("╔══════════════════════════════════════════════════════╗")
-    log.info("║        GaukDarba pipeline starting                   ║")
+    log.info("║        GaukDarba pipeline starting  (mode: %-8s)║", RUN_MODE)
     log.info("║        %s                        ║", metrics.run_date)
     log.info("╚══════════════════════════════════════════════════════╝")
 
@@ -339,11 +346,22 @@ def main() -> int:
         log.critical("Cannot connect to Supabase — aborting:\n%s", traceback.format_exc())
         return 2
 
-    # ── Run stages ────────────────────────────────────────────────────────
-    run_scraper(metrics, supabase)
-    job_map = run_title_matcher(metrics)
-    run_detail_scraper(job_map, metrics)
-    run_detail_matcher(metrics, supabase)
+    # ── Run stages based on mode ──────────────────────────────────────────
+    if RUN_MODE == "scraper":
+        run_scraper(metrics, supabase)
+
+    elif RUN_MODE == "matcher":
+        # Matchers run against whatever is already in the DB (scraped earlier today)
+        metrics.listings_scraped = _count_todays_listings(supabase)
+        job_map = run_title_matcher(metrics)
+        run_detail_scraper(job_map, metrics)
+        run_detail_matcher(metrics, supabase)
+
+    else:  # "full" or unrecognised — run everything
+        run_scraper(metrics, supabase)
+        job_map = run_title_matcher(metrics)
+        run_detail_scraper(job_map, metrics)
+        run_detail_matcher(metrics, supabase)
     # ─────────────────────────────────────────────────────────────────────
 
     metrics.total_seconds = time.time() - wall_start
