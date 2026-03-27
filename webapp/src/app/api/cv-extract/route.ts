@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { PDFParse } from 'pdf-parse'
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
@@ -28,6 +27,24 @@ TAISYKLĖS:
 
 CV TEKSTAS:
 `
+
+async function extractTextFromPdf(arrayBuffer: ArrayBuffer): Promise<string> {
+  // Use pdfjs-dist legacy build directly — no worker needed, works in serverless
+  const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs')
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(arrayBuffer) }).promise
+
+  const pageTexts: string[] = []
+  for (let i = 1; i <= doc.numPages; i++) {
+    const page = await doc.getPage(i)
+    const content = await page.getTextContent()
+    const text = content.items
+      .map((item) => ('str' in item ? item.str : ''))
+      .join(' ')
+    pageTexts.push(text)
+  }
+
+  return pageTexts.join('\n').trim()
+}
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient()
@@ -58,9 +75,7 @@ export async function POST(request: NextRequest) {
   let cvText: string
   try {
     const arrayBuffer = await file.arrayBuffer()
-    const parser = new PDFParse({ data: new Uint8Array(arrayBuffer) })
-    const textResult = await parser.getText()
-    cvText = textResult.pages.map((p) => p.text).join('\n').trim()
+    cvText = await extractTextFromPdf(arrayBuffer)
   } catch (err) {
     console.error('PDF parse error:', err)
     return NextResponse.json(

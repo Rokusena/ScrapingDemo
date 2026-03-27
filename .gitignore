@@ -1,8 +1,10 @@
 # Claude Code
 .claude/
 
-
+# Environment
 .env
+.env.local
+.env*.local
 
 # Scraper output folders
 aruodas/
@@ -26,4 +28,8 @@ __pycache__/
 .venv/
 venv/
 env/
-node_modules
+
+# Node / Next.js
+node_modules/
+.next/
+next-env.d.ts
