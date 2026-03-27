@@ -18,10 +18,10 @@ const WORK_MODES = ['Remote', 'Hybrid', 'Vietoje']
 const LANGUAGES = ['Lietuvių', 'Anglų', 'Rusų']
 const EXPERIENCE_LEVELS: { value: string; label: string }[] = [
   { value: '', label: 'Nepasirinkta' },
-  { value: 'intern', label: 'Stažuotojas (Intern)' },
-  { value: 'junior', label: 'Junior' },
-  { value: 'mid', label: 'Mid-level' },
-  { value: 'senior', label: 'Senior' },
+  { value: 'intern', label: 'Be patirties / Studentas' },
+  { value: 'junior', label: 'Pradedantysis (iki 2 m.)' },
+  { value: 'mid', label: 'Patyręs (2–5 m.)' },
+  { value: 'senior', label: 'Ekspertas (5+ m.)' },
 ]
 
 interface Props {
@@ -233,7 +233,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         </label>
         <input
           type="text"
-          placeholder="pvz. Frontend Developer, Buhalteris, Projektų vadovas"
+          placeholder="pvz. sandėlio darbuotojas, pardavėjas, programuotojas, vairuotojas"
           value={form.desired_position}
           onChange={(e) => setForm((p) => ({ ...p, desired_position: e.target.value }))}
           className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
@@ -248,7 +248,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         </label>
         <input
           type="text"
-          placeholder="pvz. React, TypeScript, SQL, projektų valdymas"
+          placeholder="pvz. sandėlio logistika, vairavimas B kat., MS Office, komandinis darbas"
           value={form.skills}
           onChange={(e) => setForm((p) => ({ ...p, skills: e.target.value }))}
           className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"

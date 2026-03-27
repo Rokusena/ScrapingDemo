@@ -7,20 +7,21 @@ const CV_EXTRACT_PROMPT = `Iš pateikto CV teksto ištrauk šią informaciją JS
 
 {
   "desired_position": "pagrindinė pozicija kurią kandidatas siekia arba atitinka",
-  "skills": "įgūdžiai atskirti kableliais (pvz. React, JavaScript, TypeScript, CSS, HTML)",
-  "experience_level": "junior | mid | senior",
+  "skills": "visi įgūdžiai atskirti kableliais",
+  "experience_level": "intern | junior | mid | senior",
   "languages": ["Lietuvių", "Anglų"],
   "summary_bullets": [
-    "3 metai React/TypeScript patirties fintech sektoriuje",
-    "Dalyvavo 5+ projektų kūrime naudojant Next.js",
-    "Patirtis dirbant Agile/Scrum komandose"
+    "2 mėnesiai siuntų rūšiavimo patirties Venipak sandėlyje",
+    "Kurjerio patirtis per Bolt ir Wolt platformas",
+    "Studijuoja dirbtinio intelekto sistemas VGTU"
   ]
 }
 
 TAISYKLĖS:
-- skills: tik techniniai įgūdžiai, atskirti kableliais
-- experience_level: junior (<2m darbo patirties), mid (2-5m), senior (5+m)
-- summary_bullets: 3-5 punktai, kiekvienas 1 sakinys
+- desired_position: kokio darbo kandidatas ieško (pvz. "sandėlio darbuotojas", "pardavėjas", "programuotojas", "vairuotojas")
+- skills: VISI įgūdžiai — tiek techniniai, tiek fiziniai, tiek socialiniai (pvz. "siuntų rūšiavimas, sandėlio logistika, MS Office, komandinis darbas, vairavimas B kat.")
+- experience_level: intern (be patirties/studentas), junior (<2m darbo patirties), mid (2-5m), senior (5+m)
+- summary_bullets: 3-5 punktai, kiekvienas 1 sakinys, apibūdinantys kandidato patirtį
 - languages: kalbos kurias kandidatas moka
 - Jei CV nenurodyta — palik tuščią arba "Nenurodyta"
 - Grąžink TIK JSON, be jokio papildomo teksto
