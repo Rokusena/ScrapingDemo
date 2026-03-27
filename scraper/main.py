@@ -343,6 +343,41 @@ def run_detail_matcher(metrics: PipelineMetrics, supabase) -> None:
         metrics.stage_errors.append("detail_matcher")
 
 
+def run_cleanup(supabase) -> None:
+    """
+    Post-pipeline cleanup: remove orphaned and garbage matches.
+    - Delete matches with detail_score IS NULL from previous runs (not today)
+    - Delete matches with detail_score <= 2
+    """
+    log.info("━━━  Cleanup: removing garbage matches  ━━━")
+    try:
+        today = _today_iso()
+
+        # Delete old unscored matches (detail_score IS NULL, not from today)
+        res1 = (
+            supabase.table("matches")
+            .delete()
+            .is_("detail_score", "null")
+            .lt("matched_at", f"{today}T00:00:00+00:00")
+            .execute()
+        )
+        deleted_null = len(res1.data or [])
+
+        # Delete confirmed garbage matches (detail_score <= 2)
+        res2 = (
+            supabase.table("matches")
+            .delete()
+            .lte("detail_score", 2)
+            .execute()
+        )
+        deleted_garbage = len(res2.data or [])
+
+        log.info("Cleanup ✓  deleted %d orphaned (NULL score) + %d garbage (score<=2) matches",
+                 deleted_null, deleted_garbage)
+    except Exception:
+        log.warning("Cleanup failed (non-fatal):\n%s", traceback.format_exc())
+
+
 # ── Summary ───────────────────────────────────────────────────────────────────
 
 def print_summary(metrics: PipelineMetrics) -> None:
@@ -436,12 +471,14 @@ def main() -> int:
             job_map = run_title_matcher(metrics)
             run_detail_scraper(job_map, metrics)
             run_detail_matcher(metrics, supabase)
+            run_cleanup(supabase)
 
     else:  # "full" or unrecognised — run everything (no skip guard, manual use)
         run_scraper(metrics, supabase)
         job_map = run_title_matcher(metrics)
         run_detail_scraper(job_map, metrics)
         run_detail_matcher(metrics, supabase)
+        run_cleanup(supabase)
     # ─────────────────────────────────────────────────────────────────────
 
     metrics.total_seconds = time.time() - wall_start

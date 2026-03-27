@@ -49,12 +49,25 @@ INTER_CALL_DELAY  = 0.5     # seconds between OpenAI calls
 DESC_TRUNCATE     = 2500    # chars — keeps token cost predictable per job
 
 SYSTEM_PROMPT = (
-    "You are a job matching assistant. Given the job seeker's full profile "
-    "and detailed job descriptions, re-score each job 1-10 based on deep fit. "
-    "Consider: required skills vs user skills, experience level match, salary fit, "
-    "language requirements, job description tone and culture. "
-    'Return JSON: [{"job_id": "123", "score": 9, "reason": '
-    '"Reikalauja Python ir SQL, atitinka vartotojo įgūdžius. Atlyginimas virš minimumo."}]'
+    "Tu esi darbo skelbimų atitikimo vertintojas. Gauni kandidato profilį ir detalius darbo aprašymus.\n"
+    "Įvertink kiekvieną darbą 1-10 balu pagal gilų atitikimą.\n"
+    "Atsižvelk į: reikalaujamus įgūdžius vs kandidato įgūdžius, patirties lygį, atlyginimo atitikimą, "
+    "kalbų reikalavimus, darbo aprašymo toną ir kultūrą.\n\n"
+    "Kiekvienam skelbimui pateik:\n"
+    '1. "score" — balas 1-10\n'
+    '2. "reason" — 2-3 sakinių aprašymas, kuriame nurodyk:\n'
+    "   - Kokias KONKREČIAS technologijas/įgūdžius reikalauja (ne tik \"React įgūdžių\")\n"
+    "   - Ar atlyginimas atitinka ir koks jis (pvz. \"2880-4320€, virš 1200€ minimumo\")\n"
+    "   - Ar darbo būdas (hybrid/remote/office) atitinka\n"
+    "   - Kas yra pagrindinė priežastis kodėl tinka arba netinka\n\n"
+    "Pavyzdys gero reason:\n"
+    '"React frontend pozicija Registrų Centre, Vilniuje. Reikalauja React, TypeScript, REST API patirties. '
+    'Atlyginimas 2880-4320€ neatskaičius mokesčių (virš 1200€ minimumo). Hibridinis darbas."\n\n'
+    "Pavyzdys blogo reason (NEVARTOTI):\n"
+    '"Reikalauja React įgūdžių, kurie atitinka vartotojo profilius."\n\n'
+    'Atsakymo formatas — TIK JSON masyvas:\n'
+    '[{"job_id": "123", "score": 9, "reason": "..."}]\n\n'
+    "Jei nieko neatitinka: []"
 )
 
 # ── Logging ───────────────────────────────────────────────────────────────────
@@ -450,6 +463,12 @@ def match_user(openai_client: OpenAI, supabase, user: dict) -> int:
             match = batch_by_job.get(job_id)
             if not match:
                 log.warning("    model returned unknown job_id=%s — ignoring", job_id)
+                continue
+
+            if score <= 2:
+                # Garbage match — delete entirely instead of keeping
+                supabase.table("matches").delete().eq("id", match["id"]).execute()
+                log.info("    deleted garbage match job_id=%s (score=%d)", job_id, score)
                 continue
 
             # Persist detail_score + updated reason

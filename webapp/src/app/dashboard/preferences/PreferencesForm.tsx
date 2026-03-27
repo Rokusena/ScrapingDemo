@@ -4,9 +4,17 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import type { JobPreferences } from '@/types/database'
-import { Save, CheckCircle } from 'lucide-react'
+import { Save, CheckCircle, Upload, Loader2 } from 'lucide-react'
 
-const CITIES = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys', 'Remote']
+const MAJOR_CITIES = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys']
+const OTHER_CITIES = [
+  'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena',
+  'Kėdainiai', 'Telšiai', 'Tauragė', 'Ukmergė', 'Visaginas',
+  'Plungė', 'Kretinga', 'Palanga', 'Radviliškis', 'Druskininkai',
+  'Biržai', 'Rokiškis', 'Elektrėnai', 'Jurbarkas', 'Garliava',
+  'Lentvaris', 'Grigiškės', 'Naujoji Vilnia',
+]
+const WORK_MODES = ['Remote', 'Hybrid']
 const LANGUAGES = ['Lietuvių', 'Anglų', 'Rusų']
 const EXPERIENCE_LEVELS: { value: string; label: string }[] = [
   { value: '', label: 'Nepasirinkta' },
@@ -60,9 +68,50 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [cvLoading, setCvLoading] = useState(false)
+  const [cvBullets, setCvBullets] = useState<string[] | null>(null)
+  const [scanning, setScanning] = useState(false)
+  const [scanResult, setScanResult] = useState<string | null>(null)
 
   const supabase = createClient()
   const router = useRouter()
+
+  const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setCvLoading(true)
+    setError(null)
+    setCvBullets(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/cv-extract', { method: 'POST', body: formData })
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || 'Nepavyko apdoroti CV')
+        return
+      }
+
+      const ext = data.extracted
+      setForm((prev) => ({
+        ...prev,
+        desired_position: ext.desired_position || prev.desired_position,
+        skills: ext.skills || prev.skills,
+        experience_level: ext.experience_level || prev.experience_level,
+        languages: ext.languages?.length ? ext.languages : prev.languages,
+      }))
+      setCvBullets(ext.summary_bullets || [])
+    } catch {
+      setError('Nepavyko apdoroti CV failo')
+    } finally {
+      setCvLoading(false)
+      e.target.value = ''
+    }
+  }
 
   const toggle = (key: 'preferred_cities' | 'languages', value: string) => {
     setForm((prev) => ({
@@ -71,6 +120,29 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         ? prev[key].filter((x) => x !== value)
         : [...prev[key], value],
     }))
+  }
+
+  const triggerScan = async () => {
+    setScanning(true)
+    setScanResult(null)
+    try {
+      const res = await fetch('/api/scan-now', { method: 'POST' })
+      const data = await res.json()
+      if (res.ok) {
+        setScanResult(
+          data.matches_found > 0
+            ? `Rasta ${data.matches_found} atitikimų!${data.top_match ? ` Geriausias: ${data.top_match.title} (${data.top_match.score}/10)` : ''}`
+            : 'Šiuo metu naujų atitikimų nerasta.'
+        )
+        router.refresh()
+      } else {
+        setScanResult(data.error || 'Skenavimas nepavyko')
+      }
+    } catch {
+      setScanResult('Nepavyko prisijungti prie skenavimo serverio')
+    } finally {
+      setScanning(false)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,12 +175,57 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
     } else {
       setSaved(true)
       router.refresh()
+      // Auto-trigger scan after saving preferences
+      triggerScan()
     }
     setLoading(false)
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
+      {/* CV Upload */}
+      <div className="p-5 bg-gray-900 border border-gray-800 rounded-xl">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Automatiškai užpildyti iš CV
+        </label>
+        <p className="text-gray-500 text-xs mb-3">
+          Įkelkite PDF CV — AI automatiškai užpildys poziciją, įgūdžius ir patirtį.
+        </p>
+        <label className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border transition cursor-pointer ${
+          cvLoading
+            ? 'bg-gray-800 border-gray-700 text-gray-500'
+            : 'bg-indigo-600/20 border-indigo-700/40 text-indigo-300 hover:bg-indigo-600/30'
+        }`}>
+          {cvLoading ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Upload className="w-4 h-4" />
+          )}
+          {cvLoading ? 'AI analizuoja CV...' : 'Įkelti CV (PDF)'}
+          <input
+            type="file"
+            accept=".pdf"
+            onChange={handleCvUpload}
+            disabled={cvLoading}
+            className="hidden"
+          />
+        </label>
+
+        {cvBullets && cvBullets.length > 0 && (
+          <div className="mt-4 p-3 bg-gray-800 rounded-lg">
+            <p className="text-xs text-gray-400 mb-2 font-medium">AI aptiko iš CV:</p>
+            <ul className="space-y-1">
+              {cvBullets.map((bullet, i) => (
+                <li key={i} className="text-sm text-gray-300 flex gap-2">
+                  <span className="text-indigo-400 flex-shrink-0">•</span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
       {/* Desired position */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-1.5">
@@ -138,13 +255,42 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         />
       </div>
 
+      {/* Work mode */}
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Darbo būdas
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {WORK_MODES.map((mode) => (
+            <ToggleChip
+              key={mode}
+              label={mode}
+              selected={form.preferred_cities.includes(mode)}
+              onToggle={() => toggle('preferred_cities', mode)}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Cities */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
           Pageidaujami miestai
         </label>
+        <p className="text-gray-500 text-xs mb-2">Didieji miestai</p>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {MAJOR_CITIES.map((city) => (
+            <ToggleChip
+              key={city}
+              label={city}
+              selected={form.preferred_cities.includes(city)}
+              onToggle={() => toggle('preferred_cities', city)}
+            />
+          ))}
+        </div>
+        <p className="text-gray-500 text-xs mb-2">Kiti miestai</p>
         <div className="flex flex-wrap gap-2">
-          {CITIES.map((city) => (
+          {OTHER_CITIES.map((city) => (
             <ToggleChip
               key={city}
               label={city}
@@ -259,13 +405,42 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
           {loading ? 'Saugoma...' : 'Išsaugoti nustatymus'}
         </button>
 
-        {saved && (
+        {saved && !scanning && (
           <span className="inline-flex items-center gap-1.5 text-green-400 text-sm">
             <CheckCircle className="w-4 h-4" />
             Išsaugota
           </span>
         )}
+
+        <button
+          type="button"
+          onClick={triggerScan}
+          disabled={scanning || loading}
+          className="inline-flex items-center gap-2 px-5 py-3 bg-gray-800 hover:bg-gray-700 disabled:opacity-60 text-white font-medium rounded-lg border border-gray-700 transition"
+        >
+          {scanning ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <span className="text-base leading-none">&#x1F50D;</span>
+          )}
+          {scanning ? 'AI ieško darbo pasiūlymų...' : 'Ieškoti dabar'}
+        </button>
       </div>
+
+      {/* Scan status */}
+      {scanning && (
+        <div className="flex items-center gap-3 p-4 bg-indigo-950/40 border border-indigo-800/50 rounded-xl text-indigo-300 text-sm">
+          <Loader2 className="w-4 h-4 animate-spin flex-shrink-0" />
+          AI analizuoja darbo skelbimus pagal jūsų profilį... Tai gali užtrukti iki 2 minučių.
+        </div>
+      )}
+
+      {scanResult && !scanning && (
+        <div className="flex items-center gap-3 p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-300 text-sm">
+          <CheckCircle className="w-4 h-4 flex-shrink-0 text-green-400" />
+          {scanResult}
+        </div>
+      )}
     </form>
   )
 }

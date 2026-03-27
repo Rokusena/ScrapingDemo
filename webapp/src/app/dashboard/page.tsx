@@ -5,15 +5,14 @@ import type { MatchWithListing, Profile, JobPreferences } from '@/types/database
 import { ExternalLink, Settings, Zap, AlertCircle } from 'lucide-react'
 import CheckoutButton from './CheckoutButton'
 
-function ScoreBadge({ score }: { score: number | null }) {
-  const s = score ?? 0
+function ScoreBadge({ score }: { score: number }) {
   const color =
-    s >= 8 ? 'bg-green-950/60 text-green-400 border-green-800/60' :
-    s >= 6 ? 'bg-yellow-950/60 text-yellow-400 border-yellow-800/60' :
-             'bg-red-950/60 text-red-400 border-red-800/60'
+    score >= 8 ? 'bg-green-950/60 text-green-400 border-green-800/60' :
+    score >= 6 ? 'bg-yellow-950/60 text-yellow-400 border-yellow-800/60' :
+                 'bg-red-950/60 text-red-400 border-red-800/60'
   return (
     <span className={`inline-flex items-center px-2.5 py-1 rounded-full border text-sm font-bold ${color}`}>
-      {s}/10
+      {score}/10
     </span>
   )
 }
@@ -28,7 +27,7 @@ function MatchCard({ match }: { match: MatchWithListing }) {
           <h3 className="font-bold text-base truncate">{listing?.title ?? 'Nežinoma pozicija'}</h3>
           <p className="text-gray-400 text-sm mt-0.5">{listing?.company ?? 'Nežinoma įmonė'}</p>
         </div>
-        <ScoreBadge score={match.detail_score} />
+        <ScoreBadge score={match.detail_score!} />
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -86,7 +85,10 @@ export default async function DashboardPage({
       .from('matches')
       .select('*, raw_listings(*)')
       .eq('user_id', user.id)
+      .not('detail_score', 'is', null)
+      .gte('detail_score', 3)
       .order('detail_score', { ascending: false })
+      .order('title_score', { ascending: false })
       .limit(30),
   ])
 

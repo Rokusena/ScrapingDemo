@@ -48,103 +48,225 @@ INTER_CALL_DELAY  = 0.5    # seconds between OpenAI calls (rate-limit courtesy)
 
 # Lithuanian nominative → locative forms used on cvbankas
 CITY_LOCATIVE_MAP = {
+    # Major cities
     "Vilnius":    ["vilniuje", "vilnius"],
     "Kaunas":     ["kaune", "kaunas"],
-    "Klaipėda":   ["klaipėdoje", "klaipėda"],
-    "Šiauliai":   ["šiauliuose", "šiauliai"],
-    "Panevėžys":  ["panevėžyje", "panevėžys"],
+    "Klaipėda":   ["klaipėdoje", "klaipėda", "klaipedoje"],
+    "Šiauliai":   ["šiauliuose", "šiauliai", "siauliuose"],
+    "Panevėžys":  ["panevėžyje", "panevėžys", "panevežyje"],
+    # Medium cities
+    "Alytus":       ["alytuje", "alytus"],
+    "Marijampolė":  ["marijampolėje", "marijampolė", "marijampoleje"],
+    "Mažeikiai":    ["mažeikiuose", "mažeikiai", "mazeikiuose"],
+    "Jonava":       ["jonavoje", "jonava"],
+    "Utena":        ["utenoje", "utena"],
+    "Kėdainiai":    ["kėdainiuose", "kėdainiai", "kedainiuose"],
+    "Telšiai":      ["telšiuose", "telšiai", "telsiuose"],
+    "Tauragė":      ["tauragėje", "tauragė", "taurageje"],
+    "Ukmergė":      ["ukmergėje", "ukmergė", "ukmergeje"],
+    "Visaginas":    ["visagine", "visaginas"],
+    "Plungė":       ["plungėje", "plungė"],
+    "Kretinga":     ["kretingoje", "kretinga"],
+    "Palanga":      ["palangoje", "palanga"],
+    "Radviliškis":  ["radviliškyje", "radviliškis"],
+    "Druskininkai": ["druskininkuose", "druskininkai"],
+    "Biržai":       ["biržuose", "biržai"],
+    "Rokiškis":     ["rokiškyje", "rokiškis"],
+    "Elektrėnai":   ["elektrėnuose", "elektrėnai"],
+    "Jurbarkas":    ["jurbarke", "jurbarkas"],
+    "Garliava":     ["garliavoje", "garliava"],
+    "Lentvaris":    ["lentvaryje", "lentvaris"],
+    "Grigiškės":    ["grigiškėse", "grigiškės"],
+    "Naujoji Vilnia": ["naujojoje vilnioje"],
 }
 
-REMOTE_KEYWORDS = ["remote", "nuotoliniu", "nuotolinis", "nuotoliu", "hibrid", "hybrid"]
+REMOTE_KEYWORDS = [
+    "remote", "nuotoliniu", "nuotolinis", "nuotoliu", "nuotolinio",
+    "hibrid", "hybrid", "mišrus",
+]
 
-# ── Layer 2: Role keyword map + blacklist ─────────────────────────────────────
+# ── Layer 2: Role-specific keyword map (strong / weak / ambiguous) ────────────
 
-ROLE_KEYWORD_MAP = {
+ROLE_KEYWORDS = {
     "frontend developer": {
-        # Lithuanian stems (catches -as/-a/-ą inflections)
-        "programuotoj", "kūrėj", "programavim",
-        # English
-        "developer", "engineer", "frontend", "front-end", "front end",
-        "fullstack", "full-stack", "full stack",
-        "react", "javascript", "typescript", "angular", "vue",
-        "web ", "ui ", "ux", "designer",
+        "strong": [
+            "frontend", "front-end", "front end",
+            "react", "vue", "angular", "next.js", "nextjs",
+            "javascript developer", "js developer", "typescript developer",
+            "ui developer", "ui kūrėj", "ui programuotoj",
+            "web developer", "web kūrėj", "web programuotoj",
+        ],
+        "weak": [
+            "full-stack", "full stack", "fullstack",
+            "ux", "ui",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "programavim",
+            "developer", "engineer", "inžinier",
+        ],
     },
     "backend developer": {
-        "programuotoj", "kūrėj", "programavim",
-        "developer", "engineer", "backend", "back-end", "back end",
-        "fullstack", "full-stack", "full stack",
-        "python", "java", "node", ".net", "golang", "go ",
-        "devops", "cloud", "api",
+        "strong": [
+            "backend", "back-end", "back end",
+            "python developer", "python programuotoj",
+            "java developer", "java programuotoj",
+            "node developer", "node.js", "nodejs",
+            ".net developer", ".net programuotoj",
+            "golang", "go developer",
+            "api developer", "api programuotoj",
+        ],
+        "weak": [
+            "full-stack", "full stack", "fullstack",
+            "devops", "cloud", "python", "java", ".net", "node",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "programavim",
+            "developer", "engineer", "inžinier",
+        ],
     },
     "fullstack developer": {
-        "programuotoj", "kūrėj", "programavim",
-        "developer", "engineer",
-        "frontend", "front-end", "front end",
-        "backend", "back-end", "back end",
-        "fullstack", "full-stack", "full stack",
-        "react", "javascript", "typescript", "angular", "vue",
-        "python", "java", "node", ".net",
-        "web ", "devops", "cloud",
+        "strong": [
+            "fullstack", "full-stack", "full stack",
+            "frontend", "front-end", "backend", "back-end",
+            "react", "vue", "angular", "next.js", "nextjs",
+            "web developer", "web kūrėj", "web programuotoj",
+        ],
+        "weak": [
+            "python", "java", "node", ".net", "javascript", "typescript",
+            "devops", "cloud", "ux", "ui",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "programavim",
+            "developer", "engineer", "inžinier",
+        ],
     },
     "data scientist": {
-        "programuotoj", "kūrėj", "analitikas", "analitik",
-        "data", "scientist", "machine learning", "ml ",
-        "analyst", "analytics", "python", "duomenų",
+        "strong": [
+            "data scientist", "data analyst", "duomenų analitikas",
+            "machine learning", "ml engineer", "ai engineer",
+            "data engineer", "duomenų inžinier",
+        ],
+        "weak": [
+            "data", "analytics", "analitikas", "analitik",
+            "python", "duomenų",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "developer", "engineer", "inžinier",
+        ],
     },
     "devops engineer": {
-        "programuotoj", "kūrėj", "inžinier",
-        "devops", "sre", "cloud", "infrastructure",
-        "engineer", "developer", "kubernetes", "docker",
-        "aws", "azure", "gcp", "linux", "administratori",
+        "strong": [
+            "devops", "sre", "site reliability",
+            "cloud engineer", "cloud inžinier",
+            "infrastructure", "kubernetes", "docker",
+            "aws engineer", "azure engineer", "gcp",
+            "platform engineer",
+        ],
+        "weak": [
+            "linux", "administratori", "aws", "azure",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "developer", "engineer", "inžinier",
+        ],
     },
     "qa engineer": {
-        "testuotoj", "testavim", "kokybės",
-        "qa", "quality", "test", "tester", "automation",
-        "engineer", "developer",
+        "strong": [
+            "qa", "quality assurance", "testuotoj", "testavim",
+            "test engineer", "test automation",
+            "kokybės", "tester",
+        ],
+        "weak": [
+            "automation", "test",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "developer", "engineer", "inžinier",
+        ],
     },
     "project manager": {
-        "projektų vadov", "vadov", "vadybinink",
-        "project manager", "product manager", "scrum", "agile",
-        "delivery manager", "team lead",
+        "strong": [
+            "project manager", "projektų vadov",
+            "product manager", "produkto vadov",
+            "scrum master", "delivery manager", "team lead",
+            "agile coach",
+        ],
+        "weak": [
+            "scrum", "agile", "vadov",
+        ],
+        "reject_if_only_this": [
+            "vadybinink",
+        ],
     },
 }
 
 # Title stems that are NEVER relevant to IT/dev roles
 TITLE_BLACKLIST = {
+    # Workers / labor
     "vairuotoj", "kurjer", "sandėl", "statybinink", "valytoj",
-    "pardavim", "pardavėj",
-    "buhalter", "virėj", "kepėj",
-    "siuvėj", "mechani", "elektrik", "suvirintoj",
-    "pakuotoj", "montuotoj", "gamybos darbuotoj",
-    "slaugytoj", "gydytoj", "vaistinink",
-    "apsaugos darbuotoj", "tiekėj", "operatori",
-    "kasininк", "kasinink", "padavėj", "barmen",
-    "konditer", "florist", "kirpėj",
+    "pakuotoj", "montuotoj", "gamybos darbuotoj", "gamybos operatori",
+    "suvirintoj", "dažytoj", "betonuotoj",
+    # Sales / management / business
+    "pardavim", "pardavėj", "vadybinink", "buhalter", "finansinink", "rinkodar",
+    "personalo", "hr ", "žmogiškųjų", "verslo plėtr",
+    "ekspedicij", "logistik", "tiekėj", "pirkėj",
+    # Medical / health
+    "slaugytoj", "gydytoj", "vaistinink", "farmaceut",
+    "kineziterapeut", "dietolog",
+    # Food / hospitality
+    "virėj", "kepėj", "barmen", "padavėj", "konditer",
+    # Manufacturing / industrial
+    "siuvėj", "mechani", "elektrik", "operatori",
+    "apsaugos darbuotoj", "sargybinink",
+    "gamybos", "pcb gamyb",
+    # Other non-IT
+    "turto valdym", "nekilnojam", "draudim",
+    "mokytoj", "dėstytoj", "auklėtoj",
+    "architekt", "dizainer",
+    "kasininк", "kasinink", "florist", "kirpėj",
 }
 
 # ── Layer 3: LLM prompt ──────────────────────────────────────────────────────
 
 SYSTEM_PROMPT = (
-    "Tu esi darbo skelbimų relevancijos vertintojas. Gauni kandidato profilį ir darbo skelbimų sąrašą.\n\n"
+    "Tu esi darbo skelbimų relevancijos vertintojas TIKSLIAI pagal kandidato tikslinę poziciją.\n\n"
     "KANDIDATO PROFILIS:\n"
     "- Pageidaujama pozicija: {desired_position}\n"
     "- Įgūdžiai: {skills}\n"
     "- Pageidaujami miestai: {preferred_cities}\n"
-    "- Min. atlyginimas (neatskaičius mokesčių): {preferred_salary_min} €/mėn.\n"
+    "- Min. atlyginimas: {preferred_salary_min} €/mėn. neatskaičius mokesčių\n"
     "- Patirties lygis: {experience_level}\n"
     "- Kalbos: {languages}\n"
     "- Darbo būdas: {keywords}\n\n"
-    "TAISYKLĖS:\n"
-    "1. Grąžink TIK skelbimus, kurie yra PROGRAMAVIMO/IT KŪRIMO srityje ir atitinka kandidato tikslinę poziciją.\n"
-    "2. ATMESTI visus skelbimus, kurie NĖRA IT/programavimo sritys: vairuotojai, sandėlininkai, "
-    "pardavimų vadybininkai, statybininkai, gamybos darbuotojai, inžinieriai (ne IT), buhalteriai ir pan.\n"
-    "3. Jei skelbimo miestas neatitinka kandidato pageidavimų ir nėra nuotolinis/hibridinis — ATMESTI.\n"
-    "4. Jei nurodytas atlyginimas mažesnis nei kandidato minimumas — ATMESTI.\n"
-    "5. Vertink 1-10 balų skalėje: pavadinimo atitikimas (50%), įgūdžių sutapimas (30%), vieta + darbo būdas (20%).\n\n"
-    "Grąžink TIK atitinkančius skelbimus JSON masyvu:\n"
-    '[{{"job_id": "123", "score": 8, "reason": "Frontend developer, React, Vilnius, hybrid"}}]\n\n'
-    "Jei NIEKO neatitinka, grąžink: []\n\n"
-    "NIEKADA neįtraukk ne-IT darbų. Geriau praleisti gerą skelbimą nei įtraukti blogą."
+    "VERTINIMO TAISYKLĖS:\n\n"
+    "Balas 8-10: Pavadinimas TIESIOGIAI atitinka kandidato poziciją IR technologijas.\n"
+    "  Pavyzdžiai FrontEnd Developer kandidatui:\n"
+    '  - "Frontend Developer" → 9\n'
+    '  - "React programuotojas" → 9\n'
+    '  - "Full-Stack Developer (React)" → 8\n'
+    '  - "Junior Front-End Developer" → 8\n\n'
+    "Balas 5-7: Susijusi IT pozicija, bet ne tiksli atitiktis.\n"
+    '  - "Full-Stack Developer" (be React paminėjimo) → 6\n'
+    '  - "Web Developer" → 6\n'
+    '  - "UX/UI Designer" → 5\n\n'
+    "Balas 1-4: NEATITINKA kandidato pozicijos.\n"
+    "  - PHP Programuotojas → 2 (kita tech stack)\n"
+    "  - Java Developer → 2 (kita tech stack)\n"
+    "  - Python Developer → 2 (kita tech stack)\n"
+    "  - .NET programuotojas → 2 (kita tech stack)\n"
+    "  - Backend Engineer → 3 (kita pozicijos tipas)\n"
+    "  - DevOps inžinierius → 2\n"
+    "  - QA inžinierius → 2\n"
+    "  - Automation Developer → 2\n"
+    "  - Embedded Developer → 1\n"
+    "  - Network Engineer → 1\n"
+    "  - BET KOKS ne-IT darbas → 0 (neįtraukti)\n\n"
+    "SVARBU:\n"
+    "- Jei pavadinime nėra frontend/react/vue/angular/javascript/web/ui — balas NEGALI būti > 6\n"
+    "- PHP, Java, Python, C#, .NET, C++, Embedded, DevOps, QA, Automation — tai NE frontend, max balas 3\n"
+    '- Jei pavadinime yra "programuotojas" be jokios technologijos — balas 4 (neįtraukti)\n'
+    "- Grąžink TIK skelbimus su balu >= 5\n\n"
+    "Atsakymo formatas — TIK JSON masyvas:\n"
+    '[{{"job_id": "123", "score": 9, "reason": "Frontend Developer, React, Vilnius"}}]\n\n'
+    "Jei nieko neatitinka: []"
 )
 
 # ── Logging ───────────────────────────────────────────────────────────────────
@@ -307,10 +429,10 @@ def sql_prefilter(supabase, user_prefs: dict) -> list[dict]:
 
 # ── Layer 2: Deterministic keyword filter ─────────────────────────────────────
 
-def _find_role_keywords(desired_position: str) -> set[str] | None:
+def _find_role_keywords(desired_position: str) -> dict | None:
     """
-    Look up the keyword set for the user's desired_position.
-    Matches against ROLE_KEYWORD_MAP keys using substring matching.
+    Look up the keyword dict for the user's desired_position.
+    Returns a dict with keys: strong, weak, reject_if_only_this.
     Returns None if no match found (will skip Layer 2 filtering).
     """
     if not desired_position:
@@ -319,11 +441,11 @@ def _find_role_keywords(desired_position: str) -> set[str] | None:
     pos_lower = desired_position.lower()
 
     # Direct match
-    if pos_lower in ROLE_KEYWORD_MAP:
-        return ROLE_KEYWORD_MAP[pos_lower]
+    if pos_lower in ROLE_KEYWORDS:
+        return ROLE_KEYWORDS[pos_lower]
 
     # Substring match: "junior frontend developer" matches "frontend developer"
-    for role_key, keywords in ROLE_KEYWORD_MAP.items():
+    for role_key, keywords in ROLE_KEYWORDS.items():
         if role_key in pos_lower or pos_lower in role_key:
             return keywords
 
@@ -331,7 +453,7 @@ def _find_role_keywords(desired_position: str) -> set[str] | None:
     pos_words = set(pos_lower.split())
     best_match = None
     best_overlap = 0
-    for role_key, keywords in ROLE_KEYWORD_MAP.items():
+    for role_key, keywords in ROLE_KEYWORDS.items():
         role_words = set(role_key.split())
         overlap = len(pos_words & role_words)
         if overlap > best_overlap:
@@ -346,52 +468,61 @@ def _find_role_keywords(desired_position: str) -> set[str] | None:
 
 def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
     """
-    Layer 2: Filter listings by title keywords.
-    Returns only listings whose titles contain at least one whitelist keyword
-    AND do not contain blacklisted words.
+    Layer 2: Role-aware keyword filter.
+    Uses strong/weak/reject_if_only_this pattern to avoid passing irrelevant
+    tech-stack jobs (PHP, Java, .NET etc.) to the LLM for a frontend user.
     """
     desired_position = user_prefs.get("desired_position") or ""
-    role_keywords = _find_role_keywords(desired_position)
+    role_kw = _find_role_keywords(desired_position)
 
-    # Also extract keywords from user's skills field
-    skills = user_prefs.get("skills") or ""
-    skill_keywords = set()
-    if skills:
-        for skill in re.split(r"[,;/\s]+", skills.lower()):
-            skill = skill.strip()
-            if len(skill) >= 3:  # skip tiny fragments
-                skill_keywords.add(skill)
-
-    # If we couldn't find any keywords, skip this layer (pass everything through)
-    if not role_keywords and not skill_keywords:
+    if not role_kw:
         log.warning("  Layer 2: no keyword map for '%s' — passing all listings through", desired_position)
         return listings
 
-    # Combine role keywords + skill keywords
-    whitelist = (role_keywords or set()) | skill_keywords
+    strong_kws  = role_kw.get("strong", [])
+    weak_kws    = role_kw.get("weak", [])
+    ambiguous   = role_kw.get("reject_if_only_this", [])
+
+    # Also use user's skills as additional strong keywords
+    skills = user_prefs.get("skills") or ""
+    extra_strong: list[str] = []
+    if skills:
+        for skill in re.split(r"[,;/]+", skills.lower()):
+            skill = skill.strip()
+            if len(skill) >= 3:
+                extra_strong.append(skill)
 
     kept = []
     for listing in listings:
         title = (listing.get("title") or "").lower()
 
-        # Check blacklist first — reject if any blacklisted stem found
-        blacklisted = False
-        for stem in TITLE_BLACKLIST:
-            if stem in title:
-                blacklisted = True
-                break
+        # Check blacklist first — always reject
+        blacklisted = any(stem in title for stem in TITLE_BLACKLIST)
         if blacklisted:
             continue
 
-        # Check whitelist — keep if any keyword matches
-        matched = False
-        for keyword in whitelist:
-            if keyword in title:
-                matched = True
-                break
-        if matched:
+        # Check strong keywords — always keep
+        if any(kw in title for kw in strong_kws):
             kept.append(listing)
+            continue
 
+        # Check user's skill keywords as strong signals (react, typescript, etc.)
+        if any(kw in title for kw in extra_strong):
+            kept.append(listing)
+            continue
+
+        # Check weak keywords — keep
+        if any(kw in title for kw in weak_kws):
+            kept.append(listing)
+            continue
+
+        # If title has ONLY an ambiguous keyword (e.g. "programuotojas" without
+        # any frontend/react/web qualifier), reject it — it's probably PHP/Java/.NET
+        has_ambiguous = any(kw in title for kw in ambiguous)
+        if has_ambiguous:
+            continue
+
+        # No keywords matched at all — reject
     return kept
 
 
