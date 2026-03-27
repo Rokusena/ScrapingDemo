@@ -29,6 +29,7 @@ import time
 import traceback
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
+from typing import Optional
 
 from supabase import create_client
 
@@ -75,9 +76,10 @@ class PipelineMetrics:
         """
         Rough GPT-4o-mini cost estimate based on data volume.
 
-        Title matching:
-          • Input per batch (200 titles):  300 (profile) + 200×25 (titles) = 5_300 tokens
-          • Output per batch:              100×20 = 2_000 tokens
+        Title matching (3-layer funnel — only ~50-100 listings reach LLM):
+          • Input per batch (25 titles):   500 (system) + 25×25 (titles) = 1_125 tokens
+          • Output per batch:              ~10×20 = 200 tokens
+          • Estimated survivors reaching LLM: ~80 per user (after SQL + keyword filter)
         Detail matching:
           • Input per batch (20 jobs):     300 (profile) + 20×600 (desc) = 12_300 tokens
           • Output per batch:              20×30 = 600 tokens
@@ -85,11 +87,13 @@ class PipelineMetrics:
         if self._listings == 0 or self._users == 0:
             return 0.0
 
-        title_batches = -(-self._listings // 200) * self._users       # ceil
+        # After 3-layer funnel, ~1% of listings reach LLM (rough estimate)
+        llm_survivors = min(self._listings, max(self._listings // 100, 50))
+        title_batches = -(-llm_survivors // 25) * self._users        # ceil
         detail_batches = -(-max(self._avg_matches, 1) // 20) * self._users
 
-        input_tokens  = title_batches * 5_300  + detail_batches * 12_300
-        output_tokens = title_batches * 2_000  + detail_batches * 600
+        input_tokens  = title_batches * 1_125  + detail_batches * 12_300
+        output_tokens = title_batches * 200    + detail_batches * 600
 
         return round(input_tokens * _INPUT_COST_PER_TOKEN
                      + output_tokens * _OUTPUT_COST_PER_TOKEN, 4)
@@ -161,20 +165,88 @@ def _has_any_listings(supabase, days_back: int = 1) -> bool:
     return (res.count or 0) > 0
 
 
+# ── Scrape metadata (24h gate) ───────────────────────────────────────────────
+
+def _get_scrape_metadata(supabase) -> Optional[dict]:
+    """Fetch the singleton scrape_metadata row (or None if table is empty/missing)."""
+    try:
+        res = supabase.table("scrape_metadata").select("*").limit(1).execute()
+        rows = res.data or []
+        return rows[0] if rows else None
+    except Exception as exc:
+        log.warning("Could not read scrape_metadata (table may not exist yet): %s", exc)
+        return None
+
+
+def _should_skip_scrape(supabase) -> bool:
+    """Return True if a scrape ran less than 24h ago."""
+    meta = _get_scrape_metadata(supabase)
+    if not meta:
+        return False
+    next_after = meta.get("next_scrape_after")
+    if not next_after:
+        return False
+    # Parse ISO timestamp
+    if isinstance(next_after, str):
+        next_after_dt = datetime.fromisoformat(next_after.replace("Z", "+00:00"))
+    else:
+        next_after_dt = next_after
+    now = datetime.now(timezone.utc)
+    if next_after_dt > now:
+        log.info("Skipping scrape — next allowed at %s (now: %s)",
+                 next_after_dt.isoformat(), now.strftime("%H:%M UTC"))
+        return True
+    return False
+
+
+def _upsert_scrape_metadata(supabase, started_at: datetime, finished_at: datetime, count: int) -> None:
+    """Upsert the singleton scrape_metadata row after a successful scrape."""
+    next_after = started_at + timedelta(hours=24)
+    meta = _get_scrape_metadata(supabase)
+    row = {
+        "last_scrape_started_at":  started_at.isoformat(),
+        "last_scrape_finished_at": finished_at.isoformat(),
+        "listings_count":          count,
+        "next_scrape_after":       next_after.isoformat(),
+    }
+    try:
+        if meta and meta.get("id"):
+            supabase.table("scrape_metadata").update(row).eq("id", meta["id"]).execute()
+        else:
+            supabase.table("scrape_metadata").insert(row).execute()
+        log.info("Updated scrape_metadata: next scrape after %s", next_after.isoformat())
+    except Exception as exc:
+        log.warning("Failed to upsert scrape_metadata: %s", exc)
+
+
 # ── Stage runners ─────────────────────────────────────────────────────────────
 
 def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
     """
     Stage 1: scrape all CVBankas listings.
     Returns True on success, False on failure.
+    Checks scrape_metadata to enforce 24h minimum between scrapes.
     On failure the matchers will use whatever is already in the DB.
     """
     log.info("━━━  Stage 1/4: Scraper  ━━━")
+
+    # Check 24h gate via scrape_metadata
+    if _should_skip_scrape(supabase):
+        metrics.listings_scraped = _count_todays_listings(supabase)
+        log.info("Stage 1 — skipped (24h gate). Existing listings: %d", metrics.listings_scraped)
+        return True
+
     t = time.time()
+    scrape_started = datetime.now(timezone.utc)
     try:
         from scrape import run as _scrape
         _scrape()
+        scrape_finished = datetime.now(timezone.utc)
         metrics.listings_scraped = _count_todays_listings(supabase)
+
+        # Record successful scrape in metadata
+        _upsert_scrape_metadata(supabase, scrape_started, scrape_finished, metrics.listings_scraped)
+
         log.info("Stage 1 ✓  listings scraped today: %d  (%.1fs)",
                  metrics.listings_scraped, time.time() - t)
         return True
@@ -348,12 +420,8 @@ def main() -> int:
 
     # ── Run stages based on mode ──────────────────────────────────────────
     if RUN_MODE == "scraper":
-        # Skip if already scraped today (prevents re-run on redeploy)
-        if _count_todays_listings(supabase) > 1000:
-            log.info("Scraper already ran today (%d listings in DB) — skipping.",
-                     _count_todays_listings(supabase))
-        else:
-            run_scraper(metrics, supabase)
+        # run_scraper itself checks the 24h gate via scrape_metadata
+        run_scraper(metrics, supabase)
 
     elif RUN_MODE == "matcher":
         # Skip if matcher already ran today (prevents re-run on redeploy)
