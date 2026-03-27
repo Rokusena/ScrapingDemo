@@ -40,7 +40,6 @@
 builder          = "dockerfile"
 dockerfilePath   = "Dockerfile"
 
-[deploy]
-startCommand        = "python main.py"
-restartPolicyType   = "never"    # job exits after each run — don't loop
-numReplicas         = 1
+# Deploy settings removed — configure per-service in Railway UI:
+#   MAIN (cron):        Start command: python main.py,    Restart: Never
+#   ScanNowCALL (web):  Start command: python api_server.py, Restart: On failure
