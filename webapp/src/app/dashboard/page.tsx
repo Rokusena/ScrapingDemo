@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { MatchWithListing, Profile, JobPreferences } from '@/types/database'
 import { ExternalLink, Settings, Zap, AlertCircle } from 'lucide-react'
 import CheckoutButton from './CheckoutButton'
+import ClearMatchesButton from './ClearMatchesButton'
 
 function ScoreBadge({ score }: { score: number }) {
   const color =
@@ -153,12 +154,15 @@ export default async function DashboardPage({
 
       {/* Matches */}
       <div>
-        <h2 className="font-bold text-lg mb-5">
-          Atitikimai{' '}
-          {typedMatches.length > 0 && (
-            <span className="text-gray-500 font-normal text-base">({typedMatches.length})</span>
-          )}
-        </h2>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="font-bold text-lg">
+            Atitikimai{' '}
+            {typedMatches.length > 0 && (
+              <span className="text-gray-500 font-normal text-base">({typedMatches.length})</span>
+            )}
+          </h2>
+          {typedMatches.length > 0 && <ClearMatchesButton />}
+        </div>
 
         {typedMatches.length === 0 ? (
           <div className="py-16 text-center border border-dashed border-gray-800 rounded-2xl">
