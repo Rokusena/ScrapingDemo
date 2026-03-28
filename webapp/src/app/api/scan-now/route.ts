@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 const PIPELINE_API_URL = process.env.PIPELINE_API_URL || 'http://localhost:8080'
@@ -43,7 +43,50 @@ export async function POST() {
 
     if (!res.ok) {
       return NextResponse.json(
-        { error: data.error || 'Skenavimas nepavyko' },
+        { ...data, error: data.error || 'Skenavimas nepavyko' },
+        { status: res.status }
+      )
+    }
+
+    return NextResponse.json(data)
+  } catch {
+    return NextResponse.json(
+      { error: 'Nepavyko prisijungti prie skenavimo serverio' },
+      { status: 502 }
+    )
+  }
+}
+
+export async function GET(request: NextRequest) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return NextResponse.json({ error: 'Neprisijungęs' }, { status: 401 })
+  }
+
+  const scanId = request.nextUrl.searchParams.get('scan_id')
+  if (!scanId) {
+    return NextResponse.json({ error: 'scan_id required' }, { status: 400 })
+  }
+
+  try {
+    const res = await fetch(
+      `${PIPELINE_API_URL}/scan-status?scan_id=${encodeURIComponent(scanId)}`,
+      {
+        headers: {
+          ...(API_SECRET ? { Authorization: `Bearer ${API_SECRET}` } : {}),
+        },
+      }
+    )
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: data.error || 'Nepavyko patikrinti būsenos' },
         { status: res.status }
       )
     }

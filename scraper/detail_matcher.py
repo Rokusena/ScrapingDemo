@@ -401,7 +401,7 @@ def build_email(user_email: str, top_matches: list[dict], total_count: int) -> t
     return subject, html
 
 
-def send_email(user_email: str, subject: str, html: str) -> bool:
+def send_email_to(user_email: str, subject: str, html: str) -> bool:
     try:
         resend.api_key = RESEND_API_KEY
         resp = resend.Emails.send({
@@ -419,7 +419,7 @@ def send_email(user_email: str, subject: str, html: str) -> bool:
 
 # ── Per-user deep matching ────────────────────────────────────────────────────
 
-def match_user(openai_client: OpenAI, supabase, user: dict) -> int:
+def match_user(openai_client: OpenAI, supabase, user: dict, send_email: bool = True) -> int:
     """
     Deep-match one user's pending title-matched jobs.
     Returns count of matches updated with a detail_score.
@@ -483,9 +483,9 @@ def match_user(openai_client: OpenAI, supabase, user: dict) -> int:
     notifiable = [m for m in scored if m["detail_score"] >= MIN_DETAIL_SCORE]
     notifiable.sort(key=lambda m: m["detail_score"], reverse=True)
 
-    if notifiable:
+    if notifiable and send_email:
         subject, html = build_email(user["email"], notifiable, len(scored))
-        sent = send_email(user["email"], subject, html)
+        sent = send_email_to(user["email"], subject, html)
 
         if sent:
             # Mark as notified

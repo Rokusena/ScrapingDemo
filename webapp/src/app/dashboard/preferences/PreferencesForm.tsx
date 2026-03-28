@@ -122,25 +122,58 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
     }))
   }
 
+  const pollScanStatus = (scanId: string) => {
+    const poll = async () => {
+      try {
+        const res = await fetch(`/api/scan-now?scan_id=${scanId}`)
+        const data = await res.json()
+
+        if (data.status === 'complete') {
+          const result = data.result || {}
+          setScanResult(
+            result.matches_found > 0
+              ? `Rasta ${result.matches_found} atitikimų!${result.top_match ? ` Geriausias: ${result.top_match.title} (${result.top_match.score}/10)` : ''}`
+              : 'Šiuo metu naujų atitikimų nerasta.'
+          )
+          setScanning(false)
+          router.refresh()
+        } else if (data.status === 'failed') {
+          setScanResult(data.result?.error || 'Skenavimas nepavyko')
+          setScanning(false)
+        } else {
+          setTimeout(poll, 3000)
+        }
+      } catch {
+        setScanResult('Nepavyko patikrinti skenavimo būsenos')
+        setScanning(false)
+      }
+    }
+
+    setTimeout(poll, 3000)
+  }
+
   const triggerScan = async () => {
     setScanning(true)
     setScanResult(null)
     try {
       const res = await fetch('/api/scan-now', { method: 'POST' })
       const data = await res.json()
-      if (res.ok) {
-        setScanResult(
-          data.matches_found > 0
-            ? `Rasta ${data.matches_found} atitikimų!${data.top_match ? ` Geriausias: ${data.top_match.title} (${data.top_match.score}/10)` : ''}`
-            : 'Šiuo metu naujų atitikimų nerasta.'
-        )
-        router.refresh()
-      } else {
+
+      if (!res.ok) {
+        // If a scan is already running, poll that one instead
+        if (data.scan_id) {
+          pollScanStatus(data.scan_id)
+          return
+        }
         setScanResult(data.error || 'Skenavimas nepavyko')
+        setScanning(false)
+        return
       }
+
+      // Scan started — poll for completion
+      pollScanStatus(data.scan_id)
     } catch {
       setScanResult('Nepavyko prisijungti prie skenavimo serverio')
-    } finally {
       setScanning(false)
     }
   }
@@ -431,7 +464,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
       {scanning && (
         <div className="flex items-center gap-3 p-4 bg-indigo-950/40 border border-indigo-800/50 rounded-xl text-indigo-300 text-sm">
           <Loader2 className="w-4 h-4 animate-spin flex-shrink-0" />
-          AI analizuoja darbo skelbimus pagal jūsų profilį... Tai gali užtrukti iki 2 minučių.
+          AI analizuoja darbo skelbimus pagal jūsų profilį... Tai gali užtrukti iki 5 minučių.
         </div>
       )}
 
