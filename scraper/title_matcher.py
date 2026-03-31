@@ -479,21 +479,17 @@ def _find_role_keywords(desired_position: str) -> dict | None:
 def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
     """
     Layer 2: Role-aware keyword filter.
-    Uses strong/weak/reject_if_only_this pattern to avoid passing irrelevant
-    tech-stack jobs (PHP, Java, .NET etc.) to the LLM for a frontend user.
+
+    Known IT roles: blacklist + strong/weak/ambiguous keyword map.
+    Unknown/generic roles: filter by words extracted from desired_position
+      (e.g. "siuntų rūšiuotojas" → keep only titles containing those words).
+      The IT blacklist is NOT applied for generic roles since it would remove
+      valid non-IT results (sandėl, vairuotoj, etc.).
     """
     desired_position = user_prefs.get("desired_position") or ""
     role_kw = _find_role_keywords(desired_position)
 
-    if not role_kw:
-        log.warning("  Layer 2: no keyword map for '%s' — passing all listings through", desired_position)
-        return listings
-
-    strong_kws  = role_kw.get("strong", [])
-    weak_kws    = role_kw.get("weak", [])
-    ambiguous   = role_kw.get("reject_if_only_this", [])
-
-    # Also use user's skills as additional strong keywords
+    # Build skill keywords (used for both known and unknown roles)
     skills = user_prefs.get("skills") or ""
     extra_strong: list[str] = []
     if skills:
@@ -502,13 +498,37 @@ def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
             if len(skill) >= 3:
                 extra_strong.append(skill)
 
+    # ── Unknown/generic role: word-match on desired_position ─────────────────
+    if not role_kw:
+        position_words = [
+            w for w in re.split(r"[\s,;/\-]+", desired_position.lower())
+            if len(w) >= 4
+        ]
+        all_words = position_words + extra_strong
+
+        if all_words:
+            filtered = [
+                l for l in listings
+                if any(w in (l.get("title") or "").lower() for w in all_words)
+            ]
+            if filtered:
+                log.info("  Layer 2 (generic word-match): %d → %d listings", len(listings), len(filtered))
+                return filtered
+
+        log.warning("  Layer 2: no keyword map for '%s' — passing all listings through", desired_position)
+        return listings
+
+    # ── Known IT role: blacklist + keyword map ────────────────────────────────
+    strong_kws = role_kw.get("strong", [])
+    weak_kws   = role_kw.get("weak", [])
+    ambiguous  = role_kw.get("reject_if_only_this", [])
+
     kept = []
     for listing in listings:
         title = (listing.get("title") or "").lower()
 
         # Check blacklist first — always reject
-        blacklisted = any(stem in title for stem in TITLE_BLACKLIST)
-        if blacklisted:
+        if any(stem in title for stem in TITLE_BLACKLIST):
             continue
 
         # Check strong keywords — always keep
@@ -528,8 +548,7 @@ def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
 
         # If title has ONLY an ambiguous keyword (e.g. "programuotojas" without
         # any frontend/react/web qualifier), reject it — it's probably PHP/Java/.NET
-        has_ambiguous = any(kw in title for kw in ambiguous)
-        if has_ambiguous:
+        if any(kw in title for kw in ambiguous):
             continue
 
         # No keywords matched at all — reject
