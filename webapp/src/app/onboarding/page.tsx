@@ -177,20 +177,25 @@ export default function OnboardingPage() {
         : [...state.cities, city],
     })
 
-  // Step 1: Send magic link OTP, then redirect back to /onboarding
+  // Step 1: Send magic link OTP
+  // We store 'onboarding' as the post-auth destination in localStorage.
+  // The dashboard page reads this and redirects back to /onboarding automatically.
   const handleSendOtp = async () => {
     if (!state.email) return
     setLoading(true)
     setError(null)
+    // Mark that after login the user should be sent back to the wizard
+    localStorage.setItem('gaukdarba-post-auth', '/onboarding')
     const { error } = await supabase.auth.signInWithOtp({
       email: state.email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding`,
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: { full_name: state.name || undefined },
       },
     })
     setLoading(false)
     if (error) {
+      localStorage.removeItem('gaukdarba-post-auth')
       setError(error.message)
     } else {
       setEmailSent(true)

@@ -5,6 +5,7 @@ import type { MatchWithListing, Profile, JobPreferences } from '@/types/database
 import { ExternalLink, Settings, Zap, AlertCircle, SlidersHorizontal } from 'lucide-react'
 import CheckoutButton from './CheckoutButton'
 import ClearMatchesButton from './ClearMatchesButton'
+import PostAuthRedirect from './PostAuthRedirect'
 
 // ── Score badge ────────────────────────────────────────────────────────────────
 
@@ -140,6 +141,9 @@ export default async function DashboardPage({
 
   return (
     <div className="space-y-7">
+      {/* Redirects back to /onboarding if wizard was in progress when user clicked magic link */}
+      <PostAuthRedirect />
+
       {/* ── Success banner ─────────────────────────────────────────────────── */}
       {searchParams.success && (
         <div className="flex items-center gap-3 p-4 bg-[#43e97b]/10 border border-[#43e97b]/25 rounded-xl text-[#43e97b] text-sm">
