@@ -186,19 +186,23 @@ export default function OnboardingPage() {
     setError(null)
     // Mark that after login the user should be sent back to the wizard
     localStorage.setItem('gaukdarba-post-auth', '/onboarding')
-    const { error } = await supabase.auth.signInWithOtp({
-      email: state.email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-        data: { full_name: state.name || undefined },
-      },
-    })
-    setLoading(false)
-    if (error) {
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: state.email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          data: { full_name: state.name || undefined },
+        },
+      })
+      if (error) {
+        localStorage.removeItem('gaukdarba-post-auth')
+        setError(error.message)
+      } else {
+        setEmailSent(true)
+      }
+    } catch (e) {
       localStorage.removeItem('gaukdarba-post-auth')
-      setError(error.message)
-    } else {
-      setEmailSent(true)
+      setError(e instanceof Error ? e.message : 'Nepavyko išsiųsti nuorodos. Bandykite dar kartą.')
     }
   }
 
