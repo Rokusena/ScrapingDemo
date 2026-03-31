@@ -370,13 +370,27 @@ def _parse_salary_min(salary_raw: str) -> int | None:
     return None
 
 
+def _get_latest_scrape_date(supabase) -> str:
+    """Return the date (YYYY-MM-DD) of the most recently scraped listing."""
+    res = (
+        supabase.table("raw_listings")
+        .select("scraped_at")
+        .order("scraped_at", desc=True)
+        .limit(1)
+        .execute()
+    )
+    if res.data:
+        return res.data[0]["scraped_at"][:10]
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+
 def sql_prefilter(supabase, user_prefs: dict) -> list[dict]:
     """
-    Layer 1: Load today's listings filtered by city/location at the SQL level.
+    Layer 1: Load the most recently scraped listings filtered by city/location at the SQL level.
     Returns listings that match the user's city preferences OR are remote/hybrid.
     Also excludes listings with salary clearly below user's minimum.
     """
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    scrape_date = _get_latest_scrape_date(supabase)
     preferred_cities = user_prefs.get("preferred_cities") or []
 
     all_listings: list[dict] = []
@@ -392,8 +406,8 @@ def sql_prefilter(supabase, user_prefs: dict) -> list[dict]:
         query = (
             supabase.table("raw_listings")
             .select("job_id, title, company, salary_raw, location")
-            .gte("scraped_at", f"{today}T00:00:00+00:00")
-            .lt("scraped_at", f"{today}T23:59:59+00:00")
+            .gte("scraped_at", f"{scrape_date}T00:00:00+00:00")
+            .lt("scraped_at", f"{scrape_date}T23:59:59+00:00")
         )
 
         # Apply location filter if user has city preferences

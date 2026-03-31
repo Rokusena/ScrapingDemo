@@ -14,7 +14,7 @@ import os
 import random
 import re
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 import requests
 from bs4 import BeautifulSoup
@@ -27,7 +27,6 @@ SUPABASE_SERVICE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
 
 BASE_URL       = "https://www.cvbankas.lt"
 PAGE_TEMPLATE  = f"{BASE_URL}/?page={{page}}"
-STALE_DAYS     = 30
 MAX_RETRIES    = 3
 BATCH_SIZE     = 100   # listings per Supabase upsert call
 
@@ -205,17 +204,16 @@ def upsert_batch(supabase, records: list[dict], existing_ids: set[str]) -> tuple
     return new_count, updated_count
 
 
-def delete_stale(supabase) -> int:
-    """Delete raw_listings not updated in the last STALE_DAYS days."""
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=STALE_DAYS)).isoformat()
+def delete_stale(supabase, current_scrape_time: str) -> int:
+    """Delete raw_listings not seen in the current scrape (removed from cvbankas)."""
     result = (
         supabase.table("raw_listings")
         .delete()
-        .lt("scraped_at", cutoff)
+        .lt("scraped_at", current_scrape_time)
         .execute()
     )
     deleted = len(result.data) if result.data else 0
-    log.info("Deleted %d stale listings (older than %d days)", deleted, STALE_DAYS)
+    log.info("Deleted %d stale listings (not seen in current scrape)", deleted)
     return deleted
 
 
@@ -274,7 +272,7 @@ def run() -> None:
         random_delay()
 
     # ── Cleanup stale rows ────────────────────────────────────────────────
-    delete_stale(supabase)
+    delete_stale(supabase, now_utc)
 
     # ── Final summary ─────────────────────────────────────────────────────
     log.info("=" * 55)
