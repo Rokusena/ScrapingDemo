@@ -483,19 +483,22 @@ def match_user(openai_client: OpenAI, supabase, user: dict, send_email: bool = T
     notifiable = [m for m in scored if m["detail_score"] >= MIN_DETAIL_SCORE]
     notifiable.sort(key=lambda m: m["detail_score"], reverse=True)
 
+    email_status = "skipped"
     if notifiable and send_email:
         subject, html = build_email(user["email"], notifiable, len(scored))
         sent = send_email_to(user["email"], subject, html)
-
         if sent:
-            # Mark as notified
+            email_status = "sent"
             ids = [m["id"] for m in notifiable]
             supabase.table("matches").update({"notified": True}).in_("id", ids).execute()
+        else:
+            email_status = "failed"
+    elif notifiable and not send_email:
+        email_status = "disabled"
 
     log.info(
         "  [%s] scored=%d  notifiable=%d  email=%s",
-        user_id[:8], len(scored), len(notifiable),
-        "sent" if notifiable else "skipped",
+        user_id[:8], len(scored), len(notifiable), email_status,
     )
     return len(scored)
 

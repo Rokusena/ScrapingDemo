@@ -12,12 +12,19 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all pipeline scripts
-COPY main.py          .
-COPY scrape.py        .
-COPY title_matcher.py .
-COPY detail_scraper.py .
-COPY detail_matcher.py .
-COPY api_server.py    .
+COPY main.py            .
+COPY scrape.py          .
+COPY scrape_cvonline.py .
+COPY scrape_cvmarket.py .
+COPY scrape_unicorns.py .
+COPY scrape_uzt.py      .
+COPY title_matcher.py   .
+COPY detail_scraper.py  .
+COPY detail_matcher.py  .
+COPY api_server.py      .
+
+# Install Playwright Chromium for Unicorns.lt (JS-rendered SPA)
+RUN playwright install chromium --with-deps
 
 # Required at runtime (pass via --env or Railway Variables):
 #   SUPABASE_URL, SUPABASE_SERVICE_KEY

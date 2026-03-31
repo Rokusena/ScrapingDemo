@@ -16,7 +16,7 @@ export default function SignOutButton() {
   return (
     <button
       onClick={handleSignOut}
-      className="px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded-lg transition"
+      className="w-full px-3 py-2 text-sm text-[#8892b0] hover:text-white hover:bg-[#141c33] rounded-xl transition text-left"
     >
       Atsijungti
     </button>

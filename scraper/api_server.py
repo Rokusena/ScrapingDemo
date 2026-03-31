@@ -152,7 +152,7 @@ def run_pipeline_for_user(user_id: str, skip_email: bool = False) -> dict:
 def _run_scan_background(user_id: str, scan_id: str):
     """Run pipeline in background thread, updating scan state on completion."""
     try:
-        result = run_pipeline_for_user(user_id, skip_email=True)
+        result = run_pipeline_for_user(user_id, skip_email=False)
         with _state_lock:
             _scans[scan_id]["status"] = "complete"
             _scans[scan_id]["result"] = result

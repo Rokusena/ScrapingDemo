@@ -498,25 +498,15 @@ def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
             if len(skill) >= 3:
                 extra_strong.append(skill)
 
-    # ── Unknown/generic role: word-match on desired_position ─────────────────
+    # ── Unknown/generic role: cap at MAX_GENERIC and let LLM decide ──────────
+    MAX_GENERIC = 150
     if not role_kw:
-        position_words = [
-            w for w in re.split(r"[\s,;/\-]+", desired_position.lower())
-            if len(w) >= 4
-        ]
-        all_words = position_words + extra_strong
-
-        if all_words:
-            filtered = [
-                l for l in listings
-                if any(w in (l.get("title") or "").lower() for w in all_words)
-            ]
-            if filtered:
-                log.info("  Layer 2 (generic word-match): %d → %d listings", len(listings), len(filtered))
-                return filtered
-
-        log.warning("  Layer 2: no keyword map for '%s' — passing all listings through", desired_position)
-        return listings
+        capped = listings[:MAX_GENERIC]
+        log.info(
+            "  Layer 2 (generic cap): no keyword map for '%s' — capped %d → %d listings",
+            desired_position, len(listings), len(capped),
+        )
+        return capped
 
     # ── Known IT role: blacklist + keyword map ────────────────────────────────
     strong_kws = role_kw.get("strong", [])

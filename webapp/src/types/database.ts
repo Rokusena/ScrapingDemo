@@ -1,5 +1,7 @@
 export type PlanStatus = 'free' | 'active' | 'cancelled'
 export type ExperienceLevel = 'intern' | 'junior' | 'mid' | 'senior'
+export type JobSource = 'cvbankas' | 'cvonline' | 'cvmarket' | 'unicorns' | 'uzt'
+export type WorkFormat = 'remote' | 'hybrid' | 'onsite'
 
 export interface Profile {
   id: string
@@ -18,6 +20,7 @@ export interface JobPreferences {
   preferred_cities: string[] | null
   preferred_salary_min: number | null
   experience_level: ExperienceLevel | null
+  work_format: WorkFormat | null
   languages: string[] | null
   keywords: string | null
   is_active: boolean
@@ -27,6 +30,7 @@ export interface JobPreferences {
 export interface RawListing {
   id: string
   job_id: string
+  source: JobSource
   title: string | null
   company: string | null
   salary_raw: string | null
@@ -57,4 +61,15 @@ export interface Match {
 
 export interface MatchWithListing extends Match {
   raw_listings: RawListing | null
+}
+
+export interface ScraperRun {
+  id: string
+  source: JobSource
+  started_at: string
+  ended_at: string | null
+  jobs_found: number
+  jobs_inserted: number
+  error: string | null
+  created_at: string
 }
