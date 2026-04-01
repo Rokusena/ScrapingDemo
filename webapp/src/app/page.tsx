@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
 import {
   ArrowRight,
   CheckCircle,
@@ -159,6 +160,15 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) setLoggedIn(true)
+    })
+  }, [])
+
   return (
     <div
       className="min-h-screen text-white"
@@ -191,18 +201,29 @@ export default function LandingPage() {
             <a href="#faq" className="hover:text-white transition">DUK</a>
           </div>
           <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-white border border-[var(--border)] hover:border-[rgba(255,255,255,0.2)] rounded-xl transition"
-            >
-              Prisijungti
-            </Link>
-            <Link
-              href="/onboarding"
-              className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition"
-            >
-              Pradėti
-            </Link>
+            {loggedIn ? (
+              <Link
+                href="/dashboard"
+                className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition"
+              >
+                Mano skydelis
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-white border border-[var(--border)] hover:border-[rgba(255,255,255,0.2)] rounded-xl transition"
+                >
+                  Prisijungti
+                </Link>
+                <Link
+                  href="/onboarding"
+                  className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition"
+                >
+                  Pradėti
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
