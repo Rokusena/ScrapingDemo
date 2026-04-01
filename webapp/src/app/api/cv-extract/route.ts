@@ -3,30 +3,47 @@ import { createClient } from '@/lib/supabase/server'
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
-const CV_EXTRACT_PROMPT = `Iš pateikto CV teksto ištrauk šią informaciją JSON formatu:
+const CV_EXTRACT_PROMPT = `You are a CV analyzer for a Lithuanian job matching platform.
+A user uploads their CV. Extract structured job search preferences from it.
+
+Return ONLY this JSON. No explanation, no markdown, no extra text:
 
 {
-  "desired_position": "pagrindinė pozicija kurią kandidatas siekia arba atitinka",
-  "skills": "visi įgūdžiai atskirti kableliais",
+  "desired_position": "",
+  "skills": "",
   "experience_level": "intern | junior | mid | senior",
-  "languages": ["Lietuvių", "Anglų"],
-  "summary_bullets": [
-    "2 mėnesiai siuntų rūšiavimo patirties Venipak sandėlyje",
-    "Kurjerio patirtis per Bolt ir Wolt platformas",
-    "Studijuoja dirbtinio intelekto sistemas VGTU"
-  ]
+  "work_format": "onsite | remote | hybrid",
+  "preferred_cities": ["Vilnius"],
+  "languages": ["Lietuvių"],
+  "summary_bullets": ["bullet 1", "bullet 2"]
 }
 
-TAISYKLĖS:
-- desired_position: kokio darbo kandidatas ieško (pvz. "sandėlio darbuotojas", "pardavėjas", "programuotojas", "vairuotojas")
-- skills: VISI įgūdžiai — tiek techniniai, tiek fiziniai, tiek socialiniai (pvz. "siuntų rūšiavimas, sandėlio logistika, MS Office, komandinis darbas, vairavimas B kat.")
-- experience_level: intern (be patirties/studentas), junior (<2m darbo patirties), mid (2-5m), senior (5+m)
-- summary_bullets: 3-5 punktai, kiekvienas 1 sakinys, apibūdinantys kandidato patirtį
-- languages: kalbos kurias kandidatas moka
-- Jei CV nenurodyta — palik tuščią arba "Nenurodyta"
-- Grąžink TIK JSON, be jokio papildomo teksto
+Rules:
 
-CV TEKSTAS:
+1. desired_position: Do NOT just copy their last job title.
+   Infer a broader, more accurate job search title based on their FULL profile — education AND work experience together.
+   - If they have a logistics/transport/warehouse degree + warehouse experience → "Logistikos specialistas" (not "Sandėlio darbuotojas")
+   - If they have a koleginis or aukštasis išsilavinimas (college/university degree), bump one level above entry-level titles
+   - Aim for a title that returns MORE relevant job listings, covering their actual qualifications
+   - Use Lithuanian job title that would be searched on Lithuanian job portals
+
+2. skills: Extract ALL skills as a comma-separated string — hard skills (tools, systems, certifications) AND soft skills (komunikacija, komandinis darbas, problemų sprendimas).
+
+3. experience_level:
+   - Student or no work experience → "intern"
+   - Less than 2 years total work experience → "junior"
+   - 2–5 years → "mid"
+   - 5+ years → "senior"
+
+4. work_format: Default to "onsite" unless CV explicitly mentions remote work preference.
+
+5. preferred_cities: Extract city from CV address as an array. Default to ["Vilnius"] if address is in Vilnius or not specified.
+
+6. languages: List languages the candidate knows, using these exact values: "Lietuvių", "Anglų", "Rusų".
+
+7. summary_bullets: 3–5 short bullet points (1 sentence each) describing the candidate's experience.
+
+CV TEXT:
 `
 
 async function extractTextFromPdf(arrayBuffer: ArrayBuffer): Promise<string> {
@@ -130,7 +147,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'Tu esi CV analizės asistentas. Grąžink TIK JSON, be jokio papildomo teksto.' },
+          { role: 'system', content: 'You are a CV analyzer assistant. Return ONLY valid JSON, no markdown, no explanation.' },
           { role: 'user', content: CV_EXTRACT_PROMPT + cvText.slice(0, 8000) },
         ],
         temperature: 0.2,

@@ -14,7 +14,11 @@ const OTHER_CITIES = [
   'Biržai', 'Rokiškis', 'Elektrėnai', 'Jurbarkas', 'Garliava',
   'Lentvaris', 'Grigiškės', 'Naujoji Vilnia',
 ]
-const WORK_MODES = ['Remote', 'Hybrid', 'Vietoje']
+const WORK_MODES = [
+  { label: 'Vietoje', value: 'onsite' },
+  { label: 'Hibridinis', value: 'hybrid' },
+  { label: 'Nuotolinis', value: 'remote' },
+]
 const LANGUAGES = ['Lietuvių', 'Anglų', 'Rusų']
 const EXPERIENCE_LEVELS: { value: string; label: string }[] = [
   { value: '', label: 'Nepasirinkta' },
@@ -60,10 +64,12 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
     preferred_cities: initialPreferences?.preferred_cities ?? ([] as string[]),
     preferred_salary_min: initialPreferences?.preferred_salary_min?.toString() ?? '',
     experience_level: initialPreferences?.experience_level ?? '',
+    work_format: initialPreferences?.work_format ?? '',
     languages: initialPreferences?.languages ?? ([] as string[]),
     keywords: initialPreferences?.keywords ?? '',
     is_active: initialPreferences?.is_active ?? true,
   })
+  const [cvAutoFilled, setCvAutoFilled] = useState(false)
 
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
@@ -102,9 +108,12 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         desired_position: ext.desired_position || prev.desired_position,
         skills: ext.skills || prev.skills,
         experience_level: ext.experience_level || prev.experience_level,
+        work_format: ext.work_format || prev.work_format,
+        preferred_cities: ext.preferred_cities?.length ? ext.preferred_cities : prev.preferred_cities,
         languages: ext.languages?.length ? ext.languages : prev.languages,
       }))
       setCvBullets(ext.summary_bullets || [])
+      setCvAutoFilled(true)
     } catch {
       setError('Nepavyko apdoroti CV failo')
     } finally {
@@ -193,6 +202,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         ? parseInt(form.preferred_salary_min, 10)
         : null,
       experience_level: (form.experience_level || null) as JobPreferences['experience_level'],
+      work_format: (form.work_format || null) as JobPreferences['work_format'],
       languages: form.languages.length > 0 ? form.languages : null,
       keywords: form.keywords || null,
       is_active: form.is_active,
@@ -259,6 +269,13 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         )}
       </div>
 
+      {cvAutoFilled && (
+        <div className="flex items-start gap-2.5 px-4 py-3 bg-amber-950/30 border border-amber-700/40 rounded-xl text-amber-300 text-sm">
+          <span className="text-base leading-none flex-shrink-0">✏️</span>
+          <span><strong>Patikrink ir pakoreguok</strong> — AI užpildė laukus pagal tavo CV. Peržiūrėk ir pakoreguok prieš išsaugodamas.</span>
+        </div>
+      )}
+
       {/* Desired position */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-1.5">
@@ -294,12 +311,12 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
           Darbo būdas
         </label>
         <div className="flex flex-wrap gap-2">
-          {WORK_MODES.map((mode) => (
+          {WORK_MODES.map(({ label, value }) => (
             <ToggleChip
-              key={mode}
-              label={mode}
-              selected={form.preferred_cities.includes(mode)}
-              onToggle={() => toggle('preferred_cities', mode)}
+              key={value}
+              label={label}
+              selected={form.work_format === value}
+              onToggle={() => setForm((p) => ({ ...p, work_format: p.work_format === value ? '' : value }))}
             />
           ))}
         </div>
@@ -385,15 +402,15 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         </div>
       </div>
 
-      {/* Keywords */}
+      {/* Additional info */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          Papildomi raktažodžiai
-          <span className="text-gray-500 font-normal ml-1">(neprivaloma)</span>
+          Papildoma informacija
+          <span className="text-gray-500 font-normal ml-1">(neprivaloma — pildyk pats)</span>
         </label>
         <textarea
           rows={3}
-          placeholder="pvz. nuotolinis darbas, startuolis, lankstus grafikas..."
+          placeholder="pvz. tik 0.5 etatas, tik ryto pamaina, vairuotojo pažymėjimas būtinas..."
           value={form.keywords}
           onChange={(e) => setForm((p) => ({ ...p, keywords: e.target.value }))}
           className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"
