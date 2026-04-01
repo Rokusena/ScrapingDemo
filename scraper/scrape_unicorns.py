@@ -1,24 +1,19 @@
 #!/usr/bin/env python3
 """
-GaukDarba — Unicorns.lt scraper (Playwright, SPA)
-Renders JS, then scrapes job listings from unicorns.lt/jobs.
-Upserts to Supabase raw_listings with source='unicorns'.
-
-Env vars required:
-  SUPABASE_URL         — https://xxx.supabase.co
-  SUPABASE_SERVICE_KEY — service-role key (bypasses RLS)
-
-System requirements:
-  playwright install chromium
+GaukDarba — Unicorns.lt scraper
+Uses the JSON API: GET https://unicorns.lt/api/more-job?page=N
+Returns {rows: "<html fragment>", totalResults: N, noResults: bool}
+Each page has 12 cards with selectors: .card.listing > h3, .company, .label, a[href]
 """
 
-import hashlib
 import logging
 import os
 import re
 import time
 from datetime import datetime, timezone
 
+import requests
+from bs4 import BeautifulSoup
 from supabase import create_client
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -27,9 +22,16 @@ SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_SERVICE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
 
 SOURCE = "unicorns"
-JOBS_URL = "https://unicorns.lt/jobs"
+BASE_URL = "https://unicorns.lt"
+API_URL = f"{BASE_URL}/api/more-job"
+MAX_PAGES = 50          # 50 × 12 = 600 listings cap
 BATCH_SIZE = 100
-MAX_RETRIES = 3
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Referer": f"{BASE_URL}/darbo-skelbimai",
+}
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,112 +49,98 @@ def clean(text: str | None) -> str:
     return " ".join(text.split()).strip()
 
 
-def make_job_id(external_id: str) -> str:
-    return f"unicorns_{external_id}"
+def make_job_id(href: str) -> str:
+    """Derive stable ID from the job URL path."""
+    slug = re.sub(r"[^a-z0-9]+", "-", href.lower().strip("/"))[-60:]
+    return f"unicorns_{slug}"
 
 
-def extract_id(url: str, title: str) -> str:
-    m = re.search(r"/(\d{4,})", url)
-    if m:
-        return m.group(1)
-    slug = re.sub(r"[^a-z0-9]+", "-", (title or url).lower())[:40]
-    return hashlib.md5(slug.encode()).hexdigest()[:12]
+# ── Scraping ──────────────────────────────────────────────────────────────────
 
-
-# ── Playwright scraping ───────────────────────────────────────────────────────
-
-def scrape_with_playwright(now_utc: str) -> list[dict]:
-    """Render the SPA with Playwright and extract job cards."""
-    try:
-        from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
-    except ImportError:
-        log.error("Playwright not installed. Run: pip install playwright && playwright install chromium")
-        return []
+def scrape_all(now_utc: str) -> list[dict]:
+    session = requests.Session()
+    session.headers.update(HEADERS)
 
     results: list[dict] = []
+    seen: set[str] = set()
 
-    for attempt in range(1, MAX_RETRIES + 1):
+    for page_num in range(1, MAX_PAGES + 1):
+        url = API_URL if page_num == 1 else f"{API_URL}?page={page_num}"
         try:
-            with sync_playwright() as p:
-                browser = p.chromium.launch(
-                    headless=True,
-                    args=["--no-sandbox", "--disable-dev-shm-usage"],
-                )
-                page = browser.new_page(
-                    user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36",
-                    viewport={"width": 1280, "height": 900},
-                )
-
-                log.info("Navigating to %s", JOBS_URL)
-                page.goto(JOBS_URL, wait_until="networkidle", timeout=30_000)
-
-                # Wait for job cards to appear
-                try:
-                    page.wait_for_selector(
-                        "[class*='job'], [class*='vacancy'], article, [data-testid*='job']",
-                        timeout=10_000,
-                    )
-                except PWTimeout:
-                    log.warning("Job cards selector timed out — parsing anyway")
-
-                # Give JS extra time to render
-                time.sleep(2)
-
-                # Extract cards via evaluate
-                cards_data = page.evaluate("""() => {
-                    const selectors = [
-                        'a[href*="/jobs/"]',
-                        '[class*="JobCard"], [class*="job-card"], [class*="VacancyCard"]',
-                        'article',
-                    ];
-                    for (const sel of selectors) {
-                        const els = document.querySelectorAll(sel);
-                        if (els.length > 2) {
-                            return Array.from(els).map(el => ({
-                                href: el.getAttribute('href') || el.querySelector('a')?.getAttribute('href') || '',
-                                title: (el.querySelector('h2, h3, h4, [class*="title"]')?.textContent || el.textContent || '').trim().slice(0, 200),
-                                company: (el.querySelector('[class*="company"], [class*="employer"]')?.textContent || '').trim().slice(0, 100),
-                                location: (el.querySelector('[class*="location"], [class*="city"]')?.textContent || '').trim().slice(0, 100),
-                                salary: (el.querySelector('[class*="salary"]')?.textContent || '').trim().slice(0, 100),
-                            }));
-                        }
-                    }
-                    return [];
-                }""")
-
-                browser.close()
-
-                for card in (cards_data or []):
-                    href = card.get("href", "")
-                    title = clean(card.get("title", ""))
-                    if not title or len(title) < 3:
-                        continue
-
-                    url = href if href.startswith("http") else f"https://unicorns.lt{href}"
-                    external_id = extract_id(url, title)
-                    job_id = make_job_id(external_id)
-
-                    results.append({
-                        "job_id": job_id,
-                        "source": SOURCE,
-                        "title": title,
-                        "company": clean(card.get("company")) or None,
-                        "salary_raw": clean(card.get("salary")) or None,
-                        "location": clean(card.get("location")) or None,
-                        "url": url,
-                        "scraped_at": now_utc,
-                    })
-
-                log.info("Playwright extracted %d cards", len(results))
-                return results
-
+            resp = session.get(url, timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
         except Exception as exc:
-            wait = 2 ** attempt
-            if attempt < MAX_RETRIES:
-                log.warning("Playwright attempt %d/%d failed: %s — retry in %ds", attempt, MAX_RETRIES, exc, wait)
-                time.sleep(wait)
-            else:
-                log.error("Playwright permanently failed: %s", exc)
+            log.warning("API request failed at page %d: %s", page_num, exc)
+            break
+
+        if data.get("noResults"):
+            log.info("noResults=true at page %d — done", page_num)
+            break
+
+        html_fragment = data.get("rows", "")
+        total = data.get("totalResults", 0)
+
+        if not html_fragment:
+            break
+
+        soup = BeautifulSoup(html_fragment, "lxml")
+        cards = soup.select(".card.listing") or soup.select(".listing") or soup.select(".card")
+
+        if not cards:
+            log.info("No cards at page %d — done", page_num)
+            break
+
+        new_count = 0
+        for card in cards:
+            try:
+                link = card.select_one("a[href]")
+                href = link.get("href", "") if link else ""
+                if not href or href in seen:
+                    continue
+                seen.add(href)
+
+                job_url = href if href.startswith("http") else BASE_URL + href
+                job_id = make_job_id(href)
+
+                h3 = card.select_one("h3")
+                title = clean(h3.get_text()) if h3 else ""
+                if len(title) < 3:
+                    continue
+
+                company_el = card.select_one(".company")
+                company_text = clean(company_el.get_text()) if company_el else ""
+                if ", " in company_text:
+                    parts = company_text.rsplit(", ", 1)
+                    company, location = parts[0], parts[1]
+                else:
+                    company, location = company_text or None, None
+
+                salary_el = card.select_one(".label") or card.select_one("[class*='salary']")
+                salary_raw = clean(salary_el.get_text()) if salary_el else None
+                if salary_raw and salary_raw.lower() in ("n/a", ""):
+                    salary_raw = None
+
+                results.append({
+                    "job_id": job_id,
+                    "source": SOURCE,
+                    "title": title,
+                    "company": company or None,
+                    "salary_raw": salary_raw,
+                    "location": location or None,
+                    "url": job_url,
+                    "scraped_at": now_utc,
+                })
+                new_count += 1
+            except Exception as exc:
+                log.warning("Card parse error: %s", exc)
+
+        log.info("Page %d: %d cards, %d new (total so far: %d / %d)", page_num, len(cards), new_count, len(results), total)
+
+        if new_count == 0 or (total and len(results) >= total):
+            break
+
+        time.sleep(1)
 
     return results
 
@@ -164,7 +152,7 @@ def run() -> dict:
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     now_utc = datetime.now(timezone.utc).isoformat()
 
-    listings = scrape_with_playwright(now_utc)
+    listings = scrape_all(now_utc)
     total_found = len(listings)
 
     if not listings:
@@ -186,7 +174,6 @@ def run() -> dict:
     except Exception as exc:
         log.warning("Could not load existing IDs: %s", exc)
 
-    # Upsert new
     new_listings = [l for l in listings if l["job_id"] not in existing_ids]
     total_inserted = 0
     if new_listings:

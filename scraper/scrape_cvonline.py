@@ -27,7 +27,7 @@ SUPABASE_SERVICE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
 
 SOURCE = "cvonline"
 BASE_URL = "https://www.cv.lt"
-LIST_URL = f"{BASE_URL}/lt/darbo-skelbimai"
+LIST_URL = f"{BASE_URL}/jobs"
 MAX_PAGES = 50
 MAX_RETRIES = 3
 BATCH_SIZE = 100
@@ -94,48 +94,38 @@ def fetch_with_retry(session: requests.Session, url: str) -> requests.Response |
 # ── Parsing ───────────────────────────────────────────────────────────────────
 
 def parse_listings(html: str, now_utc: str) -> list[dict]:
+    """
+    cv.lt page structure:
+      article[data-component=jobad]
+        a[href$="-NNNNNN"]  → relative job URL (ends in -<6+ digit id>)
+        stripped_strings:   [age, title, company, city, salary, ...]
+    """
     soup = BeautifulSoup(html, "lxml")
     results: list[dict] = []
 
-    # CV-Online uses various article/div structures — try common selectors
-    cards = (
-        soup.select("article.vacancy-item")
-        or soup.select("div.vacancy-item")
-        or soup.select("li.vacancy-list__item")
-        or soup.select("[data-job-id]")
-    )
+    cards = soup.select("article[data-component=jobad]")
 
     for card in cards:
         try:
-            # Title + URL
-            link = card.select_one("a.vacancy-item__title, a[href*='/darbo-skelbimai/']")
-            if not link:
-                link = card.select_one("a[href]")
-            if not link:
-                continue
+            # Job URL — link ending in -XXXXXXX (6+ digit ID)
+            job_link = next(
+                (l for l in card.select("a[href]") if re.search(r"-\d{6,}$", l.get("href", ""))),
+                None,
+            )
+            href = job_link.get("href", "") if job_link else ""
+            url = (BASE_URL + href) if href and not href.startswith("http") else href
 
-            href = link.get("href", "")
-            url = href if href.startswith("http") else BASE_URL + href
-            title = clean(link.get_text())
-
-            external_id = card.get("data-job-id") or make_external_id(url)
+            external_id = make_external_id(href or url)
             job_id = make_job_id(external_id)
 
-            # Company
-            company_el = card.select_one(
-                ".vacancy-item__company, .company-name, [class*='company']"
-            )
-            company = clean(company_el.get_text()) if company_el else ""
+            # Texts layout: [age, title, company, city, salary, ...]
+            texts = [t.strip() for t in card.stripped_strings if len(t.strip()) > 1]
+            title   = texts[1] if len(texts) > 1 else (texts[0] if texts else "")
+            company = texts[2] if len(texts) > 2 else None
+            location = texts[3] if len(texts) > 3 else None
+            salary_raw = texts[4] if len(texts) > 4 else None
 
-            # Salary
-            salary_el = card.select_one(".vacancy-item__salary, .salary, [class*='salary']")
-            salary_raw = clean(salary_el.get_text()) if salary_el else None
-
-            # Location
-            location_el = card.select_one(".vacancy-item__location, .location, [class*='location']")
-            location = clean(location_el.get_text()) if location_el else None
-
-            if not title:
+            if not title or len(title) < 3:
                 continue
 
             results.append({
@@ -143,8 +133,8 @@ def parse_listings(html: str, now_utc: str) -> list[dict]:
                 "source": SOURCE,
                 "title": title,
                 "company": company or None,
-                "salary_raw": salary_raw,
-                "location": location,
+                "salary_raw": salary_raw or None,
+                "location": location or None,
                 "url": url,
                 "scraped_at": now_utc,
             })
@@ -157,9 +147,8 @@ def parse_listings(html: str, now_utc: str) -> list[dict]:
 
 def has_next_page(html: str, current_page: int) -> bool:
     soup = BeautifulSoup(html, "lxml")
-    # Look for pagination link to next page
-    next_link = soup.select_one(f'a[href*="page={current_page + 1}"], a[aria-label*="Next"], a.pagination__next')
-    return next_link is not None
+    # cv.lt uses ?page=N pagination
+    return bool(soup.select_one(f'a[href*="page={current_page + 1}"]'))
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -228,10 +217,6 @@ def run() -> dict:
                 supabase.table("raw_listings").upsert(chunk, on_conflict="job_id").execute()
             total_inserted += len(new_listings)
             existing_ids.update(l["job_id"] for l in new_listings)
-
-        if not has_next_page(resp.text, page):
-            log.info("No next page after %d — done", page)
-            break
 
         time.sleep(RATE_LIMIT_DELAY)
 

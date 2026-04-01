@@ -1,0 +1,4650 @@
+GaukDarba — Scraper Test Output
+Generated: 2026-03-31 15:16 UTC
+================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SOURCE: CV.LT   (125 listings)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[001] NT Brokeris
+       Company  : Capital Real Estate
+       Location : Vilnius
+       Salary   : 1000 - 5000 €/mėn.
+       URL      : https://www.cv.lt/nt-brokeris-vilnius-capital-real-estate-428794592
+
+[002] Vyriausiasis (-ioji) specialistas (-ė) (Vilnius) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 1 val.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-specialistas-e-vilnius-vilnius-lt-vilnius-jsc-lithuanian-railways-428794591
+
+[003] PROCESŲ AUTOMATIZAVIMO SKYRIAUS VADOVĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 4260 - 6380 €/mėn.
+       URL      : https://www.cv.lt/procesu-automatizavimo-skyriaus-vadove-as-vilnius-energijos-skirstymo-operatorius-428794590
+
+[004] Operatoriai (-ės) baldų gamyboje / Patirtis nebūtina!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1200 - 1400 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-baldu-gamyboje-patirtis-nebutina-kaunas-uab-biuro-428794588
+
+[005] Vyriausiasis (-ioji) statinių techninės priežiūros inžinierius (-ė)
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 3320 - 4200 €/mėn.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-statiniu-technines-prieziuros-inzinierius-e-vilnius-uab-biuro-428794589
+
+[006] Siuntų skirstytojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1653 - 1732 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-kaunas-uab-biuro-428794585
+
+[007] Turi B kategorijos vairuotojo pažymėjimą? Prisijunk prie gamybos komandos! Trumpalaikis darbas iki rugsėjo pabaigos
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 2088 - 2259 €/mėn.
+       URL      : https://www.cv.lt/turi-b-kategorijos-vairuotojo-pazymejima-prisijunk-prie-gamybos-komandos-trumpalaikis-darbas-iki-rugsejo-pabaigos-vilnius-uab-biuro-428794586
+
+[008] Sandėlio darbuotojas (-a) | I-V, 08:00-17:00 val.
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1175 - 1226 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojas-a-i-v-0800-1700-val-vilnius-uab-biuro-428794587
+
+[009] Sandėlio darbuotojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 984 - 1231 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojai-os-kaunas-uab-biuro-428794583
+
+[010] Siuntų skirstytojai (-os) | I-V, 10:00-19:00 val.
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1260 - 1320 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-i-v-1000-1900-val-kaunas-uab-biuro-428794584
+
+[011] Operatoriai (-ės) >> Darbas modernioje gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1897 - 2279 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-darbas-modernioje-gamybos-imoneje-klaipeda-uab-biuro-428794580
+
+[012] Gamybos operatorius (-ė) Vievyje | Pradėk karjerą gamyboje
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1900 - 2090 €/mėn.
+       URL      : https://www.cv.lt/gamybos-operatorius-e-vievyje-pradek-karjera-gamyboje-vilnius-uab-biuro-428794581
+
+[013] Gamybos darbuotojai (-os) – operatoriai (-ės) | Savaitgaliais – poilsis!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1564 - 2160 €/mėn.
+       URL      : https://www.cv.lt/gamybos-darbuotojai-os-operatoriai-es-savaitgaliais-poilsis-kaunas-uab-biuro-428794582
+
+[014] Autokrautuvo vairuotojai (-os) | Savaitgaliai laisvi!
+       Company  : UAB „Biuro“
+       Location : Kazlų Rūda
+       Salary   : 1960 €/mėn.
+       URL      : https://www.cv.lt/autokrautuvo-vairuotojai-os-savaitgaliai-laisvi-kazlu-ruda-uab-biuro-428794578
+
+[015] Pakuotojos (-ai) baldų gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1387 - 1555 €/mėn.
+       URL      : https://www.cv.lt/pakuotojos-ai-baldu-gamybos-imoneje-klaipeda-uab-biuro-428794579
+
+[016] Linijos operatorius (-ė) tarptautinėje įmonėje >> Kompensuojama kelionė į darbą!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 2320 - 2807 €/mėn.
+       URL      : https://www.cv.lt/linijos-operatorius-e-tarptautineje-imoneje-kompensuojama-kelione-i-darba-kaunas-uab-biuro-428794576
+
+[017] Sandėlio operatorius (-ė) Kauno LEZ
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1306 - 1512 €/mėn.
+       URL      : https://www.cv.lt/sandelio-operatorius-e-kauno-lez-kaunas-uab-biuro-428794577
+
+[018] IT verslo partneris (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/it-verslo-partneris-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794574
+
+[019] Pamainos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/pamainos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794575
+
+[020] Vyresnioji (-ysis) teisininkė (-as)
+       Company  : EPSO-G
+       Location : Vilnius
+       Salary   : 3600 - 4000 €/mėn.
+       URL      : https://www.cv.lt/vyresnioji-ysis-teisininke-as-vilnius-epso-g-428794573
+
+[021] KLIENTŲ UŽKLAUSŲ VALDYMO KOMANDOS VADYBININKĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 1890 - 2830 €/mėn.
+       URL      : https://www.cv.lt/klientu-uzklausu-valdymo-komandos-vadybininke-as-vilnius-energijos-skirstymo-operatorius-428794572
+
+[022] Sukirpėja (-as) | Patogus darbo grafikas!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1029 - 1097 €/mėn.
+       URL      : https://www.cv.lt/sukirpeja-as-patogus-darbo-grafikas-kaunas-uab-biuro-428794571
+
+[023] Vakarinis darbas sandėlyje
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1072 €/mėn.
+       URL      : https://www.cv.lt/vakarinis-darbas-sandelyje-kaunas-uab-biuro-428794569
+
+[024] Darbuotojai (-os) gamyboje | Tik darbo dienomis!
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1185 - 1317 €/mėn.
+       URL      : https://www.cv.lt/darbuotojai-os-gamyboje-tik-darbo-dienomis-vilnius-uab-biuro-428794570
+
+[025] Korupcijos prevencijos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 7 val.
+       URL      : https://www.cv.lt/korupcijos-prevencijos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794568
+
+[026] NT Brokeris
+       Company  : Capital Real Estate
+       Location : Vilnius
+       Salary   : 1000 - 5000 €/mėn.
+       URL      : https://www.cv.lt/nt-brokeris-vilnius-capital-real-estate-428794592
+
+[027] Vyriausiasis (-ioji) specialistas (-ė) (Vilnius) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 1 val.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-specialistas-e-vilnius-vilnius-lt-vilnius-jsc-lithuanian-railways-428794591
+
+[028] PROCESŲ AUTOMATIZAVIMO SKYRIAUS VADOVĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 4260 - 6380 €/mėn.
+       URL      : https://www.cv.lt/procesu-automatizavimo-skyriaus-vadove-as-vilnius-energijos-skirstymo-operatorius-428794590
+
+[029] Operatoriai (-ės) baldų gamyboje / Patirtis nebūtina!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1200 - 1400 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-baldu-gamyboje-patirtis-nebutina-kaunas-uab-biuro-428794588
+
+[030] Vyriausiasis (-ioji) statinių techninės priežiūros inžinierius (-ė)
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 3320 - 4200 €/mėn.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-statiniu-technines-prieziuros-inzinierius-e-vilnius-uab-biuro-428794589
+
+[031] Siuntų skirstytojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1653 - 1732 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-kaunas-uab-biuro-428794585
+
+[032] Turi B kategorijos vairuotojo pažymėjimą? Prisijunk prie gamybos komandos! Trumpalaikis darbas iki rugsėjo pabaigos
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 2088 - 2259 €/mėn.
+       URL      : https://www.cv.lt/turi-b-kategorijos-vairuotojo-pazymejima-prisijunk-prie-gamybos-komandos-trumpalaikis-darbas-iki-rugsejo-pabaigos-vilnius-uab-biuro-428794586
+
+[033] Sandėlio darbuotojas (-a) | I-V, 08:00-17:00 val.
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1175 - 1226 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojas-a-i-v-0800-1700-val-vilnius-uab-biuro-428794587
+
+[034] Sandėlio darbuotojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 984 - 1231 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojai-os-kaunas-uab-biuro-428794583
+
+[035] Siuntų skirstytojai (-os) | I-V, 10:00-19:00 val.
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1260 - 1320 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-i-v-1000-1900-val-kaunas-uab-biuro-428794584
+
+[036] Operatoriai (-ės) >> Darbas modernioje gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1897 - 2279 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-darbas-modernioje-gamybos-imoneje-klaipeda-uab-biuro-428794580
+
+[037] Gamybos operatorius (-ė) Vievyje | Pradėk karjerą gamyboje
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1900 - 2090 €/mėn.
+       URL      : https://www.cv.lt/gamybos-operatorius-e-vievyje-pradek-karjera-gamyboje-vilnius-uab-biuro-428794581
+
+[038] Gamybos darbuotojai (-os) – operatoriai (-ės) | Savaitgaliais – poilsis!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1564 - 2160 €/mėn.
+       URL      : https://www.cv.lt/gamybos-darbuotojai-os-operatoriai-es-savaitgaliais-poilsis-kaunas-uab-biuro-428794582
+
+[039] Autokrautuvo vairuotojai (-os) | Savaitgaliai laisvi!
+       Company  : UAB „Biuro“
+       Location : Kazlų Rūda
+       Salary   : 1960 €/mėn.
+       URL      : https://www.cv.lt/autokrautuvo-vairuotojai-os-savaitgaliai-laisvi-kazlu-ruda-uab-biuro-428794578
+
+[040] Pakuotojos (-ai) baldų gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1387 - 1555 €/mėn.
+       URL      : https://www.cv.lt/pakuotojos-ai-baldu-gamybos-imoneje-klaipeda-uab-biuro-428794579
+
+[041] Linijos operatorius (-ė) tarptautinėje įmonėje >> Kompensuojama kelionė į darbą!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 2320 - 2807 €/mėn.
+       URL      : https://www.cv.lt/linijos-operatorius-e-tarptautineje-imoneje-kompensuojama-kelione-i-darba-kaunas-uab-biuro-428794576
+
+[042] Sandėlio operatorius (-ė) Kauno LEZ
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1306 - 1512 €/mėn.
+       URL      : https://www.cv.lt/sandelio-operatorius-e-kauno-lez-kaunas-uab-biuro-428794577
+
+[043] IT verslo partneris (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/it-verslo-partneris-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794574
+
+[044] Pamainos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/pamainos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794575
+
+[045] Vyresnioji (-ysis) teisininkė (-as)
+       Company  : EPSO-G
+       Location : Vilnius
+       Salary   : 3600 - 4000 €/mėn.
+       URL      : https://www.cv.lt/vyresnioji-ysis-teisininke-as-vilnius-epso-g-428794573
+
+[046] KLIENTŲ UŽKLAUSŲ VALDYMO KOMANDOS VADYBININKĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 1890 - 2830 €/mėn.
+       URL      : https://www.cv.lt/klientu-uzklausu-valdymo-komandos-vadybininke-as-vilnius-energijos-skirstymo-operatorius-428794572
+
+[047] Sukirpėja (-as) | Patogus darbo grafikas!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1029 - 1097 €/mėn.
+       URL      : https://www.cv.lt/sukirpeja-as-patogus-darbo-grafikas-kaunas-uab-biuro-428794571
+
+[048] Vakarinis darbas sandėlyje
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1072 €/mėn.
+       URL      : https://www.cv.lt/vakarinis-darbas-sandelyje-kaunas-uab-biuro-428794569
+
+[049] Darbuotojai (-os) gamyboje | Tik darbo dienomis!
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1185 - 1317 €/mėn.
+       URL      : https://www.cv.lt/darbuotojai-os-gamyboje-tik-darbo-dienomis-vilnius-uab-biuro-428794570
+
+[050] Korupcijos prevencijos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 7 val.
+       URL      : https://www.cv.lt/korupcijos-prevencijos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794568
+
+[051] NT Brokeris
+       Company  : Capital Real Estate
+       Location : Vilnius
+       Salary   : 1000 - 5000 €/mėn.
+       URL      : https://www.cv.lt/nt-brokeris-vilnius-capital-real-estate-428794592
+
+[052] Vyriausiasis (-ioji) specialistas (-ė) (Vilnius) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 1 val.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-specialistas-e-vilnius-vilnius-lt-vilnius-jsc-lithuanian-railways-428794591
+
+[053] PROCESŲ AUTOMATIZAVIMO SKYRIAUS VADOVĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 4260 - 6380 €/mėn.
+       URL      : https://www.cv.lt/procesu-automatizavimo-skyriaus-vadove-as-vilnius-energijos-skirstymo-operatorius-428794590
+
+[054] Operatoriai (-ės) baldų gamyboje / Patirtis nebūtina!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1200 - 1400 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-baldu-gamyboje-patirtis-nebutina-kaunas-uab-biuro-428794588
+
+[055] Vyriausiasis (-ioji) statinių techninės priežiūros inžinierius (-ė)
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 3320 - 4200 €/mėn.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-statiniu-technines-prieziuros-inzinierius-e-vilnius-uab-biuro-428794589
+
+[056] Siuntų skirstytojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1653 - 1732 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-kaunas-uab-biuro-428794585
+
+[057] Turi B kategorijos vairuotojo pažymėjimą? Prisijunk prie gamybos komandos! Trumpalaikis darbas iki rugsėjo pabaigos
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 2088 - 2259 €/mėn.
+       URL      : https://www.cv.lt/turi-b-kategorijos-vairuotojo-pazymejima-prisijunk-prie-gamybos-komandos-trumpalaikis-darbas-iki-rugsejo-pabaigos-vilnius-uab-biuro-428794586
+
+[058] Sandėlio darbuotojas (-a) | I-V, 08:00-17:00 val.
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1175 - 1226 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojas-a-i-v-0800-1700-val-vilnius-uab-biuro-428794587
+
+[059] Sandėlio darbuotojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 984 - 1231 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojai-os-kaunas-uab-biuro-428794583
+
+[060] Siuntų skirstytojai (-os) | I-V, 10:00-19:00 val.
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1260 - 1320 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-i-v-1000-1900-val-kaunas-uab-biuro-428794584
+
+[061] Operatoriai (-ės) >> Darbas modernioje gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1897 - 2279 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-darbas-modernioje-gamybos-imoneje-klaipeda-uab-biuro-428794580
+
+[062] Gamybos operatorius (-ė) Vievyje | Pradėk karjerą gamyboje
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1900 - 2090 €/mėn.
+       URL      : https://www.cv.lt/gamybos-operatorius-e-vievyje-pradek-karjera-gamyboje-vilnius-uab-biuro-428794581
+
+[063] Gamybos darbuotojai (-os) – operatoriai (-ės) | Savaitgaliais – poilsis!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1564 - 2160 €/mėn.
+       URL      : https://www.cv.lt/gamybos-darbuotojai-os-operatoriai-es-savaitgaliais-poilsis-kaunas-uab-biuro-428794582
+
+[064] Autokrautuvo vairuotojai (-os) | Savaitgaliai laisvi!
+       Company  : UAB „Biuro“
+       Location : Kazlų Rūda
+       Salary   : 1960 €/mėn.
+       URL      : https://www.cv.lt/autokrautuvo-vairuotojai-os-savaitgaliai-laisvi-kazlu-ruda-uab-biuro-428794578
+
+[065] Pakuotojos (-ai) baldų gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1387 - 1555 €/mėn.
+       URL      : https://www.cv.lt/pakuotojos-ai-baldu-gamybos-imoneje-klaipeda-uab-biuro-428794579
+
+[066] Linijos operatorius (-ė) tarptautinėje įmonėje >> Kompensuojama kelionė į darbą!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 2320 - 2807 €/mėn.
+       URL      : https://www.cv.lt/linijos-operatorius-e-tarptautineje-imoneje-kompensuojama-kelione-i-darba-kaunas-uab-biuro-428794576
+
+[067] Sandėlio operatorius (-ė) Kauno LEZ
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1306 - 1512 €/mėn.
+       URL      : https://www.cv.lt/sandelio-operatorius-e-kauno-lez-kaunas-uab-biuro-428794577
+
+[068] IT verslo partneris (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/it-verslo-partneris-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794574
+
+[069] Pamainos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/pamainos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794575
+
+[070] Vyresnioji (-ysis) teisininkė (-as)
+       Company  : EPSO-G
+       Location : Vilnius
+       Salary   : 3600 - 4000 €/mėn.
+       URL      : https://www.cv.lt/vyresnioji-ysis-teisininke-as-vilnius-epso-g-428794573
+
+[071] KLIENTŲ UŽKLAUSŲ VALDYMO KOMANDOS VADYBININKĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 1890 - 2830 €/mėn.
+       URL      : https://www.cv.lt/klientu-uzklausu-valdymo-komandos-vadybininke-as-vilnius-energijos-skirstymo-operatorius-428794572
+
+[072] Sukirpėja (-as) | Patogus darbo grafikas!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1029 - 1097 €/mėn.
+       URL      : https://www.cv.lt/sukirpeja-as-patogus-darbo-grafikas-kaunas-uab-biuro-428794571
+
+[073] Vakarinis darbas sandėlyje
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1072 €/mėn.
+       URL      : https://www.cv.lt/vakarinis-darbas-sandelyje-kaunas-uab-biuro-428794569
+
+[074] Darbuotojai (-os) gamyboje | Tik darbo dienomis!
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1185 - 1317 €/mėn.
+       URL      : https://www.cv.lt/darbuotojai-os-gamyboje-tik-darbo-dienomis-vilnius-uab-biuro-428794570
+
+[075] Korupcijos prevencijos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 7 val.
+       URL      : https://www.cv.lt/korupcijos-prevencijos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794568
+
+[076] NT Brokeris
+       Company  : Capital Real Estate
+       Location : Vilnius
+       Salary   : 1000 - 5000 €/mėn.
+       URL      : https://www.cv.lt/nt-brokeris-vilnius-capital-real-estate-428794592
+
+[077] Vyriausiasis (-ioji) specialistas (-ė) (Vilnius) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 1 val.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-specialistas-e-vilnius-vilnius-lt-vilnius-jsc-lithuanian-railways-428794591
+
+[078] PROCESŲ AUTOMATIZAVIMO SKYRIAUS VADOVĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 4260 - 6380 €/mėn.
+       URL      : https://www.cv.lt/procesu-automatizavimo-skyriaus-vadove-as-vilnius-energijos-skirstymo-operatorius-428794590
+
+[079] Operatoriai (-ės) baldų gamyboje / Patirtis nebūtina!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1200 - 1400 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-baldu-gamyboje-patirtis-nebutina-kaunas-uab-biuro-428794588
+
+[080] Vyriausiasis (-ioji) statinių techninės priežiūros inžinierius (-ė)
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 3320 - 4200 €/mėn.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-statiniu-technines-prieziuros-inzinierius-e-vilnius-uab-biuro-428794589
+
+[081] Siuntų skirstytojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1653 - 1732 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-kaunas-uab-biuro-428794585
+
+[082] Turi B kategorijos vairuotojo pažymėjimą? Prisijunk prie gamybos komandos! Trumpalaikis darbas iki rugsėjo pabaigos
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 2088 - 2259 €/mėn.
+       URL      : https://www.cv.lt/turi-b-kategorijos-vairuotojo-pazymejima-prisijunk-prie-gamybos-komandos-trumpalaikis-darbas-iki-rugsejo-pabaigos-vilnius-uab-biuro-428794586
+
+[083] Sandėlio darbuotojas (-a) | I-V, 08:00-17:00 val.
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1175 - 1226 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojas-a-i-v-0800-1700-val-vilnius-uab-biuro-428794587
+
+[084] Sandėlio darbuotojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 984 - 1231 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojai-os-kaunas-uab-biuro-428794583
+
+[085] Siuntų skirstytojai (-os) | I-V, 10:00-19:00 val.
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1260 - 1320 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-i-v-1000-1900-val-kaunas-uab-biuro-428794584
+
+[086] Operatoriai (-ės) >> Darbas modernioje gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1897 - 2279 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-darbas-modernioje-gamybos-imoneje-klaipeda-uab-biuro-428794580
+
+[087] Gamybos operatorius (-ė) Vievyje | Pradėk karjerą gamyboje
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1900 - 2090 €/mėn.
+       URL      : https://www.cv.lt/gamybos-operatorius-e-vievyje-pradek-karjera-gamyboje-vilnius-uab-biuro-428794581
+
+[088] Gamybos darbuotojai (-os) – operatoriai (-ės) | Savaitgaliais – poilsis!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1564 - 2160 €/mėn.
+       URL      : https://www.cv.lt/gamybos-darbuotojai-os-operatoriai-es-savaitgaliais-poilsis-kaunas-uab-biuro-428794582
+
+[089] Autokrautuvo vairuotojai (-os) | Savaitgaliai laisvi!
+       Company  : UAB „Biuro“
+       Location : Kazlų Rūda
+       Salary   : 1960 €/mėn.
+       URL      : https://www.cv.lt/autokrautuvo-vairuotojai-os-savaitgaliai-laisvi-kazlu-ruda-uab-biuro-428794578
+
+[090] Pakuotojos (-ai) baldų gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1387 - 1555 €/mėn.
+       URL      : https://www.cv.lt/pakuotojos-ai-baldu-gamybos-imoneje-klaipeda-uab-biuro-428794579
+
+[091] Linijos operatorius (-ė) tarptautinėje įmonėje >> Kompensuojama kelionė į darbą!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 2320 - 2807 €/mėn.
+       URL      : https://www.cv.lt/linijos-operatorius-e-tarptautineje-imoneje-kompensuojama-kelione-i-darba-kaunas-uab-biuro-428794576
+
+[092] Sandėlio operatorius (-ė) Kauno LEZ
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1306 - 1512 €/mėn.
+       URL      : https://www.cv.lt/sandelio-operatorius-e-kauno-lez-kaunas-uab-biuro-428794577
+
+[093] IT verslo partneris (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/it-verslo-partneris-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794574
+
+[094] Pamainos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/pamainos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794575
+
+[095] Vyresnioji (-ysis) teisininkė (-as)
+       Company  : EPSO-G
+       Location : Vilnius
+       Salary   : 3600 - 4000 €/mėn.
+       URL      : https://www.cv.lt/vyresnioji-ysis-teisininke-as-vilnius-epso-g-428794573
+
+[096] KLIENTŲ UŽKLAUSŲ VALDYMO KOMANDOS VADYBININKĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 1890 - 2830 €/mėn.
+       URL      : https://www.cv.lt/klientu-uzklausu-valdymo-komandos-vadybininke-as-vilnius-energijos-skirstymo-operatorius-428794572
+
+[097] Sukirpėja (-as) | Patogus darbo grafikas!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1029 - 1097 €/mėn.
+       URL      : https://www.cv.lt/sukirpeja-as-patogus-darbo-grafikas-kaunas-uab-biuro-428794571
+
+[098] Vakarinis darbas sandėlyje
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1072 €/mėn.
+       URL      : https://www.cv.lt/vakarinis-darbas-sandelyje-kaunas-uab-biuro-428794569
+
+[099] Darbuotojai (-os) gamyboje | Tik darbo dienomis!
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1185 - 1317 €/mėn.
+       URL      : https://www.cv.lt/darbuotojai-os-gamyboje-tik-darbo-dienomis-vilnius-uab-biuro-428794570
+
+[100] Korupcijos prevencijos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 7 val.
+       URL      : https://www.cv.lt/korupcijos-prevencijos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794568
+
+[101] NT Brokeris
+       Company  : Capital Real Estate
+       Location : Vilnius
+       Salary   : 1000 - 5000 €/mėn.
+       URL      : https://www.cv.lt/nt-brokeris-vilnius-capital-real-estate-428794592
+
+[102] Vyriausiasis (-ioji) specialistas (-ė) (Vilnius) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 1 val.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-specialistas-e-vilnius-vilnius-lt-vilnius-jsc-lithuanian-railways-428794591
+
+[103] PROCESŲ AUTOMATIZAVIMO SKYRIAUS VADOVĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 4260 - 6380 €/mėn.
+       URL      : https://www.cv.lt/procesu-automatizavimo-skyriaus-vadove-as-vilnius-energijos-skirstymo-operatorius-428794590
+
+[104] Operatoriai (-ės) baldų gamyboje / Patirtis nebūtina!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1200 - 1400 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-baldu-gamyboje-patirtis-nebutina-kaunas-uab-biuro-428794588
+
+[105] Vyriausiasis (-ioji) statinių techninės priežiūros inžinierius (-ė)
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 3320 - 4200 €/mėn.
+       URL      : https://www.cv.lt/vyriausiasis-ioji-statiniu-technines-prieziuros-inzinierius-e-vilnius-uab-biuro-428794589
+
+[106] Siuntų skirstytojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1653 - 1732 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-kaunas-uab-biuro-428794585
+
+[107] Turi B kategorijos vairuotojo pažymėjimą? Prisijunk prie gamybos komandos! Trumpalaikis darbas iki rugsėjo pabaigos
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 2088 - 2259 €/mėn.
+       URL      : https://www.cv.lt/turi-b-kategorijos-vairuotojo-pazymejima-prisijunk-prie-gamybos-komandos-trumpalaikis-darbas-iki-rugsejo-pabaigos-vilnius-uab-biuro-428794586
+
+[108] Sandėlio darbuotojas (-a) | I-V, 08:00-17:00 val.
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1175 - 1226 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojas-a-i-v-0800-1700-val-vilnius-uab-biuro-428794587
+
+[109] Sandėlio darbuotojai (-os)
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 984 - 1231 €/mėn.
+       URL      : https://www.cv.lt/sandelio-darbuotojai-os-kaunas-uab-biuro-428794583
+
+[110] Siuntų skirstytojai (-os) | I-V, 10:00-19:00 val.
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1260 - 1320 €/mėn.
+       URL      : https://www.cv.lt/siuntu-skirstytojai-os-i-v-1000-1900-val-kaunas-uab-biuro-428794584
+
+[111] Operatoriai (-ės) >> Darbas modernioje gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1897 - 2279 €/mėn.
+       URL      : https://www.cv.lt/operatoriai-es-darbas-modernioje-gamybos-imoneje-klaipeda-uab-biuro-428794580
+
+[112] Gamybos operatorius (-ė) Vievyje | Pradėk karjerą gamyboje
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1900 - 2090 €/mėn.
+       URL      : https://www.cv.lt/gamybos-operatorius-e-vievyje-pradek-karjera-gamyboje-vilnius-uab-biuro-428794581
+
+[113] Gamybos darbuotojai (-os) – operatoriai (-ės) | Savaitgaliais – poilsis!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1564 - 2160 €/mėn.
+       URL      : https://www.cv.lt/gamybos-darbuotojai-os-operatoriai-es-savaitgaliais-poilsis-kaunas-uab-biuro-428794582
+
+[114] Autokrautuvo vairuotojai (-os) | Savaitgaliai laisvi!
+       Company  : UAB „Biuro“
+       Location : Kazlų Rūda
+       Salary   : 1960 €/mėn.
+       URL      : https://www.cv.lt/autokrautuvo-vairuotojai-os-savaitgaliai-laisvi-kazlu-ruda-uab-biuro-428794578
+
+[115] Pakuotojos (-ai) baldų gamybos įmonėje
+       Company  : UAB „Biuro“
+       Location : Klaipėda
+       Salary   : 1387 - 1555 €/mėn.
+       URL      : https://www.cv.lt/pakuotojos-ai-baldu-gamybos-imoneje-klaipeda-uab-biuro-428794579
+
+[116] Linijos operatorius (-ė) tarptautinėje įmonėje >> Kompensuojama kelionė į darbą!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 2320 - 2807 €/mėn.
+       URL      : https://www.cv.lt/linijos-operatorius-e-tarptautineje-imoneje-kompensuojama-kelione-i-darba-kaunas-uab-biuro-428794576
+
+[117] Sandėlio operatorius (-ė) Kauno LEZ
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1306 - 1512 €/mėn.
+       URL      : https://www.cv.lt/sandelio-operatorius-e-kauno-lez-kaunas-uab-biuro-428794577
+
+[118] IT verslo partneris (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/it-verslo-partneris-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794574
+
+[119] Pamainos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 5 val.
+       URL      : https://www.cv.lt/pamainos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794575
+
+[120] Vyresnioji (-ysis) teisininkė (-as)
+       Company  : EPSO-G
+       Location : Vilnius
+       Salary   : 3600 - 4000 €/mėn.
+       URL      : https://www.cv.lt/vyresnioji-ysis-teisininke-as-vilnius-epso-g-428794573
+
+[121] KLIENTŲ UŽKLAUSŲ VALDYMO KOMANDOS VADYBININKĖ (-AS)
+       Company  : Energijos skirstymo operatorius
+       Location : Vilnius
+       Salary   : 1890 - 2830 €/mėn.
+       URL      : https://www.cv.lt/klientu-uzklausu-valdymo-komandos-vadybininke-as-vilnius-energijos-skirstymo-operatorius-428794572
+
+[122] Sukirpėja (-as) | Patogus darbo grafikas!
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1029 - 1097 €/mėn.
+       URL      : https://www.cv.lt/sukirpeja-as-patogus-darbo-grafikas-kaunas-uab-biuro-428794571
+
+[123] Vakarinis darbas sandėlyje
+       Company  : UAB „Biuro“
+       Location : Kaunas
+       Salary   : 1072 €/mėn.
+       URL      : https://www.cv.lt/vakarinis-darbas-sandelyje-kaunas-uab-biuro-428794569
+
+[124] Darbuotojai (-os) gamyboje | Tik darbo dienomis!
+       Company  : UAB „Biuro“
+       Location : Vilnius
+       Salary   : 1185 - 1317 €/mėn.
+       URL      : https://www.cv.lt/darbuotojai-os-gamyboje-tik-darbo-dienomis-vilnius-uab-biuro-428794570
+
+[125] Korupcijos prevencijos vadovas (-ė) (Vilnius, LT)
+       Company  : JSC Lithuanian Railways
+       Location : Vilnius
+       Salary   : prieš 7 val.
+       URL      : https://www.cv.lt/korupcijos-prevencijos-vadovas-e-vilnius-lt-vilnius-jsc-lithuanian-railways-428794568
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SOURCE: CVMARKET   (25 listings)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[001] NAUJAS
+       Company  : prieš 18 min.
+       Location : Vilnius
+       Salary   : Nuo 2050 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/vyriausiasis-personalo-administravimo-specialistas-e-vilnius-nacionaline-visuomenes-sveikatos-prieziuros-laboratorija-2258401
+
+[002] NAUJAS
+       Company  : prieš 52 min.
+       Location : Vilnius
+       Salary   : 1512 - 1848 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/pardavejas-a-vilniuje-maksimiskiu-g-5-vilnius-depo-diy-lt-uab-2258440
+
+[003] NAUJAS
+       Company  : prieš 52 min.
+       Location : Vilnius
+       Salary   : 1764 - 2016 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/pardavejas-a-statybiniu-medziagu-arba-santechnikos-skyriuose-vilniuje-maksimiskiu-g-5-vilnius-depo-diy-lt-uab-2258439
+
+[004] NAUJAS
+       Company  : prieš 53 min.
+       Location : Vilnius
+       Salary   : 1764 - 2016 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/prekiu-surinkejas-a-vilniuje-maksimiskiu-g-5-vilnius-depo-diy-lt-uab-2258438
+
+[005] VIP 1
+       Company  : NAUJAS
+       Location : Vilnius
+       Salary   : Nuo 6 €/val. "į rankas"
+       URL      : https://www.cvmarket.lt/barista-vilnius-projektu-laboratorija-mb-2258389
+
+[006] VIP 1
+       Company  : NAUJAS
+       Location : Vilnius
+                        
+                                                                                    /
+                            
+                            Iš namų
+       Salary   : 3146.5 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/siuolaikinio-meno-centras-iesko-finansu-valdymo-ir-apskaitos-skyriaus-vedejo-s-vyriausiojo-s-finansininko-es-vilnius-siuolaikinio-meno-centras-2258435
+
+[007] NAUJAS
+       Company  : prieš 1 val.
+       Location : Klaipėda
+       Salary   : -
+       URL      : https://www.cvmarket.lt/pardavejas-a-darbas-kasoje-ir-saleje-smexp-formate-klaipeda-rimi-lietuva-2258437
+
+[008] NAUJAS
+       Company  : prieš 1 val.
+       Location : Klaipėda
+       Salary   : -
+       URL      : https://www.cvmarket.lt/sales-darbuotojas-a-taromato-prieziura-expsm-formate-klaipeda-rimi-lietuva-2258436
+
+[009] NAUJAS
+       Company  : prieš 1 val.
+       Location : Kaunas
+       Salary   : Nuo 649 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/patalpu-valytojas-a-kauno-g-dienos-metu-kaunas-daily-spaces-uab-2258433
+
+[010] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : Nuo 600 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/patalpu-valytoja-as-subaciaus-g-vakarais-vilnius-daily-spaces-uab-2258432
+
+[011] NAUJAS
+       Company  : prieš 1 val.
+       Location : Mobili (-us) patalpų valytoja (-as) Vilnius
+       Salary   : 1680 - 1848 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/mobili-us-patalpu-valytoja-as-vilnius-vilnius-daily-spaces-uab-2258431
+
+[012] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : Nuo 1240 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/budinti-patalpu-valytoja-as-ukmerges-g-dienos-metu-1-etat-vilnius-daily-spaces-uab-2258430
+
+[013] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : Nuo 577 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/verslo-centro-valytoja-as-konstitucijos-pr-dienos-metu-vilnius-daily-spaces-uab-2258427
+
+[014] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : Nuo 277 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/patalpu-valytoja-as-slezeviciaus-g-3-ksav-vilnius-daily-spaces-uab-2258426
+
+[015] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : Nuo 350 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/patalpu-valytoja-as-baublio-g-santariskes-vakarais-3-ksav-vilnius-daily-spaces-uab-2258425
+
+[016] NAUJAS
+       Company  : prieš 1 val.
+       Location : -
+       Salary   : 1500 - 1620 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/krovejas-a-marijampole-mantinga-logistics-2258424
+
+[017] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : 3680 - 5520 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/senior-net-software-engineer-vilnius-danske-bank-as-lietuvos-filialas-2258423
+
+[018] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : 4260 - 6380 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/procesu-automatizavimo-skyriaus-vadove-as-vilnius-energijos-skirstymo-operatorius-2258422
+
+[019] NAUJAS
+       Company  : prieš 1 val.
+       Location : -
+       Salary   : 1500 - 2500 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/siauliai-kviec-gamybos-operatorius-e-siauliai-headex-uab-2258421
+
+[020] NAUJAS
+       Company  : prieš 1 val.
+       Location : -
+       Salary   : 1053 - 1225 €/mėn. "į rankas"
+       URL      : https://www.cvmarket.lt/knygu-spaustuve-iesko-padejejo-os-gargzduose-gargzdai-headex-uab-2258420
+
+[021] NAUJAS
+       Company  : prieš 1 val.
+       Location : Kaunas
+       Salary   : 1200 - 1400 €/mėn. "į rankas"
+       URL      : https://www.cvmarket.lt/operatoriai-es-baldu-gamyboje-patirtis-nebutina-kaunas-uab-biuro-2258419
+
+[022] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : 1175 - 1226 €/mėn. "į rankas"
+       URL      : https://www.cvmarket.lt/sandelio-darbuotojas-a-i-v-0800-1700-val-vilnius-uab-biuro-2258418
+
+[023] NAUJAS
+       Company  : prieš 1 val.
+       Location : Vilnius
+       Salary   : 2088 - 2259 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/turi-b-kategorijos-vairuotojo-pazymejima-prisijunk-prie-gamybos-komandos-trumpalaikis-darbas-iki-rugsejo-pabaigos-vilnius-uab-biuro-2258417
+
+[024] NAUJAS
+       Company  : prieš 1 val.
+       Location : Kaunas
+       Salary   : 1653 - 1732 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/siuntu-skirstytojai-os-kaunas-uab-biuro-2258416
+
+[025] NAUJAS
+       Company  : prieš 1 val.
+       Location : Kaunas
+       Salary   : 1260 - 1320 €/mėn. prieš mokesčius
+       URL      : https://www.cvmarket.lt/siuntu-skirstytojai-os-i-v-1000-1900-val-kaunas-uab-biuro-2258415
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SOURCE: UNICORNS   (120 listings)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[001] Senior PHP Developer (Cybersecurity tools)
+       Company  : Mediatech, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/adtech/3dcd1228-1652-4c3a-a061-d19a0d36ec47
+
+[002] PPC Team Lead
+       Company  : Mediatech
+       Location : Vilnius
+       Salary   : 4300 €
+       URL      : https://jobs.lever.co/adtech/0b090484-bdf6-4020-9863-cc260dcb1db5
+
+[003] PPC Specialist (Google Search) | Kaunas
+       Company  : Mediatech
+       Location : Kaunas
+       Salary   : 2479 - 4628 €
+       URL      : https://jobs.lever.co/adtech/3c6b252e-8ae8-4fd1-b925-2fbcd01431f7
+
+[004] Mid-Sr PPC Specialist (Google Search)
+       Company  : Mediatech
+       Location : Vilnius
+       Salary   : 2479 - 4628 €
+       URL      : https://jobs.lever.co/adtech/24b944ce-aa09-457a-8790-6c4072b4a4fc
+
+[005] KYC Specialist
+       Company  : Vialet
+       Location : Vilnius
+       Salary   : 2442 - 3141 €
+       URL      : https://vialet.eu/career/kyc-specialist/
+
+[006] Affiliate Marketing Manager
+       Company  : Eneba
+       Location : -
+       Salary   : 40000 - 50000 €
+       URL      : https://jobs.eu.lever.co/eneba/76d2cd6c-bc36-4bce-a927-fc6a08cf8de4
+
+[007] Customer Support Specialist (Afternoon Shift)
+       Company  : OBDeleven
+       Location : Kaunas
+       Salary   : -
+       URL      : https://apply.workable.com/obdeleven/j/BAFAD457B5
+
+[008] Mid/Senior Full-Stack Developer
+       Company  : OBDeleven
+       Location : Kaunas
+       Salary   : -
+       URL      : https://apply.workable.com/obdeleven/j/62F636D1A0
+
+[009] Communications Project Manager | Tesonet | Senior
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 2900 - 4400 €
+       URL      : https://jobs.lever.co/nordsec/914ed0cb-0408-415a-92f7-24ae9d087ef6
+
+[010] Fast-Track Entry: Paid Search Specialist | Mid-Senior | Saily
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 2600 - 4700 €
+       URL      : https://jobs.lever.co/nordsec/6ae82f56-fd30-4bf8-bc9f-743774c4e53a
+
+[011] Fast-Track Entry: On-Site SEO Specialist | Mid-Senior | Saily
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 2700 - 4000 €
+       URL      : https://jobs.lever.co/nordsec/34020dda-4bfe-4c27-983e-6f98d40649ae
+
+[012] Fast-Track Entry: Influencer Marketing Manager | Saily | Mid-Senior
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 2400 - 4200 €
+       URL      : https://jobs.lever.co/nordsec/5c821d25-54cf-4430-bff8-c35e36a52382
+
+[013] Fast-Track Entry: Graphic Designer | Mid-Senior | Saily
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 2600 - 4200 €
+       URL      : https://jobs.lever.co/nordsec/d877b3b3-da21-4c5e-9c8a-9d720ad440a8
+
+[014] Fast-Track Entry: Product Designer | Senior
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 3100 - 6000 €
+       URL      : https://jobs.lever.co/nordsec/d4d57bd3-8959-4614-91f4-4da06ecb6714
+
+[015] Retention Communication Manager | Email Marketing | Mid
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 2700 - 3700 €
+       URL      : https://jobs.lever.co/nordsec/47649703-af84-4206-9fea-7f3601ea3e80
+
+[016] Fast-Track Entry: Lead Performance Designer
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 3600 - 4800 €
+       URL      : https://jobs.lever.co/nordsec/825b53ea-7d7f-4f49-85d6-208d3453312c
+
+[017] Fast-Track Entry: PR Manager | Mid-Senior
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 2500 - 4200 €
+       URL      : https://jobs.lever.co/nordsec/0b8f4e10-dc43-40a5-8aee-2636bdf7c1b1
+
+[018] Fast-Track Entry: Tax Accountant (Indirect taxes) | Mid-Senior
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 3100 - 4500 €
+       URL      : https://jobs.lever.co/nordsec/3680afbc-1ab1-4a22-9434-191858ac1046
+
+[019] Fast-Track Entry: Data Analyst | Finance Department | Mid-Senior
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 2700 - 4400 €
+       URL      : https://jobs.lever.co/nordsec/c4426374-22fd-4579-a495-801e016c8d96
+
+[020] Fast-Track Entry: Accountant | Mid
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 1700 - 3000 €
+       URL      : https://jobs.lever.co/nordsec/8f86336f-0732-444f-bc7b-f6b02794a724
+
+[021] Digital Marketing Manager
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 3200 - 4000 €
+       URL      : https://jobs.lever.co/oxylabs/24f1b752-c3bd-4b60-9e08-d71cbf52e5e0
+
+[022] Legal Director
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 7000 €
+       URL      : https://jobs.lever.co/oxylabs/38ec8557-1b09-464a-b80d-771d3fd89f22
+
+[023] Talent Acquisition Partner
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 2500 - 3500 €
+       URL      : https://jobs.lever.co/oxylabs/bae055d8-5aa0-49dc-954e-9591ae95d9b6
+
+[024] Head of FP&A
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/69c8995b-943b-478b-a82f-a126ff3df617
+
+[025] Senior Backend Engineer, Order
+       Company  : Vinted
+       Location : -
+       Salary   : 6542 - 8842 €
+       URL      : https://careers.vinted.com/jobs/4753493101?gh_src=24a9d442teu
+
+[026] Legal Support Specialist
+       Company  : Vinted
+       Location : Vilnius
+       Salary   : 2758 €
+       URL      : https://careers.vinted.com/jobs/4822114101?gh_src=24a9d442teu
+
+[027] Backend Engineer, Vinted Pay
+       Company  : Vinted
+       Location : -
+       Salary   : 3558 - 4808 €
+       URL      : https://careers.vinted.com/jobs/4823220101?gh_src=24a9d442teu
+
+[028] Analytics Engineer, Trust, Security & Technologies
+       Company  : Vinted
+       Location : -
+       Salary   : 4608 - 6233 €
+       URL      : https://careers.vinted.com/jobs/4748697101?gh_src=24a9d442teu
+
+[029] Accountant, Group Accounting
+       Company  : Vinted
+       Location : Vilnius
+       Salary   : 2479 - 3354 €
+       URL      : https://careers.vinted.com/jobs/4816677101?gh_src=24a9d442teu
+
+[030] AML & Risk Operations Analyst
+       Company  : Vinted
+       Location : Kaunas
+       Salary   : 135 - 175 €
+       URL      : https://careers.vinted.com/jobs/4826155101?gh_src=24a9d442teu
+
+[031] Senior Identity and Access Management Engineer
+       Company  : Surfshark, Vilnius
+       Location : Kaunas
+       Salary   : 3000 - 6000 €
+       URL      : https://jobs.lever.co/surfshark/43f12306-481d-4c2c-a01e-132237df8e67
+
+[032] Senior Mobile Aqcuisition Specialist
+       Company  : Surfshark, Vilnius
+       Location : Kaunas
+       Salary   : 3200 - 3800 €
+       URL      : https://jobs.lever.co/surfshark/bf5cbdde-67ff-4d6d-b6ce-834e424579ea
+
+[033] ASO Specialist
+       Company  : Surfshark, Vilnius
+       Location : Kaunas
+       Salary   : 2200 - 3700 €
+       URL      : https://jobs.lever.co/surfshark/6d1b5592-8379-49af-9d3c-6432877a21f1
+
+[034] Brand Designer
+       Company  : OBDeleven
+       Location : Vilnius
+       Salary   : -
+       URL      : https://apply.workable.com/obdeleven/j/0E08C4A4D5
+
+[035] Customer service manager (Danish language) Saturday - Monday
+       Company  : Furniture1
+       Location : Vilnius
+       Salary   : 1350 - 1600 €
+       URL      : https://www.furniture1.eu/positions/customer-service-manager-danish-part-time.html
+
+[036] Customer service manager (Danish language)
+       Company  : Furniture1
+       Location : Vilnius
+       Salary   : 2200 - 2650 €
+       URL      : https://www.furniture1.eu/positions/customer-service-manager-danish.html
+
+[037] Talent Attraction Specialist | Junior - Mid
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 1490 - 2650 €
+       URL      : https://jobs.lever.co/nordsec/39bfad8f-b572-481c-8ca5-61ab5b5fd5e5
+
+[038] Technical IT Project Manager
+       Company  : Corner Case Technologies
+       Location : Vilnius
+       Salary   : 2800 - 3900 €
+       URL      : https://www.cornercasetech.com/career/technical-it-project-manager
+
+[039] Senior Product Manager
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 4700 - 6700 €
+       URL      : https://jobs.lever.co/oxylabs/a47e0e62-a0d8-49fc-afc2-93c89c702e68
+
+[040] PHP/Go Developer (Mid-Senior)
+       Company  : Oxylabs
+       Location : Kaunas
+       Salary   : 4000 - 6400 €
+       URL      : https://jobs.lever.co/oxylabs/f23c2215-0ec8-4357-b215-127f5bd35f62
+
+[041] PHP/Go Developer (Mid-Senior)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 4000 - 6400 €
+       URL      : https://jobs.lever.co/oxylabs/9a917404-a07d-4aba-bf30-ba0a89cf1af1
+
+[042] Mid PHP Developer
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 3200 - 5800 €
+       URL      : https://jobs.lever.co/oxylabs/f621c630-d2ec-4381-8dcf-4e26bd4b7f72
+
+[043] Web Scraping Engineer - Python/Go
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 2600 - 5400 €
+       URL      : https://jobs.lever.co/oxylabs/6627a3b6-84b8-4e00-ab99-6b88feb38a45
+
+[044] Mid Frontend Developer
+       Company  : Oxylabs
+       Location : Kaunas
+       Salary   : 3200 - 5600 €
+       URL      : https://jobs.lever.co/oxylabs/4c69cfbd-812b-462d-aa67-66cf3e4859f6
+
+[045] Mid Frontend Developer
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 3200 - 5600 €
+       URL      : https://jobs.lever.co/oxylabs/1f894352-0ecf-493e-9176-9843dfaca720
+
+[046] Analytics Engineer
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 3500 - 4800 €
+       URL      : https://jobs.lever.co/oxylabs/6761438b-3813-4e0c-8da9-f61ff83e420a
+
+[047] Customer Success Specialist
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 1300 - 1800 €
+       URL      : https://jobs.lever.co/oxylabs/84790844-0263-428b-a68e-aee04af1c266
+
+[048] CRM Process Manager
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 3100 - 4100 €
+       URL      : https://jobs.lever.co/oxylabs/82f1a7e6-0d7e-4190-8c93-b8b1f777ca4a
+
+[049] Product designer | WordPress team
+       Company  : Hostinger
+       Location : Vilnius
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/a6e4d99f-6ec6-448b-9d01-63cc15b6e359
+
+[050] Product Manager, Expansion (Pricing & Monetization)
+       Company  : Omnisend, Vilnius
+       Location : Kaunas
+       Salary   : 1500 €
+       URL      : https://jobs.lever.co/omnisend/1c0ba8ce-23ee-442c-8035-5241e1964e0a
+
+[051] Pricing Manager
+       Company  : Vinted
+       Location : Vilnius
+       Salary   : 5942 €
+       URL      : https://careers.vinted.com/jobs/4824491101?gh_src=24a9d442teu
+
+[052] Decision Scientist, Revenue (Pricing & Services)
+       Company  : Vinted
+       Location : -
+       Salary   : 4608 - 6233 €
+       URL      : https://careers.vinted.com/jobs/4824768101?gh_src=24a9d442teu
+
+[053] Senior Backend Engineer (Go)
+       Company  : Surfshark, Vilnius
+       Location : Kaunas
+       Salary   : 6000 - 7200 €
+       URL      : https://jobs.lever.co/surfshark/63af2a6f-f2c9-4b5a-864e-ce31a0b4be80
+
+[054] Machine Learning Engineer, Pricing Optimisation
+       Company  : Eneba
+       Location : -
+       Salary   : 55000 - 70000 €
+       URL      : https://jobs.eu.lever.co/eneba/1e6d0422-d81d-4e6a-87fb-5cc67667319d
+
+[055] Business Analyst
+       Company  : Eneba
+       Location : -
+       Salary   : 40800 - 46230 €
+       URL      : https://jobs.eu.lever.co/eneba/0ab3aa84-dc28-4dbc-af93-7877edf0033f
+
+[056] Frontend Engineer | Senior | React | Saily
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : -
+       URL      : https://jobs.lever.co/nordsec/8044ea38-bf26-4578-8616-aeaf75177ed0
+
+[057] Backend Engineer | Senior | Go | Saily
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 3500 - 7200 €
+       URL      : https://jobs.lever.co/nordsec/847a0374-2a7b-4086-ab61-ee7498b03a3e
+
+[058] Backend Engineer | Senior | Go | Saily
+       Company  : Nord Security
+       Location : -
+       Salary   : 19800 - 33400 €
+       URL      : https://jobs.lever.co/nordsec/27fd30be-a836-44c9-b1b6-565050bf6ff5
+
+[059] Data Scientist | Senior | Threat Intelligence team
+       Company  : Nord Security
+       Location : -
+       Salary   : 17600 - 30000 €
+       URL      : https://jobs.lever.co/nordsec/fec855d8-f6e1-4caf-ad99-691049a7160d
+
+[060] Data Scientist | Senior | Threat Intelligence team
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 3500 - 6800 €
+       URL      : https://jobs.lever.co/nordsec/dadaa95e-c284-4024-a552-b0ba9b3556d9
+
+[061] Conversion Copywriter | Mid-Senior
+       Company  : Nord Security
+       Location : -
+       Salary   : 9700 - 17000 €
+       URL      : https://jobs.lever.co/nordsec/59707179-3804-47d4-8739-1f0af61cb1e2
+
+[062] Backend Engineer | Mid-Senior | PHP | UCP
+       Company  : Nord Security
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/nordsec/290c9d44-018d-44c7-aa72-31ded770e377
+
+[063] iOS Engineer | Senior | Manage & Use Team
+       Company  : Nord Security
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/nordsec/eedf7769-0ba0-4cfa-b6d8-7e9e89d98b7d
+
+[064] iOS Engineer | Senior | Manage & Use Team
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 5600 - 7000 €
+       URL      : https://jobs.lever.co/nordsec/499c2836-f137-4eac-b60b-43c826149b83
+
+[065] Mid-Senior Account Manager
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 2400 - 3600 €
+       URL      : https://jobs.lever.co/oxylabs/94855bf9-05b2-47e7-849e-3df8c831c0e5
+
+[066] Head of Marketing
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 4500 - 5500 €
+       URL      : https://jobs.lever.co/oxylabs/08dd35d0-0b23-475c-a066-6e1b0d960c7a
+
+[067] Engineering Manager (Webshare product)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : -
+       URL      : https://jobs.lever.co/oxylabs/2e89cc05-84a5-4035-a9b4-b5b6f35defce
+
+[068] Senior Full Stack Developer (JS, Node.js)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 5800 - 7000 €
+       URL      : https://jobs.lever.co/oxylabs/9e9b321d-1789-47e4-8d0d-7eb9583c52dc
+
+[069] Senior Backend Engineer (Node.js)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 5800 €
+       URL      : https://jobs.lever.co/oxylabs/134059d7-36bb-490a-9d15-93bfc5d8e76a
+
+[070] Senior Cybersecurity Analyst
+       Company  : Oxylabs
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/oxylabs/38e723a1-2d9a-43f0-b63f-5ba335a90197
+
+[071] Head of Hosting | Based in Poland
+       Company  : Hostinger
+       Location : -
+       Salary   : 7000 €
+       URL      : https://jobs.lever.co/hostinger/56cd136f-454e-48f3-a062-b75dfa8f855d
+
+[072] YouTube Video Content Creator (Spanish-speaking, Remote)
+       Company  : Hostinger
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/86d7b400-835c-4683-85b8-bfa9c11d7fbb
+
+[073] YouTube Channel Owner (Spanish-speaking, Remote)
+       Company  : Hostinger
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/a42272ca-f11b-4616-abd8-a233ad165e04
+
+[074] Senior Account Manager | Asia | Based in Lithuania
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/d44e3d30-d4ea-4057-ad74-bb34fa717a5a
+
+[075] Message Director
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/1a442ca1-50e4-4009-9674-76c7abcb4a61
+
+[076] Head of User Acquisition
+       Company  : Hostinger
+       Location : Vilnius
+       Salary   : 7000 €
+       URL      : https://jobs.lever.co/hostinger/ec74af55-f976-41eb-a35d-c9b73f82c634
+
+[077] Product designer | WebPro team
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/f240309e-de88-4789-9aa6-893e37e2597a
+
+[078] Product Designer | Domain team
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/7084e70e-de4f-4c1a-9cb6-9a94b191d973
+
+[079] Account Expert (Chinese Speaking)
+       Company  : Omnisend
+       Location : -
+       Salary   : 1800 €
+       URL      : https://jobs.lever.co/omnisend/c454501c-5ca2-4e46-a2ad-401bfef70d2e
+
+[080] Senior Labour Relations Specialist (1 year FTC)
+       Company  : Vinted
+       Location : -
+       Salary   : 5950 - 8050 €
+       URL      : https://careers.vinted.com/jobs/4818268101?gh_src=24a9d442teu
+
+[081] Senior Backend Engineer, Help Experience
+       Company  : Vinted
+       Location : -
+       Salary   : 4975 - 6725 €
+       URL      : https://careers.vinted.com/jobs/4775071101?gh_src=24a9d442teu
+
+[082] Responsable Transport, VGo Field Operations
+       Company  : Vinted
+       Location : -
+       Salary   : -
+       URL      : https://careers.vinted.com/jobs/4787391101?gh_src=24a9d442teu
+
+[083] Commerce Operations Specialist
+       Company  : Eneba
+       Location : -
+       Salary   : 21600 - 23280 €
+       URL      : https://jobs.eu.lever.co/eneba/f398e4db-bb13-4166-9137-2abc5b268a94
+
+[084] Influencer marketing manager
+       Company  : Furniture1
+       Location : Vilnius
+       Salary   : 2200 - 3100 €
+       URL      : https://www.furniture1.eu/positions/influencer-marketing-manager.html
+
+[085] Accountant
+       Company  : Furniture1
+       Location : Vilnius
+       Salary   : 2100 - 2600 €
+       URL      : https://www.furniture1.eu/positions/accountant.html
+
+[086] Performance Creative
+       Company  : Orbio world, Vilnius
+       Location : Kaunas
+       Salary   : 2600 €
+       URL      : https://orbioworld.teamtailor.com/jobs/7458704-performance-creative
+
+[087] Growth Team Manager
+       Company  : Orbio world, Vilnius
+       Location : Kaunas
+       Salary   : 3600 €
+       URL      : https://orbioworld.teamtailor.com/jobs/7459472-growth-team-manager
+
+[088] Product Designer
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : -
+       URL      : https://jobs.lever.co/oxylabs/cabac28a-f1d9-4eb3-8b11-32aa37375500
+
+[089] Talent Attraction Specialist (Talent Sourcer)
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : 2000 €
+       URL      : https://jobs.lever.co/hostinger/065b1c7d-1569-4f13-8ad9-7bec914a14a5
+
+[090] Linux System Administrator | Web Hosting | Based in Lithuania
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : 1900 €
+       URL      : https://jobs.lever.co/hostinger/98f0bf88-23f7-4f6c-acfa-120a5cad7b31
+
+[091] Linux System Administrator | Infrastructure team
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : 1900 - 3305 €
+       URL      : https://jobs.lever.co/hostinger/45dae5a4-6677-4a00-83ff-98ae1ed47fee
+
+[092] Senior Design System Designer
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/fdc72254-52e4-4267-865f-5369cbe795a5
+
+[093] Senior Data Analyst | Based in Europe
+       Company  : Hostinger
+       Location : Vilnius
+       Salary   : 5000 €
+       URL      : https://jobs.lever.co/hostinger/38a053b2-e323-46aa-80f6-a49b3dcf0cf8
+
+[094] Marketing Analytics Lead
+       Company  : Hostinger
+       Location : Vilnius
+       Salary   : 6000 €
+       URL      : https://jobs.lever.co/hostinger/78db1d09-cc0b-4b08-a08f-a339a0ad926a
+
+[095] Senior Software Engineer, Message Delivery
+       Company  : Omnisend, Vilnius
+       Location : Kaunas
+       Salary   : 6500 €
+       URL      : https://jobs.lever.co/omnisend/1cb23d0f-e8f4-4bf0-9dc5-616e8f8892c4
+
+[096] Senior Agency Sales Manager
+       Company  : Vinted
+       Location : -
+       Salary   : 6642 - 7817 €
+       URL      : https://careers.vinted.com/jobs/4815499101?gh_src=24a9d442teu
+
+[097] Senior Agency Sales Manager
+       Company  : Vinted
+       Location : -
+       Salary   : 6642 - 7817 €
+       URL      : https://careers.vinted.com/jobs/4795607101?gh_src=24a9d442teu
+
+[098] Engineering Manager, Group Security
+       Company  : Vinted
+       Location : -
+       Salary   : 6658 - 9008 €
+       URL      : https://careers.vinted.com/jobs/4801872101?gh_src=24a9d442teu
+
+[099] Carrier Operations Specialist
+       Company  : Vinted
+       Location : -
+       Salary   : 2767 - 3742 €
+       URL      : https://careers.vinted.com/jobs/4805514101?gh_src=24a9d442teu
+
+[100] Accountant
+       Company  : Mediatech
+       Location : Vilnius
+       Salary   : -
+       URL      : https://jobs.lever.co/adtech/206e9438-8add-425c-8916-86f4ec7a4713
+
+[101] Senior Creative Designer & Illustrator (Heypolo)
+       Company  : Surfshark
+       Location : Vilnius
+       Salary   : 2700 - 4300 €
+       URL      : https://jobs.lever.co/surfshark/f1bb597b-4b86-4cf7-a9ba-664d69c87054
+
+[102] Product Counsel
+       Company  : Eneba
+       Location : -
+       Salary   : 60000 - 72000 €
+       URL      : https://jobs.eu.lever.co/eneba/8f461779-9cef-4810-a3af-830a67e84c27
+
+[103] Junior Lawyer (Privacy Driven)
+       Company  : Orbio world, Vilnius
+       Location : Kaunas
+       Salary   : 1200 €
+       URL      : https://orbioworld.teamtailor.com/jobs/7184538-junior-lawyer-privacy-driven
+
+[104] Android Engineer | Staff | Kotlin | Saily
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : -
+       URL      : https://jobs.lever.co/nordsec/65d3ebe2-49c5-4b09-b49a-3f72f0df5d42
+
+[105] Android Engineer | Staff | Kotlin | Saily
+       Company  : Nord Security
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/nordsec/9d287f88-032c-4204-a838-b3cd5e2af7fa
+
+[106] Android Engineer | Senior | Kotlin | Saily
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 5600 - 7000 €
+       URL      : https://jobs.lever.co/nordsec/38adcf50-d1dc-4063-9619-0c527c3ebc6d
+
+[107] Android Engineer | Senior | Kotlin | Saily
+       Company  : Nord Security
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/nordsec/a981cecd-9873-4eab-8bab-74e1e3c99c73
+
+[108] Digital Marketing Project Manager | Mid-Senior
+       Company  : Nord Security, Vilnius
+       Location : Kaunas
+       Salary   : 2900 - 4300 €
+       URL      : https://jobs.lever.co/nordsec/d7048ebe-0e96-499b-8fb9-b0f9d0feb6f9
+
+[109] Full-Stack Developer | Mid-Senior | AI Tools
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 3500 - 7000 €
+       URL      : https://jobs.lever.co/nordsec/a6ba62c8-441b-4be7-abf0-27d4092ecc41
+
+[110] Creative Copywriter | Mid-Senior
+       Company  : Nord Security
+       Location : Vilnius
+       Salary   : 2200 - 3600 €
+       URL      : https://jobs.lever.co/nordsec/13904122-d894-4950-a611-074ba6a7ce47
+
+[111] Enterprise Account Manager (for AI and big data) - Kuala Lumpur
+       Company  : Oxylabs
+       Location : -
+       Salary   : 3600 - 4800 €
+       URL      : https://jobs.lever.co/oxylabs/75eba4ca-0ae5-4635-a35a-ce0c1879984a
+
+[112] BC Consultant
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 2900 - 5200 €
+       URL      : https://jobs.lever.co/oxylabs/57812aff-a30b-4ec5-baa5-21f6723b05b8
+
+[113] Senior Frontend Engineer (Webshare product)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 6500 €
+       URL      : https://jobs.lever.co/oxylabs/f54249f9-b99d-42ff-8347-366d6db4e420
+
+[114] Python Developer (Mid)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 3200 - 6000 €
+       URL      : https://jobs.lever.co/oxylabs/f48fd23e-a415-4625-a440-125a1bc0c542
+
+[115] Squad Lead (Scraping Team)
+       Company  : Oxylabs
+       Location : Vilnius
+       Salary   : 4500 - 6000 €
+       URL      : https://jobs.lever.co/oxylabs/ad88e7e2-7aea-4d84-a676-3f183b5b2298
+
+[116] Chief Information Security Officer (CISO)
+       Company  : Hostinger, Vilnius
+       Location : Kaunas
+       Salary   : 7500 €
+       URL      : https://jobs.lever.co/hostinger/5b1833cb-46a3-4365-b69e-604f482f4cea
+
+[117] Talent Acquisition Partner
+       Company  : Hostinger
+       Location : Vilnius
+       Salary   : 3000 - 4500 €
+       URL      : https://jobs.lever.co/hostinger/cd55f019-547f-4c68-84b0-bbb7f0ad3e30
+
+[118] Senior Account Manager | Spain | Based in Europe
+       Company  : Hostinger
+       Location : -
+       Salary   : -
+       URL      : https://jobs.lever.co/hostinger/9dc29fa9-b1b3-4379-bc79-e88fd95fc0f4
+
+[119] Engineering Manager, Strategist Team
+       Company  : Omnisend
+       Location : Vilnius
+       Salary   : 8000 €
+       URL      : https://jobs.lever.co/omnisend/38dfb258-1411-465f-a4ad-4ea34a5e5c08
+
+[120] Mid/Senior IT Engineer
+       Company  : Surfshark
+       Location : Vilnius
+       Salary   : 2900 - 4900 €
+       URL      : https://jobs.lever.co/surfshark/03e1073a-f53f-49b0-b0a6-ebea1d9a9f66
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SOURCE: UZT   (500 listings)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[001] Veiklos organizavimo skyriaus specialistas buhalteris
+       Company  : Techninės pagalbos priemonių centras
+       Location : Vilnius
+       Salary   : €1798.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996805181?s=60;q=;n=100
+
+[002] Nekvalifikuotas gyvulininkystės ūkio darbininkas (-ė)
+       Company  : Klaipėdos rajono žemės ūkio bendrovė "Aglaura"
+       Location : Karklė
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996811895?s=60;q=;n=100
+
+[003] Ekskavatorininkas
+       Company  : UAB "Alduva"
+       Location : Vilnius
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996813571?s=60;q=;n=100
+
+[004] Virėjas (-a) ceche, Kaune | ATRANKA 04.09
+       Company  : MAXIMA LT, UAB
+       Location : Kaunas
+       Salary   : €1330.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996806266?s=60;q=;n=100
+
+[005] Gamybos darbuotojai (-os)
+       Company  : UAB "Biuro"
+       Location : Plungė
+       Salary   : €1244.32 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-68-996813886?s=60;q=;n=100
+
+[006] Pagalbinis montuotojas
+       Company  : Uždaroji akcinė bendrovė "Kauno liftai"
+       Location : Kaunas
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996805049?s=60;q=;n=100
+
+[007] Stalius-staklininkas
+       Company  : MB "Freitas"
+       Location : Kaunas
+       Salary   : €2440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996807019?s=60;q=;n=100
+
+[008] Krovėjas (naudotų padangų)
+       Company  : UAB "Antrinio perdirbimo grupė"
+       Location : Mažeikiai
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-61-996811690?s=60;q=;n=100
+
+[009] Pagalbinis (-ė) darbininkas (-ė)
+       Company  : UAB Klasmann-Deilmann Šilutė
+       Location : Traksėdžiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-88-996822721?s=60;q=;n=100
+
+[010] Vidaus elektrotechnikos projektuotojas (-a)
+       Company  : UAB "ENERGUS GROUP"
+       Location : Vilnius
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996812002?s=60;q=;n=100
+
+[011] Skardininkai
+       Company  : Ia international MB
+       Location : Klaipėda
+       Salary   : €3360.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996805166?s=60;q=;n=100
+
+[012] Pagalbinis statinių priežiūros darbininkas
+       Company  : Klaipėdos "Vėtrungės" gimnazija
+       Location : Klaipėda
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996806226?s=60;q=;n=100
+
+[013] Saulės elektrinių priežiūros specialistas (-ė)
+       Company  : UAB "VEJUSTA"
+       Location : Vilnius
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996806003?s=60;q=;n=100
+
+[014] Virėja(as)
+       Company  : UAB "Personeta"
+       Location : Rukla
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-46-996808204?s=60;q=;n=100
+
+[015] Vairuotojas (-a)- pagalbinis (-ė) darbininkas (-ė)
+       Company  : UAB "Švara ID"
+       Location : Alytus
+       Salary   : €2441.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-11-996818185?s=60;q=;n=100
+
+[016] Įrengimų operatorius
+       Company  : Uždaroji akcinė bendrovė "SAUDUVA"
+       Location : Gergždeliai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996806350?s=60;q=;n=100
+
+[017] Maisto produkcijos fasuotojas(-a) ir formuotojas(-a)
+       Company  : UAB "Retiva"
+       Location : Marijampolė
+       Salary   : €1221.36 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-18-996816786?s=60;q=;n=100
+
+[018] Duobkasys
+       Company  : Kauno savivaldybės įmonė "Kapinių priežiūra"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996814310?s=60;q=;n=100
+
+[019] Degalinės operatorius (-ė)
+       Company  : UAB "BALTIC PETROLEUM"
+       Location : Grigaičiai
+       Salary   : €1260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996808524?s=60;q=;n=100
+
+[020] Koordinatorius (-ė)
+       Company  : Labdaros ir paramos fondas "Maisto bankas"
+       Location : Kėdainiai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-53-996813675?s=60;q=;n=100
+
+[021] Valytojas (-a)
+       Company  : Vytauto Didžiojo universiteto klasikinio ugdymo licėjus
+       Location : Kaunas
+       Salary   : €576.50 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996839952?s=60;q=;n=100
+
+[022] Greitojo maisto ruošėjas
+       Company  : MB "Lemons"
+       Location : Klaipėda
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996805300?s=60;q=;n=100
+
+[023] Krovėjas (-a)
+       Company  : Uždaroji akcinė bendrovė "Lavisos koncernas"
+       Location : Kaunas
+       Salary   : €1650.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996804950?s=60;q=;n=100
+
+[024] Tolimųjų reisų vairuotojas
+       Company  : UAB "Sf logistics"
+       Location : Naujoji Akmenė
+       Salary   : €3000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-32-996812718?s=60;q=;n=100
+
+[025] Virėja (-as)
+       Company  : MB Agni house
+       Location : Lentvaris
+       Salary   : €2050.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-79-996806537?s=60;q=;n=100
+
+[026] Padavėjas (-a)
+       Company  : UAB Eglės sanatorija
+       Location : Druskininkai
+       Salary   : €1180.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-15-996811787?s=60;q=;n=100
+
+[027] Pagalbinis darbuotojas
+       Company  : Ūkininko ūkis, 1339025
+       Location : Ruikiai
+       Salary   : €2047.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-77-996809024?s=60;q=;n=100
+
+[028] Apsaugos darbuotojas (-a)
+       Company  : UAB saugos tarnyba "Argus"
+       Location : Palanga
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-25-996805611?s=60;q=;n=100
+
+[029] Padavėjas - barmenas (-ė)
+       Company  : UAB "Čia Market"
+       Location : Telšiai
+       Salary   : €1450.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-78-996805823?s=60;q=;n=100
+
+[030] Operatorius (-ė) derintojas (-a)
+       Company  : Uždaroji akcinė bendrovė "DZŪKIJA"
+       Location : Vilnius
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996806439?s=60;q=;n=100
+
+[031] Skardininkas
+       Company  : Mažoji bendrija Darbų švyturys
+       Location : Jakai
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996805785?s=60;q=;n=100
+
+[032] Medienos apdirbimo įrenginio operatorius
+       Company  : UAB "KERUSTA"
+       Location : Pabradė
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-86-996811790?s=60;q=;n=100
+
+[033] Pagalbinis darbininkas
+       Company  : MB "Ripu statyba"
+       Location : Mirskiškė
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996808388?s=60;q=;n=100
+
+[034] Padalinio meistras
+       Company  : Uždaroji akcinė bendrovė Rumšiškių paukštynas
+       Location : Dovainonys
+       Salary   : €1477.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-49-996825617?s=60;q=;n=100
+
+[035] Greiderio operatorius
+       Company  : UAB "Gilmera"
+       Location : Alytus
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-11-996804794?s=60;q=;n=100
+
+[036] Pardavimų vadybininkas (-ė) Kaune
+       Company  : Uždaroji akcinė bendrovė "APSAUGOS KOMANDA"
+       Location : Kaunas
+       Salary   : €1545.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996806347?s=60;q=;n=100
+
+[037] Gamybos darbuotojas (-a)
+       Company  : Ia international MB
+       Location : Ilgakiemis
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996819622?s=60;q=;n=100
+
+[038] Padavėjas (-a) - barmenas (-ė)
+       Company  : MB Taurema
+       Location : Šilutė
+       Salary   : €1260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-88-996812784?s=60;q=;n=100
+
+[039] Bendrosios praktikos slaugytojas
+       Company  : Viešoji įstaiga Klaipėdos medicininės slaugos ligoninė
+       Location : Klaipėda
+       Salary   : €2740.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996805772?s=60;q=;n=100
+
+[040] Pagalbinis sandėlio darbuotojas
+       Company  : UAB Safariland Lithuania
+       Location : Kaunas
+       Salary   : €1160.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996807966?s=60;q=;n=100
+
+[041] Meistras (-ė) Joniškyje
+       Company  : Akcinė bendrovė "Kelių priežiūra"
+       Location : Joniškis
+       Salary   : €2260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-47-996813221?s=60;q=;n=100
+
+[042] Tolimųjų reisų vairuotojas (-a)
+       Company  : UAB "REDA transport"
+       Location : Pakumulšiai
+       Salary   : €3300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996804854?s=60;q=;n=100
+
+[043] Valytoja(-as)
+       Company  : Uždaroji akcinė bendrovė "Socialinė integracija"
+       Location : Utena
+       Salary   : €350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-82-996805370?s=60;q=;n=100
+
+[044] Gamybos įrenginių priežiūros meistras
+       Company  : UAB TRIPLAN LT
+       Location : Bučiūnai
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-39-996818252?s=60;q=;n=100
+
+[045] Siuvėja (-as) (Jonavoje)
+       Company  : Ats-Ammattityokalut Oy filialas Lietuvoje
+       Location : Jonava
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-46-996809322?s=60;q=;n=100
+
+[046] AUTOMECHANIKAS (-Ė)
+       Company  : MB "Auto Dominus"
+       Location : Vilnius
+       Salary   : €2440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996813493?s=60;q=;n=100
+
+[047] Metalo CNC operatorius (ė)-derintojas(ė)
+       Company  : UAB "Arlutas"
+       Location : Panevėžys
+       Salary   : €1477.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-27-996807187?s=60;q=;n=100
+
+[048] OPERATORIUS (-Ė) PRIE KLIJAVIMO LINIJOS
+       Company  : UAB "Jugum"
+       Location : Vilnius
+       Salary   : €2167.20 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996806639?s=60;q=;n=100
+
+[049] Maisto technologas
+       Company  : Akcinės bendrovės "PIENO ŽVAIGŽDĖS" filialas Mažeikių pieninė
+       Location : Mažeikiai
+       Salary   : €2100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-61-996821890?s=60;q=;n=100
+
+[050] Teleskopinio krautuvo vairuotojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Agrokoncernas"
+       Location : Rokiškis
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-73-996807758?s=60;q=;n=100
+
+[051] Medicinos gydytojas
+       Company  : Viešoji įstaiga Klaipėdos medicininės slaugos ligoninė
+       Location : Klaipėda
+       Salary   : €5916.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996808690?s=60;q=;n=100
+
+[052] Spec. valymo darbų grupės valytojas (-a)
+       Company  : ŠVAROS MISIJA, UAB
+       Location : Marijampolė
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-18-996805236?s=60;q=;n=100
+
+[053] Gamybos darbininkas (-ė)-žuvies filetuotojas(a)
+       Company  : UAB "Baltic fish export"
+       Location : Kėdainiai
+       Salary   : €1260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-53-996808555?s=60;q=;n=100
+
+[054] Inkasatorius-vairuotojas (-a)
+       Company  : EUROCASH1, UAB
+       Location : Vilnius
+       Salary   : €1650.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996807866?s=60;q=;n=100
+
+[055] Sandėlininkas (-ė) - autokrautuvo vairuotojas (-a)
+       Company  : Akcinė bendrovė "Lietuvos geležinkeliai"
+       Location : Vilnius
+       Salary   : €1530.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996809576?s=60;q=;n=100
+
+[056] Patalpų valytojas (-a) Raudondvario pl.
+       Company  : Daily Spaces, UAB
+       Location : Kaunas
+       Salary   : €634.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996807763?s=60;q=;n=100
+
+[057] Gamybos darbininkas (-ė)
+       Company  : Žemės ūkio bendrovė "Nematekas"
+       Location : Prienai
+       Salary   : €1257.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-69-996811205?s=60;q=;n=100
+
+[058] Mokinio padėjėjas(-a)
+       Company  : Vilniaus "Atgajos" specialioji mokykla
+       Location : Vilnius
+       Salary   : €1330.52 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996806087?s=60;q=;n=100
+
+[059] Virėjas (-a)
+       Company  : Kauno lopšelis-darželis "Boružėlė"
+       Location : Kaunas
+       Salary   : €1492.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996811897?s=60;q=;n=100
+
+[060] Virėjas (-a)
+       Company  : UAB "Avelma"
+       Location : Mazūriškiai
+       Salary   : €1454.84 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996808342?s=60;q=;n=100
+
+[061] Vairuotojas- ūkio darbininkas
+       Company  : Ūkininko ūkis, 8771691
+       Location : Skratiškiai
+       Salary   : €1512.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-36-996812488?s=60;q=;n=100
+
+[062] Valytoja (-as)
+       Company  : UAB "Clean Solutions"
+       Location : Vilnius
+       Salary   : €200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996807940?s=60;q=;n=100
+
+[063] Biologijos mokytojas
+       Company  : Vilniaus Simono Daukanto gimnazija
+       Location : Vilnius
+       Salary   : €1376.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996804722?s=60;q=;n=100
+
+[064] Maisto išdavėjas (-a) Bugo g.
+       Company  : UAB "Sveikos mitybos partneris"
+       Location : Vilnius
+       Salary   : €1257.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996807106?s=60;q=;n=100
+
+[065] Pardavėjas (-a)
+       Company  : Uždaroji akcinė bendrovė "KANRUGĖ"
+       Location : Klovainiai
+       Salary   : €1160.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-65-996809444?s=60;q=;n=100
+
+[066] Santechnikas (-ė)
+       Company  : Uždaroji akcinė bendrovė "GRINDA"
+       Location : Vilnius
+       Salary   : €2047.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996805144?s=60;q=;n=100
+
+[067] Valytojas (-a)
+       Company  : UAB "Epsilon LT"
+       Location : Vilnius
+       Salary   : €148.05 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996805586?s=60;q=;n=100
+
+[068] Personalo vadybininkas/-ė
+       Company  : Akcinė bendrovė "ŽEMAITIJOS PIENAS"
+       Location : Telšiai
+       Salary   : €1410.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-78-996808467?s=60;q=;n=100
+
+[069] Baldų surinkėjas
+       Company  : UAB "Ergolain baldai"
+       Location : Kužiai
+       Salary   : €1849.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996813437?s=60;q=;n=100
+
+[070] Dažymo linijos operatorius (-ė)
+       Company  : UAB "Laudesta"
+       Location : Panevėžys
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-27-996818471?s=60;q=;n=100
+
+[071] Pagalbinis darbininkas
+       Company  : NAGI Baltics, UAB
+       Location : Vilnius
+       Salary   : €1454.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996805797?s=60;q=;n=100
+
+[072] Mokino padėjėjas (spec. poreikių vaikams)
+       Company  : Vilniaus Santariškių lopšelis-darželis
+       Location : Vilnius
+       Salary   : €638.29 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996809428?s=60;q=;n=100
+
+[073] Vamzdynų montuotojas
+       Company  : UAB "Ekologiniai projektai"
+       Location : Kaunas
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-19-996806233?s=60;q=;n=100
+
+[074] Valytojas (-a)
+       Company  : MB Spindinti švara
+       Location : Šiauliai
+       Salary   : €577.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996804808?s=60;q=;n=100
+
+[075] Meistras (-ė) Jonavoje
+       Company  : Akcinė bendrovė "Kelių priežiūra"
+       Location : Jonava
+       Salary   : €2256.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-46-996813135?s=60;q=;n=100
+
+[076] Slaugytojo padėjėjas
+       Company  : VšĮ Paliatyviosios pagalbos klinika
+       Location : Šiauliai
+       Salary   : €1386.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996811773?s=60;q=;n=100
+
+[077] Virėjas (kavinė KAMPAS)
+       Company  : UAB "Sotas"
+       Location : Marijampolė
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-18-996815859?s=60;q=;n=100
+
+[078] Vairuotojas
+       Company  : MB "Ripu statyba"
+       Location : Mirskiškė
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996808370?s=60;q=;n=100
+
+[079] Autoelektrikas (-ė)
+       Company  : Uždaroji akcinė bendrovė "Vlantana"
+       Location : Gobergiškė
+       Salary   : €2100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-21-996810947?s=60;q=;n=100
+
+[080] Sandėlininkas - krautuvo vairuotojas
+       Company  : Akcinės bendrovės "PIENO ŽVAIGŽDĖS" filialas Mažeikių pieninė
+       Location : Mažeikiai
+       Salary   : €1950.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-61-996821897?s=60;q=;n=100
+
+[081] Kambarių tvarkytojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Palangos žuvėdra"
+       Location : Palanga
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-25-996807174?s=60;q=;n=100
+
+[082] Šaltkalvis ( -ė ) surinkėjas ( -a )
+       Company  : UAB "IM Worx"
+       Location : Panevėžys
+       Salary   : €2441.04 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-27-996810847?s=60;q=;n=100
+
+[083] Aptraukėjas
+       Company  : Uždaroji akcinė bendrovė "AUSNĖ"
+       Location : Šiauliai
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996806645?s=60;q=;n=100
+
+[084] Žemės ūkio technikos operatorius
+       Company  : Žemės ūkio kooperatyvas "Agrolanka"
+       Location : Mickiškė
+       Salary   : €2400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-77-996818733?s=60;q=;n=100
+
+[085] Aplinkos apželdintojas
+       Company  : UAB "Žali sprendimai"
+       Location : Alytus
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-11-996812537?s=60;q=;n=100
+
+[086] VYR. MECHANIKAS (-Ė)
+       Company  : BIOVELA-UTENOS MĖSA, UAB
+       Location : Utena
+       Salary   : €2100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-82-996814888?s=60;q=;n=100
+
+[087] Manikiūro Pedikiūro specialistas(-ė)
+       Company  : MB Lako fantazija
+       Location : Vilnius
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996806904?s=60;q=;n=100
+
+[088] Vairuotojas-konduktorius
+       Company  : Uždaroji akcinė bendrovė Tauragės autobusų parkas
+       Location : Tauragė
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-77-996818904?s=60;q=;n=100
+
+[089] Autošaltkalvis
+       Company  : UAB "Vigada"
+       Location : Mickūnai
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-36-996829763?s=60;q=;n=100
+
+[090] Vairuotoja (-as)
+       Company  : PST Group AB
+       Location : Panevėžys
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-27-996806171?s=60;q=;n=100
+
+[091] Medicinos gydytojas
+       Company  : UAB "Gemma sveikatos centras"
+       Location : Vilnius
+       Salary   : €4000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996829697?s=60;q=;n=100
+
+[092] Pagalbinis statybų darbininkas
+       Company  : Uždaroji akcinė bendrovė Rumšiškių paukštynas
+       Location : Dovainonys
+       Salary   : €2069.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-49-996818811?s=60;q=;n=100
+
+[093] Pagalbinis virtuvės darbininkas
+       Company  : Vilniaus miesto kompleksinių paslaugų centras "Šeimos slėnis"
+       Location : Vilnius
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-01-996812513?s=60;q=;n=100
+
+[094] Siuvėjas-sukirpėjas
+       Company  : UAB "Dzūkijos baldų fabrikas"
+       Location : Radžiūnai
+       Salary   : €1350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-11-996806451?s=60;q=;n=100
+
+[095] Vairuotojas ekspeditorius
+       Company  : UAB "Delikatesas 1937"
+       Location : Joniškis
+       Salary   : €1186.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-47-996811712?s=60;q=;n=100
+
+[096] Plataus profilio darbuotojas
+       Company  : Uždaroji akcinė bendrovė "RIVONA"
+       Location : Kėdainiai
+       Salary   : €1450.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-53-996805961?s=60;q=;n=100
+
+[097] Apsaugos darbuotojas (-a)
+       Company  : UAB saugos tarnyba "Argus"
+       Location : Mažeikiai
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-61-996805610?s=60;q=;n=100
+
+[098] Vairuotojas
+       Company  : Žemės ūkio kooperatyvas "REŠKETĖNAI"
+       Location : Žarėnai
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-78-996816470?s=60;q=;n=100
+
+[099] Medelyno darbuotojas (-a)
+       Company  : MB PARKO laukai
+       Location : Pakusinė
+       Salary   : €1160.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-18-996810927?s=60;q=;n=100
+
+[100] Informacinių technologijų skyriaus vyriausiasis specialistas
+       Company  : Aplinkos apsaugos departamentas prie Aplinkos ministerijos
+       Location : Šiauliai
+       Salary   : €2100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/skelbimas/DV-29-996806364?s=60;q=;n=100
+
+[101] Duonos kepėjas (-a)
+       Company  : UAB "Nauji verslo projektai"
+       Location : Kaunas
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996807995?s=60;q=;n=100
+
+[102] Virėjas (-a)
+       Company  : UAB "Aradena"
+       Location : Raudondvaris
+       Salary   : €2150.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996813545?s=60;q=;n=100
+
+[103] Medienos apdirbimo staklių derintojas
+       Company  : Alytaus profesinio rengimo centras
+       Location : Alytus
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-11-996816235?s=60;q=;n=100
+
+[104] Laivų korpusų surinkėjas (-a)
+       Company  : UAB Vakarų Baltijos laivų statykla
+       Location : Klaipėda
+       Salary   : €2630.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996805471?s=60;q=;n=100
+
+[105] Universalaus medžio supjovimo staklininkas (-ė)
+       Company  : UAB "Dominari"
+       Location : Marijampolė
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-18-996805760?s=60;q=;n=100
+
+[106] Valytojas (-a)
+       Company  : MB "Valauskas ir Ko"
+       Location : Klaipėda
+       Salary   : €1882.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996806908?s=60;q=;n=100
+
+[107] Pardavėjas (-a)
+       Company  : UAB agrofirma "SĖKLOS"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996805152?s=60;q=;n=100
+
+[108] Picų kepėjas PC "Ogmia"
+       Company  : UAB "Čili pica"
+       Location : Vilnius
+       Salary   : €1652.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996807180?s=60;q=;n=100
+
+[109] Pagalbinis(-ė) darbininkas(-ė)
+       Company  : UAB Ovenlab
+       Location : Vilnius
+       Salary   : €1680.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996811578?s=60;q=;n=100
+
+[110] Duomenų suvedimo specialistė (as)
+       Company  : Uždaroji akcinė bendrovė "ENTAFARMA"
+       Location : Klonėnai
+       Salary   : €1455.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-89-996811906?s=60;q=;n=100
+
+[111] Gamybos darbuotojas (-a)
+       Company  : UAB "Baltic Timber Company"
+       Location : Lapiai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996808215?s=60;q=;n=100
+
+[112] Slaugytojo padėjėjas (-a)
+       Company  : Labdaros ir paramos fondas "Pagalbos namuose tarnyba"
+       Location : Kaunas
+       Salary   : €756.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996805673?s=60;q=;n=100
+
+[113] Pardavėjas (-a) - kasininkas (-ė) Fabijoniškėse
+       Company  : UAB "Valientė"
+       Location : Vilnius
+       Salary   : €1356.22 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996809396?s=60;q=;n=100
+
+[114] Miško darbininkas
+       Company  : Eglės Navikaitės IĮ
+       Location : Šilutė
+       Salary   : €1155.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-88-996811829?s=60;q=;n=100
+
+[115] Akmens šlifuotojas
+       Company  : UAB "Akmens kryžius"
+       Location : Bačkininkai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-69-996806616?s=60;q=;n=100
+
+[116] Pagalbinis darbininkas
+       Company  : A. Pilecko individuali įmonė
+       Location : Miškiniai
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-59-996807108?s=60;q=;n=100
+
+[117] Valytojas (-a)
+       Company  : Uždaroji akcinė bendrovė "ANREKA"
+       Location : Molėtai
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-62-996806580?s=60;q=;n=100
+
+[118] Apartamentų tvarkytoja (-as)
+       Company  : UAB CLUB1B
+       Location : Klaipėda
+       Salary   : €2441.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996809543?s=60;q=;n=100
+
+[119] Buhalterė (-is)
+       Company  : Uždaroji akcinė bendrovė "Žaliasis žiogas"
+       Location : Panevėžys
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-27-996807494?s=60;q=;n=100
+
+[120] Šaltkalvis (-ė)
+       Company  : VALSTYBĖS ĮMONĖ IGNALINOS ATOMINĖ ELEKTRINĖ
+       Location : Drūkšiniai
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-30-996806879?s=60;q=;n=100
+
+[121] Būrelio vadovas (-ė)
+       Company  : VšĮ "Laikas kartu"
+       Location : Pasvalys
+       Salary   : €315.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-67-996812896?s=60;q=;n=100
+
+[122] Priešmokyklinio ugdymo mokytojas (-a)
+       Company  : Elektrėnų sav. Semeliškių gimnazija
+       Location : Semeliškės
+       Salary   : €1798.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-79-996811209?s=60;q=;n=100
+
+[123] Techninės pagalbos inžinierius (IT)
+       Company  : UAB "Cherry servers"
+       Location : Šiauliai
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-29-996806619?s=60;q=;n=100
+
+[124] Suvirintojas
+       Company  : UAB "Kiruna"
+       Location : Mažeikiai
+       Salary   : €2300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-61-996807628?s=60;q=;n=100
+
+[125] Gamybos darbuotojai (-os)
+       Company  : UAB "Biuro"
+       Location : Plungė
+       Salary   : €1244.32 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-68-996813886?s=60;q=;n=100
+
+[126] Patalpų valytoja (-as)
+       Company  : Daily Spaces, UAB
+       Location : Vilnius
+       Salary   : €350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996805191?s=60;q=;n=100
+
+[127] Sandėlio darbuotojas-kranininkas
+       Company  : MB "Personalo guru"
+       Location : Vilnius
+       Salary   : €2200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996806093?s=60;q=;n=100
+
+[128] Padavėjas
+       Company  : UAB "Jaukus viešbutis"
+       Location : Druskininkai
+       Salary   : €1260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-15-996807356?s=60;q=;n=100
+
+[129] Pagalbinis statybos darbininkas
+       Company  : UAB "Mapresta"
+       Location : Klaipėda
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996808029?s=60;q=;n=100
+
+[130] Betonuotojas
+       Company  : MB "Hilera LT"
+       Location : Kaunas
+       Salary   : €2440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996805966?s=60;q=;n=100
+
+[131] Elektrikas
+       Company  : UAB "Deisima"
+       Location : Šiauliai
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-29-996806116?s=60;q=;n=100
+
+[132] Individualios priežiūros darbuotojas (-a)
+       Company  : VšĮ "Nenugalimi kartu"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996818306?s=60;q=;n=100
+
+[133] Ekskavatoriaus mašinistas
+       Company  : UAB "Trinkvasta"
+       Location : Marijampolė
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-18-996806165?s=60;q=;n=100
+
+[134] Medinių gaminių surinkėja/as
+       Company  : UAB "Analote"
+       Location : Telšiai
+       Salary   : €1168.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-78-996812497?s=60;q=;n=100
+
+[135] Konditeris
+       Company  : UAB "Tusaldi"
+       Location : Geistariškės
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-11-996809831?s=60;q=;n=100
+
+[136] Paruošimo darbuotojas (-a) 1 pamaina (Visko apmokome darbo vietoje)
+       Company  : Uždaroji akcinė bendrovė "Selteka"
+       Location : Kaunas
+       Salary   : €1194.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996811804?s=60;q=;n=100
+
+[137] Sodininkystės profesionalas (-ė) - augalų specialistas (-ė)
+       Company  : K. Geco prekybos įmonė
+       Location : Palanga
+       Salary   : €1396.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-25-996807659?s=60;q=;n=100
+
+[138] Valytojas (-a)
+       Company  : Vilniaus Vaduvos darželis-mokykla
+       Location : Vilnius
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996808680?s=60;q=;n=100
+
+[139] Elektros inžinierius (-ė)
+       Company  : Uždaroji akcinė bendrovė "Dzūkijos vandenys"
+       Location : Alytus
+       Salary   : €2300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-11-996809834?s=60;q=;n=100
+
+[140] Valytojas (-a)
+       Company  : MB Spindinti švara
+       Location : Šiauliai
+       Salary   : €577.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-29-996804808?s=60;q=;n=100
+
+[141] Apsaugos darbuotojas
+       Company  : Lietuvos šaulių sąjunga
+       Location : Klaipėda
+       Salary   : €1257.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996805929?s=60;q=;n=100
+
+[142] Santechnikas-montuotojas-suvirintojas
+       Company  : Uždaroji akcinė bendrovė "HENRIS"
+       Location : Šiauliai
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-29-996805767?s=60;q=;n=100
+
+[143] Inžinierius(-ė)-Sąmatininkas(-ė)
+       Company  : UAB "ENERGUS GROUP"
+       Location : Vilnius
+       Salary   : €2800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996812022?s=60;q=;n=100
+
+[144] Traktorininkas (-ė) Kaune
+       Company  : UAB "Ekonovus"
+       Location : Kaunas
+       Salary   : €1455.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996812845?s=60;q=;n=100
+
+[145] Pardavėjas (-a)-konsultantas (-ė) Gargždai (Gulbė)
+       Company  : UAB "STAMEX"
+       Location : Gargždai
+       Salary   : €1480.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996806592?s=60;q=;n=100
+
+[146] Statybos darbų vadovas (-ė)
+       Company  : UAB "Tilta"
+       Location : Mažeikiai
+       Salary   : €2454.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-61-996805816?s=60;q=;n=100
+
+[147] Siuvėjas
+       Company  : SCANDUN UAB
+       Location : Alytus
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-11-996812650?s=60;q=;n=100
+
+[148] Atliekų priėmėja (-as)
+       Company  : UAB Panevėžio regiono atliekų tvarkymo centras
+       Location : Panevėžys
+       Salary   : €1844.64 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-27-996807379?s=60;q=;n=100
+
+[149] Valytoja (-as)
+       Company  : ŠVAROS MISIJA, UAB
+       Location : Vilnius
+       Salary   : €1184.40 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996805528?s=60;q=;n=100
+
+[150] Pagalbinis darbuotojas krautuvo vairuotojas (-a)
+       Company  : UAB "Pandmeta"
+       Location : Pandėlys
+       Salary   : €1253.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-73-996808184?s=60;q=;n=100
+
+[151] Mobili (-us) valytoja (-as) Kaune
+       Company  : Ainava UAB
+       Location : Kaunas
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996809167?s=60;q=;n=100
+
+[152] Virėjas(-a)
+       Company  : Labdaros ir paramos fondas VA Caritas socialiniai projektai
+       Location : Vilnius
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996809198?s=60;q=;n=100
+
+[153] Autoelektrikas (-ė)
+       Company  : Uždaroji akcinė bendrovė "Vlantana"
+       Location : Gobergiškė
+       Salary   : €2100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996810947?s=60;q=;n=100
+
+[154] Socialinis darbuotojas (-a)
+       Company  : Strėvininkų socialinės globos namai
+       Location : Mūro Strėvininkai
+       Salary   : €1923.86 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-49-996808001?s=60;q=;n=100
+
+[155] Apsaugos darbuotojas (-a)
+       Company  : Uždaroji akcinė bendrovė "EKSKOMISARŲ BIURAS"
+       Location : Vilnius
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996809725?s=60;q=;n=100
+
+[156] Pardavėjas (-a) sveriamo maisto skyriuje
+       Company  : MAXIMA LT, UAB
+       Location : Jonava
+       Salary   : €1230.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-46-996805134?s=60;q=;n=100
+
+[157] Floristas
+       Company  : UAB "STEPANOTIS"
+       Location : Klaipėda
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996808446?s=60;q=;n=100
+
+[158] Jaunesnysis draudimo konsultantas
+       Company  : Akcinė bendrovė "Lietuvos draudimas"
+       Location : Prienai
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-69-996818793?s=60;q=;n=100
+
+[159] Virėjas
+       Company  : Vartotojų kooperatyvas "Kelmės prekyba"
+       Location : Kelmė
+       Salary   : €1185.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-54-996818614?s=60;q=;n=100
+
+[160] Karjerinių mašinų operatorius Radvilišlkyje
+       Company  : Akcinė bendrovė "Kelių priežiūra"
+       Location : Baisogala
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-71-996810898?s=60;q=;n=100
+
+[161] Slaugytojo padėjėjas (-a)
+       Company  : UAB "Gemma sveikatos centras"
+       Location : Vilnius
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996805312?s=60;q=;n=100
+
+[162] Administratorius
+       Company  : MB "Md bau"
+       Location : Totorviečiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-84-996805598?s=60;q=;n=100
+
+[163] Lauko vamzdynų montuotojas (-a)
+       Company  : UAB "Gensera"
+       Location : Klaipėda
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996811727?s=60;q=;n=100
+
+[164] Pradinio ugdymo mokytojas
+       Company  : Alytaus "Volungės" progimnazija
+       Location : Alytus
+       Salary   : €2137.10 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-11-996806984?s=60;q=;n=100
+
+[165] Individualios priežiūros darbuotojas (-a)
+       Company  : KAUNO ASMENŲ SU NEGALIA DRAUGIJA
+       Location : Kaunas
+       Salary   : €1344.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996812688?s=60;q=;n=100
+
+[166] Patalpų tvarkytoja (-as)
+       Company  : UAB "BSS grupė"
+       Location : Vilnius
+       Salary   : €1243.62 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996808289?s=60;q=;n=100
+
+[167] Vairuotojas C kategorija
+       Company  : UAB "Horeca sprendimai"
+       Location : Vilnius
+       Salary   : €1650.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996820003?s=60;q=;n=100
+
+[168] Šiukšliavežio vairuotojas
+       Company  : Uždaroji akcinė bendrovė "Nemėžio komunalininkas"
+       Location : Skaidiškės
+       Salary   : €2450.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996806403?s=60;q=;n=100
+
+[169] Staklių operatorius (-ė) baldų gamyboje (apmokome)
+       Company  : Actona Lithuania UAB
+       Location : Kaunas
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996806039?s=60;q=;n=100
+
+[170] Valytoja (-as)
+       Company  : Ainava UAB
+       Location : Pikutiškės
+       Salary   : €687.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996806549?s=60;q=;n=100
+
+[171] Staklininkas - pagalbinis darbininkas
+       Company  : UAB "JPackaging"
+       Location : Šeduva
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-71-996808045?s=60;q=;n=100
+
+[172] Veterinarijos farmacininkas
+       Company  : UAB "VET-1"
+       Location : Tauragė
+       Salary   : €1270.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-77-996808983?s=60;q=;n=100
+
+[173] Savivarčio vairuotojas
+       Company  : UAB "Vlatransa"
+       Location : Kalviškės
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996811010?s=60;q=;n=100
+
+[174] Nekvalifikuotas ūkio darbuotojas(-a)
+       Company  : Uždaroji akcinė bendrovė "TAKAŽOLĖ"
+       Location : Toliejai
+       Salary   : €1250.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-62-996809488?s=60;q=;n=100
+
+[175] Medicinos įstaigos administratorius(-ė)
+       Company  : UAB "Baltic Medics"
+       Location : Kretinga
+       Salary   : €1280.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-56-996805833?s=60;q=;n=100
+
+[176] Pagalbinis darbininkas
+       Company  : UAB "Samogitos sauna"
+       Location : Viešvėnai I
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-78-996819833?s=60;q=;n=100
+
+[177] Vairuotojas
+       Company  : UAB "Bioprolit"
+       Location : Rietavas
+       Salary   : €3100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-68-996806740?s=60;q=;n=100
+
+[178] Siuvėjas (-a)
+       Company  : Comco UAB
+       Location : Šiauliai
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-29-996808864?s=60;q=;n=100
+
+[179] Elektromontuotojas
+       Company  : UAB "Visa elektra"
+       Location : Marijampolė
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-18-996813935?s=60;q=;n=100
+
+[180] Virtuvės darbuotojas (-a)
+       Company  : Viešoji įstaiga Klaipėdos universiteto ligoninė
+       Location : Klaipėda
+       Salary   : €1405.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996812474?s=60;q=;n=100
+
+[181] Pardavėjas-kasininkas (-ė) Veiviržėnuose
+       Company  : UAB "Gulbelė"
+       Location : Veiviržėnai
+       Salary   : €1379.28 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996813430?s=60;q=;n=100
+
+[182] Automobilių kėbulų paruošėjas
+       Company  : UAB "Damauto"
+       Location : Klaipėda
+       Salary   : €2068.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996806152?s=60;q=;n=100
+
+[183] Pagalbinis darbininkas
+       Company  : UAB "Franklis"
+       Location : Kaunas
+       Salary   : €1655.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996805651?s=60;q=;n=100
+
+[184] Socialinis darbuotojas
+       Company  : VšĮ Auksiniai metai
+       Location : Tauragnai
+       Salary   : €2200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-82-996805239?s=60;q=;n=100
+
+[185] SUVIRINTOJAS - MONTUOTOJAS
+       Company  : UAB Litusmodus
+       Location : Klaipėda
+       Salary   : €2240.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996806996?s=60;q=;n=100
+
+[186] Sandėlininkas
+       Company  : UAB "Biržų duona"
+       Location : Biržai
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-36-996823252?s=60;q=;n=100
+
+[187] Konstrukcijų montuotojas
+       Company  : Uždaroji akcinė bendrovė "Telšių statyba"
+       Location : Telšiai
+       Salary   : €2440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-78-996816481?s=60;q=;n=100
+
+[188] Miškovežio vairuotojas - krovos krano operatorius
+       Company  : MB "Žemaitijos ąžuolas"
+       Location : Buožėnai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-78-996812476?s=60;q=;n=100
+
+[189] Medienos apdirbėjas
+       Company  : UAB "Dreveks"
+       Location : Minkeliai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996808415?s=60;q=;n=100
+
+[190] Suvirintojas (-a) elektra
+       Company  : Uždaroji akcinė bendrovė "ARGO EKSPRESAS"
+       Location : Gargždai
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996806557?s=60;q=;n=100
+
+[191] Kasininkas - pardavėjas
+       Company  : Uždaroji akcinė bendrovė "Grūstė"
+       Location : Šiluva
+       Salary   : €1170.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-72-996808481?s=60;q=;n=100
+
+[192] Slaugytojo padėjėjas (-a)
+       Company  : VšĮ "Senior Group Lietuva"
+       Location : Panevėžys
+       Salary   : €1344.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-27-996812167?s=60;q=;n=100
+
+[193] Produkcijos pakuotojas Nyderlanduose
+       Company  : UAB "Headex"
+       Location : Kaunas
+       Salary   : €2750.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-19-996807397?s=60;q=;n=100
+
+[194] Gelbėtojas
+       Company  : Biudžetinė įstaiga "Klaipėdos paplūdimiai"
+       Location : Klaipėda
+       Salary   : €1350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996804818?s=60;q=;n=100
+
+[195] Virėjas
+       Company  : UAB "Trakų pica"
+       Location : Vilnius
+       Salary   : €1344.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-01-996807950?s=60;q=;n=100
+
+[196] Individualios priežiūros darbuotojo profesijos mokytojas(a)
+       Company  : Šiaulių technologijų mokymo centras
+       Location : Mažeikiai
+       Salary   : €1737.29 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-61-996814729?s=60;q=;n=100
+
+[197] Suvirintojas
+       Company  : Uždaroji akcinė bendrovė "KLAIPĖDOS MONOLITAS"
+       Location : Klaipėda
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996806888?s=60;q=;n=100
+
+[198] Vadybininkas-montuotojas
+       Company  : UAB "Edlita"
+       Location : Šilutė
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-88-996804706?s=60;q=;n=100
+
+[199] Aplinkos tvarkytojas (-a)
+       Company  : MB "Valauskas ir Ko"
+       Location : Klaipėda
+       Salary   : €577.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-21-996809522?s=60;q=;n=100
+
+[200] Pakuotojas (-a)
+       Company  : Akcinės bendrovės "PIENO ŽVAIGŽDĖS" filialas Mažeikių pieninė
+       Location : Mažeikiai
+       Salary   : €1450.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p100/skelbimas/DV-61-996808624?s=60;q=;n=100
+
+[201] Baldų surinkėjas (-a)
+       Company  : UAB "Dominari"
+       Location : Marijampolė
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-18-996806676?s=60;q=;n=100
+
+[202] Pagalbinis darbininkas
+       Company  : Uždaroji akcinė bendrovė "SAUDEMA"
+       Location : Vilnius
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996805283?s=60;q=;n=100
+
+[203] Medicinos įstaigos administratorius(-ė)
+       Company  : UAB "Baltic Medics"
+       Location : Kretinga
+       Salary   : €1280.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-56-996805833?s=60;q=;n=100
+
+[204] Darbų vykdytojas (-a) Brigadininkas (-ė) Vilniuje
+       Company  : UAB "ENERGUS GROUP"
+       Location : Vilnius
+       Salary   : €2600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996811953?s=60;q=;n=100
+
+[205] Mechanikas
+       Company  : UAB "Mibasta"
+       Location : Melekonys
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996807315?s=60;q=;n=100
+
+[206] Langų ir fasadų valymo specialistas
+       Company  : UAB Valymo projektai
+       Location : Šiauliai
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-29-996808020?s=60;q=;n=100
+
+[207] Statybos darbų vadovas
+       Company  : UAB "Plungės Jonis"
+       Location : Plungė
+       Salary   : €3000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-68-996827068?s=60;q=;n=100
+
+[208] Pardavėjas (-a)
+       Company  : UAB "Broileta"
+       Location : Prienai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-69-996806285?s=60;q=;n=100
+
+[209] Valytoja (-as) Pociūno g. Vilnius
+       Company  : UAB "CORPUS A"
+       Location : Vilnius
+       Salary   : €519.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996811460?s=60;q=;n=100
+
+[210] Valytoja (-as) Karaliaus Mindaugo pr.
+       Company  : UAB "Jutarė"
+       Location : Kaunas
+       Salary   : €360.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996805705?s=60;q=;n=100
+
+[211] Trinkelių klojėjas
+       Company  : UAB "Diltrus"
+       Location : Kazlų Rūda
+       Salary   : €2200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-18-996811551?s=60;q=;n=100
+
+[212] Virėjas (-a)
+       Company  : UAB "Seklys morka"
+       Location : Panevėžys
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-27-996812286?s=60;q=;n=100
+
+[213] Sandėlio darbuotojas (-a) - vairuotojas (-a)
+       Company  : UAB "SPAISVILĖ"
+       Location : Ližiai
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-77-996805179?s=60;q=;n=100
+
+[214] Vairuotojas-ekspeditorius
+       Company  : Uždaroji akcinė bendrovė "Saukupa"
+       Location : Plungė
+       Salary   : €1903.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-68-996807020?s=60;q=;n=100
+
+[215] Kiemsargis (-ė)
+       Company  : AB "Civinity"
+       Location : Vilnius
+       Salary   : €600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996812206?s=60;q=;n=100
+
+[216] Virėjas (-a)
+       Company  : UAB "Antitop"
+       Location : Telšiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-78-996804855?s=60;q=;n=100
+
+[217] Individualios priežiūros darbuotojas (-a)
+       Company  : VšĮ globos centras "Šv. Gertrūda"
+       Location : Vilnius
+       Salary   : €1344.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996805977?s=60;q=;n=100
+
+[218] Odontologo padėjėjas (-a)
+       Company  : Skuodo pirminės sveikatos priežiūros centras
+       Location : Skuodas
+       Salary   : €790.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-25-996806055?s=60;q=;n=100
+
+[219] Baldų pramonės darbininkas
+       Company  : HOME GROUP, UAB
+       Location : Kriūkai
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-84-996805524?s=60;q=;n=100
+
+[220] Operatorius (-ė) - surinkėjas (-a)
+       Company  : PKC Group Lithuania UAB
+       Location : Klaipėda
+       Salary   : €1192.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996806758?s=60;q=;n=100
+
+[221] Informatikos mokytojas
+       Company  : Kauno Juozo Grušo meno gimnazija
+       Location : Kaunas
+       Salary   : €1065.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996807065?s=60;q=;n=100
+
+[222] Medicinos biologas (-ė)
+       Company  : Viešoji įstaiga Regioninė Telšių ligoninė
+       Location : Telšiai
+       Salary   : €1906.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-78-996809232?s=60;q=;n=100
+
+[223] Pagalbinis darbininkas
+       Company  : Uždaroji akcinė bendrovė BAUMANO PADĖKLAI
+       Location : Antakalnis
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-49-996806161?s=60;q=;n=100
+
+[224] Traktorininkas/ė
+       Company  : Ūkininko ūkis, 8929999
+       Location : Sindriūnai
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-67-996805056?s=60;q=;n=100
+
+[225] Elektromontuotojas (a)
+       Company  : UAB "EF grid"
+       Location : Panevėžys
+       Salary   : €2440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-27-996806635?s=60;q=;n=100
+
+[226] Baldų gamintojas (-a)
+       Company  : UAB "Balticsofa"
+       Location : Vilnius
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996813731?s=60;q=;n=100
+
+[227] Automobilių šaltkalvis (-ė)
+       Company  : UAB "Reiservis"
+       Location : Panevėžys
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-27-996813879?s=60;q=;n=100
+
+[228] Valytojas (-a)
+       Company  : Baltic Champs, UAB
+       Location : Staneliai
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-47-996805759?s=60;q=;n=100
+
+[229] Ikimokyklinio ugdymo mokytojas (-a)
+       Company  : VšĮ Šviesos slėnis
+       Location : Vilnius
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996808805?s=60;q=;n=100
+
+[230] Šilumininkas- santechnikas komercinių pastatų eksploatacijoje
+       Company  : SOL Baltics OU Lietuvos filialas
+       Location : Kaunas
+       Salary   : €2100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996805254?s=60;q=;n=100
+
+[231] GAMYBOS DARBUOTOJAS (-A) VERPYKLOS CECHE
+       Company  : UAB "Jugum"
+       Location : Vilnius
+       Salary   : €1260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996806656?s=60;q=;n=100
+
+[232] Virėjas (-a)
+       Company  : UAB "Avelma"
+       Location : Mazūriškiai
+       Salary   : €1454.84 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996808342?s=60;q=;n=100
+
+[233] Kelio darbininkas
+       Company  : UAB "Simlita"
+       Location : Vilnius
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996808320?s=60;q=;n=100
+
+[234] Siuvėja(s)
+       Company  : UAB "Audensa"
+       Location : Vilnius
+       Salary   : €1155.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996817828?s=60;q=;n=100
+
+[235] Valytojas (-a)
+       Company  : UAB "Epsilon LT"
+       Location : Vilnius
+       Salary   : €787.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996807735?s=60;q=;n=100
+
+[236] Apdailininkas
+       Company  : UAB "Palverkas"
+       Location : Mažeikiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-61-996805818?s=60;q=;n=100
+
+[237] Administratorė - koordinatorė
+       Company  : MB Dangaus turtai
+       Location : Alytus
+       Salary   : €580.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-11-996809337?s=60;q=;n=100
+
+[238] Valytojas (-a)
+       Company  : Ainava UAB
+       Location : Klaipėda
+       Salary   : €583.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996808226?s=60;q=;n=100
+
+[239] Valytoja (-as) P. Lukšio g.
+       Company  : UAB "BSS grupė"
+       Location : Kaunas
+       Salary   : €1273.23 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996816264?s=60;q=;n=100
+
+[240] Pagalbinis darbininkas (-ė)
+       Company  : Uždaroji akcinė bendrovė "JŪRĖS MEDIS"
+       Location : Jūrė
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-18-996818341?s=60;q=;n=100
+
+[241] Vairuotojas - pagalbinis darbininkas
+       Company  : UAB "AKMI"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996806997?s=60;q=;n=100
+
+[242] Bendrosios praktikos slaugytojas
+       Company  : Viešoji įstaiga Birštono pirminės sveikatos priežiūros centras
+       Location : Birštonas
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-69-996805408?s=60;q=;n=100
+
+[243] Sunkvežimio vairuotojas - sandėlininkas
+       Company  : Uždaroji akcinė bendrovė "Jurmedija"
+       Location : Jurbarkas
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-94-996805905?s=60;q=;n=100
+
+[244] Darbų meistras
+       Company  : UŽDAROJI AKCINĖ BENDROVĖ "SANDAILA"
+       Location : Šiauliai
+       Salary   : €2300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-29-996804994?s=60;q=;n=100
+
+[245] Vairuotojas
+       Company  : UAB "Trans group agro"
+       Location : Anglininkai
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-36-996831049?s=60;q=;n=100
+
+[246] Traktorininkas-pagalbinis darbininkas
+       Company  : Žemės ūkio kooperatinė bendrovė "Agrokavis"
+       Location : Vilkyčiai
+       Salary   : €1650.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-88-996805027?s=60;q=;n=100
+
+[247] Vairuotojas (-a) - ekspeditorius (-ė)
+       Company  : Uždaroji akcinė bendrovė "Daivida"
+       Location : Rokiškis
+       Salary   : €2300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-73-996811279?s=60;q=;n=100
+
+[248] Automobilių plovėjas - salonų valytojas
+       Company  : MB Pilies plovykla
+       Location : Kaunas
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996808477?s=60;q=;n=100
+
+[249] Bendrosios praktikos slaugytojas
+       Company  : VšĮ Paliatyviosios pagalbos klinika
+       Location : Šiauliai
+       Salary   : €1562.40 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-29-996811763?s=60;q=;n=100
+
+[250] Muitinės tarpininko atstovas-apskaitininkas
+       Company  : UAB "VPA Logistics"
+       Location : Klaipėda
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996805550?s=60;q=;n=100
+
+[251] KONSTRUKCIJŲ INŽINIERIUS / PROJEKTUOTOJAS
+       Company  : UAB "TOPAZ LT"
+       Location : Vilnius
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996812464?s=60;q=;n=100
+
+[252] Brigadininkas
+       Company  : UAB "Bustlita"
+       Location : Vilnius
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996813583?s=60;q=;n=100
+
+[253] Pagalbinis darbininkas (-ė) Šakiuose
+       Company  : UAB "Ekonovus"
+       Location : Šakiai
+       Salary   : €1258.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-84-996808518?s=60;q=;n=100
+
+[254] Autobuso vairuotojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Vilniaus viešasis transportas"
+       Location : Vilnius
+       Salary   : €1963.92 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996805406?s=60;q=;n=100
+
+[255] Valytojas (-a)
+       Company  : UAB "CORPUS A"
+       Location : Vilnius
+       Salary   : €440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996811483?s=60;q=;n=100
+
+[256] Apdailininkas(ė)
+       Company  : UAB "Mureka"
+       Location : Kaunas
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-46-996809412?s=60;q=;n=100
+
+[257] Stiklo montuotojas
+       Company  : Uždaroji akcinė bendrovė "Viromis"
+       Location : Kaunas
+       Salary   : €1680.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996812087?s=60;q=;n=100
+
+[258] Mikroautobuso vairuotojas B kat.
+       Company  : Mikroautobusų nuoma Vilniuje, UAB
+       Location : Vilnius
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996807230?s=60;q=;n=100
+
+[259] Siuvėjas
+       Company  : UAB TexTera
+       Location : Alytus
+       Salary   : €1344.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-11-996812292?s=60;q=;n=100
+
+[260] Valytoja (-as), Kaunas, K. Mindaugo pr.
+       Company  : VšĮ "Limeza"
+       Location : Kaunas
+       Salary   : €1010.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996808434?s=60;q=;n=100
+
+[261] Ūkio darbininkas / Pagalbininkas
+       Company  : Ūkininko ūkis, 6548427
+       Location : Dabužiai I
+       Salary   : €1160.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-34-996808632?s=60;q=;n=100
+
+[262] Siuvėjas-sukirpėjas
+       Company  : UAB "Dzūkijos baldų fabrikas"
+       Location : Radžiūnai
+       Salary   : €1350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-11-996806451?s=60;q=;n=100
+
+[263] Floristas (-ė)
+       Company  : MB Rgėlės
+       Location : Klaipėda
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996806170?s=60;q=;n=100
+
+[264] Stiklo plastiko formų paruošėjas (-a)
+       Company  : "MAREX Boats", UAB
+       Location : Ilgakiemis
+       Salary   : €2355.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996816127?s=60;q=;n=100
+
+[265] Sandėlio vadybininkas
+       Company  : UAB Bimmerlot
+       Location : Šiauliai
+       Salary   : €1180.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-29-996804767?s=60;q=;n=100
+
+[266] VAIRUOTOJAS(-A)
+       Company  : UAB "Tvarus skalbimas"
+       Location : Vilnius
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996813229?s=60;q=;n=100
+
+[267] Pastatų priežiūros darbininkas
+       Company  : Vilniaus Maironio progimnazija
+       Location : Vilnius
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996811678?s=60;q=;n=100
+
+[268] Ūkio darbininkas
+       Company  : Ūkininko ūkis, 9441618
+       Location : Šiauduva
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-87-996809364?s=60;q=;n=100
+
+[269] Mechanizatorius-traktorininkas
+       Company  : VDU Žemės ūkio akademijos mokomasis ūkis
+       Location : Noreikiškės
+       Salary   : €2046.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996813832?s=60;q=;n=100
+
+[270] Tarptautinio krovinių vežimo vairuotojas C kat.
+       Company  : Uždaroji akcinė bendrovė "Vilktukas"
+       Location : Alytus
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-11-996805580?s=60;q=;n=100
+
+[271] Pagalbinis darbuotojas
+       Company  : UAB "Aistata"
+       Location : Kėdainiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-53-996810949?s=60;q=;n=100
+
+[272] Valytojas (-a)
+       Company  : UAB "Mantinga Production"
+       Location : Marijampolė
+       Salary   : €1214.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-18-996806427?s=60;q=;n=100
+
+[273] Virėja (-s)
+       Company  : Eleonoros Ramonienės įmonė
+       Location : Šėta
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-53-996823470?s=60;q=;n=100
+
+[274] Gydytojas urologas
+       Company  : UAB Žaliakalnio poliklinika
+       Location : Kaunas
+       Salary   : €3000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996826025?s=60;q=;n=100
+
+[275] Bendrosios praktikos slaugytojas
+       Company  : Akmenės rajono socialinių paslaugų namai
+       Location : Naujoji Akmenė
+       Salary   : €1708.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-32-996806445?s=60;q=;n=100
+
+[276] Eksporto pardavimų vadybininkas (-ė)
+       Company  : UAB "EDJUSTA"
+       Location : Senoji Varėna
+       Salary   : €2133.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-38-996811544?s=60;q=;n=100
+
+[277] Traktorininkas
+       Company  : Ūkininko ūkis, 6531626
+       Location : Babrai
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-59-996812232?s=60;q=;n=100
+
+[278] Karjerinių mašinų operatorius Radvilišlkyje
+       Company  : Akcinė bendrovė "Kelių priežiūra"
+       Location : Baisogala
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-71-996810898?s=60;q=;n=100
+
+[279] Bendrosios praktikos slaugytojas
+       Company  : Viešoji įstaiga Plungės ligoninė
+       Location : Plungė
+       Salary   : €1747.07 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-68-996806863?s=60;q=;n=100
+
+[280] Virėjas/-a (Gargždai)
+       Company  : Uždaroji akcinė bendrovė "Grūstė"
+       Location : Gargždai
+       Salary   : €1407.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996807157?s=60;q=;n=100
+
+[281] Metalinių konstrukcijų montuotojas
+       Company  : UAB "Baltijos pašvaistė"
+       Location : Pabradė
+       Salary   : €2442.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-86-996805240?s=60;q=;n=100
+
+[282] Miško darbininkas-pjovėjas
+       Company  : MB Miško ekspertai
+       Location : Pagėgiai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-77-996805356?s=60;q=;n=100
+
+[283] Automechanikas
+       Company  : UAB "Autocinetum"
+       Location : Kaunas
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996808282?s=60;q=;n=100
+
+[284] Pavaduojantis laiškininkas (-ė), Karoliniškės
+       Company  : Akcinė bendrovė Lietuvos paštas
+       Location : Vilnius
+       Salary   : €1260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996815562?s=60;q=;n=100
+
+[285] Statybos darbų vadovas
+       Company  : UAB "Expolita"
+       Location : Kaniūkai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-11-996807248?s=60;q=;n=100
+
+[286] Slaugytojo padėjėjas
+       Company  : VšĮ Paliatyviosios pagalbos klinika
+       Location : Šiauliai
+       Salary   : €1386.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-29-996811773?s=60;q=;n=100
+
+[287] Valytojas(-a)
+       Company  : UAB ASVELA WORKSHOP
+       Location : Vilnius
+       Salary   : €1350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996806493?s=60;q=;n=100
+
+[288] Lietuvių kalbos ir literatūros mokytojas
+       Company  : Klaipėdos turizmo mokykla
+       Location : Klaipėda
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-21-996806609?s=60;q=;n=100
+
+[289] Gamybos darbininkas (-ė) - fasuotojas (-a)
+       Company  : UAB "Gardukas"
+       Location : Domeikava
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996805967?s=60;q=;n=100
+
+[290] Pjūklininkas
+       Company  : Eglės Navikaitės IĮ
+       Location : Šilutė
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-88-996811780?s=60;q=;n=100
+
+[291] Pašarų cecho darbininkas
+       Company  : Uždaroji akcinė bendrovė "CESTOS MAISTAS"
+       Location : Poškaičiai
+       Salary   : €1250.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996808742?s=60;q=;n=100
+
+[292] Padalinio vadybininkas (-ė)
+       Company  : UAB "Rentvėjus"
+       Location : Kaunas
+       Salary   : €2250.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-19-996807308?s=60;q=;n=100
+
+[293] Formuotojas (-a) - montuotojas (-a)
+       Company  : UAB "Jupiter Bach Lietuva"
+       Location : Tauragė
+       Salary   : €1650.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-77-996805955?s=60;q=;n=100
+
+[294] Valytojas (-a)
+       Company  : UAB North Clarity
+       Location : Vilnius
+       Salary   : €473.76 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996808540?s=60;q=;n=100
+
+[295] Padangų montuotojas mechanikas
+       Company  : IĮ "Gurneta"
+       Location : Telšiai
+       Salary   : €1160.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-78-996805458?s=60;q=;n=100
+
+[296] Automatikas-elektrikas
+       Company  : Akcinė bendrovė-firma "Šilutės Rambynas"
+       Location : Šilutė
+       Salary   : €2700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-88-996814803?s=60;q=;n=100
+
+[297] Staklių su programiniu valdymu operatorius
+       Company  : Uždaroji akcinė bendrovė "JŪRĖS MEDIS"
+       Location : Jūrė
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-18-996818345?s=60;q=;n=100
+
+[298] Pagalbinis/ė darbininkas/ė
+       Company  : UAB FRANCCAR
+       Location : Pasvalys
+       Salary   : €1170.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-67-996806601?s=60;q=;n=100
+
+[299] Mėsininkas(-ė), salės darbuotojas(-a), kasininkas(-ė)-salės darbuotojas
+       Company  : Uždaroji akcinė bendrovė "NORFOS MAŽMENA"
+       Location : Molėtai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-62-996807477?s=60;q=;n=100
+
+[300] Pastatų ir statinių remontininkass
+       Company  : Viešoji įstaiga Mykolo Marcinkevičiaus ligoninė
+       Location : Vilnius
+       Salary   : €1270.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p200/skelbimas/DV-01-996809176?s=60;q=;n=100
+
+[301] Melžimo įrangos operatorius/melžėjas
+       Company  : Ūkininko ūkis, 6023491
+       Location : Eigirgala
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996809283?s=60;q=;n=100
+
+[302] Kiemsargis
+       Company  : UAB "Švaros laikas"
+       Location : Vilnius
+       Salary   : €580.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996816738?s=60;q=;n=100
+
+[303] Brigadininkas
+       Company  : Uždaroji akcinė bendrovė "ŠILDA"
+       Location : Vilnius
+       Salary   : €3000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996814886?s=60;q=;n=100
+
+[304] Pagalbinis virtuvės darbuotojas (a)
+       Company  : UAB "AJ šokoladas"
+       Location : Trakai
+       Salary   : €924.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-79-996806162?s=60;q=;n=100
+
+[305] Padavėjas (-a)
+       Company  : UAB "GERAS MAISTAS"
+       Location : Vilnius
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996806381?s=60;q=;n=100
+
+[306] Komercijos vadybininkas
+       Company  : UAB "Inkomsta"
+       Location : Klaipėda
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996808220?s=60;q=;n=100
+
+[307] Mobilus patalpų valytojas Vilnius
+       Company  : UAB "Švarus pasaulis"
+       Location : Vilnius
+       Salary   : €2266.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996812038?s=60;q=;n=100
+
+[308] Vairuotojas (Sunkiasvorio transporto judėjimas)
+       Company  : Uždaroji akcinė bendrovė "SKUBA"
+       Location : Vilnius
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996808023?s=60;q=;n=100
+
+[309] Specialiųjų statybos darbų vadovas
+       Company  : UAB "Daugira"
+       Location : Alytus
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-11-996804988?s=60;q=;n=100
+
+[310] Valytoja (-as)
+       Company  : Ainava UAB
+       Location : Klaipėda
+       Salary   : €207.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996808960?s=60;q=;n=100
+
+[311] Teleskopinio krautuvo vairuotojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Agrokoncernas"
+       Location : Rokiškis
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-73-996807758?s=60;q=;n=100
+
+[312] Kulinarijos cecho darbuotojas (-a)
+       Company  : Uždaroji akcinė bendrovė "RIVONA"
+       Location : Klaipėda
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996811857?s=60;q=;n=100
+
+[313] Sandėlininkas (-ė) naktimis
+       Company  : UAB "Baltic fish export"
+       Location : Biruliškės
+       Salary   : €2243.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996806224?s=60;q=;n=100
+
+[314] Elektrikas (lauko elektros tinklai)
+       Company  : UAB "EnergoLT"
+       Location : Kaunas
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996807027?s=60;q=;n=100
+
+[315] Vairuotojas
+       Company  : UAB "Bioprolit"
+       Location : Rietavas
+       Salary   : €3100.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-68-996806740?s=60;q=;n=100
+
+[316] Transporto vadybininkas(ė)
+       Company  : Mikroautobusų nuoma Vilniuje, UAB
+       Location : Vilnius
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996807228?s=60;q=;n=100
+
+[317] Automobilių šaltkalvis-mechanikas
+       Company  : Uždaroji akcinė bendrovė "PORIX"
+       Location : Šiauliai
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-29-996805716?s=60;q=;n=100
+
+[318] Verslo plėtros vadovas (-ė) (metalo apdirbimo sektorius)
+       Company  : Human Capital Center, MB
+       Location : Jonava
+       Salary   : €2975.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-46-996809152?s=60;q=;n=100
+
+[319] Valytoja (-as)
+       Company  : UAB "Clean Solutions"
+       Location : Vilnius
+       Salary   : €200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996807940?s=60;q=;n=100
+
+[320] Gamybos darbuotojas (-a)
+       Company  : UAB "Baltic Timber Company"
+       Location : Lapiai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996808215?s=60;q=;n=100
+
+[321] Vyriausiasis specialistas (Radviliškis)
+       Company  : Akcinė bendrovė "Lietuvos geležinkeliai"
+       Location : Radviliškis
+       Salary   : €1655.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-71-996805071?s=60;q=;n=100
+
+[322] Gamybos linijos technikas (-ė)
+       Company  : UAB Scandi Standard - Baltics
+       Location : Liliškės
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-47-996809382?s=60;q=;n=100
+
+[323] Elektrikas-elektromontuotojas
+       Company  : MB "Elmeistras"
+       Location : Telšiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-78-996806659?s=60;q=;n=100
+
+[324] Automobilių šaltkalvis
+       Company  : UAB "Angelma"
+       Location : Marijampolė
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-18-996813220?s=60;q=;n=100
+
+[325] Valytojas Vilniuje, Karoliniškėse
+       Company  : UAB "Švaros deivė"
+       Location : Vilnius
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996805888?s=60;q=;n=100
+
+[326] Valytojas (-a) mobilioje komandoje
+       Company  : UAB "Valumina"
+       Location : Kaunas
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996806650?s=60;q=;n=100
+
+[327] Virėjas (-a)
+       Company  : Addere UAB
+       Location : Vilnius
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996805051?s=60;q=;n=100
+
+[328] Virtuvės pagalbininkas (-ė)
+       Company  : Uždaroji akcinė bendrovė "PAS STEPĄ"
+       Location : Elektrėnai
+       Salary   : €1848.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-79-996812883?s=60;q=;n=100
+
+[329] Gamybos operatorius (- ė)
+       Company  : UAB "IM Worx"
+       Location : Biruliškės
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996808966?s=60;q=;n=100
+
+[330] Vairuotojas (CE)
+       Company  : UAB "SteelTrade"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996808003?s=60;q=;n=100
+
+[331] Gamybos operatorius
+       Company  : Hessen Group, UAB
+       Location : Kaunas
+       Salary   : €1733.76 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996804881?s=60;q=;n=100
+
+[332] Autobuso vairuotojas (-a)
+       Company  : UAB "SEKNIJA"
+       Location : Vilnius
+       Salary   : €1668.24 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996809181?s=60;q=;n=100
+
+[333] Teritorijos prižiūrėtojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Vitaresta"
+       Location : Ramučiai
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996805337?s=60;q=;n=100
+
+[334] Plataus profilio statybininkas
+       Company  : UAB "Expolita"
+       Location : Kaniūkai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-11-996807258?s=60;q=;n=100
+
+[335] Duobkasys
+       Company  : Kauno savivaldybės įmonė "Kapinių priežiūra"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996814310?s=60;q=;n=100
+
+[336] Dešrų gamybos operatorius (-ė)
+       Company  : Uždaroji akcinė bendrovė "Daivida"
+       Location : Rokiškis
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-73-996812781?s=60;q=;n=100
+
+[337] Siuvinių konstruktorė (-ius)
+       Company  : UAB "TEMPLARI"
+       Location : Širvintos
+       Salary   : €2440.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-89-996811339?s=60;q=;n=100
+
+[338] Spec. valymo darbų grupės valytojas (-a)
+       Company  : ŠVAROS MISIJA, UAB
+       Location : Marijampolė
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-18-996805236?s=60;q=;n=100
+
+[339] Trinkelių klojėjas
+       Company  : UAB "Diltrus"
+       Location : Kazlų Rūda
+       Salary   : €2200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-18-996811551?s=60;q=;n=100
+
+[340] Vyriausiasis energetikas
+       Company  : Akcinės bendrovės "PIENO ŽVAIGŽDĖS" filialas Mažeikių pieninė
+       Location : Mažeikiai
+       Salary   : €3300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-61-996821893?s=60;q=;n=100
+
+[341] Šaltkalvis (-ė)
+       Company  : Uždaroji akcinė bendrovė "Vilniaus viešasis transportas"
+       Location : Vilnius
+       Salary   : €1987.44 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996807433?s=60;q=;n=100
+
+[342] Gamybos darbininkas/-ė sūdymo, nokinimo skyriuje
+       Company  : Akcinė bendrovė "ŽEMAITIJOS PIENAS"
+       Location : Telšiai
+       Salary   : €1560.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-78-996808639?s=60;q=;n=100
+
+[343] Mokinio padėjėjas (-a)
+       Company  : Kauno Palemono gimnazija
+       Location : Kaunas
+       Salary   : €1276.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996805629?s=60;q=;n=100
+
+[344] Kambarinė
+       Company  : UAB Profesijų spektras
+       Location : Druskininkai
+       Salary   : €1225.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-15-996809419?s=60;q=;n=100
+
+[345] Klientų aptarnavimo specialistas (-ė)
+       Company  : UAB "Viada LT"
+       Location : Rokiškis
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-73-996812595?s=60;q=;n=100
+
+[346] Buhalteris
+       Company  : UAB SharkeL
+       Location : Kėdainiai
+       Salary   : €700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-53-996807816?s=60;q=;n=100
+
+[347] Prekių rūšiuotojas ATRANKA 03.31
+       Company  : UAB "Alfasis"
+       Location : Parapijoniškės
+       Salary   : €1360.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996812315?s=60;q=;n=100
+
+[348] Virėjas (-a)
+       Company  : UAB "Seklys morka"
+       Location : Panevėžys
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-27-996812286?s=60;q=;n=100
+
+[349] Vairuotojas - darbininkas.
+       Company  : Uždaroji akcinė bendrovė "Raseinių komunalinės paslaugos"
+       Location : Raseiniai
+       Salary   : €1614.48 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-72-996808779?s=60;q=;n=100
+
+[350] PROJEKTŲ VADOVAS (-Ė)
+       Company  : UAB "ENERGUS GROUP"
+       Location : Vilnius
+       Salary   : €2975.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996811986?s=60;q=;n=100
+
+[351] Kavos aparatų technikas (-ė)
+       Company  : Coffee Address UAB
+       Location : Kaunas
+       Salary   : €1256.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996812605?s=60;q=;n=100
+
+[352] Bendrosios praktikos slaugytojas paslaugai namus
+       Company  : Viešoji įstaiga Klaipėdos medicininės slaugos ligoninė
+       Location : Klaipėda
+       Salary   : €2740.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996805774?s=60;q=;n=100
+
+[353] Transporto vadybininkas ( -ė)
+       Company  : UAB PRIMA LINE
+       Location : Kaunas
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996805032?s=60;q=;n=100
+
+[354] Gamybos darbuotojas (-a) (tinklelių gamyba)
+       Company  : Uždaroji akcinė bendrovė "Dextera"
+       Location : Kaunas
+       Salary   : €1160.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996811589?s=60;q=;n=100
+
+[355] Kineziterapeutas
+       Company  : UAB A. Stasiulio reabilitacijos klinika
+       Location : Klaipėda
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996806512?s=60;q=;n=100
+
+[356] Administratorius (-ė) / IT projektų koordinatorius
+       Company  : UAB "Intika"
+       Location : Alytus
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-11-996814700?s=60;q=;n=100
+
+[357] Meistras (-ė) Joniškyje
+       Company  : Akcinė bendrovė "Kelių priežiūra"
+       Location : Joniškis
+       Salary   : €2260.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-47-996813221?s=60;q=;n=100
+
+[358] Kompozitinių komponentų dirbtuvių mechanikas (-ė) - mokinys (-ė)
+       Company  : UAB "Kaunas Aircraft Maintenance Services"
+       Location : Karmėlava
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996820047?s=60;q=;n=100
+
+[359] Vairuotojas (-a) CE kat.
+       Company  : Ia international MB
+       Location : Kaunas
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996824683?s=60;q=;n=100
+
+[360] Apdailininkas
+       Company  : Uždaroji akcinė bendrovė "Rofolis"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996814367?s=60;q=;n=100
+
+[361] Šaltkalvis (-ė) - taisytojas (-a)
+       Company  : UAB "FL Technics"
+       Location : Vilnius
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996810857?s=60;q=;n=100
+
+[362] Pagalbinis darbininkas
+       Company  : Ūkininko ūkis, 8398975
+       Location : Mikėnai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-82-996806106?s=60;q=;n=100
+
+[363] Pardavėjai (M. Riomerio g.)
+       Company  : Uždaroji akcinė bendrovė "Eiginta"
+       Location : Kaunas
+       Salary   : €1220.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996807144?s=60;q=;n=100
+
+[364] Pardavėjas (-a)
+       Company  : V. Naviko firma "Eivydė"
+       Location : Marijampolė
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-18-996808719?s=60;q=;n=100
+
+[365] Virėjas (a)
+       Company  : MB Skonija
+       Location : Utena
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-82-996807557?s=60;q=;n=100
+
+[366] Valytojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Agrokoncernas"
+       Location : Babtai
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996811067?s=60;q=;n=100
+
+[367] Šaltkalvis (-ė)
+       Company  : "Emeko", UAB
+       Location : Panevėžys
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-27-996809762?s=60;q=;n=100
+
+[368] Kiemsargis (-ė)
+       Company  : UAB "Švarus pasaulis"
+       Location : Vilnius
+       Salary   : €148.05 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996812008?s=60;q=;n=100
+
+[369] Valytojas (-a)
+       Company  : Palangos sporto centras
+       Location : Palanga
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-25-996806924?s=60;q=;n=100
+
+[370] Elektrotechnikas (-ė)
+       Company  : UAB "Energijos sistemų servisas"
+       Location : Kaunas
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996809129?s=60;q=;n=100
+
+[371] Vadybininkas pardavėjas
+       Company  : UAB RSD Auto
+       Location : Tauragė
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-77-996807761?s=60;q=;n=100
+
+[372] PASTATŲ ENERGET. NAUDINGUMO VERTINIMO SPECIALISTAS
+       Company  : UAB "Veiklos valdymo sprendimai"
+       Location : Kaunas
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996806423?s=60;q=;n=100
+
+[373] Operatorius (-ė) - surinkėjas (-a)
+       Company  : PKC Group Lithuania UAB
+       Location : Rietavas
+       Salary   : €1192.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996804945?s=60;q=;n=100
+
+[374] Prekių surinkėjas (-a)
+       Company  : UAB "DEPO DIY LT"
+       Location : Vilnius
+       Salary   : €1764.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996805652?s=60;q=;n=100
+
+[375] Gamybos apskaitininkas (-ė)
+       Company  : UAB "Dominari"
+       Location : Panevėžys
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-27-996808596?s=60;q=;n=100
+
+[376] Ūkvedys (-ė)
+       Company  : UAB "GRANEX"
+       Location : Kaunas
+       Salary   : €1455.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996809692?s=60;q=;n=100
+
+[377] Kranų darbų operatorius (-ė)
+       Company  : Uždaroji akcinė bendrovė "VAKARŲ KROVA"
+       Location : Klaipėda
+       Salary   : €1652.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996805473?s=60;q=;n=100
+
+[378] Teritorijos tvarkytojas (-a), Draugystės g.
+       Company  : UAB "BSS grupė"
+       Location : Kaunas
+       Salary   : €769.86 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996806892?s=60;q=;n=100
+
+[379] socialinis darbuotojas
+       Company  : Valstybės vaiko teisių apsaugos ir įvaikinimo tarnyba prie Socialinės apsaugos ir darbo ministerijos
+       Location : Vilnius
+       Salary   : €2427.30 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996809547?s=60;q=;n=100
+
+[380] Valytojas (-a) Dariaus ir Girėno g.
+       Company  : UAB "BSS grupė"
+       Location : Birštonas
+       Salary   : €532.98 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-69-996814140?s=60;q=;n=100
+
+[381] Darbų vadovo asistentas
+       Company  : UAB "Pakrilė"
+       Location : Panevėžys
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-27-996807602?s=60;q=;n=100
+
+[382] Valymo paslaugų organizavimo vadybininkas (-ė)
+       Company  : Uždaroji akcinė bendrovė "Vitaresta"
+       Location : Kaunas
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996807179?s=60;q=;n=100
+
+[383] Statybininkas
+       Company  : UAB "Limetos NT"
+       Location : Vilnius
+       Salary   : €3000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996807895?s=60;q=;n=100
+
+[384] Gėlynų tvarkytojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Raguvilė"
+       Location : Klaipėda
+       Salary   : €1350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996804641?s=60;q=;n=100
+
+[385] Darbuotojas gamyboje
+       Company  : UAB "Biuro"
+       Location : Mažeikiai
+       Salary   : €1343.85 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-61-996807922?s=60;q=;n=100
+
+[386] Sandėlio darbuotojas
+       Company  : UAB "Šiaurės tekstilė"
+       Location : Kairiai
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-29-996808640?s=60;q=;n=100
+
+[387] Bendrosios praktikos slaugytojas
+       Company  : Viešoji įstaiga Tauragės rajono pirminės sveikatos priežiūros centras
+       Location : Tauragė
+       Salary   : €1662.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-77-996818478?s=60;q=;n=100
+
+[388] Šilutės skyriaus koordinatorius (-ė)
+       Company  : Labdaros ir paramos fondas "Maisto bankas"
+       Location : Šilutė
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-88-996811855?s=60;q=;n=100
+
+[389] Plataus profilio statybininkas
+       Company  : Uždaroji akcinė bendrovė "KLAIBUTA"
+       Location : Klaipėda
+       Salary   : €2300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996805396?s=60;q=;n=100
+
+[390] Automatikos įrengimų derintojas
+       Company  : AB "Panevėžio stiklas"
+       Location : Panevėžys
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-27-996804851?s=60;q=;n=100
+
+[391] Patalpų ir teritorijos tvarkytojas
+       Company  : Lietuvos jūrų muziejus
+       Location : Klaipėda
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-21-996804630?s=60;q=;n=100
+
+[392] Darbininkas (-ė) mėsos ceche
+       Company  : Akcinė bendrovė "Vilniaus paukštynas"
+       Location : Rudamina
+       Salary   : €1165.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996808130?s=60;q=;n=100
+
+[393] Staklininkas
+       Company  : Uždaroji akcinė bendrovė "Gilinis"
+       Location : Plungė
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-68-996813122?s=60;q=;n=100
+
+[394] Metalo konstrukcijų surinkėjas
+       Company  : UAB "Metmega"
+       Location : Šiauliai
+       Salary   : €1550.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-29-996807522?s=60;q=;n=100
+
+[395] Vadovo asistentas (-ė)
+       Company  : ATN BUS RENT, UAB
+       Location : Vilnius
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996807238?s=60;q=;n=100
+
+[396] Prekių priėmėjas/Sandėlininkas
+       Company  : "MAREX Boats", UAB
+       Location : Ilgakiemis
+       Salary   : €2150.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996818566?s=60;q=;n=100
+
+[397] Traktorininkas
+       Company  : UAB Tauragės regiono atliekų tvarkymo centras
+       Location : Kaupiai
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-77-996822192?s=60;q=;n=100
+
+[398] Valymo skyriaus vadybininkas(-ė)
+       Company  : UŽDAROJI AKCINĖ BENDROVĖ "NAUJOJI PILAITĖ"
+       Location : Vilnius
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996808126?s=60;q=;n=100
+
+[399] Teritorijos prižiūrėtojas(-a)
+       Company  : UAB "ADMI"
+       Location : Vilnius
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-01-996808149?s=60;q=;n=100
+
+[400] Valytojas (-a)
+       Company  : Uždaroji akcinė bendrovė "Vitaresta"
+       Location : Karmėlava
+       Salary   : €585.95 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p300/skelbimas/DV-19-996811498?s=60;q=;n=100
+
+[401] Automatikos technikas (-ė)
+       Company  : Uždaroji akcinė bendrovė "VIČIŪNAI IR PARTNERIAI"
+       Location : Plungė
+       Salary   : €2976.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-68-996839914?s=60;q=;n=100
+
+[402] Pastatų priežiūros meistras (šilumos ūkis)
+       Company  : UAB Mano Būsto priežiūra
+       Location : Kaunas
+       Salary   : €2455.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996814459?s=60;q=;n=100
+
+[403] Įrengimų priežiūros šaltkalvis mechanikas (Medienos apdirbimo įmonėje)
+       Company  : UŽDAROJI AKCINĖ BENDROVĖ "BAGETA"
+       Location : Dapkūnai
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-29-996805250?s=60;q=;n=100
+
+[404] Patalpų tvarkytoja (-as)
+       Company  : UAB "BSS grupė"
+       Location : Vilnius
+       Salary   : €1243.62 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996808289?s=60;q=;n=100
+
+[405] Pagalbinis (-ė) darbuotojas (-a)
+       Company  : UAB "Senoji kepyklėlė"
+       Location : Telšiai
+       Salary   : €1250.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-78-996811025?s=60;q=;n=100
+
+[406] Krautuvo vairuotojas (-a) (Kelmėje)
+       Company  : UAB "Kelmės pienas"
+       Location : Kelmė
+       Salary   : €1890.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-54-996806941?s=60;q=;n=100
+
+[407] Pagalbinis darbininkas
+       Company  : MasterLita, UAB
+       Location : Varėna
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-38-996805294?s=60;q=;n=100
+
+[408] Gyvulių šėrikas
+       Company  : Ūkininko ūkis, 8081945
+       Location : Degaičiai
+       Salary   : €1450.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-78-996809205?s=60;q=;n=100
+
+[409] Budėtoja (-as) Plungė
+       Company  : Uždaroji akcinė bendrovė "Socialinė integracija"
+       Location : Plungė
+       Salary   : €87.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-68-996811194?s=60;q=;n=100
+
+[410] Karkasinių namų gamintojas (a)-montuotojas (a)
+       Company  : UAB "Ekobūsto namai"
+       Location : Liūdynė
+       Salary   : €2900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-27-996809648?s=60;q=;n=100
+
+[411] Mokinio padėjėja (-as)
+       Company  : Vilniaus lopšelis-darželis "Strazdelis"
+       Location : Vilnius
+       Salary   : €638.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996806499?s=60;q=;n=100
+
+[412] Šaltkalvis remontininkas
+       Company  : Akcinė bendrovė "Vernitas"
+       Location : Marijampolė
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-18-996809265?s=60;q=;n=100
+
+[413] Kreditų ir skolų administratorius (-ė)
+       Company  : GT labor, UAB
+       Location : Klaipėda
+       Salary   : €1455.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996808819?s=60;q=;n=100
+
+[414] Pagalbinis darbuotojas krautuvo vairuotojas (-a)
+       Company  : UAB "Pandmeta"
+       Location : Pandėlys
+       Salary   : €1253.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-73-996808184?s=60;q=;n=100
+
+[415] Suvirintojas (-a) - Šaltkalvis (-ė)
+       Company  : Hessen Group, UAB
+       Location : Antežeriai
+       Salary   : €2145.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996804886?s=60;q=;n=100
+
+[416] Sandėlio darbuotojas-krovikas
+       Company  : UAB TWB LOGISTICS
+       Location : Vilnius
+       Salary   : €1849.33 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996805539?s=60;q=;n=100
+
+[417] Socialinis darbuotojas (-a) / Koordinatorius (-ė)
+       Company  : UAB "Kauno globa"
+       Location : Kėdainiai
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-53-996812478?s=60;q=;n=100
+
+[418] Brigadininkas - meistras
+       Company  : Uždaroji akcinė bendrovė "DAIRŪNAS IR KOMPANIJA"
+       Location : Šiauliai
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-29-996809371?s=60;q=;n=100
+
+[419] Socialinis(ė) darbuotojas(a)
+       Company  : VšĮ "Galimybių dirbtuvės"
+       Location : Jonava
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-46-996804882?s=60;q=;n=100
+
+[420] Pardavėjas (-a) - konsultantas (-ė)
+       Company  : UAB Lavande Provence
+       Location : Kaunas
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996805374?s=60;q=;n=100
+
+[421] Valytoja (-as)
+       Company  : UAB City Service Cleaning
+       Location : Panevėžys
+       Salary   : €947.52 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-27-996805313?s=60;q=;n=100
+
+[422] Vairavimo mokymo instruktorius (-ė)
+       Company  : GT labor, UAB
+       Location : Klaipėda
+       Salary   : €2441.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996808826?s=60;q=;n=100
+
+[423] Valytojas (-a)
+       Company  : VšĮ "Gerumo gija"
+       Location : Panevėžys
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-27-996804677?s=60;q=;n=100
+
+[424] Elektromonteris
+       Company  : UAB "Elektrostaka"
+       Location : Alytus
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-11-996809356?s=60;q=;n=100
+
+[425] Virėjas (-a), ATRANKA 04-08
+       Company  : UAB "KAUNO ARENA"
+       Location : Kaunas
+       Salary   : €2016.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996806331?s=60;q=;n=100
+
+[426] Produkcijos pakuotojas (-a)
+       Company  : UAB "Vilniaus duona"
+       Location : Vilnius
+       Salary   : €1226.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996807908?s=60;q=;n=100
+
+[427] Valytojas (-a)
+       Company  : UAB "BSS grupė"
+       Location : Kaišiadorys
+       Salary   : €769.86 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-49-996808834?s=60;q=;n=100
+
+[428] Fasuotojas - užsakymų rinkėjas
+       Company  : UAB "MP logistika"
+       Location : Mažeikiai
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-61-996807290?s=60;q=;n=100
+
+[429] Šeimos gydytojas (-a)
+       Company  : Lietuvos kalėjimų tarnyba
+       Location : Alytus
+       Salary   : €4000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-11-996817878?s=60;q=;n=100
+
+[430] Suvirintojas
+       Company  : UAB "Auksarankiai"
+       Location : Juciai
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-78-996819758?s=60;q=;n=100
+
+[431] Kelininkas (-ė)
+       Company  : Akcinė bendrovė "Kauno tiltai"
+       Location : Tauragė
+       Salary   : €1836.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-77-996808672?s=60;q=;n=100
+
+[432] Prekių priėmėjas (-a) - išdavėjas (-a)
+       Company  : Uždaroji akcinė bendrovė "Kesko Senukai Lithuania"
+       Location : Kaunas
+       Salary   : €1435.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996806342?s=60;q=;n=100
+
+[433] Pirkimų vadybininkas (-ė)
+       Company  : UAB Ipra LT
+       Location : Vilnius
+       Salary   : €4132.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996804963?s=60;q=;n=100
+
+[434] Automobilių kėbulų apklijuotojas prieš dažymą
+       Company  : UAB Kautera
+       Location : Poderiškiai
+       Salary   : €1850.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996809612?s=60;q=;n=100
+
+[435] Laborantas (-ė) (Marijampolėje)
+       Company  : Uždaroji akcinė bendrovė "MARIJAMPOLĖS PIENO KONSERVAI"
+       Location : Marijampolė
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-18-996804726?s=60;q=;n=100
+
+[436] Filialo administratorius (-ė) Kaune
+       Company  : Uždaroji akcinė bendrovė "Rigveda"
+       Location : Kaunas
+       Salary   : €1750.70 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996809828?s=60;q=;n=100
+
+[437] Virėjas (-a)
+       Company  : UAB "Sūduvos arka"
+       Location : Marijampolė
+       Salary   : €1428.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-18-996814866?s=60;q=;n=100
+
+[438] Traktorininkas-mechanizatorius
+       Company  : AMODUS, UAB
+       Location : Vilnius
+       Salary   : €3000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996809434?s=60;q=;n=100
+
+[439] Pardavimų vadybininkas
+       Company  : UAB "Instona"
+       Location : Aukštelkai
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-71-996809399?s=60;q=;n=100
+
+[440] Nedidelių pastatų statytojas
+       Company  : MB "Aplinkos grožio kūrėjai"
+       Location : Jovaišiškė
+       Salary   : €2500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-68-996812871?s=60;q=;n=100
+
+[441] Valytojas (-a)
+       Company  : Viešoji įstaiga Respublikinė Panevėžio ligoninė
+       Location : Panevėžys
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-27-996806420?s=60;q=;n=100
+
+[442] Pardavėjas (-a) ATRANKA
+       Company  : MB "Indritos sauga"
+       Location : Marijampolė
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-18-996807029?s=60;q=;n=100
+
+[443] Vairuotojas - mechanizatorius
+       Company  : UAB "Stakorda"
+       Location : Klaipėda
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996809122?s=60;q=;n=100
+
+[444] Direktoriaus pavaduotojas ūkio reikalams
+       Company  : Šilutės r. Švėkšnos "Saulės" gimnazija
+       Location : Švėkšna
+       Salary   : €1708.10 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-88-996808800?s=60;q=;n=100
+
+[445] Medienos apdirbimo įrenginio operatorius
+       Company  : UAB "KERUSTA"
+       Location : Pabradė
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-86-996811790?s=60;q=;n=100
+
+[446] Kulinarijos cecho darbuotojas (-a)
+       Company  : Uždaroji akcinė bendrovė "RIVONA"
+       Location : Palanga
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-25-996811867?s=60;q=;n=100
+
+[447] Valytoja (-as), Pašilės g., Kaunas
+       Company  : UAB "BSS grupė"
+       Location : Kaunas
+       Salary   : €207.27 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996811862?s=60;q=;n=100
+
+[448] Virėjas
+       Company  : Uždaroji akcinė bendrovė "Averita"
+       Location : Šiauliai
+       Salary   : €2145.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-29-996805492?s=60;q=;n=100
+
+[449] Transporto vadybininkas (-ė)
+       Company  : GT labor, UAB
+       Location : Klaipėda
+       Salary   : €1477.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996808815?s=60;q=;n=100
+
+[450] Gamybos darbuotojai (-os)
+       Company  : UAB "Biuro"
+       Location : Mažeikiai
+       Salary   : €1244.32 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-61-996813967?s=60;q=;n=100
+
+[451] Valytojas
+       Company  : Uždaroji akcinė bendrovė "Šventė jums"
+       Location : Druskininkai
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-15-996814276?s=60;q=;n=100
+
+[452] Gamybos darbuotojas
+       Company  : UAB "Gi Group Lithuania"
+       Location : Kaunas
+       Salary   : €1415.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996808737?s=60;q=;n=100
+
+[453] Vairuotojas-ekspeditorius
+       Company  : UAB "Retija"
+       Location : Druskininkai
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-15-996810943?s=60;q=;n=100
+
+[454] Padalinio vadybininkas (-ė)
+       Company  : UAB "Rentvėjus"
+       Location : Kaunas
+       Salary   : €2250.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996807308?s=60;q=;n=100
+
+[455] Kiemsargis (-ė)
+       Company  : UAB "Clean Solutions"
+       Location : Vilnius
+       Salary   : €200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996807939?s=60;q=;n=100
+
+[456] Virėjas (-a) Gobergiškės k.
+       Company  : Uždaroji akcinė bendrovė "Grūstė"
+       Location : Gobergiškė
+       Salary   : €1550.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996807910?s=60;q=;n=100
+
+[457] Vairuotojas ekspeditorius Lietuvoje
+       Company  : UAB "Autotransportas"
+       Location : Alytus
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-11-996813745?s=60;q=;n=100
+
+[458] Vairuotojas
+       Company  : MB Geras vežėjas
+       Location : Užliedžiai
+       Salary   : €1400.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996812475?s=60;q=;n=100
+
+[459] Pagalbinė (-is) virtuvės darbuotoja (-as)
+       Company  : UAB "Varna ir sūris"
+       Location : Mūro Strėvininkai
+       Salary   : €1155.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-49-996814758?s=60;q=;n=100
+
+[460] Elevatoriaus darbuotojas- operatorius(-ė) Plungėje
+       Company  : Uždaroji akcinė bendrovė "Agrokoncernas"
+       Location : Plungė
+       Salary   : €1600.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-68-996806012?s=60;q=;n=100
+
+[461] Sandėlininkas (ė) - krovėjas (a)
+       Company  : UAB "Dominari"
+       Location : Šilagalys
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-27-996809052?s=60;q=;n=100
+
+[462] Mokytojo padėjėja/as-valytoja/as
+       Company  : Viešoji įstaiga "Mažieji šnekoriai"
+       Location : Vilnius
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996804981?s=60;q=;n=100
+
+[463] AUTOELEKTRIKAS (-Ė)
+       Company  : ERS auto, UAB
+       Location : Klaipėda
+       Salary   : €2800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996812205?s=60;q=;n=100
+
+[464] Picų kepėjas (-a)
+       Company  : UAB "DELANO"
+       Location : Šiauliai
+       Salary   : €1428.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-29-996808206?s=60;q=;n=100
+
+[465] Sandėlininkas
+       Company  : UAB "Alterega"
+       Location : Vilnius
+       Salary   : €1155.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996812755?s=60;q=;n=100
+
+[466] Stovyklos vadovas
+       Company  : Vilniaus vaikų ir jaunimo klubas "Verdenė"
+       Location : Vilnius
+       Salary   : €2016.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996809187?s=60;q=;n=100
+
+[467] Atliekų priėmėja (-as)
+       Company  : UAB Panevėžio regiono atliekų tvarkymo centras
+       Location : Panevėžys
+       Salary   : €1844.64 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-27-996807379?s=60;q=;n=100
+
+[468] Dokumentų valdymo specialistas
+       Company  : Šėtos socialinis ir ugdymo centras
+       Location : Šėta
+       Salary   : €1300.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-53-996823090?s=60;q=;n=100
+
+[469] Šaltkalvis-santechnikas
+       Company  : Viešoji įstaiga Alytaus apskrities S. Kudirkos ligoninė
+       Location : Alytus
+       Salary   : €1479.15 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-11-996806833?s=60;q=;n=100
+
+[470] Staklių operatorius (-ė) (CNC) (apmokome)
+       Company  : UAB "SCAPA BALTIC"
+       Location : Kaunas
+       Salary   : €1594.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996807697?s=60;q=;n=100
+
+[471] Akmens pjaustytojas
+       Company  : UAB "AKMI"
+       Location : Kaunas
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996806998?s=60;q=;n=100
+
+[472] Pavaduojantis kiemsargis, 1 et.
+       Company  : Kauno r. Neveronių gimnazija
+       Location : Pabiržis
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996805720?s=60;q=;n=100
+
+[473] Traktorininkas/ė
+       Company  : Ūkininko ūkis, 8929999
+       Location : Sindriūnai
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-67-996805056?s=60;q=;n=100
+
+[474] Elektrikas ar elektromontuotojas (-a) Švedijoje
+       Company  : UAB "Emploera"
+       Location : Kaunas
+       Salary   : €3360.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996807988?s=60;q=;n=100
+
+[475] Sandėlio darbininkas (-ė)
+       Company  : UAB "METALIKA LT"
+       Location : Kaunas
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996813398?s=60;q=;n=100
+
+[476] Mobili (-us) valytoja (-as)
+       Company  : Daily Spaces, UAB
+       Location : Vilnius
+       Salary   : €1680.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996809731?s=60;q=;n=100
+
+[477] Vairuotojas- ekspeditorius
+       Company  : Uždaroji akcinė bendrovė "Autoera"
+       Location : Vilnius
+       Salary   : €1390.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996806261?s=60;q=;n=100
+
+[478] Aplinkotvarkos darbininkas (-ė)
+       Company  : UAB "Stebulė"
+       Location : Vilnius
+       Salary   : €1460.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996811681?s=60;q=;n=100
+
+[479] Greito maisto paruošėjas (-a) - pardavėjas (-a)
+       Company  : D. Kuršaitienės įmonė
+       Location : Ventė
+       Salary   : €1155.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-88-996813293?s=60;q=;n=100
+
+[480] Virėjas (-a)
+       Company  : UAB "Epsilon LT"
+       Location : Menčiai
+       Salary   : €1455.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-32-996805620?s=60;q=;n=100
+
+[481] Pakuotoja (-as)
+       Company  : MB Fasuotų daržovių tiekimas
+       Location : Stanaičiai
+       Salary   : €1350.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996804708?s=60;q=;n=100
+
+[482] Vamzdžių klojėjas
+       Company  : UAB "Stakorda"
+       Location : Klaipėda
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996809120?s=60;q=;n=100
+
+[483] Medienos apdirbimo staklių operatorius
+       Company  : UAB "Medieva"
+       Location : Alėjai
+       Salary   : €1450.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-72-996813876?s=60;q=;n=100
+
+[484] Darbų vadovas elektros darbams laivuose
+       Company  : UAB "RNDV Group"
+       Location : Klaipėda
+       Salary   : €4960.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996806972?s=60;q=;n=100
+
+[485] Plataus profilio statybininkas
+       Company  : UAB "Hovana"
+       Location : Janušava
+       Salary   : €1500.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-53-996806194?s=60;q=;n=100
+
+[486] Elektronikos inžinierius
+       Company  : Uždaroji akcinė bendrovė "HANSAB"
+       Location : Vilnius
+       Salary   : €1900.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996819476?s=60;q=;n=100
+
+[487] Vyriausiasis energetikas
+       Company  : Uždaroji akcinė bendrovė "Mažeikių šilumos tinklai"
+       Location : Mažeikiai
+       Salary   : €3755.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-61-996832815?s=60;q=;n=100
+
+[488] Apsauginis (-ė)
+       Company  : Ia international MB
+       Location : Vilnius
+       Salary   : €1200.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996805175?s=60;q=;n=100
+
+[489] Valytojas (-a)
+       Company  : UAB "Valumina"
+       Location : Kupiškis
+       Salary   : €1184.40 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-57-996807165?s=60;q=;n=100
+
+[490] Valymo specialistė(-as)
+       Company  : Ainava UAB
+       Location : Vilnius
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996806543?s=60;q=;n=100
+
+[491] Kelio darbininkas
+       Company  : UAB Statkasa
+       Location : Kėdainiai
+       Salary   : €2050.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-53-996815124?s=60;q=;n=100
+
+[492] Plataus profilio statybininkas
+       Company  : UAB "Statrama"
+       Location : Alytus
+       Salary   : €1700.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-11-996811482?s=60;q=;n=100
+
+[493] Padavėjas (a)
+       Company  : UAB "Bulius"
+       Location : Vilnius
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996816605?s=60;q=;n=100
+
+[494] Elektrikas (-ė)
+       Company  : Uždaroji akcinė bendrovė "VMG Service Akmenė"
+       Location : Akmenė
+       Salary   : €1800.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-32-996818114?s=60;q=;n=100
+
+[495] Gręžinių gręžimo įrangos operatorius(-ė);
+       Company  : UAB "GEO-MASTER"
+       Location : Arvydai
+       Salary   : €3305.78 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996806270?s=60;q=;n=100
+
+[496] Siuvėjas (-a)
+       Company  : Uždaroji akcinė bendrovė "VIKADA"
+       Location : Vilnius
+       Salary   : €1154.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996806712?s=60;q=;n=100
+
+[497] Ūkvedys statybos objektuose
+       Company  : MB "Gedvana"
+       Location : Klaipėda
+       Salary   : €2000.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-21-996807542?s=60;q=;n=100
+
+[498] Padavėjas
+       Company  : MB "Gražiai gražu"
+       Location : Birštonas
+       Salary   : €1512.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-69-996814259?s=60;q=;n=100
+
+[499] Padavėjas (-a)
+       Company  : Uždaroji akcinė bendrovė "RAMUSIS PAMARYS"
+       Location : Vilnius
+       Salary   : €1192.80 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-01-996805199?s=60;q=;n=100
+
+[500] Budėtojas (-a) Karaliaus Mindaugo profesinio mokymo centras
+       Company  : Karaliaus Mindaugo profesinio mokymo centras
+       Location : Kaunas
+       Salary   : €1153.00 / per mėn.
+       URL      : https://uzt.lt/laisvos-darbo-vietos/436/p400/skelbimas/DV-19-996812376?s=60;q=;n=100
+
+================================================================================
+TOTAL: 770 listings across 4 sources
+================================================================================
