@@ -1,6 +1,9 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+// Session lifetime: change this one constant to adjust how long users stay logged in.
+const SESSION_MAX_AGE = 60 * 60 * 24 // 24 hours (in seconds)
+
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
@@ -18,8 +21,11 @@ export async function middleware(request: NextRequest) {
           )
           supabaseResponse = NextResponse.next({ request })
           cookiesToSet.forEach(({ name, value, options }) =>
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            supabaseResponse.cookies.set(name, value, options as any)
+            supabaseResponse.cookies.set(name, value, {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ...(options as any),
+              maxAge: SESSION_MAX_AGE,
+            })
           )
         },
       },
