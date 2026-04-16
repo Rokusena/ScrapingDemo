@@ -2,112 +2,29 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import type { MatchWithListing, Profile, JobPreferences } from '@/types/database'
-import { ExternalLink, Settings, Zap, AlertCircle, SlidersHorizontal } from 'lucide-react'
+import { Settings, Zap, AlertCircle, SlidersHorizontal, TrendingUp } from 'lucide-react'
 import CheckoutButton from './CheckoutButton'
 import ClearMatchesButton from './ClearMatchesButton'
 import PostAuthRedirect from './PostAuthRedirect'
+import MatchCard from './MatchCard'
+import FilterBar from './FilterBar'
 
-// ── Score badge ────────────────────────────────────────────────────────────────
+// ── Relative date helper ────────────────────────────────────────────────────
 
-function ScoreBadge({ score }: { score: number }) {
-  const { bg, text, border } =
-    score >= 8
-      ? { bg: 'bg-[#43e97b]/10', text: 'text-[#43e97b]', border: 'border-[#43e97b]/25' }
-      : score >= 6
-      ? { bg: 'bg-[#f7b731]/10', text: 'text-[#f7b731]', border: 'border-[#f7b731]/25' }
-      : { bg: 'bg-red-500/10', text: 'text-red-400', border: 'border-red-500/25' }
+function relativeDate(dateStr: string): string {
+  const date = new Date(dateStr)
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  const diffMin = Math.floor(diffMs / 60_000)
+  const diffH = Math.floor(diffMs / 3_600_000)
+  const diffD = Math.floor(diffMs / 86_400_000)
 
-  return (
-    <span
-      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-sm font-bold ${bg} ${text} ${border}`}
-    >
-      {score}<span className="text-xs font-normal opacity-70">/10</span>
-    </span>
-  )
-}
-
-// ── Source badge ───────────────────────────────────────────────────────────────
-
-const SOURCE_LABELS: Record<string, string> = {
-  cvbankas: 'CVBankas',
-  cvonline: 'CV-Online',
-  cvmarket: 'CVmarket',
-  unicorns: 'Unicorns',
-  uzt: 'UZT',
-}
-
-function SourceBadge({ source }: { source: string }) {
-  return (
-    <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] text-[#8892b0] text-xs font-medium">
-      {SOURCE_LABELS[source] ?? source}
-    </span>
-  )
-}
-
-// ── Match card ─────────────────────────────────────────────────────────────────
-
-function MatchCard({ match }: { match: MatchWithListing }) {
-  const listing = match.raw_listings
-
-  return (
-    <div className="group p-5 bg-[#141c33] border border-[rgba(255,255,255,0.08)] rounded-2xl hover:border-[#4F6EF7]/30 transition-all flex flex-col gap-4">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="font-bold text-[15px] leading-snug truncate group-hover:text-[#6B84F8] transition-colors">
-            {listing?.title ?? 'Nežinoma pozicija'}
-          </h3>
-          <p className="text-[#8892b0] text-sm mt-0.5 truncate">
-            {listing?.company ?? 'Nežinoma įmonė'}
-          </p>
-        </div>
-        <ScoreBadge score={match.detail_score!} />
-      </div>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-1.5">
-        {listing?.location && (
-          <span className="flex items-center gap-1 px-2.5 py-1 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.07)] rounded-lg text-[#8892b0] text-xs">
-            📍 {listing.location}
-          </span>
-        )}
-        {listing?.salary_raw && (
-          <span className="flex items-center gap-1 px-2.5 py-1 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.07)] rounded-lg text-[#8892b0] text-xs">
-            💶 {listing.salary_raw}
-          </span>
-        )}
-        {listing?.source && <SourceBadge source={listing.source} />}
-      </div>
-
-      {/* Reason */}
-      {match.reason && (
-        <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3">
-          <p className="text-[#8892b0] text-xs font-medium uppercase tracking-wide mb-1.5">
-            Kodėl tinka
-          </p>
-          <p className="text-[#c8cfe8] text-sm leading-relaxed line-clamp-3">{match.reason}</p>
-        </div>
-      )}
-
-      {/* Footer */}
-      <div className="flex items-center justify-between mt-auto pt-2 border-t border-[rgba(255,255,255,0.06)]">
-        <span className="text-[#8892b0] text-xs">
-          {new Date(match.matched_at).toLocaleDateString('lt-LT')}
-        </span>
-        {listing?.url && (
-          <a
-            href={listing.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#4F6EF7]/10 hover:bg-[#4F6EF7]/20 border border-[#4F6EF7]/25 hover:border-[#4F6EF7]/50 text-[#6B84F8] text-sm rounded-xl transition"
-          >
-            Žiūrėti skelbimą
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        )}
-      </div>
-    </div>
-  )
+  if (diffMin < 5) return 'Ką tik'
+  if (diffMin < 60) return `Prieš ${diffMin} min.`
+  if (diffH < 24) return `Prieš ${diffH} val.`
+  if (diffD === 1) return 'Vakar'
+  if (diffD < 7) return `Prieš ${diffD} d.`
+  return date.toLocaleDateString('lt-LT', { month: 'short', day: 'numeric' })
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -115,7 +32,7 @@ function MatchCard({ match }: { match: MatchWithListing }) {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: { success?: string }
+  searchParams: { success?: string; filter?: string }
 }) {
   const supabase = await createClient()
   const {
@@ -134,17 +51,49 @@ export default async function DashboardPage({
       .gte('detail_score', 3)
       .order('detail_score', { ascending: false })
       .order('title_score', { ascending: false })
-      .limit(30),
+      .limit(60),
   ])
 
-  const typedMatches = (matches ?? []) as MatchWithListing[]
+  const allMatches = (matches ?? []) as MatchWithListing[]
+
+  // Filter counts
+  const counts = {
+    all: allMatches.length,
+    high: allMatches.filter((m) => (m.detail_score ?? 0) >= 8).length,
+    mid: allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 }).length,
+    low: allMatches.filter((m) => (m.detail_score ?? 0) < 6).length,
+  }
+
+  const activeFilter = (['high', 'mid', 'low'].includes(searchParams.filter ?? '')
+    ? searchParams.filter
+    : 'all') as 'all' | 'high' | 'mid' | 'low'
+
+  const visibleMatches =
+    activeFilter === 'high'
+      ? allMatches.filter((m) => (m.detail_score ?? 0) >= 8)
+      : activeFilter === 'mid'
+      ? allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 })
+      : activeFilter === 'low'
+      ? allMatches.filter((m) => (m.detail_score ?? 0) < 6)
+      : allMatches
+
+  // Stats
+  const now = new Date()
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
+  const todayCount = allMatches.filter((m) => m.matched_at >= todayStart).length
+  const avgScore =
+    allMatches.length > 0
+      ? (allMatches.reduce((sum, m) => sum + (m.detail_score ?? 0), 0) / allMatches.length).toFixed(1)
+      : null
+
+  // isRecent: matched within the last 24 h
+  const cutoff24h = new Date(now.getTime() - 86_400_000).toISOString()
 
   return (
     <div className="space-y-7">
-      {/* Redirects back to /onboarding if wizard was in progress when user clicked magic link */}
       <PostAuthRedirect />
 
-      {/* ── Success banner ─────────────────────────────────────────────────── */}
+      {/* ── Success banner ──────────────────────────────────────────────── */}
       {searchParams.success && (
         <div className="flex items-center gap-3 p-4 bg-[#43e97b]/10 border border-[#43e97b]/25 rounded-xl text-[#43e97b] text-sm">
           <Zap className="w-4 h-4 shrink-0" />
@@ -152,18 +101,36 @@ export default async function DashboardPage({
         </div>
       )}
 
-      {/* ── Page title ─────────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between">
+      {/* ── Page title + stats mini-row ──────────────────────────────────── */}
+      <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h1 className="text-2xl font-bold">Atitikimai</h1>
           <p className="text-[#8892b0] text-sm mt-0.5">
             AI įvertinti darbo skelbimai pagal jūsų profilį
           </p>
         </div>
-        {typedMatches.length > 0 && <ClearMatchesButton />}
+        {allMatches.length > 0 && (
+          <div className="flex items-center gap-4">
+            <div className="flex gap-4 text-sm">
+              {todayCount > 0 && (
+                <div className="flex items-center gap-1.5 text-[#43e97b]">
+                  <TrendingUp className="w-3.5 h-3.5" />
+                  <span className="font-semibold">+{todayCount}</span>
+                  <span className="text-[#8892b0]">šiandien</span>
+                </div>
+              )}
+              {avgScore && (
+                <div className="text-[#8892b0]">
+                  Vid. balas: <span className="text-white font-semibold">{avgScore}/10</span>
+                </div>
+              )}
+            </div>
+            <ClearMatchesButton />
+          </div>
+        )}
       </div>
 
-      {/* ── Subscription CTA ───────────────────────────────────────────────── */}
+      {/* ── Subscription CTA ─────────────────────────────────────────────── */}
       {profile?.plan_status !== 'active' && (
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-[#4F6EF7]/8 border border-[#4F6EF7]/25 rounded-2xl">
           <div className="flex items-start gap-3">
@@ -179,8 +146,8 @@ export default async function DashboardPage({
         </div>
       )}
 
-      {/* ── Preferences summary ────────────────────────────────────────────── */}
-      <div className="p-5 bg-[#141c33] border border-[rgba(255,255,255,0.08)] rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      {/* ── Preferences summary ──────────────────────────────────────────── */}
+      <div className="p-5 bg-[#141c33] border border-white/8 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <SlidersHorizontal className="w-4 h-4 text-[#4F6EF7] mt-0.5 shrink-0" />
           <div>
@@ -192,26 +159,33 @@ export default async function DashboardPage({
                   <span>💶 nuo {preferences.preferred_salary_min} €</span>
                 )}
                 {preferences.preferred_cities && preferences.preferred_cities.length > 0 && (
-                  <span>📍 {preferences.preferred_cities.slice(0, 3).join(', ')}{preferences.preferred_cities.length > 3 ? ` +${preferences.preferred_cities.length - 3}` : ''}</span>
+                  <span>
+                    📍 {preferences.preferred_cities.slice(0, 3).join(', ')}
+                    {preferences.preferred_cities.length > 3
+                      ? ` +${preferences.preferred_cities.length - 3}`
+                      : ''}
+                  </span>
                 )}
               </div>
             ) : (
-              <p className="text-[#8892b0] text-sm">Nustatymai nepateikti — pridėkite, kad AI galėtų ieškoti.</p>
+              <p className="text-[#8892b0] text-sm">
+                Nustatymai nepateikti — pridėkite, kad AI galėtų ieškoti.
+              </p>
             )}
           </div>
         </div>
         <Link
           href="/dashboard/preferences"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.08)] rounded-xl transition shrink-0"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-white/5 hover:bg-white/8 border border-white/8 rounded-xl transition shrink-0"
         >
           <Settings className="w-3.5 h-3.5" />
           Redaguoti
         </Link>
       </div>
 
-      {/* ── Matches grid ───────────────────────────────────────────────────── */}
-      {typedMatches.length === 0 ? (
-        <div className="py-20 text-center border border-dashed border-[rgba(255,255,255,0.08)] rounded-2xl">
+      {/* ── Matches ──────────────────────────────────────────────────────── */}
+      {allMatches.length === 0 ? (
+        <div className="py-20 text-center border border-dashed border-white/8 rounded-2xl">
           <p className="text-5xl mb-5">🔍</p>
           <p className="font-bold text-lg mb-2">Dar nėra atitikimų</p>
           <p className="text-[#8892b0] text-sm max-w-sm mx-auto leading-relaxed">
@@ -228,14 +202,34 @@ export default async function DashboardPage({
         </div>
       ) : (
         <>
-          <p className="text-[#8892b0] text-sm">
-            {typedMatches.length} atitikimų · Rikiuojama pagal AI įvertinimą
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {typedMatches.map((match) => (
-              <MatchCard key={match.id} match={match} />
-            ))}
-          </div>
+          {/* Filter bar */}
+          <FilterBar counts={counts} active={activeFilter} />
+
+          {visibleMatches.length === 0 ? (
+            <div className="py-14 text-center border border-dashed border-white/8 rounded-2xl">
+              <p className="text-3xl mb-3">🎯</p>
+              <p className="text-[#8892b0] text-sm">
+                Nėra atitikimų šiame filtro intervale.
+              </p>
+            </div>
+          ) : (
+            <>
+              <p className="text-[#8892b0] text-sm">
+                {visibleMatches.length} {activeFilter !== 'all' ? 'filtruotų ' : ''}atitikimų
+                {activeFilter === 'all' && ' · Rikiuojama pagal AI įvertinimą'}
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {visibleMatches.map((match) => (
+                  <MatchCard
+                    key={match.id}
+                    match={match}
+                    dateLabel={relativeDate(match.matched_at)}
+                    isRecent={match.matched_at >= cutoff24h}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

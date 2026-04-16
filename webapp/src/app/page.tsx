@@ -166,7 +166,7 @@ function DashboardMockup() {
       {/* Glow under the card */}
       <div className="absolute inset-x-16 bottom-0 h-24 bg-[#7C6EF7]/20 blur-3xl rounded-full" />
 
-      <div className="relative rounded-2xl border border-white/10 bg-[#0e0c1e]/90 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/60">
+      <div className="relative rounded-2xl border border-white/10 bg-[#0e0e18]/90 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/60">
         {/* Window chrome */}
         <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/6 bg-white/3">
           <span className="w-3 h-3 rounded-full bg-red-500/60" />
@@ -249,12 +249,12 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen text-white overflow-x-hidden" style={{ background: '#06040f' }}>
+    <div className="min-h-screen text-white overflow-x-hidden" style={{ background: '#0a0a0f' }}>
       <style>{`
         :root {
-          --bg-primary: #06040f;
-          --bg-secondary: #0b0818;
-          --bg-card: #120f24;
+          --bg-primary: #0a0a0f;
+          --bg-secondary: #0e0e16;
+          --bg-card: #14141e;
           --border: rgba(255,255,255,0.07);
           --accent: #7C6EF7;
           --accent-hover: #9D8EFF;
@@ -270,7 +270,7 @@ export default function LandingPage() {
       `}</style>
 
       {/* ── Navbar ─────────────────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#06040f]/80 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <span className="font-extrabold text-xl tracking-tight">
             <span className="text-[var(--accent)]">Gauk</span>Darba
@@ -366,7 +366,7 @@ export default function LandingPage() {
           <div className="flex items-center justify-center gap-3 mt-8">
             <div className="flex -space-x-2">
               {['T','A','M','L','K'].map((l) => (
-                <div key={l} className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7C6EF7] to-[#a855f7] border-2 border-[#06040f] flex items-center justify-center text-xs font-bold">
+                <div key={l} className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7C6EF7] to-[#a855f7] border-2 border-[#0a0a0f] flex items-center justify-center text-xs font-bold">
                   {l}
                 </div>
               ))}

@@ -463,21 +463,16 @@ export default function OnboardingPage() {
 
   if (!hydrated) {
     return (
-      <div className="min-h-screen bg-[#06040f] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0d0d0d] flex items-center justify-center">
         <div className="w-6 h-6 rounded-full border-2 border-[#7C6EF7] border-t-transparent animate-spin" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen text-white flex flex-col" style={{ background: '#06040f' }}>
-      {/* Background glow */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full bg-[#7C6EF7]/6 blur-[120px]" />
-      </div>
-
+    <div className="min-h-screen text-white flex flex-col" style={{ background: '#0d0d0d' }}>
       {/* Top bar */}
-      <div className="border-b border-white/5 bg-[#06040f]/90 backdrop-blur-xl sticky top-0 z-10">
+      <div className="border-b border-white/5 bg-[#0d0d0d]/90 backdrop-blur-xl sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="font-extrabold text-xl tracking-tight">
             <span className="text-[#7C6EF7]">Gauk</span>Darba
