@@ -282,12 +282,24 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-3">
             {loggedIn ? (
-              <Link
-                href="/dashboard"
-                className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition"
-              >
-                Mano skydelis
-              </Link>
+              <>
+                <Link
+                  href="/dashboard"
+                  className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition"
+                >
+                  Mano skydelis
+                </Link>
+                <button
+                  onClick={async () => {
+                    const supabase = createClient()
+                    await supabase.auth.signOut()
+                    setLoggedIn(false)
+                  }}
+                  className="px-4 py-2 text-sm text-white/45 hover:text-white border border-white/8 hover:border-white/20 rounded-xl transition"
+                >
+                  Atsijungti
+                </button>
+              </>
             ) : (
               <>
                 <Link
