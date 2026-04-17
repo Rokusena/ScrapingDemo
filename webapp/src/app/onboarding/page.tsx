@@ -320,47 +320,30 @@ export default function OnboardingPage() {
         : [...state.cities, city],
     })
 
-  // ── Step 1a: send OTP ──────────────────────────────────────────────────────
+  // ── Step 1: send magic link ────────────────────────────────────────────────
   const handleSendOtp = async () => {
     if (!state.email) return
     setLoading(true)
     setError(null)
+    // After clicking the magic link the auth/callback redirects to /dashboard,
+    // which reads this key and immediately bounces back to /onboarding.
+    localStorage.setItem('gaukdarba-post-auth', '/onboarding')
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: state.email,
-        options: { shouldCreateUser: true },
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
       })
       if (error) {
+        localStorage.removeItem('gaukdarba-post-auth')
         setError(error.message)
       } else {
         update({ otpSent: true })
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Nepavyko išsiųsti kodo. Bandykite dar kartą.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // ── Step 1b: verify OTP ────────────────────────────────────────────────────
-  const handleVerifyOtp = async () => {
-    if (otpCode.length !== 6) return
-    setLoading(true)
-    setError(null)
-    try {
-      const { error } = await supabase.auth.verifyOtp({
-        email: state.email,
-        token: otpCode,
-        type: 'email',
-      })
-      if (error) {
-        setError('Neteisingas arba pasibaigęs kodas. Bandykite dar kartą.')
-      } else {
-        update({ step: 2 })
-        setOtpCode('')
-      }
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Patvirtinimas nepavyko.')
+      localStorage.removeItem('gaukdarba-post-auth')
+      setError(e instanceof Error ? e.message : 'Nepavyko išsiųsti nuorodos. Bandykite dar kartą.')
     } finally {
       setLoading(false)
     }
@@ -505,8 +488,8 @@ export default function OnboardingPage() {
                 </h1>
                 <p className="text-white/45 leading-relaxed">
                   {state.otpSent
-                    ? `Išsiuntėme 6 skaitmenų kodą adresu ${state.email}`
-                    : 'Įveskite el. paštą — išsiųsime 6 skaitmenų prisijungimo kodą.'}
+                    ? `Išsiuntėme prisijungimo nuorodą adresu ${state.email}. Spustelėkite ją — ji grąžins jus čia.`
+                    : 'Įveskite el. paštą — išsiųsime prisijungimo nuorodą.'}
                 </p>
               </div>
 
@@ -524,7 +507,7 @@ export default function OnboardingPage() {
                       onChange={(e) => update({ email: e.target.value })}
                       autoFocus
                       onKeyDown={(e) => e.key === 'Enter' && handleSendOtp()}
-                      className="w-full px-4 py-3.5 bg-white/4 border border-white/8 rounded-xl text-white placeholder-white/25 focus:outline-none focus:border-[#7C6EF7] focus:ring-1 focus:ring-[#7C6EF7]/30 transition"
+                      className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#7C6EF7] focus:ring-1 focus:ring-[#7C6EF7]/30 transition"
                     />
                   </div>
 
@@ -558,35 +541,22 @@ export default function OnboardingPage() {
                   </p>
                 </div>
               ) : (
-                // OTP entry
-                <div className="space-y-6">
-                  <OtpInput value={otpCode} onChange={setOtpCode} />
-
-                  {error && (
-                    <div className="flex items-start gap-2.5 text-red-400 text-sm bg-red-500/8 border border-red-500/20 rounded-xl px-4 py-3">
-                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                      {error}
+                // Magic link sent — waiting
+                <div className="space-y-5">
+                  <div className="p-6 bg-white/3 border border-white/8 rounded-2xl text-center">
+                    <div className="w-14 h-14 bg-[#7C6EF7]/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Mail className="w-7 h-7 text-[#7C6EF7]" />
                     </div>
-                  )}
-
-                  <button
-                    onClick={handleVerifyOtp}
-                    disabled={loading || otpCode.length !== 6}
-                    className="w-full py-3.5 bg-[#7C6EF7] hover:bg-[#9D8EFF] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition flex items-center justify-center gap-2 text-base"
-                  >
-                    {loading ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                        Tikrinama...
-                      </span>
-                    ) : (
-                      <>Patvirtinti kodą <ArrowRight className="w-4 h-4" /></>
-                    )}
-                  </button>
+                    <p className="font-semibold mb-1">Nuoroda išsiųsta!</p>
+                    <p className="text-white/40 text-sm leading-relaxed">
+                      Spustelėkite nuorodą el. laiške — ji automatiškai
+                      grąžins jus čia tęsti registraciją.
+                    </p>
+                  </div>
 
                   <div className="text-center space-y-2">
                     <button
-                      onClick={() => { update({ otpSent: false }); setOtpCode(''); setError(null) }}
+                      onClick={() => { update({ otpSent: false }); setError(null) }}
                       className="text-sm text-white/35 hover:text-white transition"
                     >
                       ← Naudoti kitą el. paštą
@@ -597,7 +567,7 @@ export default function OnboardingPage() {
                       disabled={loading}
                       className="text-sm text-[#7C6EF7] hover:text-[#9D8EFF] transition disabled:opacity-40"
                     >
-                      Siųsti kodą iš naujo
+                      Siųsti nuorodą iš naujo
                     </button>
                   </div>
                 </div>
