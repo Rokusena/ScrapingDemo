@@ -4,7 +4,213 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import type { JobPreferences } from '@/types/database'
-import { Save, CheckCircle, Upload, Loader2 } from 'lucide-react'
+
+const CSS = `
+  .pf-form { max-width: 640px; }
+  .pf-section {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .pf-section-title {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin: 0 0 16px;
+  }
+  .pf-label {
+    display: block;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 6px;
+  }
+  .pf-label .note { text-transform: none; letter-spacing: 0; font-size: 10px; margin-left: 4px; }
+  .pf-sub { font-size: 12px; color: var(--ink-4); margin: -10px 0 12px; }
+  .pf-input {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .pf-input:focus { border-color: var(--accent); }
+  .pf-input::placeholder { color: var(--ink-4); }
+  .pf-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s;
+    box-sizing: border-box;
+    resize: none;
+    font-family: inherit;
+  }
+  .pf-textarea:focus { border-color: var(--accent); }
+  .pf-textarea::placeholder { color: var(--ink-4); }
+  .pf-select {
+    padding: 11px 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .pf-select:focus { border-color: var(--accent); }
+  .pf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pf-chip {
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+    color: var(--ink-4);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .pf-chip:hover { border-color: var(--accent); color: var(--ink); }
+  .pf-chip.on {
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .pf-cities-label { font-size: 11px; color: var(--ink-4); margin: 0 0 8px; }
+  .pf-cities-group { margin-bottom: 14px; }
+  .pf-toggle-row { display: flex; align-items: center; gap: 12px; }
+  .pf-toggle {
+    position: relative;
+    display: inline-flex;
+    height: 24px;
+    width: 44px;
+    align-items: center;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background .2s;
+    flex-shrink: 0;
+  }
+  .pf-toggle-thumb {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: white;
+    transition: transform .2s;
+  }
+  .pf-toggle-label { font-size: 14px; color: var(--ink); }
+  .pf-field { margin-bottom: 20px; }
+  .pf-field:last-child { margin-bottom: 0; }
+
+  /* CV upload */
+  .pf-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .pf-cv-btn:hover { border-color: var(--accent); }
+  .pf-cv-btn:disabled { opacity: .5; cursor: not-allowed; }
+  .pf-cv-bullets {
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--paper-2);
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .pf-cv-bullets-title { font-size: 11px; font-family: var(--font-mono); color: var(--ink-4); margin: 0 0 8px; }
+  .pf-cv-bullet { font-size: 13px; color: var(--ink); padding: 3px 0; display: flex; gap: 8px; }
+  .pf-cv-bullet::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+  .pf-cv-notice {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px;
+    background: color-mix(in oklab, var(--amber, #c47d2b) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--amber, #c47d2b) 20%, transparent);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  /* Actions */
+  .pf-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .pf-btn-save {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    background: var(--accent);
+    border: none; border-radius: 10px;
+    color: #f6f4ee; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: opacity .15s;
+    font-family: inherit;
+  }
+  .pf-btn-save:hover { opacity: .88; }
+  .pf-btn-save:disabled { opacity: .45; cursor: not-allowed; }
+  .pf-btn-scan {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    background: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 10px;
+    color: var(--ink); font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all .15s;
+    font-family: inherit;
+  }
+  .pf-btn-scan:hover { border-color: var(--accent); }
+  .pf-btn-scan:disabled { opacity: .45; cursor: not-allowed; }
+  .pf-saved { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--accent); }
+  .pf-error {
+    font-size: 13px; color: #b33;
+    background: rgba(180,50,50,.07);
+    border: 1px solid rgba(180,50,50,.2);
+    border-radius: 8px; padding: 10px 14px;
+    margin-bottom: 12px;
+  }
+  .pf-scanning {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px;
+    background: color-mix(in oklab, var(--accent) 6%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 15%, transparent);
+    border-radius: 10px; font-size: 13px; color: var(--ink);
+  }
+  .pf-scan-result {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 10px; font-size: 13px; color: var(--ink);
+  }
+  @keyframes pf-spin { to { transform: rotate(360deg); } }
+  .pf-spin { animation: pf-spin .8s linear infinite; display: inline-block; }
+`
 
 const MAJOR_CITIES = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys']
 const OTHER_CITIES = [
@@ -33,30 +239,6 @@ interface Props {
   initialPreferences: JobPreferences | null
 }
 
-function ToggleChip({
-  label,
-  selected,
-  onToggle,
-}: {
-  label: string
-  selected: boolean
-  onToggle: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition ${
-        selected
-          ? 'bg-indigo-600/30 border-indigo-600 text-indigo-300'
-          : 'bg-gray-800 border-gray-700 text-gray-400 hover:border-gray-600'
-      }`}
-    >
-      {label}
-    </button>
-  )
-}
-
 export default function PreferencesForm({ userId, initialPreferences }: Props) {
   const [form, setForm] = useState({
     desired_position: initialPreferences?.desired_position ?? '',
@@ -70,7 +252,6 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
     is_active: initialPreferences?.is_active ?? true,
   })
   const [cvAutoFilled, setCvAutoFilled] = useState(false)
-
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -97,10 +278,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
       const res = await fetch('/api/cv-extract', { method: 'POST', body: formData })
       const data = await res.json()
 
-      if (!res.ok) {
-        setError(data.error || 'Nepavyko apdoroti CV')
-        return
-      }
+      if (!res.ok) { setError(data.error || 'Nepavyko apdoroti CV'); return }
 
       const ext = data.extracted
       setForm((prev) => ({
@@ -157,7 +335,6 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         setScanning(false)
       }
     }
-
     setTimeout(poll, 3000)
   }
 
@@ -169,17 +346,11 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
       const data = await res.json()
 
       if (!res.ok) {
-        // If a scan is already running, poll that one instead
-        if (data.scan_id) {
-          pollScanStatus(data.scan_id)
-          return
-        }
+        if (data.scan_id) { pollScanStatus(data.scan_id); return }
         setScanResult(data.error || 'Skenavimas nepavyko')
         setScanning(false)
         return
       }
-
-      // Scan started — poll for completion
       pollScanStatus(data.scan_id)
     } catch {
       setScanResult('Nepavyko prisijungti prie skenavimo serverio')
@@ -198,9 +369,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
       desired_position: form.desired_position || null,
       skills: form.skills || null,
       preferred_cities: form.preferred_cities.length > 0 ? form.preferred_cities : null,
-      preferred_salary_min: form.preferred_salary_min
-        ? parseInt(form.preferred_salary_min, 10)
-        : null,
+      preferred_salary_min: form.preferred_salary_min ? parseInt(form.preferred_salary_min, 10) : null,
       experience_level: (form.experience_level || null) as JobPreferences['experience_level'],
       work_format: (form.work_format || null) as JobPreferences['work_format'],
       languages: form.languages.length > 0 ? form.languages : null,
@@ -218,279 +387,225 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
     } else {
       setSaved(true)
       router.refresh()
-      // Auto-trigger scan after saving preferences
       triggerScan()
     }
     setLoading(false)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
-      {/* CV Upload */}
-      <div className="p-5 bg-gray-900 border border-gray-800 rounded-xl">
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Automatiškai užpildyti iš CV
-        </label>
-        <p className="text-gray-500 text-xs mb-3">
-          Įkelkite PDF CV — AI automatiškai užpildys poziciją, įgūdžius ir patirtį.
-        </p>
-        <label className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border transition cursor-pointer ${
-          cvLoading
-            ? 'bg-gray-800 border-gray-700 text-gray-500'
-            : 'bg-indigo-600/20 border-indigo-700/40 text-indigo-300 hover:bg-indigo-600/30'
-        }`}>
-          {cvLoading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : (
-            <Upload className="w-4 h-4" />
-          )}
-          {cvLoading ? 'AI analizuoja CV...' : 'Įkelti CV (PDF)'}
-          <input
-            type="file"
-            accept=".pdf"
-            onChange={handleCvUpload}
-            disabled={cvLoading}
-            className="hidden"
-          />
-        </label>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <form onSubmit={handleSubmit} className="pf-form">
 
-        {cvBullets && cvBullets.length > 0 && (
-          <div className="mt-4 p-3 bg-gray-800 rounded-lg">
-            <p className="text-xs text-gray-400 mb-2 font-medium">AI aptiko iš CV:</p>
-            <ul className="space-y-1">
+        {/* CV Upload */}
+        <div className="pf-section">
+          <p className="pf-section-title">// automatinis užpildymas</p>
+          <label className="pf-label">Įkelkite CV</label>
+          <p className="pf-sub">PDF CV — AI automatiškai užpildys poziciją, įgūdžius ir patirtį.</p>
+
+          <label className="pf-cv-btn" style={cvLoading ? { opacity: .5, cursor: 'not-allowed' } : {}}>
+            {cvLoading ? (
+              <><span className="pf-spin">↻</span> AI analizuoja CV...</>
+            ) : (
+              <>⬆ Įkelti CV (PDF)</>
+            )}
+            <input type="file" accept=".pdf" onChange={handleCvUpload} disabled={cvLoading} style={{ display: 'none' }} />
+          </label>
+
+          {cvBullets && cvBullets.length > 0 && (
+            <div className="pf-cv-bullets">
+              <p className="pf-cv-bullets-title">// AI aptiko iš CV</p>
               {cvBullets.map((bullet, i) => (
-                <li key={i} className="text-sm text-gray-300 flex gap-2">
-                  <span className="text-indigo-400 flex-shrink-0">•</span>
-                  {bullet}
-                </li>
+                <div key={i} className="pf-cv-bullet">{bullet}</div>
               ))}
-            </ul>
+            </div>
+          )}
+        </div>
+
+        {cvAutoFilled && (
+          <div className="pf-cv-notice">
+            <span>✏️</span>
+            <span><strong>Patikrink ir pakoreguok</strong> — AI užpildė laukus pagal tavo CV.</span>
           </div>
         )}
-      </div>
 
-      {cvAutoFilled && (
-        <div className="flex items-start gap-2.5 px-4 py-3 bg-amber-950/30 border border-amber-700/40 rounded-xl text-amber-300 text-sm">
-          <span className="text-base leading-none flex-shrink-0">✏️</span>
-          <span><strong>Patikrink ir pakoreguok</strong> — AI užpildė laukus pagal tavo CV. Peržiūrėk ir pakoreguok prieš išsaugodamas.</span>
-        </div>
-      )}
+        {/* Main fields */}
+        <div className="pf-section">
+          <p className="pf-section-title">// darbo pageidavimai</p>
 
-      {/* Desired position */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          Pageidaujama pozicija
-        </label>
-        <input
-          type="text"
-          placeholder="pvz. sandėlio darbuotojas, pardavėjas, programuotojas, vairuotojas"
-          value={form.desired_position}
-          onChange={(e) => setForm((p) => ({ ...p, desired_position: e.target.value }))}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
-        />
-      </div>
-
-      {/* Skills */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          Įgūdžiai
-          <span className="text-gray-500 font-normal ml-1">(atskirti kableliais)</span>
-        </label>
-        <input
-          type="text"
-          placeholder="pvz. sandėlio logistika, vairavimas B kat., MS Office, komandinis darbas"
-          value={form.skills}
-          onChange={(e) => setForm((p) => ({ ...p, skills: e.target.value }))}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
-        />
-      </div>
-
-      {/* Work mode */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Darbo būdas
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {WORK_MODES.map(({ label, value }) => (
-            <ToggleChip
-              key={value}
-              label={label}
-              selected={form.work_format === value}
-              onToggle={() => setForm((p) => ({ ...p, work_format: p.work_format === value ? '' : value }))}
+          <div className="pf-field">
+            <label className="pf-label">Pageidaujama pozicija</label>
+            <input
+              className="pf-input"
+              type="text"
+              placeholder="pvz. sandėlio darbuotojas, pardavėjas, programuotojas"
+              value={form.desired_position}
+              onChange={(e) => setForm((p) => ({ ...p, desired_position: e.target.value }))}
             />
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Cities */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Pageidaujami miestai
-        </label>
-        <p className="text-gray-500 text-xs mb-2">Didieji miestai</p>
-        <div className="flex flex-wrap gap-2 mb-3">
-          {MAJOR_CITIES.map((city) => (
-            <ToggleChip
-              key={city}
-              label={city}
-              selected={form.preferred_cities.includes(city)}
-              onToggle={() => toggle('preferred_cities', city)}
+          <div className="pf-field">
+            <label className="pf-label">Įgūdžiai <span className="note">(atskirti kableliais)</span></label>
+            <input
+              className="pf-input"
+              type="text"
+              placeholder="pvz. sandėlio logistika, vairavimas B kat., MS Office"
+              value={form.skills}
+              onChange={(e) => setForm((p) => ({ ...p, skills: e.target.value }))}
             />
-          ))}
-        </div>
-        <p className="text-gray-500 text-xs mb-2">Kiti miestai</p>
-        <div className="flex flex-wrap gap-2">
-          {OTHER_CITIES.map((city) => (
-            <ToggleChip
-              key={city}
-              label={city}
-              selected={form.preferred_cities.includes(city)}
-              onToggle={() => toggle('preferred_cities', city)}
+          </div>
+
+          <div className="pf-field">
+            <label className="pf-label">Darbo būdas</label>
+            <div className="pf-chips">
+              {WORK_MODES.map(({ label, value }) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={`pf-chip${form.work_format === value ? ' on' : ''}`}
+                  onClick={() => setForm((p) => ({ ...p, work_format: p.work_format === value ? '' : value }))}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="pf-field">
+            <label className="pf-label">Pageidaujami miestai</label>
+            <div className="pf-cities-group">
+              <p className="pf-cities-label">Didieji miestai</p>
+              <div className="pf-chips">
+                {MAJOR_CITIES.map((city) => (
+                  <button
+                    key={city}
+                    type="button"
+                    className={`pf-chip${form.preferred_cities.includes(city) ? ' on' : ''}`}
+                    onClick={() => toggle('preferred_cities', city)}
+                  >
+                    {city}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="pf-cities-group">
+              <p className="pf-cities-label">Kiti miestai</p>
+              <div className="pf-chips">
+                {OTHER_CITIES.map((city) => (
+                  <button
+                    key={city}
+                    type="button"
+                    className={`pf-chip${form.preferred_cities.includes(city) ? ' on' : ''}`}
+                    onClick={() => toggle('preferred_cities', city)}
+                  >
+                    {city}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="pf-field">
+            <label className="pf-label">Minimalus atlyginimas <span className="note">(€, neatskaičius mokesčių)</span></label>
+            <input
+              className="pf-input"
+              type="number"
+              min={0}
+              step={100}
+              placeholder="pvz. 2000"
+              value={form.preferred_salary_min}
+              onChange={(e) => setForm((p) => ({ ...p, preferred_salary_min: e.target.value }))}
+              style={{ width: 180 }}
             />
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Salary */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          Minimalus atlyginimas (€, neatskaičius mokesčių)
-        </label>
-        <input
-          type="number"
-          min={0}
-          step={100}
-          placeholder="pvz. 2000"
-          value={form.preferred_salary_min}
-          onChange={(e) => setForm((p) => ({ ...p, preferred_salary_min: e.target.value }))}
-          className="w-full sm:w-48 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
-        />
-      </div>
+          <div className="pf-field">
+            <label className="pf-label">Patirties lygis</label>
+            <select
+              className="pf-select"
+              value={form.experience_level}
+              onChange={(e) => setForm((p) => ({ ...p, experience_level: e.target.value }))}
+            >
+              {EXPERIENCE_LEVELS.map((l) => (
+                <option key={l.value} value={l.value}>{l.label}</option>
+              ))}
+            </select>
+          </div>
 
-      {/* Experience level */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          Patirties lygis
-        </label>
-        <select
-          value={form.experience_level}
-          onChange={(e) => setForm((p) => ({ ...p, experience_level: e.target.value }))}
-          className="w-full sm:w-64 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
-        >
-          {EXPERIENCE_LEVELS.map((l) => (
-            <option key={l.value} value={l.value}>
-              {l.label}
-            </option>
-          ))}
-        </select>
-      </div>
+          <div className="pf-field">
+            <label className="pf-label">Kalbos</label>
+            <div className="pf-chips">
+              {LANGUAGES.map((lang) => (
+                <button
+                  key={lang}
+                  type="button"
+                  className={`pf-chip${form.languages.includes(lang) ? ' on' : ''}`}
+                  onClick={() => toggle('languages', lang)}
+                >
+                  {lang}
+                </button>
+              ))}
+            </div>
+          </div>
 
-      {/* Languages */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Kalbos
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {LANGUAGES.map((lang) => (
-            <ToggleChip
-              key={lang}
-              label={lang}
-              selected={form.languages.includes(lang)}
-              onToggle={() => toggle('languages', lang)}
+          <div className="pf-field">
+            <label className="pf-label">Papildoma informacija <span className="note">(neprivaloma)</span></label>
+            <textarea
+              className="pf-textarea"
+              rows={3}
+              placeholder="pvz. tik 0.5 etatas, tik ryto pamaina, vairuotojo pažymėjimas būtinas..."
+              value={form.keywords}
+              onChange={(e) => setForm((p) => ({ ...p, keywords: e.target.value }))}
             />
-          ))}
+          </div>
+
+          <div className="pf-toggle-row">
+            <button
+              type="button"
+              className="pf-toggle"
+              style={{ background: form.is_active ? 'var(--accent)' : 'var(--line)' }}
+              onClick={() => setForm((p) => ({ ...p, is_active: !p.is_active }))}
+            >
+              <span
+                className="pf-toggle-thumb"
+                style={{ transform: form.is_active ? 'translateX(20px)' : 'translateX(4px)' }}
+              />
+            </button>
+            <span className="pf-toggle-label">{form.is_active ? 'Paieška aktyvi' : 'Paieška pristabdyta'}</span>
+          </div>
         </div>
-      </div>
 
-      {/* Additional info */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          Papildoma informacija
-          <span className="text-gray-500 font-normal ml-1">(neprivaloma — pildyk pats)</span>
-        </label>
-        <textarea
-          rows={3}
-          placeholder="pvz. tik 0.5 etatas, tik ryto pamaina, vairuotojo pažymėjimas būtinas..."
-          value={form.keywords}
-          onChange={(e) => setForm((p) => ({ ...p, keywords: e.target.value }))}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"
-        />
-      </div>
+        {error && <p className="pf-error">{error}</p>}
 
-      {/* Active toggle */}
-      <div className="flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => setForm((p) => ({ ...p, is_active: !p.is_active }))}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-            form.is_active ? 'bg-indigo-600' : 'bg-gray-700'
-          }`}
-        >
-          <span
-            className={`inline-block h-4 w-4 rounded-full bg-white transition-transform ${
-              form.is_active ? 'translate-x-6' : 'translate-x-1'
-            }`}
-          />
-        </button>
-        <span className="text-sm text-gray-300">
-          {form.is_active ? 'Paieška aktyvi' : 'Paieška pristabdyta'}
-        </span>
-      </div>
+        <div className="pf-actions">
+          <button type="submit" className="pf-btn-save" disabled={loading}>
+            {loading ? 'Saugoma...' : '✓ Išsaugoti nustatymus'}
+          </button>
 
-      {/* Error */}
-      {error && (
-        <p className="text-red-400 text-sm bg-red-950/40 border border-red-900/50 rounded-lg px-4 py-2">
-          {error}
-        </p>
-      )}
+          {saved && !scanning && (
+            <span className="pf-saved">✓ Išsaugota</span>
+          )}
 
-      {/* Submit */}
-      <div className="flex items-center gap-4">
-        <button
-          type="submit"
-          disabled={loading}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-60 text-white font-semibold rounded-lg transition"
-        >
-          <Save className="w-4 h-4" />
-          {loading ? 'Saugoma...' : 'Išsaugoti nustatymus'}
-        </button>
+          <button type="button" className="pf-btn-scan" onClick={triggerScan} disabled={scanning || loading}>
+            {scanning ? <span className="pf-spin">↻</span> : '🔍'}
+            {scanning ? 'AI ieško darbo pasiūlymų...' : 'Ieškoti dabar'}
+          </button>
+        </div>
 
-        {saved && !scanning && (
-          <span className="inline-flex items-center gap-1.5 text-green-400 text-sm">
-            <CheckCircle className="w-4 h-4" />
-            Išsaugota
-          </span>
+        {scanning && (
+          <div className="pf-scanning" style={{ marginTop: 12 }}>
+            <span className="pf-spin" style={{ fontSize: 16 }}>↻</span>
+            AI analizuoja darbo skelbimus pagal jūsų profilį... Tai gali užtrukti iki 5 minučių.
+          </div>
         )}
 
-        <button
-          type="button"
-          onClick={triggerScan}
-          disabled={scanning || loading}
-          className="inline-flex items-center gap-2 px-5 py-3 bg-gray-800 hover:bg-gray-700 disabled:opacity-60 text-white font-medium rounded-lg border border-gray-700 transition"
-        >
-          {scanning ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : (
-            <span className="text-base leading-none">&#x1F50D;</span>
-          )}
-          {scanning ? 'AI ieško darbo pasiūlymų...' : 'Ieškoti dabar'}
-        </button>
-      </div>
-
-      {/* Scan status */}
-      {scanning && (
-        <div className="flex items-center gap-3 p-4 bg-indigo-950/40 border border-indigo-800/50 rounded-xl text-indigo-300 text-sm">
-          <Loader2 className="w-4 h-4 animate-spin flex-shrink-0" />
-          AI analizuoja darbo skelbimus pagal jūsų profilį... Tai gali užtrukti iki 5 minučių.
-        </div>
-      )}
-
-      {scanResult && !scanning && (
-        <div className="flex items-center gap-3 p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-300 text-sm">
-          <CheckCircle className="w-4 h-4 flex-shrink-0 text-green-400" />
-          {scanResult}
-        </div>
-      )}
-    </form>
+        {scanResult && !scanning && (
+          <div className="pf-scan-result" style={{ marginTop: 12 }}>
+            <span style={{ color: 'var(--accent)' }}>✓</span>
+            {scanResult}
+          </div>
+        )}
+      </form>
+    </>
   )
 }

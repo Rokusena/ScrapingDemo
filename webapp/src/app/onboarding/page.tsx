@@ -4,40 +4,507 @@ import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import {
-  ArrowRight,
-  ArrowLeft,
-  Check,
-  Mail,
-  MapPin,
-  Briefcase,
-  Upload,
-  FileText,
-  Zap,
-  Clock,
-  TrendingUp,
-  AlertCircle,
-} from 'lucide-react'
+import { Check, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react'
+
+const CSS = `
+  .ob-root {
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter Tight', sans-serif;
+  }
+  .ob-bar {
+    border-bottom: 1px solid var(--line);
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .ob-bar-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ob-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .ob-logo .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 2px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+  }
+  .ob-progress-track {
+    height: 2px;
+    background: var(--line);
+    position: sticky;
+    top: 58px;
+    z-index: 10;
+  }
+  .ob-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width .5s ease;
+  }
+
+  /* Step indicators */
+  .ob-steps { display: flex; align-items: center; gap: 6px; }
+  .ob-step-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    transition: all .2s;
+  }
+  .ob-step-dot.done {
+    width: 24px; height: 24px;
+    background: var(--accent);
+    color: white;
+  }
+  .ob-step-dot.active {
+    width: 24px; height: 24px;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+  }
+  .ob-step-dot.future {
+    width: 20px; height: 20px;
+    background: var(--line);
+    color: var(--ink-4);
+  }
+  .ob-step-connector {
+    height: 2px;
+    border-radius: 1px;
+    transition: all .2s;
+  }
+  .ob-step-connector.done { background: var(--accent); width: 24px; }
+  .ob-step-connector.pending { background: var(--line); width: 16px; }
+
+  /* Content */
+  .ob-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+  .ob-panel { width: 100%; max-width: 480px; }
+
+  /* Step icon */
+  .ob-icon-box {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .ob-icon-box svg { width: 22px; height: 22px; stroke: var(--accent); }
+
+  .ob-h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -.01em;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .ob-sub { font-size: 14px; color: var(--ink-4); line-height: 1.6; margin: 0 0 32px; }
+
+  /* Inputs */
+  .ob-label {
+    display: block;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 7px;
+  }
+  .ob-label .note { font-size: 10px; text-transform: none; letter-spacing: 0; margin-left: 4px; }
+  .ob-input {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .ob-input:focus { border-color: var(--accent); }
+  .ob-input::placeholder { color: var(--ink-4); }
+  .ob-input-wrap { position: relative; }
+  .ob-input-prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-4);
+    font-weight: 500;
+    pointer-events: none;
+  }
+  .ob-input.padded { padding-left: 28px; }
+
+  /* Option cards */
+  .ob-option {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink-4);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .ob-option:hover { border-color: var(--accent); color: var(--ink); }
+  .ob-option.selected {
+    background: color-mix(in oklab, var(--accent) 7%, transparent);
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+  .ob-option-check {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .ob-option-check svg { width: 11px; height: 11px; stroke: white; }
+  .ob-option-icon { color: var(--ink-4); display: flex; }
+  .ob-option.selected .ob-option-icon { color: var(--accent); }
+
+  /* Chips */
+  .ob-chip {
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink-4);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .ob-chip:hover { border-color: var(--accent); color: var(--ink); }
+  .ob-chip.selected {
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Buttons */
+  .ob-btn-row { display: flex; gap: 12px; margin-top: 32px; }
+  .ob-btn-primary {
+    flex: 1;
+    padding: 13px;
+    background: var(--accent);
+    border: none;
+    border-radius: 12px;
+    color: #f6f4ee;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity .15s;
+    font-family: inherit;
+  }
+  .ob-btn-primary:hover { opacity: .88; }
+  .ob-btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+  .ob-btn-back {
+    padding: 13px 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink-4);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color .15s;
+    font-family: inherit;
+  }
+  .ob-btn-back:hover { color: var(--ink); }
+  .ob-btn-skip {
+    flex: 1;
+    padding: 13px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink-4);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: color .15s;
+    font-family: inherit;
+  }
+  .ob-btn-skip:hover { color: var(--ink); }
+  .ob-btn-skip:disabled { opacity: .4; cursor: not-allowed; }
+  .ob-skip-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-4);
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    letter-spacing: .04em;
+  }
+
+  /* Error */
+  .ob-error {
+    font-size: 13px;
+    color: #b33;
+    background: rgba(180,50,50,.07);
+    border: 1px solid rgba(180,50,50,.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .ob-error svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Section label */
+  .ob-section-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .ob-stack { display: flex; flex-direction: column; gap: 8px; }
+  .ob-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ob-chips-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ob-field { margin-bottom: 24px; }
+
+  /* Step 1: magic link sent */
+  .ob-sent-box {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+  }
+  .ob-sent-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 22px;
+  }
+  .ob-sent-title { font-family: var(--font-display); font-size: 20px; letter-spacing: -.01em; margin: 0 0 8px; }
+  .ob-sent-body { font-size: 13px; color: var(--ink-4); line-height: 1.6; margin: 0; }
+  .ob-sent-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+  .ob-text-btn { background: none; border: none; font-size: 13px; cursor: pointer; padding: 0; font-family: inherit; transition: color .15s; }
+  .ob-text-btn.muted { color: var(--ink-4); }
+  .ob-text-btn.muted:hover { color: var(--ink); }
+  .ob-text-btn.accent { color: var(--accent); }
+  .ob-text-btn.accent:hover { opacity: .75; }
+
+  /* Loading spinner */
+  .ob-spinner-wrap {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .ob-spinner-ring {
+    position: relative;
+    width: 56px; height: 56px;
+    margin: 0 auto 24px;
+  }
+  .ob-spinner-track {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+  }
+  .ob-spinner-fill {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    border-top-color: transparent;
+    animation: ob-spin .8s linear infinite;
+  }
+  .ob-spinner-inner {
+    position: absolute; inset: 10px;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  @keyframes ob-spin { to { transform: rotate(360deg); } }
+  .ob-spinner-title { font-family: var(--font-display); font-size: 18px; letter-spacing: -.01em; margin: 0 0 6px; }
+  .ob-spinner-sub { font-size: 13px; color: var(--ink-4); margin: 0; }
+  .ob-spinner-file { margin-top: 16px; font-size: 11px; font-family: var(--font-mono); color: var(--ink-4); }
+
+  /* Drop zone */
+  .ob-drop {
+    border: 2px dashed var(--line);
+    border-radius: 16px;
+    background: var(--paper-2);
+    padding: 48px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .ob-drop:hover {
+    border-color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 4%, transparent);
+  }
+  .ob-drop-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 22px;
+    transition: background .15s;
+  }
+  .ob-drop:hover .ob-drop-icon {
+    background: color-mix(in oklab, var(--accent) 15%, transparent);
+  }
+  .ob-drop-title { font-weight: 600; font-size: 15px; margin: 0 0 4px; }
+  .ob-drop-sub { font-size: 13px; color: var(--ink-4); margin: 0; }
+  .ob-info-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
+  .ob-badge {
+    font-size: 11px;
+    color: var(--ink-4);
+    background: white;
+    border: 1px solid var(--line);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: var(--font-mono);
+    letter-spacing: .04em;
+  }
+
+  /* Summary card */
+  .ob-summary {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .ob-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    gap: 16px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ob-summary-row:last-child { border-bottom: none; }
+  .ob-summary-k { color: var(--ink-4); flex-shrink: 0; }
+  .ob-summary-v { color: var(--ink); font-weight: 500; text-align: right; }
+
+  /* Social proof */
+  .ob-social {
+    background: color-mix(in oklab, var(--accent) 6%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 15%, transparent);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ob-social-icon { font-size: 18px; flex-shrink: 0; }
+  .ob-social-text { font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .ob-social-text strong { color: var(--accent); }
+  .ob-social-sub { font-size: 11px; color: var(--ink-4); margin-top: 2px; font-family: var(--font-mono); }
+
+  /* What you get */
+  .ob-perks {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ob-perk { font-size: 13px; color: var(--ink-4); }
+
+  /* CV extracted badge */
+  .ob-cv-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    letter-spacing: .04em;
+  }
+  .ob-cv-badge svg { width: 12px; height: 12px; stroke: var(--accent); }
+`
 
 const LS_KEY = 'gaukdarba-onboarding-v2'
 
 interface WizardState {
   step: number
-  // Step 1 — auth
   email: string
   otpSent: boolean
-  // Step 2 — pain questions
   searchDuration: string
   hoursPerWeek: string
   biggestFrustration: string
-  // Step 3 — CV (not persisted to LS — File can't be serialized)
   cvExtracted: boolean
-  // Step 4 — job preferences
   position: string
   skills: string
   cities: string[]
   salaryMin: string
-  // Step 5 — format + experience + extra
   workFormat: string
   experienceLevel: string
   employedNow: string
@@ -116,90 +583,42 @@ const TOTAL_STEPS = 6
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-function Chip({
-  label,
-  selected,
-  onToggle,
-}: {
-  label: string
-  selected: boolean
-  onToggle: () => void
+function OptionCard({ label, selected, onClick, icon }: {
+  label: string; selected: boolean; onClick: () => void; icon?: React.ReactNode
 }) {
   return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all ${
-        selected
-          ? 'bg-[#7C6EF7]/20 border-[#7C6EF7] text-[#b8adff]'
-          : 'bg-white/3 border-white/8 text-white/45 hover:border-white/20 hover:text-white'
-      }`}
-    >
-      {label}
-    </button>
-  )
-}
-
-function OptionCard({
-  label,
-  selected,
-  onClick,
-  icon,
-}: {
-  label: string
-  selected: boolean
-  onClick: () => void
-  icon?: React.ReactNode
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`w-full px-4 py-3.5 rounded-xl text-sm font-medium border text-left transition-all flex items-center justify-between gap-3 ${
-        selected
-          ? 'bg-[#7C6EF7]/15 border-[#7C6EF7] text-white'
-          : 'bg-white/3 border-white/8 text-white/50 hover:border-white/20 hover:text-white'
-      }`}
-    >
-      <div className="flex items-center gap-2.5">
-        {icon && <span className={selected ? 'text-[#b8adff]' : 'text-white/30'}>{icon}</span>}
+    <button type="button" onClick={onClick} className={`ob-option${selected ? ' selected' : ''}`}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        {icon && <span className="ob-option-icon">{icon}</span>}
         {label}
       </div>
       {selected && (
-        <div className="w-5 h-5 rounded-full bg-[#7C6EF7] flex items-center justify-center shrink-0">
-          <Check className="w-3 h-3 text-white" />
+        <div className="ob-option-check">
+          <Check strokeWidth={3} />
         </div>
       )}
     </button>
   )
 }
 
+function ClockIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 16, height: 16 }}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+}
+
 function StepIndicator({ current }: { current: number }) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="ob-steps">
       {Array.from({ length: TOTAL_STEPS }).map((_, i) => {
         const n = i + 1
         const done = current > n
         const active = current === n
         return (
-          <div key={n} className="flex items-center gap-1.5">
-            <div
-              className={`flex items-center justify-center text-xs font-bold transition-all rounded-full ${
-                done
-                  ? 'w-6 h-6 bg-[#7C6EF7] text-white'
-                  : active
-                  ? 'w-6 h-6 border-2 border-[#7C6EF7] text-[#7C6EF7] bg-[#7C6EF7]/10'
-                  : 'w-5 h-5 bg-white/8 text-white/30'
-              }`}
-            >
-              {done ? <Check className="w-3 h-3" /> : active ? n : ''}
+          <div key={n} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div className={`ob-step-dot ${done ? 'done' : active ? 'active' : 'future'}`}>
+              {done ? <Check strokeWidth={3} style={{ width: 11, height: 11 }} /> : active ? n : ''}
             </div>
             {n < TOTAL_STEPS && (
-              <div
-                className={`h-0.5 rounded transition-all ${
-                  current > n ? 'bg-[#7C6EF7] w-6' : 'bg-white/8 w-4'
-                }`}
-              />
+              <div className={`ob-step-connector ${current > n ? 'done' : 'pending'}`} />
             )}
           </div>
         )
@@ -208,71 +627,10 @@ function StepIndicator({ current }: { current: number }) {
   )
 }
 
-// OTP input — 6 boxes
-function OtpInput({
-  value,
-  onChange,
-}: {
-  value: string
-  onChange: (v: string) => void
-}) {
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null, null, null])
-  const digits = value.padEnd(6, '').slice(0, 6).split('')
-
-  const handleKey = (i: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace') {
-      const next = value.slice(0, i) + value.slice(i + 1)
-      onChange(next)
-      if (i > 0) inputRefs.current[i - 1]?.focus()
-    }
-  }
-
-  const handleChange = (i: number, v: string) => {
-    const ch = v.replace(/\D/g, '').slice(-1)
-    if (!ch) return
-    const arr = value.padEnd(6, '').split('')
-    arr[i] = ch
-    const next = arr.join('').slice(0, 6)
-    onChange(next)
-    if (i < 5) inputRefs.current[i + 1]?.focus()
-  }
-
-  const handlePaste = (e: React.ClipboardEvent) => {
-    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6)
-    onChange(pasted)
-    const focusIdx = Math.min(pasted.length, 5)
-    inputRefs.current[focusIdx]?.focus()
-  }
-
-  return (
-    <div className="flex gap-3 justify-center">
-      {digits.map((d, i) => (
-        <input
-          key={i}
-          ref={(el) => { inputRefs.current[i] = el }}
-          type="text"
-          inputMode="numeric"
-          maxLength={1}
-          value={d}
-          onChange={(e) => handleChange(i, e.target.value)}
-          onKeyDown={(e) => handleKey(i, e)}
-          onPaste={handlePaste}
-          className={`w-11 h-14 text-center text-xl font-bold rounded-xl border transition-all bg-white/4 text-white focus:outline-none ${
-            d
-              ? 'border-[#7C6EF7] bg-[#7C6EF7]/10 text-white'
-              : 'border-white/12 focus:border-[#7C6EF7] focus:bg-[#7C6EF7]/5'
-          }`}
-        />
-      ))}
-    </div>
-  )
-}
-
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function OnboardingPage() {
   const [state, setState] = useState<WizardState>(DEFAULT_STATE)
-  const [otpCode, setOtpCode] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [hydrated, setHydrated] = useState(false)
@@ -283,16 +641,11 @@ export default function OnboardingPage() {
   const supabase = createClient()
   const router = useRouter()
 
-  // Restore localStorage + check existing session
   useEffect(() => {
     const saved = localStorage.getItem(LS_KEY)
     let parsed: WizardState = DEFAULT_STATE
     if (saved) {
-      try {
-        parsed = { ...DEFAULT_STATE, ...JSON.parse(saved) }
-      } catch {
-        // ignore
-      }
+      try { parsed = { ...DEFAULT_STATE, ...JSON.parse(saved) } } catch { /* ignore */ }
     }
 
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -305,13 +658,11 @@ export default function OnboardingPage() {
     })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Persist wizard to localStorage
   useEffect(() => {
     if (hydrated) localStorage.setItem(LS_KEY, JSON.stringify(state))
   }, [state, hydrated])
 
-  const update = (patch: Partial<WizardState>) =>
-    setState((prev) => ({ ...prev, ...patch }))
+  const update = (patch: Partial<WizardState>) => setState((prev) => ({ ...prev, ...patch }))
 
   const toggleCity = (city: string) =>
     update({
@@ -320,20 +671,15 @@ export default function OnboardingPage() {
         : [...state.cities, city],
     })
 
-  // ── Step 1: send magic link ────────────────────────────────────────────────
   const handleSendOtp = async () => {
     if (!state.email) return
     setLoading(true)
     setError(null)
-    // After clicking the magic link the auth/callback redirects to /dashboard,
-    // which reads this key and immediately bounces back to /onboarding.
     localStorage.setItem('gaukdarba-post-auth', '/onboarding')
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: state.email,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
       })
       if (error) {
         localStorage.removeItem('gaukdarba-post-auth')
@@ -349,7 +695,6 @@ export default function OnboardingPage() {
     }
   }
 
-  // ── Step 3: CV upload ──────────────────────────────────────────────────────
   const handleCvUpload = async (file: File) => {
     setCvFile(file)
     setCvLoading(true)
@@ -369,13 +714,10 @@ export default function OnboardingPage() {
       }
 
       const ext = data.extracted
-      // Pre-fill step 4 + 5 fields from CV
       update({
         position: ext.desired_position || state.position,
         skills: ext.skills || state.skills,
-        cities:
-          ext.preferred_cities?.filter((c: string) => CITIES.includes(c)) ||
-          state.cities,
+        cities: ext.preferred_cities?.filter((c: string) => CITIES.includes(c)) || state.cities,
         experienceLevel: ext.experience_level || state.experienceLevel,
         workFormat: ext.work_format || state.workFormat,
         cvExtracted: true,
@@ -388,14 +730,11 @@ export default function OnboardingPage() {
     }
   }
 
-  // ── Final step: save preferences → checkout ───────────────────────────────
   const handleFinish = async () => {
     setLoading(true)
     setError(null)
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
+    const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
       setError('Sesija baigėsi. Grįžkite prie pirmojo žingsnio.')
       setLoading(false)
@@ -409,12 +748,7 @@ export default function OnboardingPage() {
         skills: state.skills || null,
         preferred_cities: state.cities.length > 0 ? state.cities : null,
         preferred_salary_min: state.salaryMin ? parseInt(state.salaryMin, 10) : null,
-        experience_level: (state.experienceLevel || null) as
-          | 'intern'
-          | 'junior'
-          | 'mid'
-          | 'senior'
-          | null,
+        experience_level: (state.experienceLevel || null) as 'intern' | 'junior' | 'mid' | 'senior' | null,
         work_format: state.workFormat || null,
         is_active: true,
         updated_at: new Date().toISOString(),
@@ -422,178 +756,130 @@ export default function OnboardingPage() {
       { onConflict: 'user_id' }
     )
 
-    if (prefErr) {
-      setError(prefErr.message)
-      setLoading(false)
-      return
-    }
+    if (prefErr) { setError(prefErr.message); setLoading(false); return }
 
     localStorage.removeItem(LS_KEY)
 
     try {
       const res = await fetch('/api/stripe/checkout', { method: 'POST' })
       const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-        return
-      }
-    } catch {
-      // fall through
-    }
+      if (data.url) { window.location.href = data.url; return }
+    } catch { /* fall through */ }
 
     router.push('/dashboard')
   }
 
   if (!hydrated) {
     return (
-      <div className="min-h-screen bg-[#0d0d0d] flex items-center justify-center">
-        <div className="w-6 h-6 rounded-full border-2 border-[#7C6EF7] border-t-transparent animate-spin" />
-      </div>
+      <>
+        <style dangerouslySetInnerHTML={{ __html: CSS }} />
+        <div style={{ minHeight: '100vh', background: 'var(--paper)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 24, height: 24, borderRadius: '50%', border: '2px solid var(--line)', borderTopColor: 'var(--accent)', animation: 'ob-spin .8s linear infinite' }} />
+        </div>
+      </>
     )
   }
 
   return (
-    <div className="min-h-screen text-white flex flex-col" style={{ background: '#0d0d0d' }}>
-      {/* Top bar */}
-      <div className="border-b border-white/5 bg-[#0d0d0d]/90 backdrop-blur-xl sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="font-extrabold text-xl tracking-tight">
-            <span className="text-[#7C6EF7]">Gauk</span>Darba
-          </Link>
-          <StepIndicator current={state.step} />
+    <>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <div className="ob-root">
+        {/* Top bar */}
+        <div className="ob-bar">
+          <div className="ob-bar-inner">
+            <Link href="/" className="ob-logo"><span className="dot" />gaukdarba</Link>
+            <StepIndicator current={state.step} />
+          </div>
         </div>
-      </div>
 
-      {/* Progress bar */}
-      <div className="h-0.5 bg-white/5 sticky top-[57px] z-10">
-        <div
-          className="h-full bg-gradient-to-r from-[#7C6EF7] to-[#a855f7] transition-all duration-500"
-          style={{ width: `${((state.step - 1) / (TOTAL_STEPS - 1)) * 100}%` }}
-        />
-      </div>
+        {/* Progress */}
+        <div className="ob-progress-track">
+          <div className="ob-progress-fill" style={{ width: `${((state.step - 1) / (TOTAL_STEPS - 1)) * 100}%` }} />
+        </div>
 
-      {/* Wizard content */}
-      <div className="relative flex-1 flex items-start justify-center px-6 py-12">
-        <div className="w-full max-w-lg">
+        {/* Content */}
+        <div className="ob-content">
+          <div className="ob-panel">
 
-          {/* ── Step 1: Email + OTP ─────────────────────────────────────────── */}
-          {state.step === 1 && (
-            <div>
-              <div className="mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-[#7C6EF7]/15 border border-[#7C6EF7]/25 flex items-center justify-center mb-5">
-                  <Mail className="w-6 h-6 text-[#7C6EF7]" />
-                </div>
-                <h1 className="text-3xl font-bold mb-2">
-                  {state.otpSent ? 'Patikrinkite el. paštą' : 'Pradėkime'}
-                </h1>
-                <p className="text-white/45 leading-relaxed">
+            {/* ── Step 1: Email ──────────────────────────────────────────────── */}
+            {state.step === 1 && (
+              <div>
+                <div className="ob-icon-box">✉</div>
+                <h1 className="ob-h1">{state.otpSent ? 'Patikrinkite el. paštą' : 'Pradėkime'}</h1>
+                <p className="ob-sub">
                   {state.otpSent
                     ? `Išsiuntėme prisijungimo nuorodą adresu ${state.email}. Spustelėkite ją — ji grąžins jus čia.`
                     : 'Įveskite el. paštą — išsiųsime prisijungimo nuorodą.'}
                 </p>
-              </div>
 
-              {!state.otpSent ? (
-                // Email entry
-                <div className="space-y-4">
+                {!state.otpSent ? (
                   <div>
-                    <label className="block text-sm font-medium text-white/45 mb-1.5">
-                      El. pašto adresas
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="jusu@epastas.lt"
-                      value={state.email}
-                      onChange={(e) => update({ email: e.target.value })}
-                      autoFocus
-                      onKeyDown={(e) => e.key === 'Enter' && handleSendOtp()}
-                      className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#7C6EF7] focus:ring-1 focus:ring-[#7C6EF7]/30 transition"
-                    />
-                  </div>
-
-                  {error && (
-                    <div className="flex items-start gap-2.5 text-red-400 text-sm bg-red-500/8 border border-red-500/20 rounded-xl px-4 py-3">
-                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                      {error}
+                    <div className="ob-field">
+                      <label className="ob-label">El. pašto adresas</label>
+                      <input
+                        className="ob-input"
+                        type="email"
+                        placeholder="jusu@epastas.lt"
+                        value={state.email}
+                        onChange={(e) => update({ email: e.target.value })}
+                        autoFocus
+                        onKeyDown={(e) => e.key === 'Enter' && handleSendOtp()}
+                      />
                     </div>
-                  )}
 
-                  <button
-                    onClick={handleSendOtp}
-                    disabled={loading || !state.email}
-                    className="w-full py-3.5 bg-[#7C6EF7] hover:bg-[#9D8EFF] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition flex items-center justify-center gap-2 text-base"
-                  >
-                    {loading ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                        Siunčiama...
-                      </span>
-                    ) : (
-                      <>Gauti kodą <ArrowRight className="w-4 h-4" /></>
+                    {error && (
+                      <div className="ob-error">
+                        <AlertCircle />
+                        {error}
+                      </div>
                     )}
-                  </button>
 
-                  <p className="text-center text-sm text-white/35">
-                    Jau turite paskyrą?{' '}
-                    <Link href="/login" className="text-[#7C6EF7] hover:text-[#9D8EFF] transition">
-                      Prisijungti
-                    </Link>
-                  </p>
-                </div>
-              ) : (
-                // Magic link sent — waiting
-                <div className="space-y-5">
-                  <div className="p-6 bg-white/3 border border-white/8 rounded-2xl text-center">
-                    <div className="w-14 h-14 bg-[#7C6EF7]/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Mail className="w-7 h-7 text-[#7C6EF7]" />
+                    <div className="ob-btn-row" style={{ marginTop: 24 }}>
+                      <button className="ob-btn-primary" onClick={handleSendOtp} disabled={loading || !state.email}>
+                        {loading ? 'Siunčiama...' : <>Gauti nuorodą <ArrowRight strokeWidth={2.5} style={{ width: 16, height: 16 }} /></>}
+                      </button>
                     </div>
-                    <p className="font-semibold mb-1">Nuoroda išsiųsta!</p>
-                    <p className="text-white/40 text-sm leading-relaxed">
-                      Spustelėkite nuorodą el. laiške — ji automatiškai
-                      grąžins jus čia tęsti registraciją.
+
+                    <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--ink-4)', marginTop: 16 }}>
+                      Jau turite paskyrą?{' '}
+                      <Link href="/login" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+                        Prisijungti
+                      </Link>
                     </p>
                   </div>
+                ) : (
+                  <div>
+                    <div className="ob-sent-box">
+                      <div className="ob-sent-icon">✉</div>
+                      <p className="ob-sent-title">Nuoroda išsiųsta!</p>
+                      <p className="ob-sent-body">
+                        Spustelėkite nuorodą el. laiške — ji automatiškai grąžins jus čia tęsti registraciją.
+                      </p>
+                    </div>
 
-                  <div className="text-center space-y-2">
-                    <button
-                      onClick={() => { update({ otpSent: false }); setError(null) }}
-                      className="text-sm text-white/35 hover:text-white transition"
-                    >
-                      ← Naudoti kitą el. paštą
-                    </button>
-                    <br />
-                    <button
-                      onClick={handleSendOtp}
-                      disabled={loading}
-                      className="text-sm text-[#7C6EF7] hover:text-[#9D8EFF] transition disabled:opacity-40"
-                    >
-                      Siųsti nuorodą iš naujo
-                    </button>
+                    <div className="ob-sent-actions">
+                      <button className="ob-text-btn muted" onClick={() => { update({ otpSent: false }); setError(null) }}>
+                        ← Naudoti kitą el. paštą
+                      </button>
+                      <button className="ob-text-btn accent" onClick={handleSendOtp} disabled={loading}>
+                        Siųsti nuorodą iš naujo
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* ── Step 2: Pain / urgency questions ───────────────────────────── */}
-          {state.step === 2 && (
-            <div>
-              <div className="mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-[#7C6EF7]/15 border border-[#7C6EF7]/25 flex items-center justify-center mb-5">
-                  <Zap className="w-6 h-6 text-[#7C6EF7]" />
-                </div>
-                <h1 className="text-3xl font-bold mb-2">Šiek tiek apie jus</h1>
-                <p className="text-white/45 leading-relaxed">
-                  Padėsite mums geriau pritaikyti AI paiešką prie jūsų situacijos.
-                </p>
+                )}
               </div>
+            )}
 
-              <div className="space-y-7">
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-3">
-                    Kiek laiko ieškote darbo?
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
+            {/* ── Step 2: Pain questions ─────────────────────────────────────── */}
+            {state.step === 2 && (
+              <div>
+                <div className="ob-icon-box">⚡</div>
+                <h1 className="ob-h1">Šiek tiek apie jus</h1>
+                <p className="ob-sub">Padėsite mums geriau pritaikyti AI paiešką prie jūsų situacijos.</p>
+
+                <div className="ob-field">
+                  <span className="ob-section-label">Kiek laiko ieškote darbo?</span>
+                  <div className="ob-grid2">
                     {SEARCH_DURATION_OPTIONS.map((o) => (
                       <OptionCard
                         key={o.value}
@@ -605,28 +891,24 @@ export default function OnboardingPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-3">
-                    Kiek valandų per savaitę skiriate darbo paieškai?
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
+                <div className="ob-field">
+                  <span className="ob-section-label">Kiek valandų per savaitę skiriate darbo paieškai?</span>
+                  <div className="ob-grid2">
                     {HOURS_PER_WEEK_OPTIONS.map((o) => (
                       <OptionCard
                         key={o.value}
                         label={o.label}
                         selected={state.hoursPerWeek === o.value}
                         onClick={() => update({ hoursPerWeek: state.hoursPerWeek === o.value ? '' : o.value })}
-                        icon={<Clock className="w-4 h-4" />}
+                        icon={<ClockIcon />}
                       />
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-3">
-                    Kas labiausiai erzina ieškant darbo?
-                  </label>
-                  <div className="flex flex-col gap-2">
+                <div className="ob-field" style={{ marginBottom: 0 }}>
+                  <span className="ob-section-label">Kas labiausiai erzina ieškant darbo?</span>
+                  <div className="ob-stack">
                     {FRUSTRATION_OPTIONS.map((o) => (
                       <OptionCard
                         key={o.value}
@@ -637,262 +919,205 @@ export default function OnboardingPage() {
                     ))}
                   </div>
                 </div>
-              </div>
 
-              <div className="flex gap-3 mt-8">
-                <button
-                  onClick={() => update({ step: 1, otpSent: false })}
-                  className="px-4 py-3 bg-white/4 border border-white/8 rounded-xl text-white/45 hover:text-white transition"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => update({ step: 3 })}
-                  className="flex-1 py-3 bg-[#7C6EF7] hover:bg-[#9D8EFF] text-white font-semibold rounded-xl transition flex items-center justify-center gap-2"
-                >
-                  Tęsti <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-              <p className="text-center text-xs text-white/25 mt-3">Galite praleisti ir pildyti vėliau</p>
-            </div>
-          )}
-
-          {/* ── Step 3: CV upload ───────────────────────────────────────────── */}
-          {state.step === 3 && (
-            <div>
-              <div className="mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-[#7C6EF7]/15 border border-[#7C6EF7]/25 flex items-center justify-center mb-5">
-                  <Upload className="w-6 h-6 text-[#7C6EF7]" />
+                <div className="ob-btn-row">
+                  <button className="ob-btn-back" onClick={() => update({ step: 1, otpSent: false })}>
+                    <ArrowLeft strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
+                  <button className="ob-btn-primary" onClick={() => update({ step: 3 })}>
+                    Tęsti <ArrowRight strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
                 </div>
-                <h1 className="text-3xl font-bold mb-2">Įkelkite CV</h1>
-                <p className="text-white/45 leading-relaxed">
-                  AI automatiškai nuskaitys jūsų CV ir užpildys darbo pageidavimus. Sutaupysite 5 minutes.
-                </p>
+                <p className="ob-skip-note">Galite praleisti ir pildyti vėliau</p>
               </div>
+            )}
 
-              {cvLoading ? (
-                // Loading animation
-                <div className="p-10 bg-white/3 border border-white/8 rounded-2xl text-center">
-                  <div className="relative w-16 h-16 mx-auto mb-6">
-                    <div className="absolute inset-0 rounded-full border-2 border-[#7C6EF7]/20" />
-                    <div className="absolute inset-0 rounded-full border-2 border-[#7C6EF7] border-t-transparent animate-spin" />
-                    <div className="absolute inset-3 rounded-full bg-[#7C6EF7]/15 flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-[#7C6EF7]" />
+            {/* ── Step 3: CV upload ──────────────────────────────────────────── */}
+            {state.step === 3 && (
+              <div>
+                <div className="ob-icon-box">⬆</div>
+                <h1 className="ob-h1">Įkelkite CV</h1>
+                <p className="ob-sub">AI automatiškai nuskaitys jūsų CV ir užpildys darbo pageidavimus. Sutaupysite 5 minutes.</p>
+
+                {cvLoading ? (
+                  <div className="ob-spinner-wrap">
+                    <div className="ob-spinner-ring">
+                      <div className="ob-spinner-track" />
+                      <div className="ob-spinner-fill" />
+                      <div className="ob-spinner-inner">⚡</div>
                     </div>
+                    <p className="ob-spinner-title">AI nuskaito jūsų CV...</p>
+                    <p className="ob-spinner-sub">Analizuojame jūsų patirtį ir įgūdžius</p>
+                    {cvFile && <p className="ob-spinner-file">📄 {cvFile.name}</p>}
                   </div>
-                  <p className="font-semibold text-white mb-1">AI nuskaito jūsų CV...</p>
-                  <p className="text-white/40 text-sm">
-                    Analizuojame jūsų patirtį ir įgūdžius
-                  </p>
-                  {cvFile && (
-                    <div className="mt-5 flex items-center justify-center gap-2 text-xs text-white/30">
-                      <FileText className="w-3.5 h-3.5" />
-                      {cvFile.name}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <>
-                  {/* Drop zone */}
-                  <div
-                    onClick={() => fileInputRef.current?.click()}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={(e) => {
-                      e.preventDefault()
-                      const f = e.dataTransfer.files[0]
-                      if (f) handleCvUpload(f)
-                    }}
-                    className="cursor-pointer p-10 bg-white/2 border-2 border-dashed border-white/12 hover:border-[#7C6EF7]/50 hover:bg-[#7C6EF7]/4 rounded-2xl text-center transition-all group"
-                  >
-                    <div className="w-14 h-14 rounded-2xl bg-[#7C6EF7]/10 border border-[#7C6EF7]/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-[#7C6EF7]/15 transition">
-                      <Upload className="w-6 h-6 text-[#7C6EF7]" />
-                    </div>
-                    <p className="font-semibold text-white mb-1">Spustelėkite arba nutempkite CV</p>
-                    <p className="text-white/35 text-sm">PDF failas · maks. 10 MB</p>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept=".pdf"
-                      className="hidden"
-                      onChange={(e) => {
-                        const f = e.target.files?.[0]
+                ) : (
+                  <>
+                    <div
+                      className="ob-drop"
+                      onClick={() => fileInputRef.current?.click()}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={(e) => {
+                        e.preventDefault()
+                        const f = e.dataTransfer.files[0]
                         if (f) handleCvUpload(f)
                       }}
-                    />
-                  </div>
-
-                  {cvError && (
-                    <div className="flex items-start gap-2.5 text-red-400 text-sm bg-red-500/8 border border-red-500/20 rounded-xl px-4 py-3 mt-4">
-                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                      {cvError}
+                    >
+                      <div className="ob-drop-icon">⬆</div>
+                      <p className="ob-drop-title">Spustelėkite arba nutempkite CV</p>
+                      <p className="ob-drop-sub">PDF failas · maks. 10 MB</p>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".pdf"
+                        style={{ display: 'none' }}
+                        onChange={(e) => {
+                          const f = e.target.files?.[0]
+                          if (f) handleCvUpload(f)
+                        }}
+                      />
                     </div>
-                  )}
 
-                  {/* Info badges */}
-                  <div className="mt-5 flex flex-wrap gap-2 justify-center">
-                    {['Automatiškai užpildo laukus', 'Privatūs duomenys', 'Veikia per 15 sek.'].map((b) => (
-                      <span key={b} className="text-xs text-white/35 bg-white/4 border border-white/6 px-3 py-1.5 rounded-full">
-                        {b}
-                      </span>
-                    ))}
+                    {cvError && (
+                      <div className="ob-error" style={{ marginTop: 16 }}>
+                        <AlertCircle />
+                        {cvError}
+                      </div>
+                    )}
+
+                    <div className="ob-info-badges">
+                      {['Automatiškai užpildo laukus', 'Privatūs duomenys', 'Veikia per 15 sek.'].map((b) => (
+                        <span key={b} className="ob-badge">{b}</span>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {!cvLoading && (
+                  <div className="ob-btn-row">
+                    <button className="ob-btn-back" onClick={() => update({ step: 2 })}>
+                      <ArrowLeft strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                    </button>
+                    <button className="ob-btn-skip" onClick={() => update({ step: 4 })}>
+                      Praleisti CV įkėlimą <ArrowRight strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                    </button>
                   </div>
-                </>
-              )}
+                )}
+              </div>
+            )}
 
-              {!cvLoading && (
-                <div className="flex gap-3 mt-8">
-                  <button
-                    onClick={() => update({ step: 2 })}
-                    className="px-4 py-3 bg-white/4 border border-white/8 rounded-xl text-white/45 hover:text-white transition"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => update({ step: 4 })}
-                    className="flex-1 py-3 bg-white/6 hover:bg-white/10 text-white/60 hover:text-white font-medium rounded-xl transition flex items-center justify-center gap-2 border border-white/8"
-                  >
-                    Praleisti CV įkėlimą
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* ── Step 4: Job preferences ─────────────────────────────────────── */}
-          {state.step === 4 && (
-            <div>
-              <div className="mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-[#7C6EF7]/15 border border-[#7C6EF7]/25 flex items-center justify-center mb-5">
-                  <Briefcase className="w-6 h-6 text-[#7C6EF7]" />
-                </div>
-                <h1 className="text-3xl font-bold mb-2">Darbo preferencijos</h1>
-                <p className="text-white/45 leading-relaxed">
+            {/* ── Step 4: Job preferences ────────────────────────────────────── */}
+            {state.step === 4 && (
+              <div>
+                <div className="ob-icon-box">💼</div>
+                <h1 className="ob-h1">Darbo preferencijos</h1>
+                <p className="ob-sub">
                   {state.cvExtracted
                     ? 'AI nuskaitė jūsų CV — patikrinkite ir pataisykite, jei reikia.'
                     : 'Nurodykite ko ieškote — AI naudos šiuos duomenis kasdien skenuodamas darbo skelbimus.'}
                 </p>
                 {state.cvExtracted && (
-                  <div className="mt-3 flex items-center gap-2 text-xs text-[#43e97b] bg-[#43e97b]/10 border border-[#43e97b]/20 rounded-xl px-3 py-2 w-fit">
-                    <Check className="w-3.5 h-3.5" />
-                    Užpildyta iš CV
+                  <div className="ob-cv-badge">
+                    <Check strokeWidth={3} /> Užpildyta iš CV
                   </div>
                 )}
-              </div>
 
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-white/45 mb-1.5">
-                    Pageidaujama pozicija
-                  </label>
+                <div className="ob-field" style={{ marginTop: 24 }}>
+                  <label className="ob-label">Pageidaujama pozicija</label>
                   <input
+                    className="ob-input"
                     type="text"
                     placeholder="pvz. Frontend Programuotojas, Pardavėjas, Buhalteris"
                     value={state.position}
                     onChange={(e) => update({ position: e.target.value })}
                     autoFocus
-                    className="w-full px-4 py-3.5 bg-white/4 border border-white/8 rounded-xl text-white placeholder-white/25 focus:outline-none focus:border-[#7C6EF7] focus:ring-1 focus:ring-[#7C6EF7]/30 transition"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-white/45 mb-1.5">
-                    Įgūdžiai{' '}
-                    <span className="text-white/25 font-normal">(atskirti kableliais)</span>
+                <div className="ob-field">
+                  <label className="ob-label">
+                    Įgūdžiai <span className="note">(atskirti kableliais)</span>
                   </label>
                   <input
+                    className="ob-input"
                     type="text"
                     placeholder="pvz. React, TypeScript, SQL, Projektų valdymas"
                     value={state.skills}
                     onChange={(e) => update({ skills: e.target.value })}
-                    className="w-full px-4 py-3.5 bg-white/4 border border-white/8 rounded-xl text-white placeholder-white/25 focus:outline-none focus:border-[#7C6EF7] focus:ring-1 focus:ring-[#7C6EF7]/30 transition"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-white/45 mb-2.5">
-                    Pageidaujami miestai
-                  </label>
-                  <div className="flex flex-wrap gap-2">
+                <div className="ob-field">
+                  <label className="ob-label">Pageidaujami miestai</label>
+                  <div className="ob-chips-row">
                     {CITIES.map((city) => (
-                      <Chip
+                      <button
                         key={city}
-                        label={city}
-                        selected={state.cities.includes(city)}
-                        onToggle={() => toggleCity(city)}
-                      />
+                        type="button"
+                        className={`ob-chip${state.cities.includes(city) ? ' selected' : ''}`}
+                        onClick={() => toggleCity(city)}
+                      >
+                        {city}
+                      </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-white/45 mb-1.5">
-                    Minimalus atlyginimas{' '}
-                    <span className="text-white/25 font-normal">(€/mėn., bruto)</span>
+                <div className="ob-field" style={{ marginBottom: 0 }}>
+                  <label className="ob-label">
+                    Minimalus atlyginimas <span className="note">(€/mėn., bruto)</span>
                   </label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-medium">€</span>
+                  <div className="ob-input-wrap" style={{ display: 'inline-block', position: 'relative' }}>
+                    <span className="ob-input-prefix">€</span>
                     <input
+                      className="ob-input padded"
                       type="number"
                       min={0}
                       step={100}
                       placeholder="pvz. 2000"
                       value={state.salaryMin}
                       onChange={(e) => update({ salaryMin: e.target.value })}
-                      className="w-full sm:w-52 pl-8 pr-4 py-3.5 bg-white/4 border border-white/8 rounded-xl text-white placeholder-white/25 focus:outline-none focus:border-[#7C6EF7] focus:ring-1 focus:ring-[#7C6EF7]/30 transition"
+                      style={{ width: 180 }}
                     />
                   </div>
                 </div>
-              </div>
 
-              <div className="flex gap-3 mt-8">
-                <button
-                  onClick={() => update({ step: 3 })}
-                  className="px-4 py-3 bg-white/4 border border-white/8 rounded-xl text-white/45 hover:text-white transition"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => update({ step: 5 })}
-                  className="flex-1 py-3 bg-[#7C6EF7] hover:bg-[#9D8EFF] text-white font-semibold rounded-xl transition flex items-center justify-center gap-2"
-                >
-                  Tęsti <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* ── Step 5: Work format + experience + extra ────────────────────── */}
-          {state.step === 5 && (
-            <div>
-              <div className="mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-[#7C6EF7]/15 border border-[#7C6EF7]/25 flex items-center justify-center mb-5">
-                  <MapPin className="w-6 h-6 text-[#7C6EF7]" />
+                <div className="ob-btn-row">
+                  <button className="ob-btn-back" onClick={() => update({ step: 3 })}>
+                    <ArrowLeft strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
+                  <button className="ob-btn-primary" onClick={() => update({ step: 5 })}>
+                    Tęsti <ArrowRight strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
                 </div>
-                <h1 className="text-3xl font-bold mb-2">Darbo formatas</h1>
-                <p className="text-white/45 leading-relaxed">
-                  Kaip norite dirbti ir kokie papildomi kriterijai?
-                </p>
               </div>
+            )}
 
-              <div className="space-y-7">
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-2.5">Darbo formatas</label>
-                  <div className="flex flex-wrap gap-2">
+            {/* ── Step 5: Work format + experience ──────────────────────────── */}
+            {state.step === 5 && (
+              <div>
+                <div className="ob-icon-box">📍</div>
+                <h1 className="ob-h1">Darbo formatas</h1>
+                <p className="ob-sub">Kaip norite dirbti ir kokie papildomi kriterijai?</p>
+
+                <div className="ob-field">
+                  <span className="ob-section-label">Darbo formatas</span>
+                  <div className="ob-chips-row">
                     {WORK_FORMATS.map((wf) => (
-                      <Chip
+                      <button
                         key={wf.value}
-                        label={wf.label}
-                        selected={state.workFormat === wf.value}
-                        onToggle={() => update({ workFormat: state.workFormat === wf.value ? '' : wf.value })}
-                      />
+                        type="button"
+                        className={`ob-chip${state.workFormat === wf.value ? ' selected' : ''}`}
+                        onClick={() => update({ workFormat: state.workFormat === wf.value ? '' : wf.value })}
+                      >
+                        {wf.label}
+                      </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-2.5">Patirties lygis</label>
-                  <div className="flex flex-col gap-2">
+                <div className="ob-field">
+                  <span className="ob-section-label">Patirties lygis</span>
+                  <div className="ob-stack">
                     {EXPERIENCE_LEVELS.map((el) => (
                       <OptionCard
                         key={el.value}
@@ -904,11 +1129,9 @@ export default function OnboardingPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-2.5">
-                    Ar šiuo metu dirbate?
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
+                <div className="ob-field">
+                  <span className="ob-section-label">Ar šiuo metu dirbate?</span>
+                  <div className="ob-grid2">
                     {EMPLOYED_NOW_OPTIONS.map((o) => (
                       <OptionCard
                         key={o.value}
@@ -920,138 +1143,105 @@ export default function OnboardingPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-white/70 mb-2.5">
-                    Darbo kalba
-                  </label>
-                  <div className="flex flex-wrap gap-2">
+                <div className="ob-field" style={{ marginBottom: 0 }}>
+                  <span className="ob-section-label">Darbo kalba</span>
+                  <div className="ob-chips-row">
                     {WORK_LANGUAGE_OPTIONS.map((o) => (
-                      <Chip
+                      <button
                         key={o.value}
-                        label={o.label}
-                        selected={state.workLanguage === o.value}
-                        onToggle={() => update({ workLanguage: state.workLanguage === o.value ? '' : o.value })}
-                      />
+                        type="button"
+                        className={`ob-chip${state.workLanguage === o.value ? ' selected' : ''}`}
+                        onClick={() => update({ workLanguage: state.workLanguage === o.value ? '' : o.value })}
+                      >
+                        {o.label}
+                      </button>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              <div className="flex gap-3 mt-8">
-                <button
-                  onClick={() => update({ step: 4 })}
-                  className="px-4 py-3 bg-white/4 border border-white/8 rounded-xl text-white/45 hover:text-white transition"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => update({ step: 6 })}
-                  className="flex-1 py-3 bg-[#7C6EF7] hover:bg-[#9D8EFF] text-white font-semibold rounded-xl transition flex items-center justify-center gap-2"
-                >
-                  Tęsti <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* ── Step 6: Summary + paywall ────────────────────────────────────── */}
-          {state.step === 6 && (
-            <div>
-              <div className="mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-[#43e97b]/15 border border-[#43e97b]/25 flex items-center justify-center mb-5">
-                  <Check className="w-6 h-6 text-[#43e97b]" />
-                </div>
-                <h1 className="text-3xl font-bold mb-2">Profilis paruoštas!</h1>
-                <p className="text-white/45 leading-relaxed">
-                  Peržiūrėkite savo nustatymus ir aktyvuokite AI darbo paiešką.
-                </p>
-              </div>
-
-              {/* Social proof */}
-              <div className="p-4 bg-[#7C6EF7]/8 border border-[#7C6EF7]/20 rounded-2xl mb-5 flex items-start gap-3">
-                <TrendingUp className="w-5 h-5 text-[#7C6EF7] shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-medium text-white mb-0.5">
-                    Panašiems vartotojams rasta vidutiniškai <span className="text-[#9D8EFF]">18 tinkamų darbo pasiūlymų</span> per pirmą savaitę
-                  </p>
-                  <p className="text-xs text-white/35">Sutaupo ~4 val/sav.</p>
+                <div className="ob-btn-row">
+                  <button className="ob-btn-back" onClick={() => update({ step: 4 })}>
+                    <ArrowLeft strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
+                  <button className="ob-btn-primary" onClick={() => update({ step: 6 })}>
+                    Tęsti <ArrowRight strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
                 </div>
               </div>
+            )}
 
-              {/* Summary card */}
-              <div className="p-5 bg-white/3 border border-white/7 rounded-2xl space-y-3 mb-5">
-                {[
-                  { label: 'El. paštas', value: state.email },
-                  state.position && { label: 'Pozicija', value: state.position },
-                  state.skills && { label: 'Įgūdžiai', value: state.skills },
-                  state.cities.length > 0 && { label: 'Miestai', value: state.cities.join(', ') },
-                  state.salaryMin && { label: 'Min. atlyginimas', value: `€${state.salaryMin}/mėn.` },
-                  state.workFormat && { label: 'Darbo formatas', value: WORK_FORMATS.find((wf) => wf.value === state.workFormat)?.label },
-                  state.experienceLevel && { label: 'Patirtis', value: EXPERIENCE_LEVELS.find((el) => el.value === state.experienceLevel)?.label },
-                ]
-                  .filter(Boolean)
-                  .map((row) => {
+            {/* ── Step 6: Summary + paywall ──────────────────────────────────── */}
+            {state.step === 6 && (
+              <div>
+                <div className="ob-icon-box" style={{ background: 'color-mix(in oklab, var(--accent) 10%, transparent)', border: '1px solid color-mix(in oklab, var(--accent) 20%, transparent)' }}>
+                  ✓
+                </div>
+                <h1 className="ob-h1">Profilis paruoštas!</h1>
+                <p className="ob-sub">Peržiūrėkite savo nustatymus ir aktyvuokite AI darbo paiešką.</p>
+
+                <div className="ob-social">
+                  <span className="ob-social-icon">📈</span>
+                  <div>
+                    <p className="ob-social-text">
+                      Panašiems vartotojams rasta vidutiniškai{' '}
+                      <strong>18 tinkamų darbo pasiūlymų</strong> per pirmą savaitę
+                    </p>
+                    <p className="ob-social-sub">Sutaupo ~4 val/sav.</p>
+                  </div>
+                </div>
+
+                <div className="ob-summary">
+                  {[
+                    { label: 'El. paštas', value: state.email },
+                    state.position && { label: 'Pozicija', value: state.position },
+                    state.skills && { label: 'Įgūdžiai', value: state.skills },
+                    state.cities.length > 0 && { label: 'Miestai', value: state.cities.join(', ') },
+                    state.salaryMin && { label: 'Min. atlyginimas', value: `€${state.salaryMin}/mėn.` },
+                    state.workFormat && { label: 'Formatas', value: WORK_FORMATS.find((wf) => wf.value === state.workFormat)?.label },
+                    state.experienceLevel && { label: 'Patirtis', value: EXPERIENCE_LEVELS.find((el) => el.value === state.experienceLevel)?.label },
+                  ].filter(Boolean).map((row) => {
                     const r = row as { label: string; value: string | undefined }
                     return (
-                      <div key={r.label} className="flex justify-between text-sm gap-4">
-                        <span className="text-white/40 shrink-0">{r.label}</span>
-                        <span className="text-white font-medium text-right truncate">{r.value}</span>
+                      <div key={r.label} className="ob-summary-row">
+                        <span className="ob-summary-k">{r.label}</span>
+                        <span className="ob-summary-v">{r.value}</span>
                       </div>
                     )
                   })}
-              </div>
-
-              {/* What they get */}
-              <div className="p-4 bg-white/2 border border-white/6 rounded-xl mb-5 space-y-2">
-                {[
-                  '🔍 AI kasdien skaituoja 5 lietuviškus darbo portalus',
-                  '🎯 Tik labiausiai tinkami pasiūlymai su įvertinimu 1–10',
-                  '📧 El. pašto pranešimas, kai atsiranda naujų atitikimų',
-                ].map((item) => (
-                  <p key={item} className="text-sm text-white/45">{item}</p>
-                ))}
-              </div>
-
-              {error && (
-                <div className="flex items-start gap-2.5 text-red-400 text-sm bg-red-500/8 border border-red-500/20 rounded-xl px-4 py-3 mb-4">
-                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                  {error}
                 </div>
-              )}
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => update({ step: 5 })}
-                  className="px-4 py-3 bg-white/4 border border-white/8 rounded-xl text-white/45 hover:text-white transition"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handleFinish}
-                  disabled={loading}
-                  className="flex-1 py-3.5 bg-[#7C6EF7] hover:bg-[#9D8EFF] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl transition flex items-center justify-center gap-2 text-base"
-                >
-                  {loading ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                      Kraunama...
-                    </span>
-                  ) : (
-                    <>
-                      Aktyvuoti Pro · €10/mėn.
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
+                <div className="ob-perks">
+                  {[
+                    '🔍 AI kasdien skaituoja 5 lietuviškus darbo portalus',
+                    '🎯 Tik labiausiai tinkami pasiūlymai su įvertinimu 1–10',
+                    '📧 El. pašto pranešimas, kai atsiranda naujų atitikimų',
+                  ].map((item) => (
+                    <p key={item} className="ob-perk">{item}</p>
+                  ))}
+                </div>
+
+                {error && (
+                  <div className="ob-error" style={{ marginBottom: 16 }}>
+                    <AlertCircle />
+                    {error}
+                  </div>
+                )}
+
+                <div className="ob-btn-row">
+                  <button className="ob-btn-back" onClick={() => update({ step: 5 })}>
+                    <ArrowLeft strokeWidth={2.5} style={{ width: 16, height: 16 }} />
+                  </button>
+                  <button className="ob-btn-primary" onClick={handleFinish} disabled={loading}>
+                    {loading ? 'Kraunama...' : <>Aktyvuoti Pro · €10/mėn. <ArrowRight strokeWidth={2.5} style={{ width: 16, height: 16 }} /></>}
+                  </button>
+                </div>
+                <p className="ob-skip-note">7 dienos nemokamai · Saugi Stripe apmokėjimas · Atšaukti galima bet kada</p>
               </div>
-              <p className="text-center text-xs text-white/25 mt-4">
-                7 dienos nemokamai · Saugi Stripe apmokėjimas · Atšaukti galima bet kada
-              </p>
-            </div>
-          )}
+            )}
 
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

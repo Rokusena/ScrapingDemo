@@ -18,10 +18,15 @@ export default async function PreferencesPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-1">Paieškos nustatymai</h1>
-        <p className="text-gray-400">
-          Nurodykite ko ieškote — AI naudos šiuos nustatymus skenuodamas CVBankas.lt kasdien.
+      <div style={{ marginBottom: 32 }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--ink-4)', marginBottom: 8 }}>
+          // nustatymai
+        </div>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, letterSpacing: '-.01em', margin: '0 0 6px' }}>
+          Paieškos nustatymai
+        </h1>
+        <p style={{ fontSize: 14, color: 'var(--ink-4)', margin: 0 }}>
+          Nurodykite ko ieškote — AI naudos šiuos nustatymus skenuodamas 5 portalus kasdien.
         </p>
       </div>
 

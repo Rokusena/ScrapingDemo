@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Trash2 } from 'lucide-react'
 
 export default function ClearMatchesButton() {
   const [loading, setLoading] = useState(false)
@@ -14,9 +13,7 @@ export default function ClearMatchesButton() {
     setLoading(true)
     try {
       const res = await fetch('/api/clear-matches', { method: 'DELETE' })
-      if (res.ok) {
-        router.refresh()
-      }
+      if (res.ok) router.refresh()
     } finally {
       setLoading(false)
     }
@@ -26,9 +23,17 @@ export default function ClearMatchesButton() {
     <button
       onClick={handleClear}
       disabled={loading}
-      className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-red-950/40 hover:bg-red-950/60 border border-red-800/50 text-red-400 rounded-lg transition disabled:opacity-50"
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: 6,
+        padding: '7px 14px',
+        background: 'transparent',
+        border: '1px solid rgba(180,40,40,.3)',
+        color: 'rgba(180,40,40,.7)',
+        borderRadius: 8, fontSize: 12,
+        cursor: 'pointer', opacity: loading ? .5 : 1,
+        transition: 'opacity .15s',
+      }}
     >
-      <Trash2 className="w-4 h-4" />
       {loading ? 'Valoma...' : 'Išvalyti visus'}
     </button>
   )

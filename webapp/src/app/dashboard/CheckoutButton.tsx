@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Zap } from 'lucide-react'
 
 export default function CheckoutButton() {
   const [loading, setLoading] = useState(false)
@@ -27,10 +26,17 @@ export default function CheckoutButton() {
     <button
       onClick={handleCheckout}
       disabled={loading}
-      className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-60 text-white text-sm font-semibold rounded-lg transition flex-shrink-0"
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: 8,
+        padding: '10px 20px',
+        background: 'var(--accent-2)', color: 'var(--ink)',
+        border: 'none', borderRadius: 10,
+        fontSize: 13, fontWeight: 700, cursor: 'pointer',
+        opacity: loading ? .5 : 1, flexShrink: 0,
+        transition: 'opacity .15s',
+      }}
     >
-      <Zap className="w-4 h-4" />
-      {loading ? 'Kraunama...' : 'Aktyvuoti Pro'}
+      {loading ? 'Kraunama...' : 'Aktyvuoti Pro →'}
     </button>
   )
 }

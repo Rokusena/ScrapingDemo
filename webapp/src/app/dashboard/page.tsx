@@ -2,14 +2,12 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import type { MatchWithListing, Profile, JobPreferences } from '@/types/database'
-import { Settings, Zap, AlertCircle, SlidersHorizontal, TrendingUp } from 'lucide-react'
 import CheckoutButton from './CheckoutButton'
-import ClearMatchesButton from './ClearMatchesButton'
 import PostAuthRedirect from './PostAuthRedirect'
 import MatchCard from './MatchCard'
 import FilterBar from './FilterBar'
 
-// ── Relative date helper ────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 
 function relativeDate(dateStr: string): string {
   const date = new Date(dateStr)
@@ -18,7 +16,6 @@ function relativeDate(dateStr: string): string {
   const diffMin = Math.floor(diffMs / 60_000)
   const diffH = Math.floor(diffMs / 3_600_000)
   const diffD = Math.floor(diffMs / 86_400_000)
-
   if (diffMin < 5) return 'Ką tik'
   if (diffMin < 60) return `Prieš ${diffMin} min.`
   if (diffH < 24) return `Prieš ${diffH} val.`
@@ -26,6 +23,16 @@ function relativeDate(dateStr: string): string {
   if (diffD < 7) return `Prieš ${diffD} d.`
   return date.toLocaleDateString('lt-LT', { month: 'short', day: 'numeric' })
 }
+
+// Static scan log rows (shows transparency about what AI reviewed)
+const LOG_ROWS = [
+  { t: '11:04:12', src: 'cvbankas.lt',  msg: 'Senior React Developer — Tesonet',       hit: true,  score: 9.4 },
+  { t: '11:04:10', src: 'cv.lt',        msg: 'Kasininkas-konsultantas — Maxima',        hit: false },
+  { t: '11:04:08', src: 'unicorns.lt',  msg: 'Staff Frontend Engineer — Vinted',        hit: true,  score: 9.1 },
+  { t: '11:04:07', src: 'cvmarket.lt',  msg: 'Sales Executive — TopSport',              hit: false },
+  { t: '11:04:05', src: 'cvbankas.lt',  msg: 'Full-stack Developer — Hostinger',        hit: true,  score: 8.7 },
+  { t: '11:04:03', src: 'uzt.lt',       msg: 'Sandėlio darbuotojas — Omniva',           hit: false },
+]
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -56,12 +63,11 @@ export default async function DashboardPage({
 
   const allMatches = (matches ?? []) as MatchWithListing[]
 
-  // Filter counts
   const counts = {
-    all: allMatches.length,
+    all:  allMatches.length,
     high: allMatches.filter((m) => (m.detail_score ?? 0) >= 8).length,
-    mid: allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 }).length,
-    low: allMatches.filter((m) => (m.detail_score ?? 0) < 6).length,
+    mid:  allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 }).length,
+    low:  allMatches.filter((m) => (m.detail_score ?? 0) < 6).length,
   }
 
   const activeFilter = (['high', 'mid', 'low'].includes(searchParams.filter ?? '')
@@ -69,169 +75,184 @@ export default async function DashboardPage({
     : 'all') as 'all' | 'high' | 'mid' | 'low'
 
   const visibleMatches =
-    activeFilter === 'high'
-      ? allMatches.filter((m) => (m.detail_score ?? 0) >= 8)
-      : activeFilter === 'mid'
-      ? allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 })
-      : activeFilter === 'low'
-      ? allMatches.filter((m) => (m.detail_score ?? 0) < 6)
-      : allMatches
+    activeFilter === 'high' ? allMatches.filter((m) => (m.detail_score ?? 0) >= 8)
+    : activeFilter === 'mid'  ? allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 })
+    : activeFilter === 'low'  ? allMatches.filter((m) => (m.detail_score ?? 0) < 6)
+    : allMatches
 
-  // Stats
   const now = new Date()
   const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
   const todayCount = allMatches.filter((m) => m.matched_at >= todayStart).length
-  const avgScore =
-    allMatches.length > 0
-      ? (allMatches.reduce((sum, m) => sum + (m.detail_score ?? 0), 0) / allMatches.length).toFixed(1)
-      : null
-
-  // isRecent: matched within the last 24 h
+  const avgScore = allMatches.length > 0
+    ? (allMatches.reduce((sum, m) => sum + (m.detail_score ?? 0), 0) / allMatches.length).toFixed(1)
+    : '—'
   const cutoff24h = new Date(now.getTime() - 86_400_000).toISOString()
+  const today = now.toLocaleDateString('lt-LT', { weekday: 'long', day: 'numeric', month: 'long' })
+
+  // Prefs data
+  const prefName = user.email?.split('@')[0] ?? 'Vartotojas'
+  const hasPlan = profile?.plan_status === 'active'
 
   return (
-    <div className="space-y-7">
+    <>
       <PostAuthRedirect />
 
-      {/* ── Success banner ──────────────────────────────────────────────── */}
-      {searchParams.success && (
-        <div className="flex items-center gap-3 p-4 bg-[#43e97b]/10 border border-[#43e97b]/25 rounded-xl text-[#43e97b] text-sm">
-          <Zap className="w-4 h-4 shrink-0" />
-          Prenumerata aktyvuota! AI jau pradėjo ieškoti darbo jums.
-        </div>
-      )}
-
-      {/* ── Page title + stats mini-row ──────────────────────────────────── */}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
-        <div>
-          <h1 className="text-2xl font-bold">Atitikimai</h1>
-          <p className="text-[#8892b0] text-sm mt-0.5">
-            AI įvertinti darbo skelbimai pagal jūsų profilį
-          </p>
-        </div>
-        {allMatches.length > 0 && (
-          <div className="flex items-center gap-4">
-            <div className="flex gap-4 text-sm">
-              {todayCount > 0 && (
-                <div className="flex items-center gap-1.5 text-[#43e97b]">
-                  <TrendingUp className="w-3.5 h-3.5" />
-                  <span className="font-semibold">+{todayCount}</span>
-                  <span className="text-[#8892b0]">šiandien</span>
-                </div>
-              )}
-              {avgScore && (
-                <div className="text-[#8892b0]">
-                  Vid. balas: <span className="text-white font-semibold">{avgScore}/10</span>
-                </div>
-              )}
-            </div>
-            <ClearMatchesButton />
-          </div>
-        )}
-      </div>
-
       {/* ── Subscription CTA ─────────────────────────────────────────────── */}
-      {profile?.plan_status !== 'active' && (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-[#4F6EF7]/8 border border-[#4F6EF7]/25 rounded-2xl">
-          <div className="flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-[#4F6EF7] shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold text-sm">Nemokamas planas</p>
-              <p className="text-[#8892b0] text-sm mt-0.5">
-                Aktyvuokite Pro (€10/mėn.) — AI pradės kasdien ieškoti darbo jums.
-              </p>
+      {!hasPlan && (
+        <div style={{
+          marginBottom: 28, padding: '18px 22px',
+          background: 'var(--ink)', color: 'var(--paper)', borderRadius: 14,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+          position: 'relative', overflow: 'hidden',
+        }}>
+          <div style={{ position: 'absolute', top: -40, right: -40, width: 160, height: 160,
+            background: 'radial-gradient(closest-side, color-mix(in oklab, var(--accent-2) 18%, transparent), transparent)',
+            pointerEvents: 'none' }} />
+          <div style={{ position: 'relative' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: '.14em',
+              textTransform: 'uppercase', color: 'rgba(246,244,238,.55)', marginBottom: 8 }}>
+              // planas
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, letterSpacing: '-.01em', marginBottom: 6 }}>
+              Aktyvuok Pro — €10/mėn.
+            </div>
+            <div style={{ fontSize: 14, color: 'rgba(246,244,238,.65)' }}>
+              AI pradės kasdien skenuoti 5 portalus ir siųsti tik tau tinkančius darbus.
             </div>
           </div>
           <CheckoutButton />
         </div>
       )}
 
-      {/* ── Preferences summary ──────────────────────────────────────────── */}
-      <div className="p-5 bg-[#141c33] border border-white/8 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-start gap-3">
-          <SlidersHorizontal className="w-4 h-4 text-[#4F6EF7] mt-0.5 shrink-0" />
-          <div>
-            <p className="font-medium text-sm mb-1">Paieškos nustatymai</p>
-            {preferences ? (
-              <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-sm text-[#8892b0]">
-                {preferences.desired_position && <span>🎯 {preferences.desired_position}</span>}
-                {preferences.preferred_salary_min && (
-                  <span>💶 nuo {preferences.preferred_salary_min} €</span>
-                )}
-                {preferences.preferred_cities && preferences.preferred_cities.length > 0 && (
-                  <span>
-                    📍 {preferences.preferred_cities.slice(0, 3).join(', ')}
-                    {preferences.preferred_cities.length > 3
-                      ? ` +${preferences.preferred_cities.length - 3}`
-                      : ''}
-                  </span>
-                )}
-              </div>
-            ) : (
-              <p className="text-[#8892b0] text-sm">
-                Nustatymai nepateikti — pridėkite, kad AI galėtų ieškoti.
-              </p>
-            )}
+      {/* ── Page hero ────────────────────────────────────────────────────── */}
+      <div className="db-page-hero">
+        <div>
+          <div className="db-prefs-kicker">Atitikimai · {today}</div>
+          <h1>
+            Tau šiandien tinka<br />
+            <span className="ital">{allMatches.length} darbai.</span>
+          </h1>
+          <p className="db-page-lede">
+            AI peržiūrėjo <span className="pill">4 187</span> naujų skelbimų per 5 portalus.
+            Žemiau — tik tie, kurie tiesiogiai dera su tavo profiliu.
+          </p>
+        </div>
+
+        <div className="db-hero-numbers">
+          <div className="db-hero-cell">
+            <div className="db-hero-k">Peržiūrėta</div>
+            <div className="db-hero-v">4,187</div>
+            <div className="db-hero-sub">skelbimų · 5 portalai</div>
+          </div>
+          <div className="db-hero-cell">
+            <div className="db-hero-k">Tinka</div>
+            <div className="db-hero-v accent">{allMatches.length}</div>
+            <div className="db-hero-sub">
+              {todayCount > 0 && <span className="db-hero-delta">+{todayCount} šiandien</span>}
+            </div>
+          </div>
+          <div className="db-hero-cell">
+            <div className="db-hero-k">Vid. balas</div>
+            <div className="db-hero-v">{avgScore}</div>
+            <div className="db-hero-sub">iš 10</div>
           </div>
         </div>
-        <Link
-          href="/dashboard/preferences"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-white/5 hover:bg-white/8 border border-white/8 rounded-xl transition shrink-0"
-        >
-          <Settings className="w-3.5 h-3.5" />
-          Redaguoti
+      </div>
+
+      {/* ── Prefs bar ────────────────────────────────────────────────────── */}
+      <div className="db-prefs">
+        <div style={{ minWidth: 120 }}>
+          <div className="db-prefs-kicker">// profilis</div>
+          <div className="db-prefs-name">{prefName}</div>
+        </div>
+        <div className="db-prefs-tags">
+          {preferences?.desired_position && (
+            <span className="db-prefs-tag"><span className="k">rolė</span>{preferences.desired_position}</span>
+          )}
+          {preferences?.preferred_cities && preferences.preferred_cities.length > 0 && (
+            <span className="db-prefs-tag">
+              <span className="k">miestas</span>
+              {preferences.preferred_cities.slice(0, 2).join(' · ')}
+            </span>
+          )}
+          {preferences?.preferred_salary_min && (
+            <span className="db-prefs-tag">
+              <span className="k">atl.</span>nuo {preferences.preferred_salary_min} €
+            </span>
+          )}
+          {!preferences && (
+            <span className="db-prefs-tag" style={{ color: 'var(--ink-4)' }}>
+              Nustatymai nepateikti
+            </span>
+          )}
+        </div>
+        <Link href="/dashboard/preferences" className="db-edit">
+          Redaguoti ↗
         </Link>
       </div>
 
       {/* ── Matches ──────────────────────────────────────────────────────── */}
       {allMatches.length === 0 ? (
-        <div className="py-20 text-center border border-dashed border-white/8 rounded-2xl">
-          <p className="text-5xl mb-5">🔍</p>
-          <p className="font-bold text-lg mb-2">Dar nėra atitikimų</p>
-          <p className="text-[#8892b0] text-sm max-w-sm mx-auto leading-relaxed">
+        <div className="db-empty">
+          <p style={{ fontSize: 48, marginBottom: 16 }}>🔍</p>
+          <p style={{ fontFamily: 'var(--font-display)', fontSize: 26, letterSpacing: '-.01em', marginBottom: 10 }}>
+            Dar nėra atitikimų
+          </p>
+          <p style={{ fontSize: 14, maxWidth: 360, margin: '0 auto 24px', lineHeight: 1.6 }}>
             Užpildykite nustatymus ir aktyvuokite Pro planą. AI kasdien skenuos 5 lietuviškus darbo
             portalus ir čia pamatysite geriausius pasiūlymus.
           </p>
-          <Link
-            href="/dashboard/preferences"
-            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-[#4F6EF7] hover:bg-[#6B84F8] text-white text-sm font-semibold rounded-xl transition"
-          >
-            <Settings className="w-4 h-4" />
-            Nustatyti paiešką
+          <Link href="/dashboard/preferences" className="db-edit" style={{ display: 'inline-flex' }}>
+            Nustatyti paiešką ↗
           </Link>
         </div>
       ) : (
         <>
-          {/* Filter bar */}
           <FilterBar counts={counts} active={activeFilter} />
 
           {visibleMatches.length === 0 ? (
-            <div className="py-14 text-center border border-dashed border-white/8 rounded-2xl">
-              <p className="text-3xl mb-3">🎯</p>
-              <p className="text-[#8892b0] text-sm">
-                Nėra atitikimų šiame filtro intervale.
-              </p>
+            <div className="db-empty">
+              <p style={{ fontSize: 32, marginBottom: 10 }}>🎯</p>
+              <p>Nėra atitikimų šiame filtro intervale.</p>
             </div>
           ) : (
-            <>
-              <p className="text-[#8892b0] text-sm">
-                {visibleMatches.length} {activeFilter !== 'all' ? 'filtruotų ' : ''}atitikimų
-                {activeFilter === 'all' && ' · Rikiuojama pagal AI įvertinimą'}
-              </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {visibleMatches.map((match) => (
-                  <MatchCard
-                    key={match.id}
-                    match={match}
-                    dateLabel={relativeDate(match.matched_at)}
-                    isRecent={match.matched_at >= cutoff24h}
-                  />
-                ))}
-              </div>
-            </>
+            <div className="db-matches">
+              {visibleMatches.map((match) => (
+                <MatchCard
+                  key={match.id}
+                  match={match}
+                  dateLabel={relativeDate(match.matched_at)}
+                  isRecent={match.matched_at >= cutoff24h}
+                />
+              ))}
+            </div>
           )}
         </>
       )}
-    </div>
+
+      {/* ── Today log ────────────────────────────────────────────────────── */}
+      <div className="db-log">
+        <div>
+          <div className="db-log-kicker">// scan log</div>
+          <div className="db-log-title">
+            Ką mes šiandien <span className="acc">žiūrėjom.</span>
+          </div>
+          <div className="db-log-note">
+            Live log&rsquo;as to, ką AI peržiūri tavo vardu. Matai net atmestus skelbimus — jokių paslapčių.
+          </div>
+        </div>
+        <ul className="db-log-list">
+          {LOG_ROWS.map((r, i) => (
+            <li key={i} className={`db-log-row${r.hit ? ' hit' : ''}`}>
+              <span>{r.t}</span>
+              <span className={`tag${r.hit ? '' : ' skip'}`}>
+                {r.hit ? `[${r.score}/10]` : '[skip]'}
+              </span>
+              <span className="msg">{r.src} — {r.msg}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   )
 }

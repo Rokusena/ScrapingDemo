@@ -3,240 +3,425 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import {
-  ArrowRight,
-  CheckCircle,
-  BrainCircuit,
-  Rss,
-  Mail,
-  ChevronDown,
-  ChevronUp,
-  Star,
-  Zap,
-  Shield,
-  Clock,
-  Sparkles,
-  TrendingUp,
-} from 'lucide-react'
 
-// ── Data ─────────────────────────────────────────────────────────────────────
+// ─── Design system CSS ────────────────────────────────────────────────────────
 
-const STATS = [
-  { value: '5', label: 'darbo šaltiniai' },
-  { value: 'Kasdien', label: 'atnaujinama' },
-  { value: 'AI 1–10', label: 'įvertinimas' },
-]
+const CSS = `
+:root {
+  --ink:        #0c0c0a;
+  --ink-2:      #2a2a27;
+  --ink-3:      #55554f;
+  --ink-4:      #86867e;
+  --paper:      #f6f4ee;
+  --paper-2:    #efece3;
+  --paper-3:    #e6e2d5;
+  --line:       #d9d5c6;
+  --line-2:     #c3beab;
+  --accent:     #1f4d3d;
+  --accent-ink: #f6f4ee;
+  --accent-2:   #d7f26a;
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-sans:    "Inter Tight", Inter, -apple-system, system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+}
+.ld-root { box-sizing: border-box; background: var(--paper); color: var(--ink);
+  font-family: var(--font-sans); font-feature-settings: "ss01","cv11";
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  line-height: 1.45; }
+.ld-root *, .ld-root *::before, .ld-root *::after { box-sizing: border-box; }
+.ld-root a { color: inherit; text-decoration: none; }
+.ld-root button { font-family: inherit; cursor: pointer; border: none; background: none; padding: 0; }
 
-const HOW_IT_WORKS = [
-  {
-    num: '01',
-    icon: <BrainCircuit className="w-6 h-6 text-[#7C6EF7]" />,
-    title: 'Užpildykite profilį',
-    desc: 'Įkelkite CV — AI automatiškai nuskaito ir užpildo jūsų pageidavimus. Užtrunka 2 minutes.',
-  },
-  {
-    num: '02',
-    icon: <Rss className="w-6 h-6 text-[#7C6EF7]" />,
-    title: 'AI skaituoja kasdien',
-    desc: 'Automatiškai perrenkame CVBankas.lt, CV-Online.lt, CVmarket.lt ir kitus portalus — kiekvieną dieną.',
-  },
-  {
-    num: '03',
-    icon: <Mail className="w-6 h-6 text-[#7C6EF7]" />,
-    title: 'Gaukite geriausius pasiūlymus',
-    desc: 'Matote tik labiausiai tinkančius darbus su AI įvertinimu 1–10 ir paaiškinimu, kodėl jie atitinka.',
-  },
-]
+/* Type */
+.ld-display {
+  font-family: var(--font-display); font-weight: 400;
+  letter-spacing: -0.025em; line-height: 0.96;
+  font-size: clamp(52px, 7.6vw, 120px);
+}
+.ld-display .ital { font-style: italic; }
+.ld-display .acc  { color: var(--accent); }
+.ld-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+.ld-section-title { font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(36px, 4.2vw, 64px); letter-spacing: -0.02em; line-height: 1.02; margin: 0; }
 
-const FEATURES = [
-  {
-    icon: <Zap className="w-6 h-6 text-[#7C6EF7]" />,
-    title: 'Greitas AI vertinimas',
-    desc: 'GPT-4o modelis peržiūri kiekvieną darbo skelbimą ir įvertina, kaip gerai jis atitinka jūsų profilį. Sutaupykite valandas rankinės paieškos.',
-    badge: '3 sluoksnių filtravimas',
-  },
-  {
-    icon: <Shield className="w-6 h-6 text-[#7C6EF7]" />,
-    title: '5 lietuviški portalai',
-    desc: 'Skanuojame CVBankas.lt, CV-Online.lt, CVmarket.lt, Unicorns.lt ir UZT.lt — visa lietuviška darbo rinka vienoje vietoje.',
-    badge: 'Pilnas aprėptis',
-  },
-  {
-    icon: <Clock className="w-6 h-6 text-[#7C6EF7]" />,
-    title: 'Kasdieniai el. pranešimai',
-    desc: 'Gaukite dienos santrauką su geriausiais jums tinkančiais pasiūlymais tiesiai į el. paštą. Niekada nepraleiskite geros galimybės.',
-    badge: 'Automatinis',
-  },
-]
+/* Layout */
+.ld-wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.ld-wrap-narrow { max-width: 920px; margin: 0 auto; padding: 0 28px; }
 
-const TESTIMONIALS = [
+/* Nav */
+.ld-nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px);
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  border-bottom: 1px solid var(--line); }
+.ld-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.ld-logo { font-family: var(--font-display); font-size: 24px; font-style: italic;
+  letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+.ld-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  display: inline-block; transform: translateY(-2px); }
+.ld-nav-links { display: flex; gap: 28px; font-size: 13.5px; color: var(--ink-3); }
+.ld-nav-links a:hover { color: var(--ink); }
+.ld-nav-cta { display: flex; align-items: center; gap: 10px; }
+@media (max-width: 760px) { .ld-nav-links { display: none; } }
+
+/* Buttons */
+.ld-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px;
+  font-weight: 500; letter-spacing: -0.005em; padding: 10px 16px;
+  border-radius: var(--r-md);
+  transition: transform .12s ease, background .15s ease, color .15s ease, border-color .15s ease; }
+.ld-btn-primary { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
+.ld-btn-primary:hover { transform: translateY(-1px); background: #1e1e1a; }
+.ld-btn-primary .arrow { transition: transform .15s ease; }
+.ld-btn-primary:hover .arrow { transform: translate(2px,0); }
+.ld-btn-ghost { color: var(--ink-2); border: 1px solid var(--line); background: transparent; }
+.ld-btn-ghost:hover { border-color: var(--ink-3); color: var(--ink); }
+.ld-btn-accent { background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent); }
+.ld-btn-accent:hover { transform: translateY(-1px); background: #173a2e; }
+.ld-btn-lg { padding: 14px 22px; font-size: 15px; border-radius: 12px; }
+
+/* Hero */
+.ld-hero { padding: 60px 0 30px; position: relative; }
+.ld-hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: end; }
+@media (max-width: 900px) { .ld-hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+.ld-hero-badge { display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); padding: 6px 10px 6px 8px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: color-mix(in oklab, var(--paper) 70%, white); margin-bottom: 28px; }
+.ld-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+  animation: ldpulse 2s infinite; }
+@keyframes ldpulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.ld-hero-sub { margin-top: 28px; max-width: 520px; font-size: 17.5px; line-height: 1.5;
+  color: var(--ink-2); letter-spacing: -0.005em; }
+.ld-hero-sub .strike { text-decoration: line-through; color: var(--ink-4); text-decoration-thickness: 1.5px; }
+.ld-hero-sub .high { background: var(--accent-2); padding: 0 3px; border-radius: 3px; color: var(--ink); }
+.ld-hero-ctas { display: flex; gap: 10px; align-items: center; margin-top: 32px; flex-wrap: wrap; }
+.ld-hero-meta { margin-top: 18px; font-size: 12.5px; color: var(--ink-4); font-family: var(--font-mono); }
+.ld-hero-meta .dot { margin: 0 8px; color: var(--line-2); }
+.ld-hero-visual { position: relative; min-height: 540px; display: flex; align-items: stretch; }
+
+/* Stats widget */
+.ld-statsA { width: 100%; background: var(--ink); color: var(--paper); border-radius: 18px;
+  padding: 28px; position: relative; overflow: hidden; font-feature-settings: "tnum"; }
+.ld-statsA::before { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(60% 50% at 80% 0%, color-mix(in oklab, var(--accent-2) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, transparent 70%, rgba(0,0,0,.2));
+  pointer-events: none; }
+.ld-statsA-head { display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 14px; position: relative; }
+.ld-statsA-head .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(246,244,238,.55); }
+.ld-statsA-live { display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #d7f26a; }
+.ld-live-dot { width: 6px; height: 6px; border-radius: 50%; background: #d7f26a;
+  box-shadow: 0 0 8px #d7f26a; animation: ldblink 1.6s infinite; }
+@keyframes ldblink { 50% { opacity: .35; } }
+.ld-statsA-counter { padding: 22px 0 10px; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; position: relative; }
+.ld-big { font-family: var(--font-display); font-size: clamp(54px, 6vw, 88px);
+  line-height: 1; letter-spacing: -0.03em; font-weight: 400; }
+.ld-big-match { color: var(--accent-2); }
+.ld-arrow-drop { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(246,244,238,.55); margin-top: 8px; }
+.ld-statsA-row { padding-top: 16px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,.08);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; position: relative; }
+.ld-cell-k { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(246,244,238,.4); margin-bottom: 6px; }
+.ld-cell-v { font-size: 15px; font-weight: 500; }
+.ld-statsA-sources { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; position: relative; }
+.ld-source-chip { font-family: var(--font-mono); font-size: 11px; padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
+  color: rgba(246,244,238,.8); display: inline-flex; align-items: center; gap: 6px; }
+.ld-source-ok { color: var(--accent-2); font-size: 12px; }
+.ld-statsA-log { margin-top: 22px; font-family: var(--font-mono); font-size: 12px;
+  color: rgba(246,244,238,.55); height: 78px; overflow: hidden; position: relative;
+  border-top: 1px dashed rgba(255,255,255,.12); padding-top: 14px; }
+.ld-log-line { line-height: 1.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ld-log-t { color: rgba(246,244,238,.35); margin-right: 10px; }
+.ld-log-hit { color: var(--accent-2); }
+.ld-log-skip { color: rgba(246,244,238,.35); }
+
+/* Portals */
+.ld-portals { padding: 46px 0 30px; border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); margin-top: 70px; }
+.ld-portals-grid { display: grid; grid-template-columns: auto repeat(5, 1fr);
+  align-items: center; gap: 40px; }
+.ld-portals-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-3); max-width: 160px; line-height: 1.5; }
+.ld-portals-item { font-family: var(--font-display); font-size: 22px; color: var(--ink-2);
+  letter-spacing: -0.01em; opacity: .75; transition: opacity .2s;
+  display: flex; align-items: center; justify-content: center; }
+.ld-portals-item:hover { opacity: 1; }
+@media (max-width: 900px) {
+  .ld-portals-grid { grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .ld-portals-label { grid-column: 1 / -1; max-width: none; text-align: center; }
+}
+
+/* How it works */
+.ld-how { padding: 120px 0 100px; border-bottom: 1px solid var(--line); }
+.ld-how-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 60px; }
+@media (max-width: 800px) { .ld-how-head { grid-template-columns: 1fr; } }
+.ld-how-lede { font-size: 17px; color: var(--ink-2); max-width: 460px; }
+.ld-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.ld-step { padding: 32px 28px 30px; border-right: 1px solid var(--line); position: relative; }
+.ld-step:last-child { border-right: none; }
+@media (max-width: 900px) {
+  .ld-steps { grid-template-columns: 1fr; }
+  .ld-step { border-right: none; border-bottom: 1px solid var(--line); }
+  .ld-step:last-child { border-bottom: none; }
+}
+.ld-step-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  color: var(--ink-4); margin-bottom: 26px; display: flex; justify-content: space-between; align-items: center; }
+.ld-step-ico { color: var(--accent); }
+.ld-step h3 { font-family: var(--font-display); font-weight: 400; font-size: 30px;
+  letter-spacing: -0.015em; line-height: 1.1; margin-bottom: 12px; margin-top: 0; }
+.ld-step p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; max-width: 320px; margin: 0; }
+.ld-step-time { margin-top: 18px; font-family: var(--font-mono); font-size: 11px;
+  color: var(--ink-4); letter-spacing: 0.04em; }
+
+/* Pricing */
+.ld-pricing { padding: 120px 0; border-bottom: 1px solid var(--line); }
+.ld-price-head { text-align: left; margin-bottom: 50px; max-width: 680px; }
+.ld-price-head p { font-size: 17px; color: var(--ink-2); margin-top: 16px; margin-bottom: 0; }
+.ld-price-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: stretch; }
+@media (max-width: 900px) { .ld-price-grid { grid-template-columns: 1fr; } }
+.ld-price-card { background: var(--ink); color: var(--paper); border-radius: 18px; padding: 40px;
+  position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.ld-price-card::before { content: ""; position: absolute; top: -30%; right: -20%; width: 400px; height: 400px;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--accent-2) 20%, transparent), transparent);
+  pointer-events: none; }
+.ld-price-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent-2); margin-bottom: 20px; }
+.ld-price-big { font-family: var(--font-display); font-size: 96px; line-height: 1;
+  letter-spacing: -0.03em; position: relative; z-index: 1; }
+.ld-price-per { font-family: var(--font-mono); font-size: 13px; color: rgba(246,244,238,.6); margin-top: 6px; }
+.ld-price-features { margin: 32px 0 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; position: relative; }
+.ld-price-features li { display: flex; gap: 8px; align-items: flex-start;
+  font-size: 13.5px; color: rgba(246,244,238,.85); }
+.ld-check { color: var(--accent-2); flex-shrink: 0; margin-top: 2px; }
+.ld-price-cta-row { display: flex; gap: 10px; align-items: center; margin-top: 28px; flex-wrap: wrap; position: relative; }
+.ld-price-foot { font-family: var(--font-mono); font-size: 11px; color: rgba(246,244,238,.5); margin-top: 14px; position: relative; }
+.ld-price-side { display: flex; flex-direction: column; gap: 16px; justify-content: space-between; }
+.ld-price-why { background: var(--paper-2); border: 1px solid var(--line); border-radius: 14px; padding: 28px; }
+.ld-price-why h3 { font-family: var(--font-display); font-weight: 400; font-size: 26px;
+  letter-spacing: -0.015em; margin-bottom: 14px; margin-top: 0; }
+.ld-price-why p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; margin: 0; }
+.ld-why-row { display: flex; justify-content: space-between; padding: 10px 0;
+  border-bottom: 1px dashed var(--line-2); font-size: 13px; }
+.ld-why-row:last-child { border-bottom: none; }
+.ld-why-k { color: var(--ink-3); font-family: var(--font-mono); font-size: 12px; }
+.ld-why-v { font-weight: 500; }
+
+/* FAQ */
+.ld-faq { padding: 110px 0; border-bottom: 1px solid var(--line); }
+.ld-faq-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 60px; }
+@media (max-width: 820px) { .ld-faq-grid { grid-template-columns: 1fr; gap: 32px; } }
+.ld-faq-list { border-top: 1px solid var(--line); }
+.ld-faq-item { border-bottom: 1px solid var(--line); }
+.ld-faq-q { width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 4px; text-align: left; font-family: var(--font-display); font-size: 22px;
+  font-weight: 400; letter-spacing: -0.01em; color: var(--ink); transition: color .15s; }
+.ld-faq-q:hover { color: var(--accent); }
+.ld-faq-plus { font-family: var(--font-mono); font-size: 20px; color: var(--ink-3);
+  transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
+.ld-faq-item.open .ld-faq-plus { transform: rotate(45deg); }
+.ld-faq-a { max-height: 0; overflow: hidden; transition: max-height .28s ease;
+  color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+.ld-faq-item.open .ld-faq-a { max-height: 400px; }
+.ld-faq-a-inner { padding: 0 4px 24px; max-width: 620px; }
+
+/* CTA strip */
+.ld-cta-strip { padding: 110px 0; background: var(--paper); position: relative; overflow: hidden; }
+.ld-cta-strip .ld-display { font-size: clamp(56px, 8vw, 120px); }
+.ld-cta-strip .ld-hero-ctas { margin-top: 36px; }
+
+/* Footer */
+.ld-footer { background: var(--ink); color: var(--paper); padding: 60px 0 30px; }
+.ld-footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+@media (max-width: 800px) { .ld-footer-grid { grid-template-columns: 1fr 1fr; } }
+.ld-footer .ld-logo { color: var(--paper); }
+.ld-footer-desc { color: rgba(246,244,238,.55); font-size: 13.5px; max-width: 340px; margin-top: 14px; line-height: 1.55; }
+.ld-footer-col-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(246,244,238,.5); margin-bottom: 16px; }
+.ld-footer-links { padding: 0; margin: 0; list-style: none; display: grid; gap: 10px; }
+.ld-footer-links a { font-size: 13.5px; color: rgba(246,244,238,.85); }
+.ld-footer-links a:hover { color: var(--paper); }
+.ld-footer-bot { border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px;
+  display: flex; justify-content: space-between; font-family: var(--font-mono);
+  font-size: 11px; color: rgba(246,244,238,.5); }
+`
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const HOW_STEPS = [
   {
-    name: 'Tomas K.',
-    role: 'Backend Programuotojas',
-    text: 'Nebepraleidu valandų naršydamas darbo portalus. GaukDarba kiekvieną rytą siunčia tiksliai tai, ko ieškau.',
-    score: 5,
+    num: '01', kicker: 'Upload',
+    title: 'Įkelk savo CV.',
+    desc: 'AI per 2 minutes išskaido tavo patirtį, stack\'ą, atlyginimo lūkesčius ir net tai, ko tu vengi. Nereikia pildyti anketų.',
+    time: '≈ 90 sek.',
   },
   {
-    name: 'Agnė M.',
-    role: 'Projektų vadovė',
-    text: 'AI įvertinimas 1–10 labai padeda — iš karto matau, kurie skelbimai verti atidesnio žvilgsnio ir kuriuos galiu praleisti.',
-    score: 5,
+    num: '02', kicker: 'Scan',
+    title: 'Mes skaitome viską.',
+    desc: 'Kiekvieną rytą 06:00 LT laiku peržiūrime ~4 000 naujų skelbimų per 5 portalus. GPT-4o įvertina kiekvieną 1–10 balu.',
+    time: 'Kasdien · 06:00',
   },
   {
-    name: 'Mantas P.',
-    role: 'Finansų analitikas',
-    text: 'Per pirmą savaitę radau 3 labai tinkančius pasiūlymus, kurių pats nepastebėjau naršydamas CV-Online. Verta kiekvieno euro.',
-    score: 5,
+    num: '03', kicker: 'Match',
+    title: 'Tu matai tik tai, kas tinka.',
+    desc: 'Gauni el. laišką su top-5 pasiūlymais, kiekvienam — paaiškinimą kodėl. Jokio scrolling, jokio šlamšto.',
+    time: 'Rytas · inbox',
   },
 ]
 
 const PRICING_FEATURES = [
-  'Neribota darbo paieška',
-  'AI vertinimas 1–10 balų',
-  'El. pašto pranešimai',
-  'Asmeninis valdymo skydelis',
-  'Paaiškinimai, kodėl tinka',
-  'Atnaujinama kasdien',
-  '5 lietuviški darbo portalai',
+  'Neribota AI paieška',
+  '5 Lietuvos portalai',
+  'Score 1–10 su paaiškinimu',
+  'Kasdienės el. ataskaitos',
+  'Asmeninis dashboard',
+  'Filtravimas pagal miestą',
+  'Atlyginimų benchmark',
+  'Atšaukti bet kada',
 ]
 
-const FAQ_ITEMS = [
+const FAQ = [
   {
-    q: 'Kaip veikia AI atitikimas?',
-    a: 'Naudojame GPT-4o-mini modelį, kuris išanalizuoja jūsų profilį (pozicija, įgūdžiai, miestas, atlyginimas) ir lygina su kiekvienu darbo skelbimu. Kiekvienas atitikimas gauna įvertinimą 1–10 su paaiškinimu, kodėl jis tinkamas.',
+    q: 'Kaip AI žino, kas man tinka?',
+    a: 'Įkelus CV, GPT-4o-mini išskaido 24+ signalus: tavo stack\'ą, pozicijos lygį, miestą, atlyginimo ruožą, industrijas. Kiekvienas skelbimas lyginamas su šiuo profiliu ir gauna 1–10 balų su trumpu paaiškinimu — kodėl tinka arba kur spraga.',
   },
   {
-    q: 'Kokius darbo portalus skanuojate?',
-    a: 'CVBankas.lt, CV-Online.lt, CVmarket.lt, Unicorns.lt (startuoliai) ir UZT.lt (valstybinė užimtumo tarnyba). Visi skelbimai normalizuojami į vieną formatą.',
+    q: 'Kokius portalus skenuojate?',
+    a: 'CVBankas.lt, CV.lt, CVmarket.lt, Unicorns.lt (startuoliai) ir UZT.lt. Visos skelbimų formuluotės normalizuojamos — pamatai tą pačią struktūrą, nesvarbu iš kur skelbimas.',
   },
   {
-    q: 'Kaip dažnai atnaujinami skelbimai?',
-    a: 'Kasdien — kiekvieną rytą apie 6 val. (Lietuvos laiku). Nauji atitikimai atsiranda jūsų valdymo skydelyje ir siunčiami el. paštu.',
+    q: 'Kiek dažnai gaunu pranešimus?',
+    a: 'Vieną laišką rytą, ~06:30. Viduje — top-5 rezultatai. Jei norisi daugiau, dashboard\'e visada rasi pilną sąrašą su filtrais.',
   },
   {
-    q: 'Ar galiu atšaukti prenumeratą?',
-    a: 'Taip, bet kada. Jokių slaptų mokesčių ar įsipareigojimų. Atsiskaitymas vyksta per saugią Stripe sistemą.',
+    q: 'Kas su mano CV duomenimis?',
+    a: 'CV apdorojamas vieną kartą ekstrahuoti signalams, po to failas saugomas privačiame Supabase bucket\'e tik tau. Trinam per 24 val. jei atšauki paskyrą. Row-level security — niekas, išskyrus tave, nemato tavo profilio.',
   },
   {
-    q: 'Ar mano duomenys saugūs?',
-    a: 'Taip. Naudojame Supabase duomenų bazę su eilutės lygio saugumo politika (RLS) — kiekvienas vartotojas mato tik savo duomenis. Slaptažodžio nereikia — autentifikacija vyksta per el. pašto kodą.',
+    q: 'Ar galiu atšaukti?',
+    a: 'Taip, bet kada, iš dashboard\'o. Jokio skambučio, jokių klausimų. Pirmos 7 dienos — nemokamai, kortelės nereikia iš karto.',
+  },
+  {
+    q: 'Ar tai veikia jei nesu IT srityje?',
+    a: 'Visiškai. Modelio treniravimas apima visus sektorius — logistika, finansai, marketingas, sveikata, gamyba. Jei tavo sritis yra lietuviškuose portaluose, mes ją randame.',
   },
 ]
 
-// ── Components ────────────────────────────────────────────────────────────────
+// ─── Live Stats Widget ────────────────────────────────────────────────────────
 
-function StarRow({ count }: { count: number }) {
+function LiveStats() {
+  const [scanned, setScanned] = useState(3742)
+  const [matches, setMatches] = useState(17)
+  const [logs, setLogs] = useState([
+    { t: '11:04:02', msg: 'cvbankas.lt — Senior React Developer', hit: true, score: 9 },
+    { t: '11:04:01', msg: 'cv.lt — Marketing Manager', hit: false, score: null },
+    { t: '11:03:59', msg: 'unicorns.lt — Backend Engineer (Go)', hit: true, score: 8 },
+    { t: '11:03:57', msg: 'cvmarket.lt — Sales Assistant', hit: false, score: null },
+  ])
+
+  useEffect(() => {
+    const samples = [
+      { src: 'cvbankas.lt', roles: ['Product Designer', 'DevOps Engineer', 'Junior PM', 'Staff Engineer'] },
+      { src: 'cv.lt',       roles: ['Finance Analyst', 'UX Researcher', 'Data Engineer'] },
+      { src: 'unicorns.lt', roles: ['Growth Lead', 'Platform Engineer', 'Full-stack Dev'] },
+      { src: 'cvmarket.lt', roles: ['Support Lead', 'Account Exec', 'Ops Manager'] },
+      { src: 'uzt.lt',      roles: ['HR Specialist', 'Accountant', 'Project Coordinator'] },
+    ]
+    const id = setInterval(() => {
+      setScanned((s) => s + Math.floor(1 + Math.random() * 3))
+      if (Math.random() < 0.28) setMatches((m) => m + 1)
+      const s = samples[Math.floor(Math.random() * samples.length)]
+      const role = s.roles[Math.floor(Math.random() * s.roles.length)]
+      const hit = Math.random() < 0.35
+      const now = new Date()
+      const stamp = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`
+      setLogs((prev) => [
+        { t: stamp, msg: `${s.src} — ${role}`, hit, score: hit ? 6 + Math.floor(Math.random() * 4) : null },
+        ...prev,
+      ].slice(0, 5))
+    }, 1400)
+    return () => clearInterval(id)
+  }, [])
+
   return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} className="w-4 h-4 fill-[#f7b731] text-[#f7b731]" />
-      ))}
-    </div>
-  )
-}
+    <div className="ld-statsA">
+      <div className="ld-statsA-head">
+        <span className="label">Network · Live feed</span>
+        <span className="ld-statsA-live">
+          <span className="ld-live-dot" /> Scanning now
+        </span>
+      </div>
 
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className="border border-white/8 rounded-2xl overflow-hidden bg-white/2 backdrop-blur-sm">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/4 transition"
-      >
-        <span className="font-medium text-sm">{q}</span>
-        {open ? (
-          <ChevronUp className="w-4 h-4 text-white/40 shrink-0" />
-        ) : (
-          <ChevronDown className="w-4 h-4 text-white/40 shrink-0" />
-        )}
-      </button>
-      {open && (
-        <div className="px-6 pb-5 text-white/50 text-sm leading-relaxed border-t border-white/6 pt-4">
-          {a}
+      <div className="ld-statsA-counter">
+        <div>
+          <div className="ld-big">{scanned.toLocaleString('en')}</div>
+          <div className="ld-arrow-drop">Skelbimų peržiūrėta / jobs scanned</div>
         </div>
-      )}
-    </div>
-  )
-}
-
-// Simulated dashboard mockup for the hero
-function DashboardMockup() {
-  return (
-    <div className="relative w-full max-w-3xl mx-auto mt-14">
-      {/* Glow under the card */}
-      <div className="absolute inset-x-16 bottom-0 h-24 bg-[#7C6EF7]/20 blur-3xl rounded-full" />
-
-      <div className="relative rounded-2xl border border-white/10 bg-[#0e0e18]/90 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/60">
-        {/* Window chrome */}
-        <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/6 bg-white/3">
-          <span className="w-3 h-3 rounded-full bg-red-500/60" />
-          <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-          <span className="w-3 h-3 rounded-full bg-green-500/60" />
-          <span className="ml-4 text-xs text-white/30 font-mono">gaukdarba.lt/dashboard</span>
+        <div style={{ textAlign: 'right' }}>
+          <div className="ld-big ld-big-match">{matches}</div>
+          <div className="ld-arrow-drop">Tinka tau / matched for you</div>
         </div>
+      </div>
 
-        {/* Dashboard content */}
-        <div className="p-5">
-          {/* Header row */}
-          <div className="flex items-center justify-between mb-5">
-            <div>
-              <p className="text-xs text-white/40 mb-0.5">Šiandien rasta</p>
-              <p className="text-2xl font-bold text-white">12 atitikimų</p>
-            </div>
-            <div className="flex gap-2">
-              <div className="px-3 py-1.5 bg-[#7C6EF7]/20 border border-[#7C6EF7]/30 rounded-lg text-xs text-[#9D8EFF] font-medium">
-                Kasdienė ataskaita
-              </div>
-            </div>
-          </div>
+      <div className="ld-statsA-row">
+        <div><div className="ld-cell-k">Avg score</div><div className="ld-cell-v">8.4 / 10</div></div>
+        <div><div className="ld-cell-k">Šaltinių</div><div className="ld-cell-v">5 portalai</div></div>
+        <div><div className="ld-cell-k">Atnaujinta</div><div className="ld-cell-v">prieš 2 min</div></div>
+      </div>
 
-          {/* Stats row */}
-          <div className="grid grid-cols-3 gap-3 mb-5">
-            {[
-              { label: 'Vidutinis balas', value: '8.4/10', color: 'text-[#43e97b]' },
-              { label: 'Šaltiniai', value: '5 portalai', color: 'text-[#9D8EFF]' },
-              { label: 'Nauji šiandien', value: '+12', color: 'text-[#60b4ff]' },
-            ].map((s) => (
-              <div key={s.label} className="bg-white/4 rounded-xl p-3 border border-white/5">
-                <p className="text-xs text-white/40 mb-1">{s.label}</p>
-                <p className={`text-base font-bold ${s.color}`}>{s.value}</p>
-              </div>
-            ))}
-          </div>
+      <div className="ld-statsA-sources">
+        {['cvbankas.lt', 'cv.lt', 'cvmarket.lt', 'unicorns.lt', 'uzt.lt'].map((s) => (
+          <span className="ld-source-chip" key={s}>
+            <span className="ld-source-ok">●</span>{s}
+          </span>
+        ))}
+      </div>
 
-          {/* Job listings */}
-          <div className="space-y-2">
-            {[
-              { title: 'Senior Frontend Developer', company: 'Tesonet', score: 9, portal: 'CV-Online', badge: 'Puikiai tinka' },
-              { title: 'React Programuotojas', company: 'Hostinger', score: 8, portal: 'CVBankas', badge: 'Labai tinka' },
-              { title: 'Full-stack Developer', company: 'Nord Security', score: 7, portal: 'Unicorns.lt', badge: 'Tinka' },
-            ].map((job) => (
-              <div key={job.title} className="flex items-center justify-between p-3 bg-white/3 rounded-xl border border-white/5 hover:bg-white/5 transition-colors group">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-8 h-8 rounded-lg bg-[#7C6EF7]/20 border border-[#7C6EF7]/20 flex items-center justify-center shrink-0">
-                    <span className="text-[10px] font-bold text-[#9D8EFF]">{job.company.charAt(0)}</span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">{job.title}</p>
-                    <p className="text-xs text-white/40">{job.company} · {job.portal}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 shrink-0 ml-2">
-                  <span className="text-xs text-white/40 hidden sm:block">{job.badge}</span>
-                  <span className={`text-sm font-bold px-2 py-0.5 rounded-lg ${job.score >= 9 ? 'bg-[#43e97b]/15 text-[#43e97b]' : job.score >= 7 ? 'bg-[#7C6EF7]/15 text-[#9D8EFF]' : 'bg-white/8 text-white/60'}`}>
-                    {job.score}/10
-                  </span>
-                </div>
-              </div>
-            ))}
+      <div className="ld-statsA-log">
+        {logs.map((l, i) => (
+          <div className="ld-log-line" key={l.t + i} style={{ opacity: 1 - i * 0.2 }}>
+            <span className="ld-log-t">{l.t}</span>
+            <span className={l.hit ? 'ld-log-hit' : 'ld-log-skip'}>
+              {l.hit ? `[MATCH ${l.score}/10]` : '[skip]'}
+            </span>{' '}
+            {l.msg}
           </div>
-        </div>
+        ))}
       </div>
     </div>
   )
 }
 
-// ── Page ─────────────────────────────────────────────────────────────────────
+// ─── FAQ Item ─────────────────────────────────────────────────────────────────
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`ld-faq-item${open ? ' open' : ''}`}>
+      <button className="ld-faq-q" onClick={() => setOpen((o) => !o)}>
+        <span>{q}</span>
+        <span className="ld-faq-plus">+</span>
+      </button>
+      <div className="ld-faq-a">
+        <div className="ld-faq-a-inner">{a}</div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -249,70 +434,38 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen text-white overflow-x-hidden" style={{ background: '#0a0a0f' }}>
-      <style>{`
-        :root {
-          --bg-primary: #0a0a0f;
-          --bg-secondary: #0e0e16;
-          --bg-card: #14141e;
-          --border: rgba(255,255,255,0.07);
-          --accent: #7C6EF7;
-          --accent-hover: #9D8EFF;
-          --text-primary: #ffffff;
-          --text-secondary: rgba(255,255,255,0.45);
-          --success: #43e97b;
-          --warning: #f7b731;
-        }
-        .glow-accent { box-shadow: 0 0 40px rgba(124,110,247,0.15); }
-        .text-gradient { background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #7C6EF7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .card-hover { transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
-        .card-hover:hover { border-color: rgba(124,110,247,0.3); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,110,247,0.08); }
-      `}</style>
+    <div className="ld-root">
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       {/* ── Navbar ─────────────────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="font-extrabold text-xl tracking-tight">
-            <span className="text-[var(--accent)]">Gauk</span>Darba
-          </span>
-          <div className="hidden md:flex items-center gap-8 text-sm text-white/45">
-            <a href="#how-it-works" className="hover:text-white transition">Kaip veikia</a>
-            <a href="#pricing" className="hover:text-white transition">Kaina</a>
-            <a href="#faq" className="hover:text-white transition">DUK</a>
+      <nav className="ld-nav">
+        <div className="ld-wrap ld-nav-inner">
+          <Link href="/" className="ld-logo">
+            <span className="ld-logo-dot" />
+            gaukdarba
+          </Link>
+          <div className="ld-nav-links">
+            <a href="#how">Kaip veikia</a>
+            <a href="#pricing">Kaina</a>
+            <a href="#faq">DUK</a>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="ld-nav-cta">
             {loggedIn ? (
               <>
-                <Link
-                  href="/dashboard"
-                  className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition"
-                >
+                <Link href="/dashboard" className="ld-btn ld-btn-ghost" style={{ display: 'none' }}>
                   Mano skydelis
                 </Link>
-                <button
-                  onClick={async () => {
-                    const supabase = createClient()
-                    await supabase.auth.signOut()
-                    setLoggedIn(false)
-                  }}
-                  className="px-4 py-2 text-sm text-white/45 hover:text-white border border-white/8 hover:border-white/20 rounded-xl transition"
-                >
-                  Atsijungti
-                </button>
+                <Link href="/dashboard" className="ld-btn ld-btn-primary">
+                  Mano skydelis <span className="arrow">→</span>
+                </Link>
               </>
             ) : (
               <>
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-sm text-white/45 hover:text-white border border-white/8 hover:border-white/20 rounded-xl transition"
-                >
+                <Link href="/login" className="ld-btn ld-btn-ghost" style={{ fontSize: 13.5 }}>
                   Prisijungti
                 </Link>
-                <Link
-                  href="/onboarding"
-                  className="px-4 py-2 text-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition glow-accent"
-                >
-                  7 dienos nemokamai
+                <Link href="/onboarding" className="ld-btn ld-btn-primary">
+                  Pradėti nemokamai <span className="arrow">→</span>
                 </Link>
               </>
             )}
@@ -321,321 +474,257 @@ export default function LandingPage() {
       </nav>
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
-        {/* Background gradients */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-[#7C6EF7]/8 blur-[120px]" />
-          <div className="absolute top-20 left-1/4 w-[400px] h-[400px] rounded-full bg-[#a855f7]/5 blur-[100px]" />
-          <div className="absolute top-10 right-1/4 w-[300px] h-[300px] rounded-full bg-[#6366f1]/6 blur-[80px]" />
+      <section className="ld-hero">
+        <div className="ld-wrap ld-hero-grid">
+          <div>
+            <div className="ld-hero-badge">
+              <span className="ld-pulse" />
+              AI job matching · Lithuania
+            </div>
+
+            <h1 className="ld-display">
+              Nustok slinkti<br />
+              <span className="ital acc">CVBankas</span> valandomis.
+            </h1>
+
+            <p className="ld-hero-sub">
+              Įkelk CV. Mes kasdien peržiūrime{' '}
+              <span className="strike">4 187 skelbimus</span>{' '}
+              <span className="high">ir siunčiam tik tuos ~5</span>, kurie tikrai tinka
+              tavo profiliui — su AI įvertinimu ir paaiškinimu kodėl.
+            </p>
+
+            <div className="ld-hero-ctas">
+              <Link href="/onboarding" className="ld-btn ld-btn-primary ld-btn-lg">
+                Įkelk CV — 7 d. nemokamai <span className="arrow">→</span>
+              </Link>
+              <a href="#how" className="ld-btn ld-btn-ghost ld-btn-lg">
+                Kaip tai veikia
+              </a>
+            </div>
+
+            <div className="ld-hero-meta">
+              ⌁ Kortelės nereikia <span className="dot">·</span> Atšaukti bet kada <span className="dot">·</span> Made in Vilnius
+            </div>
+          </div>
+
+          <div className="ld-hero-visual">
+            <LiveStats />
+          </div>
         </div>
 
-        {/* Subtle grid overlay */}
-        <div className="pointer-events-none absolute inset-0 opacity-20" style={{
-          backgroundImage: 'linear-gradient(rgba(124,110,247,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,110,247,0.06) 1px, transparent 1px)',
-          backgroundSize: '64px 64px'
-        }} />
-
-        <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-8 text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full border border-[#7C6EF7]/25 bg-[#7C6EF7]/8 text-[#b8adff] text-sm font-medium">
-            <Sparkles className="w-3.5 h-3.5" />
-            AI darbo paieška Lietuvoje
-          </div>
-
-          {/* Headline */}
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.06] mb-6 tracking-tight">
-            Rask darbą{' '}
-            <span className="text-gradient">greičiau su AI</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Kasdien automatiškai skanuojame 5 lietuviškus darbo portalus ir AI pagalba
-            atrandame tuos skelbimus, kurie labiausiai atitinka <span className="text-white/80">jūsų</span> profilį.
-          </p>
-
-          {/* Primary CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/onboarding"
-              className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-2xl transition text-lg shadow-xl shadow-[#7C6EF7]/30 glow-accent"
-            >
-              Get Started Now
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/4 hover:bg-white/7 text-white/60 hover:text-white font-semibold rounded-2xl border border-white/8 hover:border-white/15 transition text-lg"
-            >
-              Kaip tai veikia?
-            </a>
-          </div>
-
-          <p className="mt-5 text-white/30 text-sm">
-            7 dienos nemokamai · Atšaukti galima bet kada · Banko kortele arba PayPal
-          </p>
-
-          {/* Social proof row */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            <div className="flex -space-x-2">
-              {['T','A','M','L','K'].map((l) => (
-                <div key={l} className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7C6EF7] to-[#a855f7] border-2 border-[#0a0a0f] flex items-center justify-center text-xs font-bold">
-                  {l}
-                </div>
+        {/* Portals strip */}
+        <div className="ld-wrap">
+          <div className="ld-portals">
+            <div className="ld-portals-grid">
+              <div className="ld-portals-label">Skenuojam kasdien / scanning daily</div>
+              {['CVBankas', 'CV.lt', 'CVmarket', 'Unicorns', 'UZT'].map((p) => (
+                <div className="ld-portals-item" key={p}>{p}</div>
               ))}
             </div>
-            <p className="text-white/40 text-sm">
-              <span className="text-white font-semibold">500+</span> darbo ieškančių šiandien
-            </p>
-          </div>
-        </div>
-
-        {/* Dashboard mockup */}
-        <div className="relative max-w-5xl mx-auto px-6 pb-20">
-          <DashboardMockup />
-        </div>
-      </section>
-
-      {/* ── Stats bar ──────────────────────────────────────────────────────── */}
-      <section className="border-y border-white/5 bg-white/2">
-        <div className="max-w-6xl mx-auto px-6 py-10">
-          <div className="grid grid-cols-3 gap-6 text-center">
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <p className="text-3xl md:text-4xl font-extrabold text-white mb-1">{s.value}</p>
-                <p className="text-sm text-white/40">{s.label}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
       {/* ── How it works ───────────────────────────────────────────────────── */}
-      <section id="how-it-works" className="max-w-6xl mx-auto px-6 py-28">
-        <div className="text-center mb-16">
-          <p className="text-[var(--accent)] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-            Kaip tai veikia
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Trys žingsniai</h2>
-          <p className="text-white/45 text-lg">
-            Iki tobulo darbo pasiūlymo per mažiau nei 2 minutes
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {HOW_IT_WORKS.map((s) => (
-            <div
-              key={s.num}
-              className="relative p-8 bg-[var(--bg-card)] border border-white/7 rounded-2xl card-hover"
-            >
-              <div className="flex items-center gap-3 mb-5">
-                <div className="p-2.5 rounded-xl bg-[#7C6EF7]/10 border border-[#7C6EF7]/15">
-                  {s.icon}
-                </div>
-                <span className="font-mono text-xs font-bold text-white/25 tracking-widest">
-                  {s.num}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold mb-2">{s.title}</h3>
-              <p className="text-white/45 leading-relaxed text-sm">{s.desc}</p>
+      <section id="how" className="ld-how">
+        <div className="ld-wrap">
+          <div className="ld-how-head">
+            <div>
+              <div className="ld-kicker" style={{ marginBottom: 14 }}>// how it works</div>
+              <h2 className="ld-section-title">
+                Trys žingsniai tarp<br />tavęs ir naujo darbo.
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Features ───────────────────────────────────────────────────────── */}
-      <section className="py-28 relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#7C6EF7]/5 blur-[100px]" />
-        </div>
-        <div className="relative max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-[var(--accent)] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-              Funkcijos
+            <p className="ld-how-lede">
+              Daug paieškos sistemų tiesiog rodo <em>daugiau</em> skelbimų.
+              Mes rodom <em>mažiau</em> — bet tikrai tavo.
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Kodėl verta rinktis GaukDarba
-            </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {FEATURES.map((f) => (
-              <div
-                key={f.title}
-                className="p-7 bg-[var(--bg-card)] border border-white/7 rounded-2xl flex flex-col gap-4 card-hover"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="p-2.5 rounded-xl bg-[#7C6EF7]/10 border border-[#7C6EF7]/15">
-                    {f.icon}
-                  </div>
-                  <span className="text-xs font-medium text-[#9D8EFF] bg-[#7C6EF7]/10 border border-[#7C6EF7]/15 px-2.5 py-1 rounded-full">
-                    {f.badge}
-                  </span>
+          <div className="ld-steps">
+            {HOW_STEPS.map((s) => (
+              <div className="ld-step" key={s.num}>
+                <div className="ld-step-num">
+                  <span>{s.num} / {s.kicker}</span>
+                  <span className="ld-step-ico">●</span>
                 </div>
-                <div>
-                  <h3 className="font-bold text-base mb-2">{f.title}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed">{f.desc}</p>
-                </div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+                <div className="ld-step-time">↳ {s.time}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Testimonials ───────────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 py-28">
-        <div className="text-center mb-16">
-          <p className="text-[var(--accent)] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-            Atsiliepimai
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Ką sako vartotojai</h2>
-          <div className="flex items-center justify-center gap-2 mt-3">
-            <div className="flex">
-              {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-[#f7b731] text-[#f7b731]" />)}
-            </div>
-            <span className="text-white/40 text-sm">4.9/5 iš 200+ atsiliepimų</span>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => (
-            <div
-              key={t.name}
-              className="p-7 bg-[var(--bg-card)] border border-white/7 rounded-2xl flex flex-col gap-4 card-hover"
-            >
-              <StarRow count={t.score} />
-              <p className="text-white/50 text-sm leading-relaxed flex-1">
-                &ldquo;{t.text}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7C6EF7] to-[#a855f7] flex items-center justify-center text-xs font-bold shrink-0">
-                  {t.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="font-semibold text-sm">{t.name}</p>
-                  <p className="text-white/35 text-xs">{t.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── Pricing ────────────────────────────────────────────────────────── */}
-      <section id="pricing" className="py-28 relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full bg-[#7C6EF7]/6 blur-[100px]" />
-        </div>
-        <div className="relative max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-[var(--accent)] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-              Kainodara
+      <section id="pricing" className="ld-pricing">
+        <div className="ld-wrap">
+          <div className="ld-price-head">
+            <div className="ld-kicker" style={{ marginBottom: 14 }}>// pricing</div>
+            <h2 className="ld-section-title">
+              Vienas planas.<br />Pigiau nei vienas vakarėlis.
+            </h2>
+            <p>
+              Jei per mėnesį sutaupysi bent 2 valandas naršydamas CVBankas — tai jau grąža.
+              Dauguma sutaupo daugiau.
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Paprasta kainodara</h2>
-            <p className="text-white/45 text-lg">Vienas planas — viskas įskaičiuota</p>
           </div>
 
-          <div className="max-w-sm mx-auto">
-            <div className="relative p-8 bg-gradient-to-b from-[#7C6EF7]/10 to-[var(--bg-card)] border border-[#7C6EF7]/25 rounded-3xl shadow-2xl shadow-[#7C6EF7]/10 glow-accent">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="px-4 py-1.5 bg-[var(--accent)] text-white text-xs font-bold rounded-full uppercase tracking-wide">
-                  Pro
+          <div className="ld-price-grid">
+            <div className="ld-price-card">
+              <div className="ld-price-tag">Pro · monthly</div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                <span className="ld-price-big">€10</span>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: 38, color: 'rgba(246,244,238,.4)', letterSpacing: '-.02em' }}>
+                  /mėn.
                 </span>
               </div>
+              <div className="ld-price-per">Billed monthly · VAT included · Stripe</div>
 
-              <div className="text-center mb-8">
-                <div className="flex items-end justify-center gap-1">
-                  <span className="text-6xl font-extrabold">€10</span>
-                  <span className="text-white/40 mb-2">/mėn.</span>
-                </div>
-                <p className="text-white/40 text-sm mt-2">
-                  Pirmos 7 dienos nemokamai · Atšaukti bet kada
-                </p>
-              </div>
-
-              <ul className="space-y-3 mb-8">
+              <ul className="ld-price-features">
                 {PRICING_FEATURES.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-white/55">
-                    <CheckCircle className="w-4 h-4 text-[var(--success)] shrink-0" />
+                  <li key={f}>
+                    <svg className="ld-check" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
                     {f}
                   </li>
                 ))}
               </ul>
 
-              {/* Social proof */}
-              <div className="mb-6 p-3 bg-white/4 rounded-xl border border-white/6 flex items-center gap-3">
-                <TrendingUp className="w-4 h-4 text-[var(--success)] shrink-0" />
-                <p className="text-xs text-white/50">
-                  Vartotojai vidutiniškai sutaupo <span className="text-white font-semibold">4 val/sav</span> darbo paieškoje
+              <div className="ld-price-cta-row">
+                <Link href="/onboarding" className="ld-btn ld-btn-lg"
+                  style={{ background: 'var(--accent-2)', color: 'var(--ink)', border: '1px solid var(--accent-2)' }}>
+                  Start 7-day trial <span className="arrow">→</span>
+                </Link>
+                <Link href="/dashboard" className="ld-btn ld-btn-lg"
+                  style={{ color: 'rgba(246,244,238,.85)', border: '1px solid rgba(255,255,255,.15)' }}>
+                  Pažiūrėk demo
+                </Link>
+              </div>
+              <div className="ld-price-foot">
+                No card required for trial · Cancel anytime from dashboard
+              </div>
+            </div>
+
+            <div className="ld-price-side">
+              <div className="ld-price-why">
+                <h3>Kodėl €10?</h3>
+                <p style={{ marginBottom: 18 }}>
+                  GPT-4o API skambučiai + 5 portalų scraping + infra. Mes turim padengti savo
+                  kaštus ir vystyti produktą — ne pumpuot ads&apos;us.
+                </p>
+                <div className="ld-why-row">
+                  <span className="ld-why-k">AI kaštai / user</span>
+                  <span className="ld-why-v">~€3.40</span>
+                </div>
+                <div className="ld-why-row">
+                  <span className="ld-why-k">Infra + scraping</span>
+                  <span className="ld-why-v">~€1.10</span>
+                </div>
+                <div className="ld-why-row">
+                  <span className="ld-why-k">Tavo laikas</span>
+                  <span className="ld-why-v">nekainuoja</span>
+                </div>
+              </div>
+              <div className="ld-price-why">
+                <h3>Kam tai netinka?</h3>
+                <p>
+                  Jei nesi aktyviai ieškantis darbo arba ieškai <em>pasyvių</em> galimybių —
+                  palik LinkedIn atidarytą. Mes optimizuojam aktyvių ieškotojų kelionę.
                 </p>
               </div>
-
-              <Link
-                href="/onboarding"
-                className="block w-full py-4 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-center transition text-lg glow-accent"
-              >
-                Get Started Now
-              </Link>
-              <p className="text-center text-xs text-white/30 mt-3">
-                7 dienos nemokamai · Nereikia korteles iš karto
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── FAQ ────────────────────────────────────────────────────────────── */}
-      <section id="faq" className="max-w-3xl mx-auto px-6 py-28">
-        <div className="text-center mb-16">
-          <p className="text-[var(--accent)] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-            DUK
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Dažni klausimai</h2>
+      <section id="faq" className="ld-faq">
+        <div className="ld-wrap ld-faq-grid">
+          <div>
+            <div className="ld-kicker" style={{ marginBottom: 14 }}>// faq</div>
+            <h2 className="ld-section-title">Dažni klausimai.</h2>
+            <p style={{ marginTop: 20, color: 'var(--ink-2)', fontSize: 15, lineHeight: 1.6, maxWidth: 360, marginBottom: 0 }}>
+              Nori daugiau? Rašyk —{' '}
+              <a href="mailto:labas@gaukdarba.lt" style={{ textDecoration: 'underline' }}>
+                labas@gaukdarba.lt
+              </a>. Atsakom tą pačią dieną.
+            </p>
+          </div>
+          <div className="ld-faq-list">
+            {FAQ.map((f) => (
+              <FaqItem key={f.q} q={f.q} a={f.a} />
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="space-y-3">
-          {FAQ_ITEMS.map((item) => (
-            <FaqItem key={item.q} {...item} />
-          ))}
+      {/* ── CTA strip ──────────────────────────────────────────────────────── */}
+      <section className="ld-cta-strip">
+        <div className="ld-wrap">
+          <div className="ld-kicker" style={{ marginBottom: 22 }}>// last thing</div>
+          <h2 className="ld-display">
+            Šiandien tau tinka<br />
+            <span className="ital acc">4 darbai.</span>
+          </h2>
+          <div className="ld-hero-ctas">
+            <Link href="/onboarding" className="ld-btn ld-btn-accent ld-btn-lg">
+              Įkelk CV → pamatyk juos <span className="arrow">→</span>
+            </Link>
+            <a href="#faq" className="ld-btn ld-btn-ghost ld-btn-lg">
+              Dar abejoji?
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
-      <footer className="border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-14">
-          <div className="grid sm:grid-cols-4 gap-8 mb-10">
-            <div className="sm:col-span-2">
-              <span className="font-extrabold text-xl tracking-tight block mb-3">
-                <span className="text-[var(--accent)]">Gauk</span>Darba
-              </span>
-              <p className="text-white/35 text-sm leading-relaxed max-w-xs">
-                AI darbo paieška Lietuvoje. Skanuojame 5 portalus kasdien ir siunčiame tik
-                jums tinkančius pasiūlymus.
+      <footer className="ld-footer">
+        <div className="ld-wrap">
+          <div className="ld-footer-grid">
+            <div>
+              <Link href="/" className="ld-logo">
+                <span className="ld-logo-dot" />
+                gaukdarba
+              </Link>
+              <p className="ld-footer-desc">
+                AI darbo paieška Lietuvai. Mes skaitom skelbimus, tu skaitai pasiūlymus.
+                Built in Vilnius 🇱🇹
               </p>
             </div>
             <div>
-              <p className="font-semibold text-sm mb-4">Produktas</p>
-              <ul className="space-y-2 text-sm text-white/35">
-                <li><a href="#how-it-works" className="hover:text-white transition">Kaip veikia</a></li>
-                <li><a href="#pricing" className="hover:text-white transition">Kainodara</a></li>
-                <li><a href="#faq" className="hover:text-white transition">DUK</a></li>
+              <div className="ld-footer-col-title">Produktas</div>
+              <ul className="ld-footer-links">
+                <li><a href="#how">Kaip veikia</a></li>
+                <li><a href="#pricing">Kaina</a></li>
+                <li><a href="#faq">DUK</a></li>
+                <li><Link href="/dashboard">Demo</Link></li>
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-sm mb-4">Paskyra</p>
-              <ul className="space-y-2 text-sm text-white/35">
-                <li><Link href="/onboarding" className="hover:text-white transition">Registracija</Link></li>
-                <li><Link href="/login" className="hover:text-white transition">Prisijungimas</Link></li>
-                <li><Link href="/dashboard" className="hover:text-white transition">Valdymo skydelis</Link></li>
+              <div className="ld-footer-col-title">Paskyra</div>
+              <ul className="ld-footer-links">
+                <li><Link href="/login">Prisijungti</Link></li>
+                <li><Link href="/onboarding">Registruotis</Link></li>
+                <li><Link href="/dashboard">Dashboard</Link></li>
+              </ul>
+            </div>
+            <div>
+              <div className="ld-footer-col-title">Kita</div>
+              <ul className="ld-footer-links">
+                <li><a href="#">Privatumas</a></li>
+                <li><a href="#">Sąlygos</a></li>
+                <li><a href="mailto:labas@gaukdarba.lt">labas@gaukdarba.lt</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/25 text-sm">
-              © {new Date().getFullYear()} GaukDarba. Visos teisės saugomos.
-            </p>
-            <p className="text-white/20 text-xs">
-              Sukurta Lietuvoje 🇱🇹
-            </p>
+          <div className="ld-footer-bot">
+            <span>© 2026 gaukdarba.lt</span>
+            <span>v.2026.04 · all quiet</span>
           </div>
         </div>
       </footer>
