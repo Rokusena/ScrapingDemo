@@ -102,29 +102,31 @@ def parse_cards(html: str, now_utc: str) -> list[dict]:
     soup = BeautifulSoup(html, "lxml")
     results: list[dict] = []
 
-    for card in soup.select("a.list__item"):
+    for card in soup.select('a[href*="/skelbimas/"]'):
         try:
             href = card.get("href", "")
             href_key = href.split("?")[0]
             if not href_key:
                 continue
 
-            job_url = BASE_URL + href if href.startswith("/") else href
+            job_url = BASE_URL + href_key
             job_id = make_job_id(href_key)
 
-            title_el = card.select_one(".title strong") or card.select_one(".title")
+            title_el = card.select_one("strong")
             title = clean(title_el.get_text()) if title_el else ""
             if len(title) < 3:
                 continue
 
-            company_el = card.select_one(".company")
-            company = clean(company_el.get_text()) if company_el else None
+            # Remaining lines after title: company, optional salary, location, then date metadata
+            all_lines = [clean(l) for l in card.get_text("\n").split("\n") if clean(l)]
+            data_lines = [
+                l for l in all_lines
+                if l != title and not l.startswith("Įkelta:") and not l.startswith("Galioja:")
+            ]
 
-            salary_el = card.select_one(".salary")
-            salary_raw = clean(salary_el.get_text()) if salary_el else None
-
-            location_el = card.select_one(".location")
-            location = clean(location_el.get_text()) if location_el else None
+            company   = data_lines[0] if data_lines else None
+            salary_raw = next((l for l in data_lines[1:] if "€" in l), None)
+            location   = next((l for l in data_lines[1:] if "€" not in l), None)
 
             results.append({
                 "job_id": job_id,

@@ -255,7 +255,6 @@ def run_additional_scrapers(supabase) -> None:
         ("cvmarket",  "scrape_cvmarket",  "run"),
         ("unicorns",  "scrape_unicorns",  "run"),
         ("uzt",       "scrape_uzt",       "run"),
-        ("facebook",  "scrape_facebook",  "run"),
     ]
 
     for source, module_name, func_name in EXTRA_SCRAPERS:
