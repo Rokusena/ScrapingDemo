@@ -48,7 +48,7 @@ export async function POST() {
           Accept: 'application/vnd.github+json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ref: 'main' }),
+        body: JSON.stringify({ ref: 'master' }),
       }
     )
 
