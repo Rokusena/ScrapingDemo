@@ -309,35 +309,6 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
     }))
   }
 
-  const pollScanStatus = (scanId: string) => {
-    const poll = async () => {
-      try {
-        const res = await fetch(`/api/scan-now?scan_id=${scanId}`)
-        const data = await res.json()
-
-        if (data.status === 'complete') {
-          const result = data.result || {}
-          setScanResult(
-            result.matches_found > 0
-              ? `Rasta ${result.matches_found} atitikimų!${result.top_match ? ` Geriausias: ${result.top_match.title} (${result.top_match.score}/10)` : ''}`
-              : 'Šiuo metu naujų atitikimų nerasta.'
-          )
-          setScanning(false)
-          router.refresh()
-        } else if (data.status === 'failed') {
-          setScanResult(data.result?.error || 'Skenavimas nepavyko')
-          setScanning(false)
-        } else {
-          setTimeout(poll, 3000)
-        }
-      } catch {
-        setScanResult('Nepavyko patikrinti skenavimo būsenos')
-        setScanning(false)
-      }
-    }
-    setTimeout(poll, 3000)
-  }
-
   const triggerScan = async () => {
     setScanning(true)
     setScanResult(null)
@@ -346,14 +317,13 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
       const data = await res.json()
 
       if (!res.ok) {
-        if (data.scan_id) { pollScanStatus(data.scan_id); return }
         setScanResult(data.error || 'Skenavimas nepavyko')
-        setScanning(false)
-        return
+      } else {
+        setScanResult('Skenavimas pradėtas! Rezultatai ateis el. paštu per kelias minutes.')
       }
-      pollScanStatus(data.scan_id)
     } catch {
       setScanResult('Nepavyko prisijungti prie skenavimo serverio')
+    } finally {
       setScanning(false)
     }
   }
@@ -595,7 +565,7 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
         {scanning && (
           <div className="pf-scanning" style={{ marginTop: 12 }}>
             <span className="pf-spin" style={{ fontSize: 16 }}>↻</span>
-            AI analizuoja darbo skelbimus pagal jūsų profilį... Tai gali užtrukti iki 5 minučių.
+            Paleidžiamas skenavimas...
           </div>
         )}
 

@@ -1,8 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-
-const PIPELINE_API_URL = process.env.PIPELINE_API_URL || 'http://localhost:8080'
-const API_SECRET = process.env.API_SECRET || ''
 
 export async function POST() {
   const supabase = await createClient()
@@ -14,7 +11,6 @@ export async function POST() {
     return NextResponse.json({ error: 'Neprisijungęs' }, { status: 401 })
   }
 
-  // Check that user has active preferences
   const { data: prefs } = await supabase
     .from('job_preferences')
     .select('user_id')
@@ -29,73 +25,36 @@ export async function POST() {
     )
   }
 
-  try {
-    const res = await fetch(`${PIPELINE_API_URL}/scan-now`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(API_SECRET ? { Authorization: `Bearer ${API_SECRET}` } : {}),
-      },
-      body: JSON.stringify({ user_id: user.id }),
-    })
+  const owner = process.env.GITHUB_REPO_OWNER
+  const repo = process.env.GITHUB_REPO_NAME
+  const pat = process.env.GITHUB_PAT
 
-    const data = await res.json()
-
-    if (!res.ok) {
-      return NextResponse.json(
-        { ...data, error: data.error || 'Skenavimas nepavyko' },
-        { status: res.status }
-      )
-    }
-
-    return NextResponse.json(data)
-  } catch {
-    return NextResponse.json(
-      { error: 'Nepavyko prisijungti prie skenavimo serverio' },
-      { status: 502 }
-    )
-  }
-}
-
-export async function GET(request: NextRequest) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    return NextResponse.json({ error: 'Neprisijungęs' }, { status: 401 })
-  }
-
-  const scanId = request.nextUrl.searchParams.get('scan_id')
-  if (!scanId) {
-    return NextResponse.json({ error: 'scan_id required' }, { status: 400 })
+  if (!owner || !repo || !pat) {
+    return NextResponse.json({ error: 'GitHub configuration missing' }, { status: 500 })
   }
 
   try {
     const res = await fetch(
-      `${PIPELINE_API_URL}/scan-status?scan_id=${encodeURIComponent(scanId)}`,
+      `https://api.github.com/repos/${owner}/${repo}/actions/workflows/matcher.yml/dispatches`,
       {
+        method: 'POST',
         headers: {
-          ...(API_SECRET ? { Authorization: `Bearer ${API_SECRET}` } : {}),
+          Authorization: `Bearer ${pat}`,
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ ref: 'main' }),
       }
     )
 
-    const data = await res.json()
-
     if (!res.ok) {
-      return NextResponse.json(
-        { error: data.error || 'Nepavyko patikrinti būsenos' },
-        { status: res.status }
-      )
+      const text = await res.text()
+      console.error('GitHub dispatch failed:', res.status, text)
+      return NextResponse.json({ error: 'Nepavyko paleisti skenavimo' }, { status: 502 })
     }
 
-    return NextResponse.json(data)
+    return NextResponse.json({ ok: true })
   } catch {
-    return NextResponse.json(
-      { error: 'Nepavyko prisijungti prie skenavimo serverio' },
-      { status: 502 }
-    )
+    return NextResponse.json({ error: 'Nepavyko paleisti skenavimo' }, { status: 502 })
   }
 }
