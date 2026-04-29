@@ -31,6 +31,8 @@ const CSS = `
   line-height: 1.45; }
 .ld-root *, .ld-root *::before, .ld-root *::after { box-sizing: border-box; }
 .ld-root a { color: inherit; text-decoration: none; }
+.ld-root a.ld-btn-primary { color: var(--paper); }
+.ld-root a.ld-btn-accent  { color: var(--accent-ink); }
 .ld-root button { font-family: inherit; cursor: pointer; border: none; background: none; padding: 0; }
 
 /* Type */
