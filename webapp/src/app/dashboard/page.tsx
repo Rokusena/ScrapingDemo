@@ -64,28 +64,37 @@ export default async function DashboardPage({
 
   const allMatches = (matches ?? []) as MatchWithListing[]
 
+  // Separate ignored from the rest — ignored only shown when explicitly filtered
+  const ignoredMatches = allMatches.filter((m) => m.application_status === 'ignored')
+  const activeMatches  = allMatches.filter((m) => m.application_status !== 'ignored')
+  const appliedMatches = allMatches.filter((m) => m.application_status === 'applied')
+
   const counts = {
-    all:  allMatches.length,
-    high: allMatches.filter((m) => (m.detail_score ?? 0) >= 8).length,
-    mid:  allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 }).length,
-    low:  allMatches.filter((m) => (m.detail_score ?? 0) < 6).length,
+    all:     activeMatches.length,
+    high:    activeMatches.filter((m) => (m.detail_score ?? 0) >= 8).length,
+    mid:     activeMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 }).length,
+    low:     activeMatches.filter((m) => (m.detail_score ?? 0) < 6).length,
+    applied: appliedMatches.length,
+    ignored: ignoredMatches.length,
   }
 
-  const activeFilter = (['high', 'mid', 'low'].includes(searchParams.filter ?? '')
+  const activeFilter = (['high', 'mid', 'low', 'applied', 'ignored'].includes(searchParams.filter ?? '')
     ? searchParams.filter
-    : 'all') as 'all' | 'high' | 'mid' | 'low'
+    : 'all') as 'all' | 'high' | 'mid' | 'low' | 'applied' | 'ignored'
 
   const visibleMatches =
-    activeFilter === 'high' ? allMatches.filter((m) => (m.detail_score ?? 0) >= 8)
-    : activeFilter === 'mid'  ? allMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 })
-    : activeFilter === 'low'  ? allMatches.filter((m) => (m.detail_score ?? 0) < 6)
-    : allMatches
+    activeFilter === 'high'    ? activeMatches.filter((m) => (m.detail_score ?? 0) >= 8)
+    : activeFilter === 'mid'   ? activeMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 })
+    : activeFilter === 'low'   ? activeMatches.filter((m) => (m.detail_score ?? 0) < 6)
+    : activeFilter === 'applied' ? appliedMatches
+    : activeFilter === 'ignored' ? ignoredMatches
+    : activeMatches
 
   const now = new Date()
   const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
-  const todayCount = allMatches.filter((m) => m.matched_at >= todayStart).length
-  const avgScore = allMatches.length > 0
-    ? (allMatches.reduce((sum, m) => sum + (m.detail_score ?? 0), 0) / allMatches.length).toFixed(1)
+  const todayCount = activeMatches.filter((m) => m.matched_at >= todayStart).length
+  const avgScore = activeMatches.length > 0
+    ? (activeMatches.reduce((sum, m) => sum + (m.detail_score ?? 0), 0) / activeMatches.length).toFixed(1)
     : '—'
   const cutoff24h = new Date(now.getTime() - 86_400_000).toISOString()
   const today = now.toLocaleDateString('lt-LT', { weekday: 'long', day: 'numeric', month: 'long' })
@@ -131,7 +140,7 @@ export default async function DashboardPage({
           <div className="db-prefs-kicker">Atitikimai · {today}</div>
           <h1>
             Tau šiandien tinka<br />
-            <span className="ital">{allMatches.length} darbai.</span>
+            <span className="ital">{activeMatches.length} darbai.</span>
           </h1>
           <p className="db-page-lede">
             AI peržiūrėjo <span className="pill">{(totalListings ?? 0).toLocaleString('lt-LT')}</span> naujų skelbimų per 5 portalus.
@@ -147,7 +156,7 @@ export default async function DashboardPage({
           </div>
           <div className="db-hero-cell">
             <div className="db-hero-k">Tinka</div>
-            <div className="db-hero-v accent">{allMatches.length}</div>
+            <div className="db-hero-v accent">{activeMatches.length}</div>
             <div className="db-hero-sub">
               {todayCount > 0 && <span className="db-hero-delta">+{todayCount} šiandien</span>}
             </div>

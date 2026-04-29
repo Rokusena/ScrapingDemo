@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import SignOutButton from '@/components/SignOutButton'
+import DashboardNav from './DashboardNav'
+import DashboardTopbar from './DashboardTopbar'
 
 // ─── Dashboard CSS ────────────────────────────────────────────────────────────
 
@@ -245,13 +247,6 @@ export default async function DashboardLayout({
 
   const initial = (user.email ?? 'U').charAt(0).toUpperCase()
 
-  const NAV_LINKS = [
-    { href: '/dashboard',             label: 'Atitikimai',  ico: '⊟', badge: newMatchCount > 0 ? String(newMatchCount) : null, active: true },
-    { href: '/dashboard/stats',       label: 'Statistika',  ico: '⏚', badge: null, active: false },
-    { href: '/dashboard',             label: 'Pranešimai',  ico: '⬡', badge: newMatchCount > 0 ? String(newMatchCount) : null, active: false },
-    { href: '/dashboard/preferences', label: 'CV profilis', ico: '✎', badge: null, active: false },
-    { href: '/dashboard/preferences', label: 'Nustatymai',  ico: '⚙', badge: null, active: false },
-  ]
 
   return (
     <div className="db-root">
@@ -266,19 +261,7 @@ export default async function DashboardLayout({
             </Link>
           </div>
 
-          <nav className="db-nav">
-            {NAV_LINKS.map((n) => (
-              <Link
-                key={n.label}
-                href={n.href}
-                className={`db-link${n.active ? ' active' : ''}`}
-              >
-                <span className="db-link-ico">{n.ico}</span>
-                <span style={{ flex: 1 }}>{n.label}</span>
-                {n.badge && <span className="db-link-badge">{n.badge}</span>}
-              </Link>
-            ))}
-          </nav>
+          <DashboardNav newMatchCount={newMatchCount} />
 
           {newMatchCount > 0 && (
             <div className="db-today">
@@ -297,22 +280,7 @@ export default async function DashboardLayout({
 
         {/* ── Main ─────────────────────────────────────────────────────────── */}
         <div className="db-main">
-          <div className="db-topbar">
-            <div className="db-crumb">
-              <span>gaukdarba</span>
-              <span className="sep">/</span>
-              <span className="cur">atitikimai</span>
-            </div>
-            <div className="db-topbar-right">
-              <span className="db-scan-chip">
-                <span className="db-scan-dot" />
-                Skenavimas aktyvus · next 06:00
-              </span>
-              <Link href="/dashboard/preferences" className="db-icon-btn" title="Nustatymai">
-                ⚙
-              </Link>
-            </div>
-          </div>
+          <DashboardTopbar />
 
           <div className="db-content">
             {children}

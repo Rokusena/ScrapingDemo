@@ -1,4 +1,5 @@
 export type PlanStatus = 'free' | 'active' | 'cancelled'
+export type ApplicationStatus = 'applied' | 'ignored' | 'no_response' | 'rejected' | 'interview' | 'offer'
 export type ExperienceLevel = 'intern' | 'junior' | 'mid' | 'senior'
 export type JobSource = 'cvbankas' | 'cvonline' | 'cvmarket' | 'unicorns' | 'uzt'
 export type WorkFormat = 'remote' | 'hybrid' | 'onsite'
@@ -57,6 +58,8 @@ export interface Match {
   reason: string | null
   matched_at: string
   notified: boolean
+  application_status: ApplicationStatus | null
+  applied_at: string | null
 }
 
 export interface MatchWithListing extends Match {
