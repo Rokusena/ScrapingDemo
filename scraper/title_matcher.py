@@ -89,6 +89,59 @@ ONSITE_KEYWORDS = [
     "on-site", "onsite", "on site", "office", "biure", "vietoje",
 ]
 
+# ── Lithuanian position name → ROLE_KEYWORDS key map ─────────────────────────
+# Handles common LT position names that don't word-overlap with English role keys.
+
+LT_POSITION_MAP = {
+    # IT roles
+    "pilno spektro programuotojas": "fullstack developer",
+    "pilno spektro":                "fullstack developer",
+    "web programuotojas":           "fullstack developer",
+    "web kūrėjas":                  "fullstack developer",
+    "programuotojas":               "fullstack developer",
+    "kūrėjas":                      "fullstack developer",
+    "priekinės dalies":             "frontend developer",
+    "galinės dalies":               "backend developer",
+    "duomenų mokslininkas":         "data scientist",
+    "duomenų inžinierius":          "data scientist",
+    "mašininis mokymasis":          "ai engineer",
+    "dirbtinio intelekto":          "ai engineer",
+    "ai inžinierius":               "ai engineer",
+    "testavimo inžinierius":        "qa engineer",
+    "kokybės inžinierius":          "qa engineer",
+    "projektų vadovas":             "project manager",
+    "produkto vadovas":             "project manager",
+    # Non-IT roles
+    "sandėlio darbuotojas":         "warehouse worker",
+    "sandėlininkas":                "warehouse worker",
+    "logistikos specialistas":      "warehouse worker",
+    "ekspeditorius":                "driver",
+    "vairuotojas":                  "driver",
+    "kurjeris":                     "driver",
+    "valytoja":                     "cleaner",
+    "valytojas":                    "cleaner",
+    "pardavėjas":                   "sales assistant",
+    "pardavimo konsultantas":       "sales assistant",
+    "kasininkas":                   "sales assistant",
+    "vadybininkas":                 "sales assistant",
+    "buhalteris":                   "accountant",
+    "finansininkas":                "accountant",
+    "statybininkas":                "construction worker",
+    "montuotojas":                  "construction worker",
+    "suvirintojas":                 "construction worker",
+    "virėjas":                      "cook",
+    "konditeris":                   "cook",
+    "padavėjas":                    "cook",
+    "apsaugos darbuotojas":         "security guard",
+    "sargybininkas":                "security guard",
+    "gamybos darbuotojas":          "manufacturing worker",
+    "slaugytoja":                   "nurse",
+    "slaugytojas":                  "nurse",
+    "gydytojas":                    "nurse",
+    "personalo specialistas":       "hr specialist",
+    "įdarbinimo specialistas":      "hr specialist",
+}
+
 # ── Layer 2: Role-specific keyword map (strong / weak / ambiguous) ────────────
 
 ROLE_KEYWORDS = {
@@ -142,6 +195,27 @@ ROLE_KEYWORDS = {
         "reject_if_only_this": [
             "programuotoj", "kūrėj", "programavim",
             "developer", "engineer", "inžinier",
+        ],
+    },
+    "ai engineer": {
+        "strong": [
+            "ai engineer", "ai inžinier", "ai developer", "ai programuotoj",
+            "machine learning", "ml engineer", "llm engineer", "llm developer",
+            "nlp engineer", "computer vision", "deep learning",
+            "dirbtinis intelektas", "mašininis mokymasis",
+            "artificial intelligence", "generative ai", "gen ai",
+            "data scientist", "data analyst", "duomenų analitikas",
+            "data engineer", "duomenų inžinier",
+            "prompt engineer", "rag", "fine-tun",
+        ],
+        "weak": [
+            "python", "pytorch", "tensorflow", "keras",
+            "backend", "full-stack", "fullstack",
+            "data", "analytics", "analitikas", "analitik",
+            "cloud", "mlops", "devops",
+        ],
+        "reject_if_only_this": [
+            "programuotoj", "kūrėj", "developer", "engineer", "inžinier",
         ],
     },
     "data scientist": {
@@ -199,6 +273,110 @@ ROLE_KEYWORDS = {
         "reject_if_only_this": [
             "vadybinink",
         ],
+    },
+
+    # ── Non-IT roles (apply_blacklist=False) ──────────────────────────────────
+
+    "warehouse worker": {
+        "apply_blacklist": False,
+        "strong": [
+            "sandėl", "sandėlio", "logistik", "pakuotoj", "rūšiuotoj",
+            "ekspedicij", "krovinių", "komplektuotoj", "sandėlininkas",
+        ],
+        "weak": ["gamyb", "produkcij", "operatori"],
+        "reject_if_only_this": [],
+    },
+    "driver": {
+        "apply_blacklist": False,
+        "strong": [
+            "vairuotoj", "ekspeditor", "kurjer", "pristatym",
+            "transporto", "autovežim", "krovinių vežim",
+        ],
+        "weak": ["logistik", "c kat", "b kat", "ce kat"],
+        "reject_if_only_this": [],
+    },
+    "cleaner": {
+        "apply_blacklist": False,
+        "strong": [
+            "valytoj", "valymas", "tvarkytoj", "patalpų priežiūr",
+            "švaros specialistas", "housekeeping",
+        ],
+        "weak": ["namų", "biur", "aptarnavim"],
+        "reject_if_only_this": [],
+    },
+    "sales assistant": {
+        "apply_blacklist": False,
+        "strong": [
+            "pardavėj", "pardavim", "konsultant", "kasininkas", "kasinink",
+            "prekybos", "vadybinink", "account manager",
+        ],
+        "weak": ["prekyb", "klientų aptarnavim", "aptarnavim"],
+        "reject_if_only_this": [],
+    },
+    "accountant": {
+        "apply_blacklist": False,
+        "strong": [
+            "buhalter", "apskaitos", "finansinink", "apskaita",
+            "accountant", "finansų specialistas",
+        ],
+        "weak": ["finansų", "mokesčių", "ekonomistas"],
+        "reject_if_only_this": [],
+    },
+    "construction worker": {
+        "apply_blacklist": False,
+        "strong": [
+            "statybinink", "statybos", "remonto", "montuotoj",
+            "suvirintoj", "dažytoj", "betonuotoj", "stogdeng",
+            "santechnik", "elektrik", "apdailininkas",
+        ],
+        "weak": ["priežiūr", "techninis"],
+        "reject_if_only_this": [],
+    },
+    "cook": {
+        "apply_blacklist": False,
+        "strong": [
+            "virėj", "kepėj", "konditer", "šefas", "kulinar",
+            "padavėj", "barmenas", "barist", "restorano",
+        ],
+        "weak": ["maitinimo", "kavinės", "virtuvės"],
+        "reject_if_only_this": [],
+    },
+    "security guard": {
+        "apply_blacklist": False,
+        "strong": [
+            "apsaugos", "sargybinink", "sargas",
+            "security", "apsaugininkas",
+        ],
+        "weak": ["stebėjim", "kontrolės"],
+        "reject_if_only_this": [],
+    },
+    "manufacturing worker": {
+        "apply_blacklist": False,
+        "strong": [
+            "gamybos darbuotoj", "gamybos operatori", "gamyklos",
+            "surinkėj", "linijos operatori", "pramonės",
+        ],
+        "weak": ["gamyb", "fabrik", "produkcij"],
+        "reject_if_only_this": [],
+    },
+    "nurse": {
+        "apply_blacklist": False,
+        "strong": [
+            "slaugytoj", "slaugytojas", "medicinos sesuo",
+            "gydytoj", "farmaceut", "vaistinink",
+            "kineziterapeut", "odontolog",
+        ],
+        "weak": ["sveikat", "ligoninė", "klinika"],
+        "reject_if_only_this": [],
+    },
+    "hr specialist": {
+        "apply_blacklist": False,
+        "strong": [
+            "personalo", "hr specialistas", "žmogiškųjų išteklių",
+            "recruiter", "įdarbinimo", "hr manager",
+        ],
+        "weak": ["organizacin", "darbo santyki"],
+        "reject_if_only_this": [],
     },
 }
 
@@ -450,6 +628,12 @@ def _find_role_keywords(desired_position: str) -> dict | None:
 
     pos_lower = desired_position.lower()
 
+    # Lithuanian position name map (checked first — handles LT names that don't
+    # word-overlap with English role keys, e.g. "pilno spektro programuotojas")
+    for lt_phrase, role_key in LT_POSITION_MAP.items():
+        if lt_phrase in pos_lower:
+            return ROLE_KEYWORDS.get(role_key)
+
     # Direct match
     if pos_lower in ROLE_KEYWORDS:
         return ROLE_KEYWORDS[pos_lower]
@@ -498,9 +682,22 @@ def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
             if len(skill) >= 3:
                 extra_strong.append(skill)
 
-    # ── Unknown/generic role: cap at MAX_GENERIC and let LLM decide ──────────
+    # ── Unknown/generic role: try skill-based filter first, then cap ─────────
     MAX_GENERIC = 150
     if not role_kw:
+        if extra_strong:
+            skill_matched = [
+                l for l in listings
+                if any(kw in (l.get("title") or "").lower() for kw in extra_strong)
+            ]
+            if len(skill_matched) >= 5:
+                capped = skill_matched[:MAX_GENERIC]
+                log.info(
+                    "  Layer 2 (skills filter): '%s' — skill-filtered %d → %d listings",
+                    desired_position, len(listings), len(capped),
+                )
+                return capped
+
         capped = listings[:MAX_GENERIC]
         log.info(
             "  Layer 2 (generic cap): no keyword map for '%s' — capped %d → %d listings",
@@ -508,17 +705,18 @@ def deterministic_filter(listings: list[dict], user_prefs: dict) -> list[dict]:
         )
         return capped
 
-    # ── Known IT role: blacklist + keyword map ────────────────────────────────
-    strong_kws = role_kw.get("strong", [])
-    weak_kws   = role_kw.get("weak", [])
-    ambiguous  = role_kw.get("reject_if_only_this", [])
+    # ── Known role: keyword map (blacklist only for IT roles) ─────────────────
+    strong_kws      = role_kw.get("strong", [])
+    weak_kws        = role_kw.get("weak", [])
+    ambiguous       = role_kw.get("reject_if_only_this", [])
+    apply_blacklist = role_kw.get("apply_blacklist", True)
 
     kept = []
     for listing in listings:
         title = (listing.get("title") or "").lower()
 
-        # Check blacklist first — always reject
-        if any(stem in title for stem in TITLE_BLACKLIST):
+        # IT blacklist — only applied for IT roles
+        if apply_blacklist and any(stem in title for stem in TITLE_BLACKLIST):
             continue
 
         # Check strong keywords — always keep

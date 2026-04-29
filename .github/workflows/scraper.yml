@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r scraper/requirements.txt
 
+      - name: Install Playwright browsers
+        run: playwright install chromium
+
       - name: Run scraper
         env:
           RUN_MODE: scraper

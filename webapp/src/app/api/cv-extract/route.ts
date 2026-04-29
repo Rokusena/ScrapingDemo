@@ -3,6 +3,32 @@ import { createClient } from '@/lib/supabase/server'
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
+const VALID_POSITIONS = [
+  // IT
+  'frontend developer',
+  'backend developer',
+  'fullstack developer',
+  'ai engineer',
+  'data scientist',
+  'devops engineer',
+  'qa engineer',
+  'project manager',
+  // Non-IT
+  'warehouse worker',
+  'driver',
+  'cleaner',
+  'sales assistant',
+  'accountant',
+  'construction worker',
+  'cook',
+  'security guard',
+  'manufacturing worker',
+  'nurse',
+  'hr specialist',
+] as const
+
+export type ValidPosition = typeof VALID_POSITIONS[number]
+
 const CV_EXTRACT_PROMPT = `You are a CV analyzer for a Lithuanian job matching platform.
 A user uploads their CV. Extract structured job search preferences from it.
 
@@ -20,14 +46,31 @@ Return ONLY this JSON. No explanation, no markdown, no extra text:
 
 Rules:
 
-1. desired_position: Do NOT just copy their last job title.
-   Infer a broader, more accurate job search title based on their FULL profile — education AND work experience together.
-   - If they have a logistics/transport/warehouse degree + warehouse experience → "Logistikos specialistas" (not "Sandėlio darbuotojas")
-   - If they have a koleginis or aukštasis išsilavinimas (college/university degree), bump one level above entry-level titles
-   - Aim for a title that returns MORE relevant job listings, covering their actual qualifications
-   - Use Lithuanian job title that would be searched on Lithuanian job portals
+1. desired_position: You MUST return EXACTLY ONE of these values (copy the exact string):
+   IT roles:
+   - "frontend developer"    — React, Vue, Angular, Next.js, UI developer
+   - "backend developer"     — Python, Java, Node.js, .NET, API developer
+   - "fullstack developer"   — Both frontend + backend, full-stack web developer
+   - "ai engineer"           — AI, ML, LLM, NLP, machine learning engineer
+   - "data scientist"        — Data analyst, BI analyst, data scientist
+   - "devops engineer"       — DevOps, cloud, SRE, infrastructure, Kubernetes
+   - "qa engineer"           — QA, tester, test automation, quality assurance
+   - "project manager"       — Project manager, product manager, scrum master
+   Non-IT roles:
+   - "warehouse worker"      — Sandėlio darbuotojas, logistikos specialistas, ekspeditorius
+   - "driver"                — Vairuotojas, kurjeris, ekspeditorius
+   - "cleaner"               — Valytoja, valytojas, patalpų priežiūra
+   - "sales assistant"       — Pardavėjas, konsultantas, kasininkas, vadybininkas
+   - "accountant"            — Buhalteris, finansininkas, apskaita
+   - "construction worker"   — Statybininkas, montuotojas, suvirintojas, elektrikas
+   - "cook"                  — Virėjas, kepėjas, konditeris, padavėjas
+   - "security guard"        — Apsaugos darbuotojas, sargybininkas
+   - "manufacturing worker"  — Gamybos darbuotojas, operatorius, gamykla
+   - "nurse"                 — Slaugytoja, gydytojas, farmaceutas, vaistininkas
+   - "hr specialist"         — Personalo specialistas, įdarbinimo specialistas, HR
+   Pick the CLOSEST match. Do NOT invent other values.
 
-2. skills: Extract ALL skills as a comma-separated string — hard skills (tools, systems, certifications) AND soft skills (komunikacija, komandinis darbas, problemų sprendimas).
+2. skills: Extract ALL skills as a comma-separated string — hard skills (tools, systems, certifications) AND soft skills.
 
 3. experience_level:
    - Student or no work experience → "intern"
@@ -37,7 +80,7 @@ Rules:
 
 4. work_format: Default to "onsite" unless CV explicitly mentions remote work preference.
 
-5. preferred_cities: Extract city from CV address as an array. Default to ["Vilnius"] if address is in Vilnius or not specified.
+5. preferred_cities: Extract city from CV address as an array. Default to ["Vilnius"] if not specified.
 
 6. languages: List languages the candidate knows, using these exact values: "Lietuvių", "Anglų", "Rusų".
 
@@ -167,6 +210,14 @@ export async function POST(request: NextRequest) {
     content = content.replace(/^```(?:json)?\s*/m, '').replace(/\s*```\s*$/m, '').trim()
 
     const extracted = JSON.parse(content)
+
+    // Ensure desired_position is one of the valid keys; fall back to closest match
+    if (!VALID_POSITIONS.includes(extracted.desired_position)) {
+      const raw = (extracted.desired_position || '').toLowerCase()
+      extracted.desired_position =
+        VALID_POSITIONS.find((p) => raw.includes(p) || p.split(' ').some((w) => raw.includes(w))) ??
+        'fullstack developer'
+    }
 
     return NextResponse.json({ extracted })
   } catch (err) {

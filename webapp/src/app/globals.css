@@ -2,8 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ink:        #0c0c0a;
+  --ink-2:      #2a2a27;
+  --ink-3:      #55554f;
+  --ink-4:      #86867e;
+  --paper:      #f6f4ee;
+  --paper-2:    #efece3;
+  --paper-3:    #e6e2d5;
+  --line:       #d9d5c6;
+  --line-2:     #c3beab;
+  --accent:     #1f4d3d;
+  --accent-ink: #f6f4ee;
+  --accent-2:   #d7f26a;
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-sans:    "Inter Tight", Inter, -apple-system, system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 }

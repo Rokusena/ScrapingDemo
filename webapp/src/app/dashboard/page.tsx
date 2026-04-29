@@ -47,7 +47,7 @@ export default async function DashboardPage({
   } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const [{ data: profile }, { data: preferences }, { data: matches }] = await Promise.all([
+  const [{ data: profile }, { data: preferences }, { data: matches }, { count: totalListings }] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', user.id).single<Profile>(),
     supabase.from('job_preferences').select('*').eq('user_id', user.id).maybeSingle<JobPreferences>(),
     supabase
@@ -59,6 +59,7 @@ export default async function DashboardPage({
       .order('detail_score', { ascending: false })
       .order('title_score', { ascending: false })
       .limit(60),
+    supabase.from('raw_listings').select('*', { count: 'exact', head: true }),
   ])
 
   const allMatches = (matches ?? []) as MatchWithListing[]
@@ -133,7 +134,7 @@ export default async function DashboardPage({
             <span className="ital">{allMatches.length} darbai.</span>
           </h1>
           <p className="db-page-lede">
-            AI peržiūrėjo <span className="pill">4 187</span> naujų skelbimų per 5 portalus.
+            AI peržiūrėjo <span className="pill">{(totalListings ?? 0).toLocaleString('lt-LT')}</span> naujų skelbimų per 5 portalus.
             Žemiau — tik tie, kurie tiesiogiai dera su tavo profiliu.
           </p>
         </div>
@@ -141,7 +142,7 @@ export default async function DashboardPage({
         <div className="db-hero-numbers">
           <div className="db-hero-cell">
             <div className="db-hero-k">Peržiūrėta</div>
-            <div className="db-hero-v">4,187</div>
+            <div className="db-hero-v">{(totalListings ?? 0).toLocaleString('lt-LT')}</div>
             <div className="db-hero-sub">skelbimų · 5 portalai</div>
           </div>
           <div className="db-hero-cell">

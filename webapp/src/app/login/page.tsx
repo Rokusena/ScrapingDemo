@@ -27,13 +27,17 @@ const CSS = `
   .lg-box { width: 100%; max-width: 400px; }
   .lg-logo {
     font-family: var(--font-display);
+    font-style: italic;
     font-size: 26px;
-    letter-spacing: -.01em;
+    letter-spacing: -.02em;
     margin-bottom: 32px;
     text-align: center;
     color: var(--ink);
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
   .lg-logo .dot {
     display: inline-block;
@@ -41,10 +45,8 @@ const CSS = `
     height: 8px;
     border-radius: 50%;
     background: var(--accent);
-    margin-right: 3px;
-    vertical-align: middle;
-    position: relative;
-    top: -2px;
+    transform: translateY(-2px);
+    flex-shrink: 0;
   }
   .lg-card {
     background: white;

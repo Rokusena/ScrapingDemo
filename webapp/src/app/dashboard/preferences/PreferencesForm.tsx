@@ -212,6 +212,53 @@ const CSS = `
   .pf-spin { animation: pf-spin .8s linear infinite; display: inline-block; }
 `
 
+const POSITION_GROUPS = [
+  {
+    group: 'IT / Technologijos',
+    options: [
+      { value: 'frontend developer',  label: 'Frontend Programuotojas (React, Vue, Angular)' },
+      { value: 'backend developer',   label: 'Backend Programuotojas (Python, Java, Node.js)' },
+      { value: 'fullstack developer', label: 'Fullstack / Pilno spektro Programuotojas' },
+      { value: 'ai engineer',         label: 'AI / ML Inžinierius' },
+      { value: 'data scientist',      label: 'Duomenų mokslininkas / Analitikas' },
+      { value: 'devops engineer',     label: 'DevOps / Cloud Inžinierius' },
+      { value: 'qa engineer',         label: 'QA / Testavimo Inžinierius' },
+      { value: 'project manager',     label: 'Projektų / Produkto Vadovas' },
+    ],
+  },
+  {
+    group: 'Prekyba ir Paslaugos',
+    options: [
+      { value: 'sales assistant',     label: 'Pardavėjas / Konsultantas / Kasininkas' },
+      { value: 'accountant',          label: 'Buhalteris / Finansininkas' },
+      { value: 'hr specialist',       label: 'Personalo / HR Specialistas' },
+    ],
+  },
+  {
+    group: 'Transportas ir Logistika',
+    options: [
+      { value: 'warehouse worker',    label: 'Sandėlio darbuotojas / Logistikos specialistas' },
+      { value: 'driver',              label: 'Vairuotojas / Kurjeris / Ekspeditorius' },
+    ],
+  },
+  {
+    group: 'Gamyba ir Statyba',
+    options: [
+      { value: 'construction worker', label: 'Statybininkas / Montuotojas / Suvirintojas' },
+      { value: 'manufacturing worker',label: 'Gamybos darbuotojas / Operatorius' },
+    ],
+  },
+  {
+    group: 'Kita',
+    options: [
+      { value: 'cleaner',             label: 'Valytoja / Valytojas' },
+      { value: 'cook',                label: 'Virėjas / Konditeris / Padavėjas' },
+      { value: 'security guard',      label: 'Apsaugos darbuotojas / Sargybininkas' },
+      { value: 'nurse',               label: 'Slaugytoja / Gydytojas / Farmaceutas' },
+    ],
+  },
+]
+
 const MAJOR_CITIES = ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys']
 const OTHER_CITIES = [
   'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena',
@@ -405,13 +452,21 @@ export default function PreferencesForm({ userId, initialPreferences }: Props) {
 
           <div className="pf-field">
             <label className="pf-label">Pageidaujama pozicija</label>
-            <input
-              className="pf-input"
-              type="text"
-              placeholder="pvz. sandėlio darbuotojas, pardavėjas, programuotojas"
+            <select
+              className="pf-select"
+              style={{ width: '100%' }}
               value={form.desired_position}
               onChange={(e) => setForm((p) => ({ ...p, desired_position: e.target.value }))}
-            />
+            >
+              <option value="">— Pasirinkite poziciją —</option>
+              {POSITION_GROUPS.map((g) => (
+                <optgroup key={g.group} label={g.group}>
+                  {g.options.map((o) => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
           </div>
 
           <div className="pf-field">
