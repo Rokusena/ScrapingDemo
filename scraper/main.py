@@ -201,7 +201,7 @@ def _should_skip_scrape(supabase) -> bool:
 
 def _upsert_scrape_metadata(supabase, started_at: datetime, finished_at: datetime, count: int) -> None:
     """Upsert the singleton scrape_metadata row after a successful scrape."""
-    next_after = started_at + timedelta(hours=24)
+    next_after = started_at + timedelta(hours=23, minutes=55)
     meta = _get_scrape_metadata(supabase)
     row = {
         "last_scrape_started_at":  started_at.isoformat(),

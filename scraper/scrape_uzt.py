@@ -77,7 +77,22 @@ def make_job_id(href_path: str) -> str:
 
 # ── Scraping ──────────────────────────────────────────────────────────────────
 
-def fetch_page(session: requests.Session, offset: int) -> requests.Response | None:
+def _fetch_with_playwright(url: str) -> str | None:
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            page.goto(url, wait_until="networkidle", timeout=30000)
+            html = page.content()
+            browser.close()
+            return html
+    except Exception as exc:
+        log.error("Playwright fallback failed for %s: %s", url, exc)
+        return None
+
+
+def fetch_page(session: requests.Session, offset: int) -> str | None:
     if offset == 0:
         url = RESULTS_URL
         params = {"s": "60", "n": str(PAGE_SIZE)}
@@ -88,13 +103,16 @@ def fetch_page(session: requests.Session, offset: int) -> requests.Response | No
     for attempt in range(1, 4):
         try:
             resp = session.get(url, params=params, timeout=20)
+            if resp.status_code == 403:
+                log.warning("403 Forbidden — falling back to Playwright for offset %d", offset)
+                return _fetch_with_playwright(resp.url)
             if resp.status_code == 429:
                 wait = 2 ** attempt * 3
                 log.warning("Rate limited — sleeping %ds", wait)
                 time.sleep(wait)
                 continue
             resp.raise_for_status()
-            return resp
+            return resp.text
         except requests.RequestException as exc:
             wait = 2 ** attempt
             if attempt < 3:
@@ -196,18 +214,18 @@ def run() -> dict:
 
     for page_idx in range(MAX_PAGES):
         offset = page_idx * PAGE_SIZE
-        resp = fetch_page(session, offset)
-        if resp is None:
+        html = fetch_page(session, offset)
+        if html is None:
             break
 
-        listings = parse_cards(resp.text, now_utc)
+        listings = parse_cards(html, now_utc)
 
         if not listings:
             log.info("No cards at offset %d — done", offset)
             break
 
         if page_idx == 0:
-            grand_total = get_total(resp.text)
+            grand_total = get_total(html)
             log.info("Total listings on UZT: %d", grand_total)
 
         total_found += len(listings)
