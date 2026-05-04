@@ -49,6 +49,7 @@ export default function MatchCard({
   const [isNew, setIsNew] = useState(false)
   const [status, setStatus] = useState<ApplicationStatus | null>(match.application_status ?? null)
   const [showStatusMenu, setShowStatusMenu] = useState(false)
+  const [hiddenFromActive, setHiddenFromActive] = useState(false)
 
   const listing = match.raw_listings
   const score = match.detail_score ?? 0
@@ -72,6 +73,10 @@ export default function MatchCard({
 
   const handleStatus = async (next: ApplicationStatus | null) => {
     const newStatus = next === status ? null : next  // toggle off if same
+    // Hide from active view when a status is first set
+    if (newStatus !== null && status === null) {
+      setHiddenFromActive(true)
+    }
     setStatus(newStatus)
     setShowStatusMenu(false)
     await updateStatus(match.id, newStatus)
@@ -79,10 +84,11 @@ export default function MatchCard({
 
   const cfg = status ? STATUS_CONFIG[status] : null
 
+  if (hiddenFromActive) return null
+
   return (
     <div
-      className={`db-card ${bucket}${isNew ? ' is-new' : ''}${status === 'ignored' ? ' ignored' : ''}`}
-      style={status === 'ignored' ? { opacity: 0.5 } : undefined}
+      className={`db-card ${bucket}${isNew ? ' is-new' : ''}`}
     >
       <div className="db-card-top">
         <div style={{ minWidth: 0, flex: 1 }}>

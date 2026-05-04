@@ -47,7 +47,7 @@ export default async function DashboardPage({
   } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const [{ data: profile }, { data: preferences }, { data: matches }, { count: totalListings }] = await Promise.all([
+  const [{ data: profile }, { data: preferences }, { data: activeMatchesData }, { data: historyMatchesData }, { count: totalListings }] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', user.id).single<Profile>(),
     supabase.from('job_preferences').select('*').eq('user_id', user.id).maybeSingle<JobPreferences>(),
     supabase
@@ -56,38 +56,41 @@ export default async function DashboardPage({
       .eq('user_id', user.id)
       .not('detail_score', 'is', null)
       .gte('detail_score', 3)
+      .is('application_status', null)
       .order('detail_score', { ascending: false })
       .order('title_score', { ascending: false })
       .limit(60),
+    supabase
+      .from('matches')
+      .select('*, raw_listings(*)')
+      .eq('user_id', user.id)
+      .not('application_status', 'is', null)
+      .order('matched_at', { ascending: false })
+      .limit(100),
     supabase.from('raw_listings').select('*', { count: 'exact', head: true }),
   ])
 
-  const allMatches = (matches ?? []) as MatchWithListing[]
-
-  // Separate ignored from the rest — ignored only shown when explicitly filtered
-  const ignoredMatches = allMatches.filter((m) => m.application_status === 'ignored')
-  const activeMatches  = allMatches.filter((m) => m.application_status !== 'ignored')
-  const appliedMatches = allMatches.filter((m) => m.application_status === 'applied')
+  const activeMatches  = (activeMatchesData ?? []) as MatchWithListing[]
+  const historyMatches = (historyMatchesData ?? []) as MatchWithListing[]
+  const allMatches     = [...activeMatches, ...historyMatches]
 
   const counts = {
     all:     activeMatches.length,
     high:    activeMatches.filter((m) => (m.detail_score ?? 0) >= 8).length,
     mid:     activeMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 }).length,
     low:     activeMatches.filter((m) => (m.detail_score ?? 0) < 6).length,
-    applied: appliedMatches.length,
-    ignored: ignoredMatches.length,
+    history: historyMatches.length,
   }
 
-  const activeFilter = (['high', 'mid', 'low', 'applied', 'ignored'].includes(searchParams.filter ?? '')
+  const activeFilter = (['high', 'mid', 'low', 'history'].includes(searchParams.filter ?? '')
     ? searchParams.filter
-    : 'all') as 'all' | 'high' | 'mid' | 'low' | 'applied' | 'ignored'
+    : 'all') as 'all' | 'high' | 'mid' | 'low' | 'history'
 
   const visibleMatches =
     activeFilter === 'high'    ? activeMatches.filter((m) => (m.detail_score ?? 0) >= 8)
     : activeFilter === 'mid'   ? activeMatches.filter((m) => { const s = m.detail_score ?? 0; return s >= 6 && s < 8 })
     : activeFilter === 'low'   ? activeMatches.filter((m) => (m.detail_score ?? 0) < 6)
-    : activeFilter === 'applied' ? appliedMatches
-    : activeFilter === 'ignored' ? ignoredMatches
+    : activeFilter === 'history' ? historyMatches
     : activeMatches
 
   const now = new Date()
@@ -202,7 +205,7 @@ export default async function DashboardPage({
       </div>
 
       {/* ── Matches ──────────────────────────────────────────────────────── */}
-      {allMatches.length === 0 ? (
+      {activeMatches.length === 0 && historyMatches.length === 0 ? (
         <div className="db-empty">
           <p style={{ fontSize: 48, marginBottom: 16 }}>🔍</p>
           <p style={{ fontFamily: 'var(--font-display)', fontSize: 26, letterSpacing: '-.01em', marginBottom: 10 }}>
@@ -219,6 +222,12 @@ export default async function DashboardPage({
       ) : (
         <>
           <FilterBar counts={counts} active={activeFilter} />
+
+          {activeFilter === 'history' && historyMatches.length > 0 && (
+            <div style={{ fontSize: 13, color: 'var(--ink-4)', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
+              // {historyMatches.length} pažymėtų — nebus rodomi kaip nauji
+            </div>
+          )}
 
           {visibleMatches.length === 0 ? (
             <div className="db-empty">

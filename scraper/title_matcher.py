@@ -491,16 +491,24 @@ def load_active_users(supabase) -> list[dict]:
 
 
 def load_existing_match_ids(supabase, user_id: str) -> set[str]:
-    """Return job_ids already in `matches` for this user today."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    res = (
-        supabase.table("matches")
-        .select("job_id")
-        .eq("user_id", user_id)
-        .gte("matched_at", f"{today}T00:00:00+00:00")
-        .execute()
-    )
-    return {r["job_id"] for r in (res.data or [])}
+    """Return all job_ids ever matched for this user (all time, paginated)."""
+    all_ids: set[str] = set()
+    page_size = 1000
+    offset = 0
+    while True:
+        res = (
+            supabase.table("matches")
+            .select("job_id")
+            .eq("user_id", user_id)
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+        batch = res.data or []
+        all_ids.update(r["job_id"] for r in batch)
+        if len(batch) < page_size:
+            break
+        offset += page_size
+    return all_ids
 
 
 # ── Layer 1: SQL pre-filter ──────────────────────────────────────────────────
@@ -929,9 +937,11 @@ def match_user(
                 "notified":    False,
             })
 
-    # Bulk-insert all qualifying matches for this user
+    # Bulk-insert qualifying matches; ignore duplicates in case of concurrent runs
     if to_insert:
-        supabase.table("matches").insert(to_insert).execute()
+        supabase.table("matches").upsert(
+            to_insert, on_conflict="user_id,job_id", ignore_duplicates=True
+        ).execute()
 
     log.info("  [%s] Layer 3 (LLM): %d → %d matches (score >= %d)",
              user_id[:8], layer2_count, len(qualified_ids), MIN_SCORE)

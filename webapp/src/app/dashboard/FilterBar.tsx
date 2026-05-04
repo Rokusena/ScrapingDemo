@@ -5,8 +5,7 @@ interface FilterCounts {
   high: number
   mid: number
   low: number
-  applied: number
-  ignored: number
+  history: number
 }
 
 const TABS = [
@@ -14,8 +13,7 @@ const TABS = [
   { key: 'high',    label: 'Puikūs · 8+', href: '/dashboard?filter=high' },
   { key: 'mid',     label: 'Geri · 6–7',  href: '/dashboard?filter=mid' },
   { key: 'low',     label: 'Silpni · <6', href: '/dashboard?filter=low' },
-  { key: 'applied', label: 'Teikiau',     href: '/dashboard?filter=applied' },
-  { key: 'ignored', label: 'Ignoruota',   href: '/dashboard?filter=ignored' },
+  { key: 'history', label: 'Istorija',    href: '/dashboard?filter=history' },
 ] as const
 
 type FilterKey = (typeof TABS)[number]['key']
