@@ -19,7 +19,7 @@ import re
 import time
 from datetime import datetime, timezone
 
-import requests
+from curl_cffi import requests
 from bs4 import BeautifulSoup
 from supabase import create_client
 
@@ -81,9 +81,24 @@ def _fetch_with_playwright(url: str) -> str | None:
     try:
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            page = browser.new_page()
-            page.goto(url, wait_until="networkidle", timeout=30000)
+            browser = p.chromium.launch(
+                headless=True,
+                args=["--disable-blink-features=AutomationControlled"],
+            )
+            context = browser.new_context(
+                user_agent=HEADERS["User-Agent"],
+                extra_http_headers={
+                    "Accept": HEADERS["Accept"],
+                    "Accept-Language": HEADERS["Accept-Language"],
+                },
+            )
+            page = context.new_page()
+            page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+            page.goto(url, wait_until="domcontentloaded", timeout=45000)
+            try:
+                page.wait_for_selector('a[href*="/skelbimas/"]', timeout=20000)
+            except Exception:
+                pass
             html = page.content()
             browser.close()
             return html
@@ -113,7 +128,7 @@ def fetch_page(session: requests.Session, offset: int) -> str | None:
                 continue
             resp.raise_for_status()
             return resp.text
-        except requests.RequestException as exc:
+        except Exception as exc:
             wait = 2 ** attempt
             if attempt < 3:
                 log.warning("Attempt %d/3 failed: %s — retry in %ds", attempt, exc, wait)
@@ -185,7 +200,7 @@ def run() -> dict:
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     now_utc = datetime.now(timezone.utc).isoformat()
 
-    session = requests.Session()
+    session = requests.Session(impersonate="chrome124")
     session.headers.update(HEADERS)
 
     # Load existing IDs
