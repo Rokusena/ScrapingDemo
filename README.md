@@ -19,6 +19,7 @@ AI-powered job matching platform for the Lithuanian job market. Scrapes 5 job po
 | **Scraper hosting** | GitHub Actions | Python pipeline cron jobs |
 | **Scraper runtime** | Python 3.12 | Scraping pipeline |
 | **SPA scraping** | Playwright (Chromium) | CVmarket.lt + Unicorns.lt |
+| **CF bypass** | Scrapling (Camoufox) | UZT.lt Cloudflare Turnstile |
 
 ---
 
@@ -161,15 +162,19 @@ Each stage is isolated — a failure in one stage does not abort the others.
 
 ### Stage 1 — Scrapers
 
+All 5 scrapers run **concurrently** in a `ThreadPoolExecutor` (each builds its own Supabase client + browser session). Wall time is gated by the slowest source — currently UZT at ~10 min — instead of the sum.
+
 | File | Source | Method |
 |---|---|---|
 | `scrape.py` | CVBankas.lt | HTTP + BeautifulSoup |
 | `scrape_cvonline.py` | CV-Online.lt | HTTP + BeautifulSoup |
 | `scrape_cvmarket.py` | CVmarket.lt | Playwright (Chromium) |
 | `scrape_unicorns.py` | Unicorns.lt | Playwright (Chromium) |
-| `scrape_uzt.py` | UZT.lt | HTTP + BeautifulSoup |
+| `scrape_uzt.py` | UZT.lt | Scrapling `StealthyFetcher` (Camoufox) — Cloudflare Turnstile auto-solve |
 
-Playwright is installed in the scraper workflow via `playwright install chromium`.
+The scraper workflow installs both Playwright Chromium (`playwright install chromium`) and Camoufox (`scrapling install`).
+
+A 23h gate in `scrape_metadata` prevents back-to-back full scrapes; the daily 01:00 UTC cron is never blocked since 24h ≥ 23h with margin even if the previous run started late or took 20+ min.
 
 ### Stage 2 — Title Matcher (3-layer funnel)
 
@@ -197,6 +202,7 @@ The matcher skips if it already ran today (guards against re-runs on every hourl
 cd scraper
 pip install -r requirements.txt
 playwright install chromium
+scrapling install                # downloads Camoufox for UZT CF bypass
 
 export SUPABASE_URL=...
 export SUPABASE_SERVICE_KEY=...

@@ -201,8 +201,12 @@ def _should_skip_scrape(supabase) -> bool:
 
 
 def _upsert_scrape_metadata(supabase, started_at: datetime, finished_at: datetime, count: int) -> None:
-    """Upsert the singleton scrape_metadata row after a successful scrape."""
-    next_after = started_at + timedelta(hours=23, minutes=55)
+    """Upsert the singleton scrape_metadata row after a successful scrape.
+
+    Gate is 23h (not 24h) so the daily 01:00 UTC cron is never blocked even when
+    the previous run started 30+ min late or took longer than expected.
+    """
+    next_after = started_at + timedelta(hours=23)
     meta = _get_scrape_metadata(supabase)
     row = {
         "last_scrape_started_at":  started_at.isoformat(),
