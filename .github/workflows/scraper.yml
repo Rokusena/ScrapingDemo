@@ -25,6 +25,9 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install chromium
 
+      - name: Install Scrapling browsers (Camoufox for UZT CF bypass)
+        run: scrapling install
+
       - name: Run scraper
         env:
           RUN_MODE: scraper

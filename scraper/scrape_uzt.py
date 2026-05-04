@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 """
 GaukDarba — Užimtumo tarnyba (UZT.lt) scraper
-Uses direct HTTP GET to the results endpoint (no Angular/Playwright needed).
+
+UZT sits behind Cloudflare's Turnstile/Interstitial challenge that blocks
+plain HTTP clients (curl_cffi 403s) and vanilla Playwright (challenge never
+solves). We use Scrapling's StealthyFetcher (Camoufox under the hood) with
+solve_cloudflare=True and humanize=True so the challenge auto-clears with
+randomised mouse movements.
 
 Listing URL:  GET https://uzt.lt/laisvos-darbo-vietos/436/results?s=60&n=100
 Pagination:   https://uzt.lt/laisvos-darbo-vietos/436/results/p{offset}?s=60;q=;n=100
 
-Job cards:  a.list__item
-  Title:    .title strong
-  Company:  .company
-  Salary:   .salary
-  Location: .location
+Job cards:  a[href*="/skelbimas/"]
+  Title:    strong
+  Lines:    company / salary (if any) / location / metadata
 """
 
 import logging
@@ -19,8 +22,8 @@ import re
 import time
 from datetime import datetime, timezone
 
-from curl_cffi import requests
 from bs4 import BeautifulSoup
+from scrapling.fetchers import StealthyFetcher
 from supabase import create_client
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -35,20 +38,7 @@ PAGE_SIZE = 100
 MAX_PAGES = 60          # 60 × 100 = 6000 listings cap
 BATCH_SIZE = 100
 RATE_LIMIT_DELAY = 1.5
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-    "Accept-Language": "lt-LT,lt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Referer": f"{BASE_URL}/laisvos-darbo-vietos/paieska/436",
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "same-origin",
-    "Sec-Fetch-User": "?1",
-}
+FETCH_TIMEOUT_MS = 120_000
 
 logging.basicConfig(
     level=logging.INFO,
@@ -77,64 +67,31 @@ def make_job_id(href_path: str) -> str:
 
 # ── Scraping ──────────────────────────────────────────────────────────────────
 
-def _fetch_with_playwright(url: str) -> str | None:
-    try:
-        from playwright.sync_api import sync_playwright
-        with sync_playwright() as p:
-            browser = p.chromium.launch(
-                headless=True,
-                args=["--disable-blink-features=AutomationControlled"],
-            )
-            context = browser.new_context(
-                user_agent=HEADERS["User-Agent"],
-                extra_http_headers={
-                    "Accept": HEADERS["Accept"],
-                    "Accept-Language": HEADERS["Accept-Language"],
-                },
-            )
-            page = context.new_page()
-            page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-            page.goto(url, wait_until="domcontentloaded", timeout=45000)
-            try:
-                page.wait_for_selector('a[href*="/skelbimas/"]', timeout=20000)
-            except Exception:
-                pass
-            html = page.content()
-            browser.close()
-            return html
-    except Exception as exc:
-        log.error("Playwright fallback failed for %s: %s", url, exc)
-        return None
-
-
-def fetch_page(session: requests.Session, offset: int) -> str | None:
+def fetch_page(offset: int) -> str | None:
+    """Fetch one results page through Scrapling's CF-solving stealth fetcher."""
     if offset == 0:
-        url = RESULTS_URL
-        params = {"s": "60", "n": str(PAGE_SIZE)}
+        url = f"{RESULTS_URL}?s=60&n={PAGE_SIZE}"
     else:
         url = f"{RESULTS_URL}/p{offset}?s=60;q=;n={PAGE_SIZE}"
-        params = None
 
     for attempt in range(1, 4):
         try:
-            resp = session.get(url, params=params, timeout=20)
-            if resp.status_code == 403:
-                log.warning("403 Forbidden — falling back to Playwright for offset %d", offset)
-                return _fetch_with_playwright(resp.url)
-            if resp.status_code == 429:
-                wait = 2 ** attempt * 3
-                log.warning("Rate limited — sleeping %ds", wait)
-                time.sleep(wait)
-                continue
-            resp.raise_for_status()
-            return resp.text
+            resp = StealthyFetcher.fetch(
+                url,
+                headless=True,
+                humanize=True,
+                solve_cloudflare=True,
+                network_idle=True,
+                timeout=FETCH_TIMEOUT_MS,
+            )
+            if resp.status == 200 and resp.html_content:
+                return resp.html_content
+            log.warning("Attempt %d/3 status=%s len=%d", attempt, resp.status, len(resp.html_content or ""))
         except Exception as exc:
-            wait = 2 ** attempt
-            if attempt < 3:
-                log.warning("Attempt %d/3 failed: %s — retry in %ds", attempt, exc, wait)
-                time.sleep(wait)
-            else:
-                log.error("Permanently failed at offset %d: %s", offset, exc)
+            log.warning("Attempt %d/3 failed: %s", attempt, exc)
+        if attempt < 3:
+            time.sleep(2 ** attempt)
+    log.error("Permanently failed at offset %d", offset)
     return None
 
 
@@ -200,9 +157,6 @@ def run() -> dict:
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     now_utc = datetime.now(timezone.utc).isoformat()
 
-    session = requests.Session(impersonate="chrome124")
-    session.headers.update(HEADERS)
-
     # Load existing IDs
     existing_ids: set[str] = set()
     try:
@@ -229,7 +183,7 @@ def run() -> dict:
 
     for page_idx in range(MAX_PAGES):
         offset = page_idx * PAGE_SIZE
-        html = fetch_page(session, offset)
+        html = fetch_page(offset)
         if html is None:
             break
 
