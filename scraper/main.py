@@ -27,6 +27,7 @@ import os
 import sys
 import time
 import traceback
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from typing import Optional
@@ -244,53 +245,65 @@ def _log_scraper_run(
         log.warning("Could not write scraper_run log for %s: %s", source, exc)
 
 
-def run_additional_scrapers(supabase) -> None:
-    """
-    Run CV-Online, CVmarket, Unicorns, and UZT scrapers in sequence.
-    Each scraper is isolated — failure of one does not abort the others.
-    Results are logged to scraper_runs table.
-    """
-    EXTRA_SCRAPERS = [
-        ("cvonline",  "scrape_cvonline",  "run"),
-        ("cvmarket",  "scrape_cvmarket",  "run"),
-        ("unicorns",  "scrape_unicorns",  "run"),
-        ("uzt",       "scrape_uzt",       "run"),
-    ]
+SCRAPERS = [
+    ("cvbankas", "scrape",           "run"),
+    ("cvonline", "scrape_cvonline",  "run"),
+    ("cvmarket", "scrape_cvmarket",  "run"),
+    ("unicorns", "scrape_unicorns",  "run"),
+    ("uzt",      "scrape_uzt",       "run"),
+]
 
-    for source, module_name, func_name in EXTRA_SCRAPERS:
-        log.info("── Extra scraper: %s ──", source)
-        started = datetime.now(timezone.utc)
-        try:
-            import importlib
-            mod = importlib.import_module(module_name)
-            fn = getattr(mod, func_name)
-            result = fn()
-            ended = datetime.now(timezone.utc)
-            _log_scraper_run(
-                supabase, source, started, ended,
-                result.get("jobs_found", 0),
-                result.get("jobs_inserted", 0),
-                result.get("error"),
-            )
-            log.info("  %s ✓  found=%d inserted=%d", source,
-                     result.get("jobs_found", 0), result.get("jobs_inserted", 0))
-        except Exception as exc:
-            ended = datetime.now(timezone.utc)
-            error_msg = str(exc)
-            log.error("  %s FAILED: %s", source, traceback.format_exc())
-            _log_scraper_run(supabase, source, started, ended, 0, 0, error_msg)
+
+def _run_one_scraper(source: str, module_name: str, func_name: str, supabase) -> dict:
+    """Run a single scraper, write to scraper_runs, and return a status dict.
+
+    cvbankas's run() returns None; the others return {jobs_found, jobs_inserted, error}.
+    For cvbankas we substitute today's listing count via _count_todays_listings(supabase),
+    matching the previous sequential behaviour.
+    """
+    started = datetime.now(timezone.utc)
+    try:
+        import importlib
+        mod = importlib.import_module(module_name)
+        fn = getattr(mod, func_name)
+        result = fn() or {}
+        ended = datetime.now(timezone.utc)
+
+        if source == "cvbankas":
+            jobs_found = _count_todays_listings(supabase)
+            jobs_inserted = 0
+            error = None
+        else:
+            jobs_found = result.get("jobs_found", 0)
+            jobs_inserted = result.get("jobs_inserted", 0)
+            error = result.get("error")
+
+        _log_scraper_run(supabase, source, started, ended, jobs_found, jobs_inserted, error)
+        return {
+            "source": source, "ok": error is None,
+            "jobs_found": jobs_found, "jobs_inserted": jobs_inserted,
+            "error": error, "duration": (ended - started).total_seconds(),
+        }
+    except Exception as exc:
+        ended = datetime.now(timezone.utc)
+        log.error("Scraper %s crashed:\n%s", source, traceback.format_exc())
+        _log_scraper_run(supabase, source, started, ended, 0, 0, str(exc)[:500])
+        return {
+            "source": source, "ok": False,
+            "jobs_found": 0, "jobs_inserted": 0,
+            "error": str(exc), "duration": (ended - started).total_seconds(),
+        }
 
 
 def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
     """
-    Stage 1: scrape all job listings (CVBankas + additional sources).
-    Returns True on success, False on failure.
-    Checks scrape_metadata to enforce 24h minimum between scrapes.
-    On failure the matchers will use whatever is already in the DB.
+    Stage 1: scrape all 5 sources concurrently (CVBankas, CV-Online, CVmarket, Unicorns, UZT).
+    Returns True iff CVBankas succeeded; matchers fall back to existing DB rows otherwise.
+    Concurrency caps wall time at max(individual scrape times) instead of the sum.
+    Each scraper builds its own Supabase client + browser session, so threads share no state.
     """
     log.info("━━━  Stage 1/4: Scraper  ━━━")
 
-    # Check 24h gate via scrape_metadata
     if _should_skip_scrape(supabase):
         metrics.listings_scraped = _count_todays_listings(supabase)
         log.info("Stage 1 — skipped (24h gate). Existing listings: %d", metrics.listings_scraped)
@@ -298,39 +311,38 @@ def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
 
     t = time.time()
     scrape_started = datetime.now(timezone.utc)
-    cvbankas_ok = False
+    log.info("Launching %d scrapers in parallel: %s",
+             len(SCRAPERS), ", ".join(s[0] for s in SCRAPERS))
 
-    # ── CVBankas (primary) ────────────────────────────────────────────────
-    cvbankas_start = datetime.now(timezone.utc)
-    try:
-        from scrape import run as _scrape
-        _scrape()
-        cvbankas_end = datetime.now(timezone.utc)
-        listings_today = _count_todays_listings(supabase)
-        _log_scraper_run(supabase, "cvbankas", cvbankas_start, cvbankas_end, listings_today, 0, None)
-        cvbankas_ok = True
-    except Exception:
-        cvbankas_end = datetime.now(timezone.utc)
-        err = traceback.format_exc()
-        log.error("CVBankas scraper FAILED:\n%s", err)
-        _log_scraper_run(supabase, "cvbankas", cvbankas_start, cvbankas_end, 0, 0, str(err[:500]))
+    results: dict[str, dict] = {}
+    with ThreadPoolExecutor(max_workers=len(SCRAPERS)) as pool:
+        futures = {
+            pool.submit(_run_one_scraper, src, mod, fn, supabase): src
+            for src, mod, fn in SCRAPERS
+        }
+        for fut in as_completed(futures):
+            r = fut.result()
+            results[r["source"]] = r
+            mark = "✓" if r["ok"] else "✗"
+            err_tail = f"  err={r['error'][:80]}" if r["error"] else ""
+            log.info("  %s %-9s found=%-5d inserted=%-5d  (%.1fs)%s",
+                     mark, r["source"], r["jobs_found"], r["jobs_inserted"],
+                     r["duration"], err_tail)
+
+    cvbankas_ok = results.get("cvbankas", {}).get("ok", False)
+    if not cvbankas_ok:
         metrics.stage_errors.append("scraper_cvbankas")
 
-    # ── Additional scrapers (cv-online, cvmarket, unicorns, uzt) ─────────
-    run_additional_scrapers(supabase)
-
-    # ── Finalize ──────────────────────────────────────────────────────────
     scrape_finished = datetime.now(timezone.utc)
     metrics.listings_scraped = _count_todays_listings(supabase)
 
     if cvbankas_ok:
         _upsert_scrape_metadata(supabase, scrape_started, scrape_finished, metrics.listings_scraped)
 
-    log.info("Stage 1 ✓  listings scraped today: %d  (%.1fs)",
+    log.info("Stage 1 ✓  listings scraped today: %d  (%.1fs total)",
              metrics.listings_scraped, time.time() - t)
 
     if not cvbankas_ok:
-        metrics.listings_scraped = _count_todays_listings(supabase)
         if metrics.listings_scraped == 0 and _has_any_listings(supabase, days_back=2):
             log.warning("No today's listings in DB. Matchers will use yesterday's data.")
         return False
