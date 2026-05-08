@@ -57,7 +57,7 @@ def make_job_id(href: str) -> str:
 
 # ── Scraping ──────────────────────────────────────────────────────────────────
 
-def scrape_all(now_utc: str) -> list[dict]:
+def scrape_all(now_utc: str, full_sweep: bool = False) -> list[dict]:
     session = requests.Session()
     session.headers.update(HEADERS)
 
@@ -130,6 +130,7 @@ def scrape_all(now_utc: str) -> list[dict]:
                     "location": location or None,
                     "url": job_url,
                     "scraped_at": now_utc,
+                    "last_seen_at": now_utc,
                 })
                 new_count += 1
             except Exception as exc:
@@ -137,7 +138,10 @@ def scrape_all(now_utc: str) -> list[dict]:
 
         log.info("Page %d: %d cards, %d new (total so far: %d / %d)", page_num, len(cards), new_count, len(results), total)
 
-        if new_count == 0 or (total and len(results) >= total):
+        if not full_sweep and new_count == 0:
+            log.info("Page %d: all listings already known — stopping early.", page_num)
+            break
+        if total and len(results) >= total:
             break
 
         time.sleep(1)
@@ -147,19 +151,19 @@ def scrape_all(now_utc: str) -> list[dict]:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def run() -> dict:
-    log.info("Unicorns scraper starting")
+def run(full_sweep: bool = False) -> dict:
+    mode = "full-sweep" if full_sweep else "incremental"
+    log.info("Unicorns scraper starting [%s]", mode)
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     now_utc = datetime.now(timezone.utc).isoformat()
 
-    listings = scrape_all(now_utc)
+    listings = scrape_all(now_utc, full_sweep=full_sweep)
     total_found = len(listings)
 
     if not listings:
         log.warning("No listings extracted — aborting")
         return {"jobs_found": 0, "jobs_inserted": 0, "error": "No listings extracted"}
 
-    # Load existing IDs
     existing_ids: set[str] = set()
     try:
         rows = (
@@ -175,14 +179,15 @@ def run() -> dict:
         log.warning("Could not load existing IDs: %s", exc)
 
     new_listings = [l for l in listings if l["job_id"] not in existing_ids]
-    total_inserted = 0
-    if new_listings:
-        for i in range(0, len(new_listings), BATCH_SIZE):
-            chunk = new_listings[i: i + BATCH_SIZE]
-            supabase.table("raw_listings").upsert(chunk, on_conflict="job_id").execute()
-        total_inserted = len(new_listings)
+    total_inserted = len(new_listings)
 
-    log.info("Unicorns done: found=%d inserted=%d", total_found, total_inserted)
+    # Upsert all visited listings to refresh last_seen_at on known ones too
+    for i in range(0, len(listings), BATCH_SIZE):
+        supabase.table("raw_listings").upsert(
+            listings[i: i + BATCH_SIZE], on_conflict="job_id"
+        ).execute()
+
+    log.info("Unicorns done [%s]: found=%d inserted=%d", mode, total_found, total_inserted)
     return {"jobs_found": total_found, "jobs_inserted": total_inserted, "error": None}
 
 

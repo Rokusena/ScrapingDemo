@@ -14,12 +14,13 @@ const SOURCE_LABELS: Record<string, string> = {
 }
 
 const STATUS_CONFIG: Record<ApplicationStatus, { label: string; color: string; bg: string }> = {
-  applied:     { label: 'Teikiau',   color: '#1f4d3d', bg: 'color-mix(in oklab, #1f4d3d 10%, transparent)' },
-  ignored:     { label: 'Ignoruota', color: '#86867e', bg: 'var(--paper-3)' },
-  no_response: { label: 'Neatsakė',  color: '#c47d2b', bg: 'color-mix(in oklab, #c47d2b 10%, transparent)' },
-  rejected:    { label: 'Atmetė',    color: '#b54a2c', bg: 'color-mix(in oklab, #b54a2c 10%, transparent)' },
-  interview:   { label: 'Pokalbis',  color: '#1f4d3d', bg: 'color-mix(in oklab, #d7f26a 30%, transparent)' },
-  offer:       { label: 'Pasiūlė!',  color: '#1f4d3d', bg: 'color-mix(in oklab, #d7f26a 50%, transparent)' },
+  applied:     { label: 'Teikiau',      color: '#1f4d3d', bg: 'color-mix(in oklab, #1f4d3d 10%, transparent)' },
+  not_applied: { label: 'Nesikreipiau', color: '#86867e', bg: 'var(--paper-3)' },
+  ignored:     { label: 'Ignoruota',    color: '#86867e', bg: 'var(--paper-3)' },
+  no_response: { label: 'Neatsakė',     color: '#c47d2b', bg: 'color-mix(in oklab, #c47d2b 10%, transparent)' },
+  rejected:    { label: 'Atmetė',       color: '#b54a2c', bg: 'color-mix(in oklab, #b54a2c 10%, transparent)' },
+  interview:   { label: 'Pokalbis',     color: '#1f4d3d', bg: 'color-mix(in oklab, #d7f26a 30%, transparent)' },
+  offer:       { label: 'Pasiūlė!',    color: '#1f4d3d', bg: 'color-mix(in oklab, #d7f26a 50%, transparent)' },
 }
 
 function scoreBucket(s: number) {
@@ -167,6 +168,17 @@ export default function MatchCard({
               </div>
             )}
           </div>
+
+          {status === null && (
+            <button
+              className="db-ia"
+              title="Nesikreipiau į šį darbą"
+              onClick={() => handleStatus('not_applied')}
+              style={{ color: 'var(--ink-4)', fontSize: 12 }}
+            >
+              Nesikreipiau
+            </button>
+          )}
 
           {listing?.url && (
             <a

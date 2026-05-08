@@ -153,9 +153,10 @@ def has_next_page(html: str, current_page: int) -> bool:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def run() -> dict:
+def run(full_sweep: bool = False) -> dict:
     """Returns summary dict: {jobs_found, jobs_inserted, error}"""
-    log.info("CV-Online scraper starting")
+    mode = "full-sweep" if full_sweep else "incremental"
+    log.info("CV-Online scraper starting [%s]", mode)
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
     session = requests.Session()
@@ -170,7 +171,6 @@ def run() -> dict:
     total_inserted = 0
     existing_ids: set[str] = set()
 
-    # Load existing cvonline job_ids
     try:
         page_size = 1000
         offset = 0
@@ -208,19 +208,24 @@ def run() -> dict:
             break
 
         total_found += len(listings)
+        new_on_page = [l for l in listings if l["job_id"] not in existing_ids]
 
-        # Insert new listings
-        new_listings = [l for l in listings if l["job_id"] not in existing_ids]
-        if new_listings:
-            for i in range(0, len(new_listings), BATCH_SIZE):
-                chunk = new_listings[i: i + BATCH_SIZE]
-                supabase.table("raw_listings").upsert(chunk, on_conflict="job_id").execute()
-            total_inserted += len(new_listings)
-            existing_ids.update(l["job_id"] for l in new_listings)
+        # Upsert ALL listings on visited pages (refreshes last_seen_at for known ones too)
+        payload = [{**l, "last_seen_at": now_utc} for l in listings]
+        for i in range(0, len(payload), BATCH_SIZE):
+            supabase.table("raw_listings").upsert(payload[i: i + BATCH_SIZE], on_conflict="job_id").execute()
+
+        total_inserted += len(new_on_page)
+        existing_ids.update(l["job_id"] for l in listings)
+
+        # Early-stop: entire page was known — no new listings further in
+        if not full_sweep and len(new_on_page) == 0:
+            log.info("Page %d: all listings already known — stopping early.", page)
+            break
 
         time.sleep(RATE_LIMIT_DELAY)
 
-    log.info("CV-Online done: found=%d inserted=%d", total_found, total_inserted)
+    log.info("CV-Online done [%s]: found=%d inserted=%d", mode, total_found, total_inserted)
     return {"jobs_found": total_found, "jobs_inserted": total_inserted, "error": None}
 
 

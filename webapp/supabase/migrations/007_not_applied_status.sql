@@ -1,0 +1,3 @@
+-- Migration 007: Document 'not_applied' as a valid application_status value
+-- No schema change needed (column is text). This is for history/documentation only.
+-- application_status values: null | 'applied' | 'not_applied' | 'ignored' | 'no_response' | 'rejected' | 'interview' | 'offer'

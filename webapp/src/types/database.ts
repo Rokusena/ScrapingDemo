@@ -1,5 +1,5 @@
 export type PlanStatus = 'free' | 'active' | 'cancelled'
-export type ApplicationStatus = 'applied' | 'ignored' | 'no_response' | 'rejected' | 'interview' | 'offer'
+export type ApplicationStatus = 'applied' | 'not_applied' | 'ignored' | 'no_response' | 'rejected' | 'interview' | 'offer'
 export type ExperienceLevel = 'intern' | 'junior' | 'mid' | 'senior'
 export type JobSource = 'cvbankas' | 'cvonline' | 'cvmarket' | 'unicorns' | 'uzt'
 export type WorkFormat = 'remote' | 'hybrid' | 'onsite'

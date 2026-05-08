@@ -258,19 +258,23 @@ SCRAPERS = [
 ]
 
 
-def _run_one_scraper(source: str, module_name: str, func_name: str, supabase) -> dict:
+def _run_one_scraper(source: str, module_name: str, func_name: str, supabase,
+                     full_sweep: bool = False) -> dict:
     """Run a single scraper, write to scraper_runs, and return a status dict.
 
-    cvbankas's run() returns None; the others return {jobs_found, jobs_inserted, error}.
-    For cvbankas we substitute today's listing count via _count_todays_listings(supabase),
-    matching the previous sequential behaviour.
+    full_sweep=True is passed to scrapers that support it (cvbankas, cvonline, unicorns)
+    for the weekly run — they skip early-stop and crawl every page.
     """
     started = datetime.now(timezone.utc)
     try:
         import importlib
         mod = importlib.import_module(module_name)
         fn = getattr(mod, func_name)
-        result = fn() or {}
+
+        # Only pass full_sweep to scrapers whose run() accepts it
+        _FULL_SWEEP_SOURCES = {"cvbankas", "cvonline", "unicorns"}
+        kwargs = {"full_sweep": full_sweep} if source in _FULL_SWEEP_SOURCES else {}
+        result = fn(**kwargs) or {}
         ended = datetime.now(timezone.utc)
 
         if source == "cvbankas":
@@ -299,16 +303,16 @@ def _run_one_scraper(source: str, module_name: str, func_name: str, supabase) ->
         }
 
 
-def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
+def run_scraper(metrics: PipelineMetrics, supabase, full_sweep: bool = False) -> bool:
     """
-    Stage 1: scrape all 5 sources concurrently (CVBankas, CV-Online, CVmarket, Unicorns, UZT).
-    Returns True iff CVBankas succeeded; matchers fall back to existing DB rows otherwise.
-    Concurrency caps wall time at max(individual scrape times) instead of the sum.
-    Each scraper builds its own Supabase client + browser session, so threads share no state.
+    Stage 1: scrape all 5 sources concurrently.
+    full_sweep=True (weekly run): scrapers skip early-stop and crawl every page.
+    Returns True iff CVBankas succeeded.
     """
-    log.info("━━━  Stage 1/4: Scraper  ━━━")
+    label = "full-sweep" if full_sweep else "incremental"
+    log.info("━━━  Stage 1/4: Scraper [%s]  ━━━", label)
 
-    if _should_skip_scrape(supabase):
+    if not full_sweep and _should_skip_scrape(supabase):
         metrics.listings_scraped = _count_todays_listings(supabase)
         log.info("Stage 1 — skipped (24h gate). Existing listings: %d", metrics.listings_scraped)
         return True
@@ -321,7 +325,7 @@ def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
     results: dict[str, dict] = {}
     with ThreadPoolExecutor(max_workers=len(SCRAPERS)) as pool:
         futures = {
-            pool.submit(_run_one_scraper, src, mod, fn, supabase): src
+            pool.submit(_run_one_scraper, src, mod, fn, supabase, full_sweep): src
             for src, mod, fn in SCRAPERS
         }
         for fut in as_completed(futures):
@@ -340,7 +344,7 @@ def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
     scrape_finished = datetime.now(timezone.utc)
     metrics.listings_scraped = _count_todays_listings(supabase)
 
-    if cvbankas_ok:
+    if cvbankas_ok and not full_sweep:
         _upsert_scrape_metadata(supabase, scrape_started, scrape_finished, metrics.listings_scraped)
 
     log.info("Stage 1 ✓  listings scraped today: %d  (%.1fs total)",
@@ -352,6 +356,30 @@ def run_scraper(metrics: PipelineMetrics, supabase) -> bool:
         return False
 
     return True
+
+
+def run_stale_cleanup(supabase) -> None:
+    """
+    Weekly post-sweep: delete listings whose last_seen_at is older than 8 days.
+    These were not seen during the full sweep → they've been removed from the site.
+    UZT is excluded since we don't update its last_seen_at (Cloudflare bypass scraper is left unchanged).
+    """
+    log.info("━━━  Weekly cleanup: removing stale listings  ━━━")
+    try:
+        from datetime import timedelta
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=8)).isoformat()
+        result = (
+            supabase.table("raw_listings")
+            .delete()
+            .not_.is_("last_seen_at", "null")
+            .lt("last_seen_at", cutoff)
+            .neq("source", "uzt")
+            .execute()
+        )
+        deleted = len(result.data or [])
+        log.info("Stale cleanup ✓  deleted %d expired listings (last_seen_at < %s)", deleted, cutoff[:10])
+    except Exception:
+        log.warning("Stale cleanup failed (non-fatal):\n%s", traceback.format_exc())
 
 
 def run_title_matcher(metrics: PipelineMetrics) -> dict[str, list[str]]:
@@ -514,9 +542,10 @@ def print_summary(metrics: PipelineMetrics) -> None:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 # RUN_MODE controls which stages execute:
-#   "scraper"  — Stage 1 only  (run once a day at 04:00 Lithuania time)
-#   "matcher"  — Stages 2-4    (run every hour)
-#   "full"     — All stages    (default, for manual / legacy use)
+#   "scraper"         — Stage 1 only, incremental (daily cron)
+#   "weekly_scraper"  — Stage 1 full-sweep + stale listing cleanup (weekly cron, Sundays)
+#   "matcher"         — Stages 2-4 (hourly cron)
+#   "full"            — All stages, incremental (default, manual use)
 RUN_MODE = os.environ.get("RUN_MODE", "full").lower()
 
 
@@ -545,8 +574,12 @@ def main() -> int:
 
     # ── Run stages based on mode ──────────────────────────────────────────
     if RUN_MODE == "scraper":
-        # run_scraper itself checks the 24h gate via scrape_metadata
         run_scraper(metrics, supabase)
+
+    elif RUN_MODE == "weekly_scraper":
+        # Full sweep: crawl every page of all sources, refresh last_seen_at, then clean up stale
+        run_scraper(metrics, supabase, full_sweep=True)
+        run_stale_cleanup(supabase)
 
     elif RUN_MODE == "matcher":
         # Skip if matcher already ran today (prevents re-run on redeploy)

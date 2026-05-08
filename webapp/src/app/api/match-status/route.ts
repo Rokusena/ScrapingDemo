@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import type { ApplicationStatus } from '@/types/database'
 
 const VALID_STATUSES: ApplicationStatus[] = [
-  'applied', 'ignored', 'no_response', 'rejected', 'interview', 'offer',
+  'applied', 'not_applied', 'ignored', 'no_response', 'rejected', 'interview', 'offer',
 ]
 
 export async function PATCH(request: NextRequest) {

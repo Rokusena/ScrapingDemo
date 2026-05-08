@@ -12,7 +12,7 @@ AI-powered job matching platform for the Lithuanian job market. Scrapes 5 job po
 | **Styling** | Tailwind CSS + inline CSS vars | UI |
 | **Auth** | Supabase Auth (email magic link + Google OAuth) | Passwordless login |
 | **Database** | Supabase (PostgreSQL + RLS) | All app data |
-| **Payments** | Stripe | Monthly subscriptions |
+| **Payments** | Stripe | Monthly subscriptions |/
 | **Email** | Resend | Job digest emails + magic links |
 | **AI** | OpenAI GPT-4o-mini | Job matching + CV parsing |
 | **Webapp hosting** | Vercel | Next.js deployment |

@@ -13,7 +13,7 @@ const TABS = [
   { key: 'high',    label: 'Puikūs · 8+', href: '/dashboard?filter=high' },
   { key: 'mid',     label: 'Geri · 6–7',  href: '/dashboard?filter=mid' },
   { key: 'low',     label: 'Silpni · <6', href: '/dashboard?filter=low' },
-  { key: 'history', label: 'Istorija',    href: '/dashboard?filter=history' },
+  { key: 'history', label: 'Oferti',      href: '/dashboard?filter=history' },
 ] as const
 
 type FilterKey = (typeof TABS)[number]['key']

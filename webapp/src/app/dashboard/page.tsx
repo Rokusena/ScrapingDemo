@@ -5,6 +5,7 @@ import type { MatchWithListing, Profile, JobPreferences } from '@/types/database
 import CheckoutButton from './CheckoutButton'
 import PostAuthRedirect from './PostAuthRedirect'
 import MatchCard from './MatchCard'
+import OfferedCard from './OfferedCard'
 import FilterBar from './FilterBar'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -225,7 +226,7 @@ export default async function DashboardPage({
 
           {activeFilter === 'history' && historyMatches.length > 0 && (
             <div style={{ fontSize: 13, color: 'var(--ink-4)', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>
-              // {historyMatches.length} pažymėtų — nebus rodomi kaip nauji
+              // {historyMatches.length} pasiūlytų — pažymėti kaip matyti, nebus rodomi aktyvuose
             </div>
           )}
 
@@ -233,6 +234,16 @@ export default async function DashboardPage({
             <div className="db-empty">
               <p style={{ fontSize: 32, marginBottom: 10 }}>🎯</p>
               <p>Nėra atitikimų šiame filtro intervale.</p>
+            </div>
+          ) : activeFilter === 'history' ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {visibleMatches.map((match) => (
+                <OfferedCard
+                  key={match.id}
+                  match={match}
+                  dateLabel={relativeDate(match.matched_at)}
+                />
+              ))}
             </div>
           ) : (
             <div className="db-matches">

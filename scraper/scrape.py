@@ -189,8 +189,10 @@ def load_existing_ids(supabase) -> set[str]:
     return ids
 
 
-def upsert_batch(supabase, records: list[dict], existing_ids: set[str]) -> tuple[int, int]:
-    """Upsert records in chunks of BATCH_SIZE. Returns (new, updated)."""
+def upsert_batch(supabase, records: list[dict], existing_ids: set[str], now_utc: str) -> tuple[int, int]:
+    """Upsert records in chunks of BATCH_SIZE. Returns (new, updated).
+    All records get last_seen_at refreshed so the weekly cleanup knows they're still live.
+    """
     if not records:
         return 0, 0
 
@@ -198,30 +200,23 @@ def upsert_batch(supabase, records: list[dict], existing_ids: set[str]) -> tuple
     updated_count = len(records) - new_count
 
     for i in range(0, len(records), BATCH_SIZE):
-        chunk = records[i : i + BATCH_SIZE]
+        chunk = [{**r, "last_seen_at": now_utc} for r in records[i : i + BATCH_SIZE]]
         supabase.table("raw_listings").upsert(chunk, on_conflict="job_id").execute()
 
     return new_count, updated_count
 
 
-def delete_stale(supabase, current_scrape_time: str) -> int:
-    """Delete raw_listings not seen in the current scrape (removed from cvbankas)."""
-    result = (
-        supabase.table("raw_listings")
-        .delete()
-        .lt("scraped_at", current_scrape_time)
-        .execute()
-    )
-    deleted = len(result.data) if result.data else 0
-    log.info("Deleted %d stale listings (not seen in current scrape)", deleted)
-    return deleted
-
-
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def run() -> None:
+def run(full_sweep: bool = False) -> None:
+    """
+    full_sweep=False (default / daily):  early-stop as soon as a full page is all-known.
+    full_sweep=True  (weekly):           crawl every page to refresh last_seen_at on all listings.
+    """
+    mode = "full-sweep" if full_sweep else "incremental"
     log.info("=" * 55)
-    log.info("GaukDarba scraper starting — %s", datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"))
+    log.info("GaukDarba CVBankas scraper starting [%s] — %s",
+             mode, datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"))
     log.info("=" * 55)
 
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
@@ -257,12 +252,18 @@ def run() -> None:
             log.info("Empty page %d — done.", current_page)
             break
 
-        new_c, upd_c = upsert_batch(supabase, listings, existing_ids)
+        new_c, upd_c = upsert_batch(supabase, listings, existing_ids, now_utc)
         total_new     += new_c
         total_updated += upd_c
 
-        # keep local set in sync so later pages count correctly
         existing_ids.update(r["job_id"] for r in listings)
+
+        # Early-stop: if every listing on this page was already known we've
+        # reached "old" territory — no point crawling further pages today.
+        if not full_sweep and new_c == 0:
+            log.info("Page %d: all listings already known — stopping early (incremental mode).",
+                     current_page)
+            break
 
         if not has_next_page(html, current_page):
             log.info("No next-page link after page %d — done.", current_page)
@@ -271,12 +272,9 @@ def run() -> None:
         current_page += 1
         random_delay()
 
-    # ── Cleanup stale rows ────────────────────────────────────────────────
-    delete_stale(supabase, now_utc)
-
     # ── Final summary ─────────────────────────────────────────────────────
     log.info("=" * 55)
-    log.info("Scrape finished.")
+    log.info("Scrape finished [%s].", mode)
     log.info("  New listings    : %d", total_new)
     log.info("  Updated listings: %d", total_updated)
     log.info("  Total processed : %d", total_new + total_updated)
