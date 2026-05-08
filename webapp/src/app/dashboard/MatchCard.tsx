@@ -133,38 +133,59 @@ export default function MatchCard({
           <span>{dateLabel}</span>
         </div>
         <div className="db-foot-actions" style={{ position: 'relative' }}>
-          {/* Status menu */}
+          {/* Status button + dropdown */}
           <div style={{ position: 'relative' }}>
             <button
-              className="db-ia"
-              title="Pažymėti statusą"
               onClick={() => setShowStatusMenu((v) => !v)}
-              style={showStatusMenu ? { background: 'var(--paper-2)', borderColor: 'var(--ink-3)' } : undefined}
+              style={{
+                padding: '5px 10px', borderRadius: 6,
+                border: '1px solid var(--line)',
+                background: showStatusMenu ? 'var(--paper-2)' : 'transparent',
+                fontSize: 12, cursor: 'pointer', fontFamily: 'inherit',
+                color: cfg ? cfg.color : 'var(--ink-3)',
+                fontWeight: cfg ? 600 : 400,
+                whiteSpace: 'nowrap',
+              }}
             >
-              {status ? '●' : '○'}
+              {cfg ? `${cfg.label} ↓` : 'Žymėti ↓'}
             </button>
             {showStatusMenu && (
               <div style={{
                 position: 'absolute', bottom: '110%', right: 0, zIndex: 20,
                 background: 'white', border: '1px solid var(--line)', borderRadius: 10,
                 padding: 6, display: 'flex', flexDirection: 'column', gap: 2,
-                boxShadow: '0 4px 16px rgba(0,0,0,.1)', minWidth: 140,
+                boxShadow: '0 4px 16px rgba(0,0,0,.1)', minWidth: 150,
               }}>
-                {(Object.entries(STATUS_CONFIG) as [ApplicationStatus, typeof STATUS_CONFIG[ApplicationStatus]][]).map(([key, cfg]) => (
+                {(Object.entries(STATUS_CONFIG) as [ApplicationStatus, typeof STATUS_CONFIG[ApplicationStatus]][]).map(([key, c]) => (
                   <button
                     key={key}
                     onClick={() => handleStatus(key)}
                     style={{
                       padding: '7px 12px', borderRadius: 6, border: 'none', textAlign: 'left',
                       fontSize: 13, cursor: 'pointer', fontFamily: 'inherit',
-                      background: status === key ? cfg.bg : 'transparent',
-                      color: status === key ? cfg.color : 'var(--ink)',
+                      background: status === key ? c.bg : 'transparent',
+                      color: status === key ? c.color : 'var(--ink)',
                       fontWeight: status === key ? 600 : 400,
                     }}
                   >
-                    {cfg.label}
+                    {c.label}
                   </button>
                 ))}
+                {status !== null && (
+                  <>
+                    <div style={{ height: 1, background: 'var(--line)', margin: '4px 0' }} />
+                    <button
+                      onClick={() => handleStatus(null)}
+                      style={{
+                        padding: '7px 12px', borderRadius: 6, border: 'none', textAlign: 'left',
+                        fontSize: 12, cursor: 'pointer', fontFamily: 'inherit',
+                        color: 'var(--ink-4)', background: 'transparent',
+                      }}
+                    >
+                      Valyti statusą
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>
