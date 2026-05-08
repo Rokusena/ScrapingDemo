@@ -31,11 +31,11 @@ function scoreLabel(s: number) {
   return s >= 8 ? 'PUIKIAI' : s >= 6 ? 'GERAI' : 'PRASTAI'
 }
 
-async function updateStatus(matchId: string, status: ApplicationStatus | null) {
+async function updateStatus(matchId: string, jobId: string, status: ApplicationStatus | null) {
   await fetch('/api/match-status', {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ match_id: matchId, status }),
+    body: JSON.stringify({ match_id: matchId, job_id: jobId, status }),
   })
 }
 
@@ -81,7 +81,7 @@ export default function MatchCard({
     }
     setStatus(newStatus)
     setShowStatusMenu(false)
-    await updateStatus(match.id, newStatus)
+    await updateStatus(match.id, match.job_id, newStatus)
     router.refresh()
   }
 

@@ -22,11 +22,11 @@ const STATUS_CONFIG: Record<ApplicationStatus, { label: string; color: string; b
   offer:       { label: 'Pasiūlė!',    color: '#1f4d3d', bg: 'color-mix(in oklab, #d7f26a 45%, transparent)',    border: '#5a9a4a' },
 }
 
-async function patchStatus(matchId: string, status: ApplicationStatus | null) {
+async function patchStatus(matchId: string, jobId: string, status: ApplicationStatus | null) {
   await fetch('/api/match-status', {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ match_id: matchId, status }),
+    body: JSON.stringify({ match_id: matchId, job_id: jobId, status }),
   })
 }
 
@@ -50,7 +50,7 @@ export default function OfferedCard({
     setStatus(newStatus)
     setShowMenu(false)
     if (newStatus === null) setGone(true)
-    await patchStatus(match.id, newStatus)
+    await patchStatus(match.id, match.job_id, newStatus)
     router.refresh()
   }
 
