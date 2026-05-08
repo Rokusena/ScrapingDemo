@@ -169,17 +169,6 @@ export default function MatchCard({
             )}
           </div>
 
-          {status === null && (
-            <button
-              className="db-ia"
-              title="Nesikreipiau į šį darbą"
-              onClick={() => handleStatus('not_applied')}
-              style={{ color: 'var(--ink-4)', fontSize: 12 }}
-            >
-              Nesikreipiau
-            </button>
-          )}
-
           {listing?.url && (
             <a
               href={listing.url}

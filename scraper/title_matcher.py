@@ -491,9 +491,11 @@ def load_active_users(supabase) -> list[dict]:
 
 
 def load_existing_match_ids(supabase, user_id: str) -> set[str]:
-    """Return all job_ids ever matched for this user (all time, paginated)."""
+    """Return all job_ids ever matched or actioned for this user (all time, paginated)."""
     all_ids: set[str] = set()
     page_size = 1000
+
+    # Load from matches table
     offset = 0
     while True:
         res = (
@@ -508,6 +510,23 @@ def load_existing_match_ids(supabase, user_id: str) -> set[str]:
         if len(batch) < page_size:
             break
         offset += page_size
+
+    # Also load from user_job_actions — persists even after match cleanup
+    offset = 0
+    while True:
+        res = (
+            supabase.table("user_job_actions")
+            .select("job_id")
+            .eq("user_id", user_id)
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+        batch = res.data or []
+        all_ids.update(r["job_id"] for r in batch)
+        if len(batch) < page_size:
+            break
+        offset += page_size
+
     return all_ids
 
 
