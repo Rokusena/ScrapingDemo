@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import type { MatchWithListing, ApplicationStatus } from '@/types/database'
 
 const SOURCE_LABELS: Record<string, string> = {
@@ -36,6 +37,7 @@ export default function OfferedCard({
   match: MatchWithListing
   dateLabel: string
 }) {
+  const router = useRouter()
   const [status, setStatus] = useState<ApplicationStatus | null>(match.application_status ?? null)
   const [showMenu, setShowMenu] = useState(false)
   const [gone, setGone] = useState(false)
@@ -47,9 +49,9 @@ export default function OfferedCard({
     const newStatus = next === status ? null : next
     setStatus(newStatus)
     setShowMenu(false)
-    // cleared → moves back to active tab; hide from offered view
     if (newStatus === null) setGone(true)
     await patchStatus(match.id, newStatus)
+    router.refresh()
   }
 
   if (gone) return null

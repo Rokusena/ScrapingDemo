@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import type { MatchWithListing, ApplicationStatus } from '@/types/database'
 
 const SEEN_KEY = 'gaukdarba-seen-v1'
@@ -47,6 +48,7 @@ export default function MatchCard({
   dateLabel: string
   isRecent: boolean
 }) {
+  const router = useRouter()
   const [isNew, setIsNew] = useState(false)
   const [status, setStatus] = useState<ApplicationStatus | null>(match.application_status ?? null)
   const [showStatusMenu, setShowStatusMenu] = useState(false)
@@ -73,14 +75,14 @@ export default function MatchCard({
   }, [match.id, isRecent])
 
   const handleStatus = async (next: ApplicationStatus | null) => {
-    const newStatus = next === status ? null : next  // toggle off if same
-    // Hide from active view when a status is first set
+    const newStatus = next === status ? null : next
     if (newStatus !== null && status === null) {
       setHiddenFromActive(true)
     }
     setStatus(newStatus)
     setShowStatusMenu(false)
     await updateStatus(match.id, newStatus)
+    router.refresh()
   }
 
   const cfg = status ? STATUS_CONFIG[status] : null

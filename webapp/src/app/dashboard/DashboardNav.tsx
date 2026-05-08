@@ -5,12 +5,14 @@ import { usePathname } from 'next/navigation'
 
 const NAV_ITEMS = [
   { href: '/dashboard',             label: 'Atitikimai', ico: '⊟' },
+  { href: '/dashboard/history',     label: 'Istorija',   ico: '◑' },
   { href: '/dashboard/stats',       label: 'Statistika',  ico: '⏚' },
   { href: '/dashboard/preferences', label: 'Nustatymai',  ico: '⚙' },
 ]
 
 export const BREADCRUMB_MAP: Record<string, string> = {
   '/dashboard':             'Atitikimai',
+  '/dashboard/history':     'Istorija',
   '/dashboard/stats':       'Statistika',
   '/dashboard/preferences': 'Nustatymai',
 }
